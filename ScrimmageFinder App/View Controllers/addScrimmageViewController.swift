@@ -104,7 +104,13 @@ class addScrimmageViewController: UIViewController {
             let scrimmage = Scrimmage(name: self.nameTF.text!, vanueName: self.venueNameTF.text!, postCode: self.postCodeTF.text!, time: time!, managerName: self.managerNameTF.text!, managerNumber: self.managersNumberTF.text!, price: price!, date: self.dateTF.text!)
                 
                 FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
-                
+            
+            let alert = UIAlertController(title: "Added!", message: "You have added your Scrimmage to Data Base.", preferredStyle: UIAlertControllerStyle.alert)
+            
+            //  add an action (button)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
             }
     }
     

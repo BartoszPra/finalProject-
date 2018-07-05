@@ -31,6 +31,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
 
         FIRFirestoreService.shared.read(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
             self.scrimmages = scrimmages
+            self.deleteIfOld()
             self.scrimmagesTableView.reloadData()
         
     }
@@ -160,5 +161,24 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         showNavigationBar() // Optional
         return true
     }
-    
+  
+    func deleteIfOld(){
+        
+        let current = Date()
+        
+        for scr in scrimmages {
+           
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd.MM.yyyy"
+            
+            let sCdate = dateFormatter.date(from: "\(String(describing: scr.date))")
+            
+            if sCdate! < current {
+                print("This is the date to remove , \(scr) lalalalalala" )
+                
+                FIRFirestoreService.shared.delete(scr, in: .scrimmages)
+               
+            }
+        }
+    }
 }

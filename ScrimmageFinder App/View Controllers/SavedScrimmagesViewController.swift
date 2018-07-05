@@ -73,40 +73,27 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
 }
     
     @objc func longTap(gestureReconizer: UILongPressGestureRecognizer) {
-
+        
         
         let longPress = gestureReconizer as UILongPressGestureRecognizer
         _ = longPress.state
         let locationInView = longPress.location(in: self.savedTableView)
         guard  let indexPath = self.savedTableView.indexPathForRow(at: locationInView) else {return}
-        let donara = self.coreScrimmages.remove(at: indexPath.row)
-        self.savedTableView.deleteRows(at: [indexPath], with: .automatic)
-        self.coreDataController.mainContext.delete(donara)
-        self.coreDataController.saveContext()
-        print("Long tap")
-       
-    }
-    
-   
-    @objc func longPressed(gesture: UILongPressGestureRecognizer) {
         
-        // create the alert
         let alert = UIAlertController(title: "Delete?", message: "Do you really want to delete this Scrimmage.", preferredStyle: UIAlertControllerStyle.alert)
+        let Action = UIAlertAction.init(title: "Yes", style: .default) { (UIAlertAction) in
         
-        // add an action (button)
-        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: {(action:UIAlertAction!) in
-          
-//            guard let indexPath = self.savedTableView.indexPathForSelectedRow else {return}
-//            let donara = self.coreScrimmages.remove(at: indexPath.row)
-//            self.savedTableView.deleteRows(at: [indexPath], with: .automatic)
-//            self.coreDataController.mainContext.delete(donara)
-//            self.coreDataController.saveContext()
-        }))
+            let donara = self.coreScrimmages.remove(at: indexPath.row)
+            self.savedTableView.deleteRows(at: [indexPath], with: .automatic)
+            self.coreDataController.mainContext.delete(donara)
+            self.coreDataController.saveContext()
+            print("Long tap")
+           
+        }
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
-        
-        // show the alert
+        alert.addAction(Action)
         self.present(alert, animated: true, completion: nil)
-        
+       
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

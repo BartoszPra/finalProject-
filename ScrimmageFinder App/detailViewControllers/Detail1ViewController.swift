@@ -62,30 +62,11 @@ class Detail1ViewController: UIViewController {
         }
     }
     
-    func entityExists(name: String) -> Bool {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "name")
-        fetchRequest.includesSubentities = false
-        
-        var entitiesCount = 0
-        
-        do {
-            entitiesCount = try coreDataController.mainContext.count(for: fetchRequest)
-        }
-        catch {
-            print("error executing fetch request: \(error)")
-        }
-        
-        if entitiesCount == 0{
-            return true
-        } else {
-            return false
-        }
-        
-    }
     
     
     @IBAction func add2Saved(_ sender: Any) {
         
+        if entityExists(name: (scrimmagePassedOver?.name)!) == true{
         let newScrimmage = ScrimmageD(context: self.coreDataController.mainContext)
         
        //  Add parts of the scrimmage
@@ -100,23 +81,53 @@ class Detail1ViewController: UIViewController {
         newScrimmage.date = (scrimmagePassedOver!.date)
         newScrimmage.participants = Int16((scrimmagePassedOver!.participants))
         
-      //  SAVE THE CONTEXT
-       // if entityExists(name: (scrimmagePassedOver?.name)!) == true{
+       // SAVE THE CONTEXT and check if it already exist
+        
         
         coreDataController.saveContext()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-        
+        //add allert
         let alert = UIAlertController(title: "Saved!", message: "You have saved your Scrimmage.", preferredStyle: UIAlertControllerStyle.alert)
         
-      //  add an action (button)
+       // add an action (button)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
-    //    } else {
-   //     let alert = UIAlertController(title: "hey", message: "You have saved this Scrimmage before.", preferredStyle: UIAlertControllerStyle.alert)
-   //     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-   //     self.present(alert, animated: true, completion: nil)
-    //        }
+       }
+        
+        else {
+         //add allert
+        let alert = UIAlertController(title: "Sorry.", message: "You have saved this Scrimmage before.", preferredStyle: UIAlertControllerStyle.alert)
+       //add button to allert
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+       self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func entityExists(name: String) -> Bool {
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ScrimmageD")
+        let predicate = NSPredicate(format: "name = %@", name)
+        fetchRequest.predicate = predicate
+        
+        var entitiesCount = 0
+        
+        do {
+            entitiesCount = try coreDataController.mainContext.count(for: fetchRequest)
+            print (entitiesCount)
+        }
+        catch {
+            print("error executing fetch request: \(error)")
+        }
+        
+        if entitiesCount > 0 {
+            
+            return false
+            
+        } else {
+            
+            return true
+        }
+    }
     
     @IBAction func participate(_ sender: Any) {
         
@@ -124,10 +135,8 @@ class Detail1ViewController: UIViewController {
         updatedParticipants.participants = (updatedParticipants.participants) + 1
         FIRFirestoreService.shared.update(for: updatedParticipants, in: .scrimmages)
         
-        
     }
     
-
     @IBAction func share(_ sender: Any) {
         
         let activityController = UIActivityViewController(activityItems: [scrimmagePassedOver?.name as Any], applicationActivities: nil)
