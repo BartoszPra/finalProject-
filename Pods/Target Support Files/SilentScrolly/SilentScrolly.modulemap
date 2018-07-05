@@ -1,0 +1,6 @@
+framework module SilentScrolly {
+  umbrella header "SilentScrolly-umbrella.h"
+
+  export *
+  module * { export * }
+}
