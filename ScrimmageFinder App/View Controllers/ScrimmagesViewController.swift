@@ -2,6 +2,7 @@
 
 import UIKit
 import SilentScrolly
+import MobileCoreServices
 
 
 
@@ -33,6 +34,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             self.scrimmages = scrimmages
             self.deleteIfOld()
             self.scrimmagesTableView.reloadData()
+            self.scrimmagesTableView.dragDelegate =   self
         
     }
 }
@@ -180,5 +182,28 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
                
             }
         }
+    }
+    
+    func dragItems (for indexPath: IndexPath)-> [UIDragItem] {
+        
+        let scrimmage = scrimmages[indexPath.row]
+        
+        let itemProvider = NSItemProvider()
+        itemProvider.registerDataRepresentation(forTypeIdentifier: kUTTypeText as String, visibility: .all) {completion in
+            
+            let data = scrimmage.name.data(using: .utf8)
+            completion(data, nil)
+            return nil
+        }
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        return [dragItem]
+        
+    }
+}
+
+extension ScrimmagesViewController: UITableViewDragDelegate {
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        return self.dragItems(for: indexPath)
     }
 }
