@@ -139,14 +139,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0369DAEB20E121BF006B7507 /* View Controllers */ = {
+		0369DAEB20E121BF006B7507 /* Main Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				03D14CF120E0EBA300D76E38 /* ScrimmagesViewController.swift */,
 				0369DAE920E121B1006B7507 /* SavedScrimmagesViewController.swift */,
 				0369DAF220E14308006B7507 /* addScrimmageViewController.swift */,
 			);
-			path = "View Controllers";
+			path = "Main Controllers";
 			sourceTree = "<group>";
 		};
 		0369DAEC20E121D1006B7507 /* ModelFIR */ = {
@@ -161,13 +161,13 @@
 			path = ModelFIR;
 			sourceTree = "<group>";
 		};
-		0369DAED20E135D3006B7507 /* detailViewControllers */ = {
+		0369DAED20E135D3006B7507 /* Detail Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				0369DAEE20E13635006B7507 /* Detail1ViewController.swift */,
 				0369DAF820E27319006B7507 /* SavedDetailViewController.swift */,
 			);
-			path = detailViewControllers;
+			path = "Detail Controllers";
 			sourceTree = "<group>";
 		};
 		03F10DB920DC55BE00F8C62B = {
@@ -197,18 +197,17 @@
 		03F10DC420DC55BF00F8C62B /* ScrimmageFinder App */ = {
 			isa = PBXGroup;
 			children = (
-				049193C620EA56800063671E /* ScrimmageFinder App.entitlements */,
-				03F10DC520DC55BF00F8C62B /* AppDelegate.swift */,
-				0369DAF420E25365006B7507 /* CoreDataController.swift */,
-				0369DAED20E135D3006B7507 /* detailViewControllers */,
-				0369DAEB20E121BF006B7507 /* View Controllers */,
+				04F4301620F0A93400E5D8ED /* CoreDataModel */,
 				0369DAEC20E121D1006B7507 /* ModelFIR */,
-				03F10DC920DC55BF00F8C62B /* Main.storyboard */,
+				04F4301420F0A8E600E5D8ED /* View */,
+				0369DAEB20E121BF006B7507 /* Main Controllers */,
+				0369DAED20E135D3006B7507 /* Detail Controllers */,
+				04F4301520F0A90400E5D8ED /* helperFiles */,
 				034D429620E7F0EC00D59F8C /* Assets.xcassets */,
-				03F10DD120DC55C300F8C62B /* LaunchScreen.storyboard */,
 				03F10DD420DC55C300F8C62B /* Info.plist */,
 				03F10DCC20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld */,
 				034D429220E54FCA00D59F8C /* GoogleService-Info.plist */,
+				049193C620EA56800063671E /* ScrimmageFinder App.entitlements */,
 				034D429020E4E8FD00D59F8C /* Settings.bundle */,
 			);
 			path = "ScrimmageFinder App";
@@ -239,6 +238,31 @@
 				0491940220EB6C060063671E /* Info.plist */,
 			);
 			path = SiriScrimmageWorkouts;
+			sourceTree = "<group>";
+		};
+		04F4301420F0A8E600E5D8ED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				03F10DD120DC55C300F8C62B /* LaunchScreen.storyboard */,
+				03F10DC920DC55BF00F8C62B /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		04F4301520F0A90400E5D8ED /* helperFiles */ = {
+			isa = PBXGroup;
+			children = (
+				03F10DC520DC55BF00F8C62B /* AppDelegate.swift */,
+			);
+			path = helperFiles;
+			sourceTree = "<group>";
+		};
+		04F4301620F0A93400E5D8ED /* CoreDataModel */ = {
+			isa = PBXGroup;
+			children = (
+				0369DAF420E25365006B7507 /* CoreDataController.swift */,
+			);
+			path = CoreDataModel;
 			sourceTree = "<group>";
 		};
 		3429B88FFE552F66B589880D /* Frameworks */ = {
