@@ -37,10 +37,10 @@ class SavedDetailViewController: UIViewController {
         nameLbl.text = scrimmagePassedOver2?.name
         venueNameLbl.text = scrimmagePassedOver2?.venueName
         postCode.text = scrimmagePassedOver2?.postCode
-        time.text = "\(String(describing: scrimmagePassedOver2!.time))"
+        time.text = "\(String(format:"%.2f", scrimmagePassedOver2!.time))"
         manName.text = scrimmagePassedOver2?.managersName
         manNumber.text = scrimmagePassedOver2?.managersNumber
-        price.text = "£ \(String(describing: scrimmagePassedOver2!.price))"
+        price.text = "£ \(String(format:"%.2f",scrimmagePassedOver2!.price))"
         dateLbl.text = scrimmagePassedOver2?.date
         
     }
@@ -87,7 +87,10 @@ class SavedDetailViewController: UIViewController {
     }
     @IBAction func share(_ sender: Any) {
         
-        let activityController = UIActivityViewController(activityItems: [scrimmagePassedOver2?.name as Any], applicationActivities: nil)
+        let shareItem = "Hey Im going to \(scrimmagePassedOver2!.name!),do you want to join me?"
+        
+        let activityController = UIActivityViewController(activityItems: [shareItem], applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceView = self.view
         present(activityController,animated: true, completion: nil)
         
     }
@@ -100,8 +103,10 @@ class SavedDetailViewController: UIViewController {
         
         
         guard let date = dateFormatter.date(from: "\(String(describing: scrimmagePassedOver2!.date!)) \(String(describing: scrimmagePassedOver2!.time))") else {
-            fatalError("ERROR: Date conversion failed due to mismatched format.")
-        }
+            fatalError("ERROR: Date conversion failed due to mismatched format.")}
+        
+        let calendar = Calendar.current
+        guard let endDate = calendar.date(byAdding: .hour, value: 2, to: date) else {return}
         
         print("\(String(describing: scrimmagePassedOver2!.date!)) \(String(describing: scrimmagePassedOver2!.time))")
         
@@ -116,8 +121,8 @@ class SavedDetailViewController: UIViewController {
                 let event:EKEvent = EKEvent(eventStore: eventStore)
                 event.title = self.scrimmagePassedOver2?.name
                 event.startDate = date
-                event.endDate = date
-                event.notes = "\(String(describing: self.scrimmagePassedOver2?.venueName!)), \(String(describing: self.scrimmagePassedOver2?.postCode!)), \(String(describing: self.scrimmagePassedOver2?.time))"
+                event.endDate = endDate
+                event.notes = "\(String(describing: self.scrimmagePassedOver2!.venueName!)), \(String(describing: self.scrimmagePassedOver2!.postCode!)), \(String(format: "%.2f", self.scrimmagePassedOver2!.time))"
                 event.calendar = eventStore.defaultCalendarForNewEvents
                 
                 do {
@@ -126,14 +131,20 @@ class SavedDetailViewController: UIViewController {
                     print("error: \(error)")
                 }
                 print("Save Event")
-                let alert = UIAlertController(title: "Added!", message: "You have added your Scrimmage to Callendar.", preferredStyle: UIAlertControllerStyle.alert)
                 
+                let alert = UIAlertController(title: "Added!", message: "You have added your Scrimmage to Callendar.", preferredStyle: UIAlertControllerStyle.alert)
                 //  add an action (button)
                 alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
+                
             }
             else {
                 print("error: \(String(describing: error))")
+                let alert = UIAlertController(title: "Error!", message: "Sorry Couldn't add it to Callendar", preferredStyle: UIAlertControllerStyle.alert)
+
+                //  add an action (button)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
             
         }

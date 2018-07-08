@@ -53,10 +53,8 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SVcell", for: indexPath)
         let coreScrimmage = coreScrimmages[indexPath.row]
-        cell.textLabel?.text = coreScrimmage.venueName
-        //let logPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(SavedScrimmagesViewController.longPressed(gesture:)))
-        //cell.addGestureRecognizer(logPressGesture)
-        
+        cell.textLabel?.text = coreScrimmage.name
+        cell.detailTextLabel?.text = "Details: \(coreScrimmage.venueName!), Price: £\(String(format:"%.2f",coreScrimmage.price)), Time: \(String(format:"%.2f",coreScrimmage.time))"
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(SavedScrimmagesViewController.longTap))
         cell.addGestureRecognizer(longGesture)
   
@@ -64,17 +62,13 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        
+  
         self.performSegue(withIdentifier: "go2SVDetails", sender: indexPath)
-
-        
-        
+       
 }
     
     @objc func longTap(gestureReconizer: UILongPressGestureRecognizer) {
-        
-        
+       
         let longPress = gestureReconizer as UILongPressGestureRecognizer
         _ = longPress.state
         let locationInView = longPress.location(in: self.savedTableView)

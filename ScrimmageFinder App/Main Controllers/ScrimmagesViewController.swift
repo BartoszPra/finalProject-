@@ -71,7 +71,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         else {
             let scrimmage = scrimmages[indexPath.row]
             cell.textLabel?.text = String(scrimmage.name)
-           // cell.detailTextLabel?.text = String(scrimmage.venueName)
+            cell.detailTextLabel?.text = "\(scrimmage.venueName), Price: £\(String(format:"%.2f",scrimmage.price)), Time: \(String(format:"%.2f",scrimmage.time))"
         }
         
         return cell
@@ -110,19 +110,19 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             
         } else {
             isSearching = true
-            let firstTwo = searchBar.text?.prefix(3)
+            let firstTwo = searchBar.text?.prefix(3).uppercased()
             filteredScrimmages = scrimmages.filter{$0.postCode.hasPrefix(String(firstTwo!))}
             scrimmagesTableView.reloadData()}
             
     }
     
-    
-     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else { return }
-        let scrimmage = scrimmages[indexPath.row]
-        FIRFirestoreService.shared.delete(scrimmage, in: .scrimmages)
-        
-    }
+    //ONLY If YOU WANT TO DELETE
+//     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        guard editingStyle == .delete else { return }
+//        let scrimmage = scrimmages[indexPath.row]
+//        FIRFirestoreService.shared.delete(scrimmage, in: .scrimmages)
+//
+//    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -173,8 +173,6 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             let sCdate = dateFormatter.date(from: "\(String(describing: scr.date))")
             
             if sCdate! < current {
-                print("This is the date to remove , \(scr) lalalalalala" )
-                
                 FIRFirestoreService.shared.delete(scr, in: .scrimmages)
                
             }

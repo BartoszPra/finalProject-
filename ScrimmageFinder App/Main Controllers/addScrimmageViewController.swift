@@ -101,7 +101,13 @@ class addScrimmageViewController: UIViewController {
             let priceString = priceTF.text!
             let price = Double(priceString)
             
-            let scrimmage = Scrimmage(name: self.nameTF.text!, vanueName: self.venueNameTF.text!, postCode: self.postCodeTF.text!, time: time!, managerName: self.managerNameTF.text!, managerNumber: self.managersNumberTF.text!, price: price!, date: self.dateTF.text!)
+            let scrimmage = Scrimmage(name: self.nameTF.text!,
+                                      vanueName: self.venueNameTF.text!,
+                                      postCode: self.postCodeTF.text!.uppercased(),
+                                      time: time!, managerName: self.managerNameTF.text!,
+                                      managerNumber: self.managersNumberTF.text!,
+                                      price: price!,
+                                      date: self.dateTF.text!)
                 
                 FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
             
@@ -123,6 +129,8 @@ class addScrimmageViewController: UIViewController {
             return true
         }
     }
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true);
+    }
     
 }

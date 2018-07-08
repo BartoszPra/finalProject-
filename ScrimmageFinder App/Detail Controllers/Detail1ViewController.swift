@@ -42,10 +42,10 @@ class Detail1ViewController: UIViewController {
         nameLbl.text = scrimmagePassedOver?.name
         venueNameLbl.text = scrimmagePassedOver?.venueName
         postCodeLbl.text = scrimmagePassedOver?.postCode
-        timeLbl.text = "\(scrimmagePassedOver!.time)"
+        timeLbl.text = String(format:"%.2f",scrimmagePassedOver!.time)
         manNameLbl.text = scrimmagePassedOver?.managerName
         manNumberLbl.text = scrimmagePassedOver?.managerNumber
-        priceLbl.text = "£ \(String(describing: scrimmagePassedOver!.price))"
+        priceLbl.text = "£ \(String(format:"%.2f", scrimmagePassedOver!.price))"
         dateLbl.text = scrimmagePassedOver?.date
         participantsLbl.text = "\(String(describing: scrimmagePassedOver!.participants))"
         
@@ -83,7 +83,6 @@ class Detail1ViewController: UIViewController {
         
        // SAVE THE CONTEXT and check if it already exist
         
-        
         coreDataController.saveContext()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
         //add allert
@@ -102,7 +101,7 @@ class Detail1ViewController: UIViewController {
        self.present(alert, animated: true, completion: nil)
         }
     }
-    
+    //function to check if Entity exist in the core data
     func entityExists(name: String) -> Bool {
         
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ScrimmageD")
@@ -134,14 +133,29 @@ class Detail1ViewController: UIViewController {
         var updatedParticipants = scrimmagePassedOver!
         updatedParticipants.participants = (updatedParticipants.participants) + 1
         FIRFirestoreService.shared.update(for: updatedParticipants, in: .scrimmages)
+        let alert = UIAlertController(title: "Added.", message: "You have added one more person to participants.", preferredStyle: UIAlertControllerStyle.alert)
+        //add button to allert
+        
+        let Action = UIAlertAction.init(title: "OK", style: .default) { (UIAlertAction) in
+            
+            let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScrimmagesViewController") as! ScrimmagesViewController
+            self.navigationController?.pushViewController(loginVC, animated: true)
+            
+        }
+        alert.addAction(Action)
+        self.present(alert, animated: true, completion: nil)
         
     }
     
     @IBAction func share(_ sender: Any) {
         
-        let activityController = UIActivityViewController(activityItems: [scrimmagePassedOver?.name as Any], applicationActivities: nil)
-        present(activityController,animated: true, completion: nil)
+        let shareItem = "Hey Im going to \(scrimmagePassedOver!.name),do you want to join me?"
         
+        let activityController = UIActivityViewController(activityItems: [shareItem], applicationActivities: nil)
+        
+        activityController.popoverPresentationController?.sourceView = self.view
+        
+        present(activityController,animated: true, completion: nil)
         
     }
    
