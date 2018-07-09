@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,6 +26,10 @@
                             <constraint firstItem="Fuy-Xz-0sp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="4RB-kL-THj"/>
                             <constraint firstItem="Fuy-Xz-0sp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Azm-FP-PA4"/>
                             <constraint firstItem="Fuy-Xz-0sp" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Cj9-I8-wA1"/>
+                            <constraint firstItem="Fuy-Xz-0sp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="L1H-oM-V0A"/>
+                            <constraint firstItem="Fuy-Xz-0sp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="N9z-QG-wKn"/>
+                            <constraint firstItem="Fuy-Xz-0sp" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="bAI-Dv-bSu"/>
+                            <constraint firstItem="Fuy-Xz-0sp" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="neb-cB-oSe"/>
                             <constraint firstItem="Fuy-Xz-0sp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-20" id="qMP-Bn-myB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>

@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background2Bball70" translatesAutoresizingMaskIntoConstraints="NO" id="FIH-Pf-eT3">
-                                <rect key="frame" x="0.0" y="28" width="320" height="540"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background2Bball70" translatesAutoresizingMaskIntoConstraints="NO" id="FIH-Pf-eT3">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="46u-NZ-mbZ">
                                 <rect key="frame" x="0.0" y="17" width="320" height="551"/>
@@ -59,11 +59,14 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="FIH-Pf-eT3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-36" id="2yk-vC-9pu"/>
                             <constraint firstItem="FIH-Pf-eT3" firstAttribute="trailing" secondItem="46u-NZ-mbZ" secondAttribute="trailing" id="3Hz-hO-PlC"/>
                             <constraint firstItem="46u-NZ-mbZ" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="49" id="3Vg-Y9-d4d"/>
+                            <constraint firstItem="FIH-Pf-eT3" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="8ga-OJ-FTF"/>
                             <constraint firstItem="FIH-Pf-eT3" firstAttribute="bottom" secondItem="46u-NZ-mbZ" secondAttribute="bottom" id="C7m-oS-yvO"/>
+                            <constraint firstItem="FIH-Pf-eT3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="IoU-P6-VtA"/>
+                            <constraint firstItem="FIH-Pf-eT3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="S4H-Wj-gWs"/>
                             <constraint firstItem="46u-NZ-mbZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-47" id="WqJ-hH-rgo"/>
+                            <constraint firstAttribute="bottom" secondItem="FIH-Pf-eT3" secondAttribute="bottom" id="bvi-PH-VOp"/>
                             <constraint firstItem="46u-NZ-mbZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ibV-p0-Cws"/>
                             <constraint firstItem="FIH-Pf-eT3" firstAttribute="leading" secondItem="46u-NZ-mbZ" secondAttribute="leading" id="kmC-42-f8H"/>
                             <constraint firstItem="46u-NZ-mbZ" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="w2L-s2-L52"/>
@@ -667,7 +670,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgoundBBall70" translatesAutoresizingMaskIntoConstraints="NO" id="M5b-rL-8uj">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="miu-f3-pQL">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="miu-f3-pQL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Insert first 3 letters of your Post Code" id="uTm-t2-nQL">
@@ -1054,16 +1057,16 @@
                         <viewLayoutGuide key="safeArea" id="egB-1l-ku1"/>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="S8e-Bt-U07"/>
                                 <exclude reference="1Re-BJ-LJp"/>
+                                <exclude reference="S8e-Bt-U07"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=compact">
                             <mask key="constraints">
-                                <exclude reference="319-tj-hTx"/>
-                                <include reference="S8e-Bt-U07"/>
                                 <include reference="1Re-BJ-LJp"/>
                                 <exclude reference="wxb-GF-3ox"/>
+                                <exclude reference="319-tj-hTx"/>
+                                <include reference="S8e-Bt-U07"/>
                             </mask>
                         </variation>
                     </view>

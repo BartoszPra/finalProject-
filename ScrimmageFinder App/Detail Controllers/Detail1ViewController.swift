@@ -67,11 +67,12 @@ class Detail1ViewController: UIViewController {
     @IBAction func add2Saved(_ sender: Any) {
         
         if entityExists(name: (scrimmagePassedOver?.name)!) == true{
+       
+        // Crete new Scrimmage object
         let newScrimmage = ScrimmageD(context: self.coreDataController.mainContext)
         
        //  Add parts of the scrimmage
         newScrimmage.name = scrimmagePassedOver?.name
-        
         newScrimmage.venueName = scrimmagePassedOver?.venueName
         newScrimmage.managersName = scrimmagePassedOver?.managerName
         newScrimmage.managersNumber = scrimmagePassedOver?.managerNumber
@@ -149,7 +150,7 @@ class Detail1ViewController: UIViewController {
     
     @IBAction func share(_ sender: Any) {
         
-        let shareItem = "Hey Im going to \(scrimmagePassedOver!.name),do you want to join me?"
+        let shareItem = "Hey Im going to \(scrimmagePassedOver!.name), do you want to join me?"
         
         let activityController = UIActivityViewController(activityItems: [shareItem], applicationActivities: nil)
         

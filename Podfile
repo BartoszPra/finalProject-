@@ -13,5 +13,14 @@ target 'ScrimmageFinder App' do
 	pod 'Firebase/Firestore'
 	pod 'SilentScrolly'
 
+	target 'ScrimmageFinder AppTests' do inherit! :search_paths
+	# Pods for testing
+	end
+
+	target 'ScrimmageFinder AppUITests' do inherit! :search_paths
+	# Pods for testing
+	end
+
+
 	
 end

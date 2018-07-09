@@ -112,8 +112,8 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             isSearching = true
             let firstTwo = searchBar.text?.prefix(3).uppercased()
             filteredScrimmages = scrimmages.filter{$0.postCode.hasPrefix(String(firstTwo!))}
-            scrimmagesTableView.reloadData()}
-            
+            scrimmagesTableView.reloadData()
+        }
     }
     
     //ONLY If YOU WANT TO DELETE
@@ -192,6 +192,10 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         
         let dragItem =  UIDragItem(itemProvider: itemProvider)
         return [dragItem]
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true);
     }
 }
 

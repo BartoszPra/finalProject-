@@ -6,9 +6,9 @@ import SilentScrolly
 
 
 
-class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SilentScrollable {
+class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SilentScrollable
+    {
 
-  
     var silentScrolly: SilentScrolly?
     
     @IBOutlet var savedTableView: UITableView!
@@ -127,7 +127,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         do {
             let items = try coreDataController.mainContext.fetch(fetchRequest)
             coreScrimmages = items
-            savedTableView.reloadData()
+           // savedTableView.reloadData()
         } catch {
             print("Error \(error.localizedDescription)")
         }
