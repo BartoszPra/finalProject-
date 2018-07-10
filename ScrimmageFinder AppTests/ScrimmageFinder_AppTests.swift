@@ -25,7 +25,7 @@ class ScrimmageFinder_AppTests: XCTestCase {
         XCTAssertFalse(VC.isValidDate(dateString: exDate2))
         
     }
-//test check if fetching is working correctly
+//test check if fetching is working correctly  
     func testFetchingCoreData(){
         
         let VCS = SavedScrimmagesViewController()
