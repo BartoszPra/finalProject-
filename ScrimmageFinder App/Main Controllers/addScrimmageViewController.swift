@@ -5,6 +5,7 @@ import UIKit
 
 class addScrimmageViewController: UIViewController {
    
+    //text fields outlets 
    
     @IBOutlet var addSCBackGroundPhotoImg: UIImageView!
     
@@ -33,6 +34,7 @@ class addScrimmageViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // adjusting the theme when view will applear
         let userDefaults = UserDefaults.standard
         guard let themes = userDefaults.string(forKey: "user_theme") else {return}
         
@@ -45,54 +47,62 @@ class addScrimmageViewController: UIViewController {
         
     }
     
-   
+   //function to add number and name to contact list
     @IBAction func addContact(_ sender: Any) {
-        
+       //creating allert that will be used for text field check
         let alert = UIAlertController(title: "Error", message: "Please fill out all the Informations Correctly!", preferredStyle: UIAlertControllerStyle.alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         
-    
+        //checking for spaces and if its empty
         if (nameTF.text?.trimmingCharacters(in: .whitespaces).isEmpty)! {
             print("noooo")
             
             self.present(alert, animated: true, completion: nil)
         }
+        //checking for spaces and if its empty
         else if (venueNameTF.text?.trimmingCharacters(in: .whitespaces).isEmpty)! {
             print("noooo")
            
             self.present(alert, animated: true, completion: nil)
         }
+        //checking for spaces and if its empty
         else if (postCodeTF.text?.trimmingCharacters(in: .whitespaces).isEmpty)! {
             print("noooo")
             
             self.present(alert, animated: true, completion: nil)
         }
+        //checking for spaces and if its empty
         else if (managerNameTF.text?.trimmingCharacters(in: .whitespaces).isEmpty)! {
             print("noooo")
            
             self.present(alert, animated: true, completion: nil)
         }
+        //checking for spaces and if its empty
         else if (managersNumberTF.text?.trimmingCharacters(in: .whitespaces).isEmpty)! {
             print("noooo")
            
             self.present(alert, animated: true, completion: nil)
         }
+        //checking for spaces and if its empty
         else if (priceTF.text?.trimmingCharacters(in: .whitespaces).isEmpty)! {
             print("noooo")
             
             self.present(alert, animated: true, completion: nil)
         }
+        //checking for spaces and if its empty
         else if (timeTF.text?.trimmingCharacters(in: .whitespaces).isEmpty)! {
             print("noooo")
             
             self.present(alert, animated: true, completion: nil)
         }
+        //checking for spaces and if its empty
         else if (dateTF.text?.trimmingCharacters(in: .whitespaces).isEmpty)! {
             print("noooo")
             
             self.present(alert, animated: true, completion: nil)
         }
+        //validating date
         else if !isValidDate(dateString: "\(dateTF.text!) \(timeTF.text!)") {
             
             self.present(alert, animated: true, completion: nil)
@@ -100,12 +110,15 @@ class addScrimmageViewController: UIViewController {
         }
         else {
             
+            //converting time to double
             let timeString = timeTF.text!
             let time = Double(timeString)
             
+            //converting price to double
             let priceString = priceTF.text!
             let price = Double(priceString)
             
+            // composing a scrimmage
             let scrimmage = Scrimmage(name: self.nameTF.text!,
                                       vanueName: self.venueNameTF.text!,
                                       postCode: self.postCodeTF.text!.uppercased(),
@@ -113,12 +126,12 @@ class addScrimmageViewController: UIViewController {
                                       managerNumber: self.managersNumberTF.text!,
                                       price: price!,
                                       date: self.dateTF.text!)
-                
+            // creating a scrimmage
                 FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
-            
+            //allert if added
             let alert = UIAlertController(title: "Added!", message: "You have added your Scrimmage to Data Base.", preferredStyle: UIAlertControllerStyle.alert)
             
-            
+            //clearing the text fields
             let Action2 = UIAlertAction.init(title: "OK", style: .default) { (UIAlertAction) in
                 
                 self.nameTF.text = ""
@@ -146,19 +159,23 @@ class addScrimmageViewController: UIViewController {
             
             }
     }
-    
+    // function to validate date and time
     func isValidDate(dateString: String) -> Bool {
+        
+        //date formmater to format string into date
         let dateFormatterGet = DateFormatter()
+        //date format
         dateFormatterGet.dateFormat = "dd.MM.yyyy HH:mm"
         let date = Date()
-        let l = dateFormatterGet.date(from: dateString)
-        if (l != nil) && (l! >= date) {
+        let dateFromString = dateFormatterGet.date(from: dateString)
+        //checking if its nill and if the date is not olderthe current date
+        if (dateFromString != nil) && (dateFromString! >= date) {
             return true
         } else {
             return false
         }
     }
-    
+    //hidding keyboard after touching somewhere elsle
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true);
     }

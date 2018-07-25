@@ -29,7 +29,10 @@
 		03F10DF720DD0F7400F8C62B /* Scrimmage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DF620DD0F7300F8C62B /* Scrimmage.swift */; };
 		0491940120EB6C060063671E /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491940020EB6C060063671E /* IntentHandler.swift */; };
 		0491940520EB6C060063671E /* SiriScrimmageWorkouts.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 049193FE20EB6C060063671E /* SiriScrimmageWorkouts.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		662BB2BE39AEF80F674AC8B2 /* Pods_ScrimmageFinder_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06025A504561BDBE1220B5F6 /* Pods_ScrimmageFinder_App.framework */; };
+		04C8F37820FF2A0E00AF48E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F37720FF2A0E00AF48E4 /* LoginViewController.swift */; };
+		04C8F37A20FF2A2F00AF48E4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F37920FF2A2E00AF48E4 /* RegisterViewController.swift */; };
+		04C8F37E20FFFDA400AF48E4 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F37D20FFFDA400AF48E4 /* AlertController.swift */; };
+		662BB2BE39AEF80F674AC8B2 /* Pods_ScrimmageFinder_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06025A504561BDBE1220B5F6 /* Pods_ScrimmageFinder_App.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		C53B747BEB4E8E432E213461 /* Pods_ScrimmageFinder_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF1BFFC0D3C64B94DB6675A /* Pods_ScrimmageFinder_AppTests.framework */; };
 		EC3967E19098D337F43DBB05 /* Pods_ScrimmageFinder_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C50FD11D4357864F28C6CD8 /* Pods_ScrimmageFinder_AppUITests.framework */; };
 /* End PBXBuildFile section */
@@ -103,6 +106,9 @@
 		049193FE20EB6C060063671E /* SiriScrimmageWorkouts.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SiriScrimmageWorkouts.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0491940020EB6C060063671E /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		0491940220EB6C060063671E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04C8F37720FF2A0E00AF48E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		04C8F37920FF2A2E00AF48E4 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		04C8F37D20FFFDA400AF48E4 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		06025A504561BDBE1220B5F6 /* Pods_ScrimmageFinder_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrimmageFinder_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF1BFFC0D3C64B94DB6675A /* Pods_ScrimmageFinder_AppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrimmageFinder_AppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C50FD11D4357864F28C6CD8 /* Pods_ScrimmageFinder_AppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrimmageFinder_AppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +158,8 @@
 		0369DAEB20E121BF006B7507 /* Main Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				04C8F37720FF2A0E00AF48E4 /* LoginViewController.swift */,
+				04C8F37920FF2A2E00AF48E4 /* RegisterViewController.swift */,
 				03D14CF120E0EBA300D76E38 /* ScrimmagesViewController.swift */,
 				0369DAE920E121B1006B7507 /* SavedScrimmagesViewController.swift */,
 				0369DAF220E14308006B7507 /* addScrimmageViewController.swift */,
@@ -263,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				03F10DC520DC55BF00F8C62B /* AppDelegate.swift */,
+				04C8F37D20FFFDA400AF48E4 /* AlertController.swift */,
 			);
 			path = helperFiles;
 			sourceTree = "<group>";
@@ -509,7 +518,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ScrimmageFinder App/Pods-ScrimmageFinder App-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SilentScrolly/SilentScrolly.framework",
@@ -522,7 +536,12 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SilentScrolly.framework",
@@ -563,16 +582,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04C8F37820FF2A0E00AF48E4 /* LoginViewController.swift in Sources */,
 				0369DAF920E27319006B7507 /* SavedDetailViewController.swift in Sources */,
 				0369DAF320E14308006B7507 /* addScrimmageViewController.swift in Sources */,
 				03C6E1EC20DD5557001DFD01 /* FIRCollectionReference.swift in Sources */,
 				0369DAF520E25365006B7507 /* CoreDataController.swift in Sources */,
 				0369DAEF20E13635006B7507 /* Detail1ViewController.swift in Sources */,
+				04C8F37A20FF2A2F00AF48E4 /* RegisterViewController.swift in Sources */,
 				03C6E1E820DD357D001DFD01 /* FIRFiestoreService.swift in Sources */,
 				0369DAEA20E121B1006B7507 /* SavedScrimmagesViewController.swift in Sources */,
 				03C6E1F020DD63E0001DFD01 /* SnapshotExtensions.swift in Sources */,
 				03F10DC620DC55BF00F8C62B /* AppDelegate.swift in Sources */,
 				03D14CF220E0EBA300D76E38 /* ScrimmagesViewController.swift in Sources */,
+				04C8F37E20FFFDA400AF48E4 /* AlertController.swift in Sources */,
 				03F10DF720DD0F7400F8C62B /* Scrimmage.swift in Sources */,
 				03F10DCE20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld in Sources */,
 				03C6E1EE20DD59C3001DFD01 /* EncodableExtensions.swift in Sources */,
@@ -694,7 +716,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -748,7 +770,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

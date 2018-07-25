@@ -7,29 +7,48 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
 
+    
+    @IBOutlet var emailTF: UITextField!
+    
+    @IBOutlet var passTF: UITextField!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+       
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        if let user = Auth.auth().currentUser {
+            self.performSegue(withIdentifier: "loginSuccessful", sender: self)
+        }
     }
-    */
 
+    @IBAction func onLoginCLick(_ sender: Any) {
+        
+        guard let email = emailTF.text else {return}
+        guard let password = passTF.text else {return}
+        
+        if email.trimmingCharacters(in: .whitespaces).isEmpty {
+            AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Email")
+        }else if password.trimmingCharacters(in: .whitespaces).isEmpty {
+            AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Password")
+        }else {
+        Auth.auth().signIn(withEmail: email, password: password) { user, error in
+            if (error == nil) && (user != nil) {
+                self.performSegue(withIdentifier: "loginSuccessful", sender: self)
+            } else {
+                print("Error logging in: \(String(describing: error?.localizedDescription))")
+            }
+        }
+        }
+    }
+    
+   
 }

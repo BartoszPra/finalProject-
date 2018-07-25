@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "280090C22EFE1AB01E8B1D6988A59666"
+               BlueprintIdentifier = "8BF7909A28EA9A66FF327BF40D903546"
                BlueprintName = "SilentScrolly"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "SilentScrolly.framework">

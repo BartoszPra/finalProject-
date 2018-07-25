@@ -38,7 +38,8 @@ class Detail1ViewController: UIViewController {
         super.viewDidLoad()
         
         UserDefaults.standard.register(defaults: [String : Any]())
-
+        
+        //assigning data to labels
         nameLbl.text = scrimmagePassedOver?.name
         venueNameLbl.text = scrimmagePassedOver?.venueName
         postCodeLbl.text = scrimmagePassedOver?.postCode
@@ -54,7 +55,7 @@ class Detail1ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         let userDefaults = UserDefaults.standard
         guard let themes = userDefaults.string(forKey: "user_theme") else {return}
-        
+        // adjusting the theme when view will applear
         if themes == "theme1" {
             DT1backGroundPhotoImg.image = #imageLiteral(resourceName: "backgoundBBall70")
         } else {
@@ -63,9 +64,9 @@ class Detail1ViewController: UIViewController {
     }
     
     
-    
+    //function that adds to CoreData
     @IBAction func add2Saved(_ sender: Any) {
-        
+        //checks if it already exist
         if entityExists(name: (scrimmagePassedOver?.name)!) == true{
        
         // Crete new Scrimmage object
@@ -83,7 +84,7 @@ class Detail1ViewController: UIViewController {
         newScrimmage.participants = Int16((scrimmagePassedOver!.participants))
         
        // SAVE THE CONTEXT and check if it already exist
-        
+        //saving contextf
         coreDataController.saveContext()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
         //add allert
@@ -91,6 +92,7 @@ class Detail1ViewController: UIViewController {
         
        // add an action (button)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        
         self.present(alert, animated: true, completion: nil)
        }
         
@@ -104,7 +106,7 @@ class Detail1ViewController: UIViewController {
     }
     //function to check if Entity exist in the core data
     func entityExists(name: String) -> Bool {
-        
+        //fetching all the entities using predicate
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ScrimmageD")
         let predicate = NSPredicate(format: "name = %@", name)
         fetchRequest.predicate = predicate
@@ -128,7 +130,7 @@ class Detail1ViewController: UIViewController {
             return true
         }
     }
-    
+    //function to update the number of participants
     @IBAction func participate(_ sender: Any) {
         
         var updatedParticipants = scrimmagePassedOver!
@@ -147,7 +149,7 @@ class Detail1ViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
         
     }
-    
+    //function to implememnt activity controller
     @IBAction func share(_ sender: Any) {
         
         let shareItem = "Hey Im going to \(scrimmagePassedOver!.name), do you want to join me?"

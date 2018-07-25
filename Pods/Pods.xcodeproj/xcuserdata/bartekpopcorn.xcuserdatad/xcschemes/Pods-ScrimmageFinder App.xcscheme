@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4B22366BE7AFEFF9A4C2BA6C9BC67B8A"
+               BlueprintIdentifier = "F8075931FC18B837CC70D6467DFC3B70"
                BuildableName = "Pods_ScrimmageFinder_App.framework"
                BlueprintName = "Pods-ScrimmageFinder App"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4B22366BE7AFEFF9A4C2BA6C9BC67B8A"
+            BlueprintIdentifier = "F8075931FC18B837CC70D6467DFC3B70"
             BuildableName = "Pods_ScrimmageFinder_App.framework"
             BlueprintName = "Pods-ScrimmageFinder App"
             ReferencedContainer = "container:Pods.xcodeproj">

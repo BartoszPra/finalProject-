@@ -3,6 +3,7 @@
 import UIKit
 import CoreData
 import Intents
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -11,6 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         FIRFirestoreService.shared.configure()
         
@@ -24,14 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     internal func application(_ application: UIApplication, continue UserActivity: NSUserActivity, restorationHandler: @escaping([Any]?)-> Void) -> Bool {
         
         
-        guard let intent = userActivity?.interaction?.intent as? INStartWorkoutIntent else {return false}
+//guard let intent = userActivity?.interaction?.intent as? INStartWorkoutIntent else {return false}
         
         
         //guard let spokenPhrase = intent.workoutName?.spokenPhrase else {return false}
         
-        guard let scrVC = application.keyWindow?.rootViewController as? UINavigationController else {return false}
+      //  guard let scrVC = application.keyWindow?.rootViewController as? UINavigationController else {return false}
         
-        guard let detailVC = scrVC.topViewController as? SavedDetailViewController else {return false}
+       // guard let detailVC = scrVC.topViewController as? SavedDetailViewController else {return false}
      
         //detailVC.add2Saved(spokenPhrase)
         
