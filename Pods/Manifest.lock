@@ -52,9 +52,21 @@ PODS:
     - Protobuf (~> 3.1)
   - FirebaseInstanceID (3.1.1):
     - FirebaseCore (~> 5.0)
+  - GoogleSignIn (4.1.2):
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
+    - GTMOAuth2 (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.4):
+    - GoogleToolboxForMac/Defines (= 2.1.4)
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.1.4)":
+    - GoogleToolboxForMac/DebugUtils (= 2.1.4)
+    - GoogleToolboxForMac/Defines (= 2.1.4)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.4)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.1.4)"
   - gRPC (1.12.0):
     - gRPC-RxLibrary (= 1.12.0)
     - gRPC/Main (= 1.12.0)
@@ -74,7 +86,13 @@ PODS:
   - gRPC/Main (1.12.0):
     - gRPC-Core (= 1.12.0)
     - gRPC-RxLibrary (= 1.12.0)
+  - GTMOAuth2 (1.1.6):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.1.15):
+    - GTMSessionFetcher/Full (= 1.1.15)
   - GTMSessionFetcher/Core (1.1.15)
+  - GTMSessionFetcher/Full (1.1.15):
+    - GTMSessionFetcher/Core (= 1.1.15)
   - leveldb-library (1.20)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -90,6 +108,7 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - GoogleSignIn
   - SilentScrolly
 
 SPEC REPOS:
@@ -105,11 +124,13 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseFirestore
     - FirebaseInstanceID
+    - GoogleSignIn
     - GoogleToolboxForMac
     - gRPC
     - gRPC-Core
     - gRPC-ProtoRPC
     - gRPC-RxLibrary
+    - GTMOAuth2
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
@@ -128,17 +149,19 @@ SPEC CHECKSUMS:
   FirebaseCore: 62f1b792a49bb9e8b4073f24606d2c93ffc352f0
   FirebaseFirestore: 53f6fe858494c39dbfd5237655e0641152a88c89
   FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
+  GoogleSignIn: d9ef55b10f0aa401a5de2747f59b725e4b9732ac
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   gRPC: 9362451032695e2dfb7bafcd3740e3a27939e4ff
   gRPC-Core: 9696b220565b283e021cf2722d473a4a74b7622a
   gRPC-ProtoRPC: a1bd56fb1991a8dae4581250d7259eddabb66779
   gRPC-RxLibrary: 1ed5314e8b38cd6e55c9bfa048387136ae925ce9
+  GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 0fc0ad8bec688b2a3017a139953e01374fedbd5f
   SilentScrolly: 0d85996304048c9e6c49788823c9c2a64185be76
 
-PODFILE CHECKSUM: a1e018fcb35b1c6651740ac67c1985db1d402cc0
+PODFILE CHECKSUM: 5306eea075dad335b29bd6df9cff1c5d91686193
 
 COCOAPODS: 1.5.3

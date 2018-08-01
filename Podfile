@@ -15,7 +15,7 @@ target 'ScrimmageFinder App' do
 	pod 'Firebase/Auth'
 	pod 'FacebookCore'
 	pod 'FBSDKLoginKit'
-    
+        pod 'GoogleSignIn'
 
 	target 'ScrimmageFinder AppTests' do inherit! :search_paths
 	# Pods for testing

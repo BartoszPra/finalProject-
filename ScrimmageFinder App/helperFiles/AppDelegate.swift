@@ -4,9 +4,12 @@ import UIKit
 import CoreData
 import Intents
 import FBSDKCoreKit
+import GoogleSignIn
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
 
     var window: UIWindow?
 
@@ -17,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FIRFirestoreService.shared.configure()
         
+        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
+        
+        
+        
         INPreferences.requestSiriAuthorization({status in
             print(String(reflecting: status))
         })
@@ -24,23 +31,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    internal func application(_ application: UIApplication, continue UserActivity: NSUserActivity, restorationHandler: @escaping([Any]?)-> Void) -> Bool {
+    internal func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool
+    {
+        FIRFirestoreService.shared.configure()
         
+        GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: [:])
+        GIDSignIn.sharedInstance().delegate = self as! GIDSignInDelegate 
         
-//guard let intent = userActivity?.interaction?.intent as? INStartWorkoutIntent else {return false}
-        
-        
-        //guard let spokenPhrase = intent.workoutName?.spokenPhrase else {return false}
-        
-      //  guard let scrVC = application.keyWindow?.rootViewController as? UINavigationController else {return false}
-        
-       // guard let detailVC = scrVC.topViewController as? SavedDetailViewController else {return false}
-     
-        //detailVC.add2Saved(spokenPhrase)
-        
-        //guard let savedVC = scrVC.topViewController as? SavedDetailViewController else {return false}
-        
-        return true
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
 

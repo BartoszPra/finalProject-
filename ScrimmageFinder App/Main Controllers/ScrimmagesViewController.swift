@@ -4,9 +4,10 @@ import UIKit
 import SilentScrolly
 import MobileCoreServices
 import FirebaseAuth
+import FBSDKLoginKit
 
 class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable {
-   
+    
     
     @IBOutlet var titleItem: UINavigationItem!
     
@@ -189,9 +190,9 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     
     
     @IBAction func logOutClicked(_ sender: Any) {
-        
         try! Auth.auth().signOut()
         self.dismiss(animated: true, completion: nil)
+        FBSDKLoginManager().logOut()
         
     }
     
