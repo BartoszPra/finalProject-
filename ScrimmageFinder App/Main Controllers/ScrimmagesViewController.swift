@@ -5,6 +5,7 @@ import SilentScrolly
 import MobileCoreServices
 import FirebaseAuth
 import FBSDKLoginKit
+import GoogleSignIn
 
 class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable {
     
@@ -191,6 +192,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     
     @IBAction func logOutClicked(_ sender: Any) {
         try! Auth.auth().signOut()
+        try! GIDSignIn.sharedInstance()?.signOut()
         self.dismiss(animated: true, completion: nil)
         FBSDKLoginManager().logOut()
         

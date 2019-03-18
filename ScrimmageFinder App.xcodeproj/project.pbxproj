@@ -113,6 +113,8 @@
 		1DF1BFFC0D3C64B94DB6675A /* Pods_ScrimmageFinder_AppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrimmageFinder_AppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C50FD11D4357864F28C6CD8 /* Pods_ScrimmageFinder_AppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrimmageFinder_AppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD1AF697CE9CBB669D028A8B /* Pods-ScrimmageFinder App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrimmageFinder App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScrimmageFinder App/Pods-ScrimmageFinder App.debug.xcconfig"; sourceTree = "<group>"; };
+		C70F3FE3222F60F400703859 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C70F3FE5222F614100703859 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCB790D9F83C6EDD4B016A99 /* Pods-ScrimmageFinder App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrimmageFinder App.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrimmageFinder App/Pods-ScrimmageFinder App.release.xcconfig"; sourceTree = "<group>"; };
 		D061B63F1F8C86543645DDC0 /* Pods-ScrimmageFinder AppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrimmageFinder AppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrimmageFinder AppTests/Pods-ScrimmageFinder AppTests.release.xcconfig"; sourceTree = "<group>"; };
 		D3D79C37139A66C9C3C2FA7E /* Pods-ScrimmageFinder AppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrimmageFinder AppUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrimmageFinder AppUITests/Pods-ScrimmageFinder AppUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -287,6 +289,8 @@
 		3429B88FFE552F66B589880D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C70F3FE5222F614100703859 /* GoogleToolboxForMac.framework */,
+				C70F3FE3222F60F400703859 /* GoogleToolboxForMac.framework */,
 				06025A504561BDBE1220B5F6 /* Pods_ScrimmageFinder_App.framework */,
 				1DF1BFFC0D3C64B94DB6675A /* Pods_ScrimmageFinder_AppTests.framework */,
 				5C50FD11D4357864F28C6CD8 /* Pods_ScrimmageFinder_AppUITests.framework */,
@@ -523,38 +527,34 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ScrimmageFinder App/Pods-ScrimmageFinder App-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FacebookCore/FacebookCore.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SilentScrolly/SilentScrolly.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FacebookCore.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SilentScrolly.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -811,7 +811,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "ScrimmageFinder App/ScrimmageFinder App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WHW5C4JA8E;
+				DEVELOPMENT_TEAM = 3V2Q7MMTTZ;
 				INFOPLIST_FILE = "ScrimmageFinder App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -833,7 +833,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "ScrimmageFinder App/ScrimmageFinder App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WHW5C4JA8E;
+				DEVELOPMENT_TEAM = 3V2Q7MMTTZ;
 				INFOPLIST_FILE = "ScrimmageFinder App/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

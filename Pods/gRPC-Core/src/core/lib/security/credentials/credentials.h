@@ -45,6 +45,7 @@ typedef enum {
 #define GRPC_CHANNEL_CREDENTIALS_TYPE_SSL "Ssl"
 #define GRPC_CHANNEL_CREDENTIALS_TYPE_FAKE_TRANSPORT_SECURITY \
   "FakeTransportSecurity"
+#define GRPC_CHANNEL_CREDENTIALS_TYPE_GOOGLE_DEFAULT "GoogleDefault"
 
 #define GRPC_CALL_CREDENTIALS_TYPE_OAUTH2 "Oauth2"
 #define GRPC_CALL_CREDENTIALS_TYPE_JWT "Jwt"
@@ -141,8 +142,8 @@ grpc_channel_credentials* grpc_channel_credentials_find_in_args(
 /* --- grpc_credentials_mdelem_array. --- */
 
 typedef struct {
-  grpc_mdelem* md;
-  size_t size;
+  grpc_mdelem* md = nullptr;
+  size_t size = 0;
 } grpc_credentials_mdelem_array;
 
 /// Takes a new ref to \a md.

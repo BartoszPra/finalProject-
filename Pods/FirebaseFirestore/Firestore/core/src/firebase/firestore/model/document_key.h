@@ -51,18 +51,10 @@ class DocumentKey {
   explicit DocumentKey(ResourcePath&& path);
 
 #if defined(__OBJC__)
-  DocumentKey(FSTDocumentKey* key)  // NOLINT(runtime/explicit)
-      : path_(std::make_shared<ResourcePath>(key.path)) {
-  }
-
-  operator FSTDocumentKey*() const {
-    return [FSTDocumentKey keyWithPath:path()];
-  }
-
   NSUInteger Hash() const {
     return util::Hash(ToString());
   }
-#endif
+#endif  // defined(__OBJC__)
 
   std::string ToString() const {
     return path().CanonicalString();
@@ -124,6 +116,20 @@ struct DocumentKeyHash {
     return util::Hash(key.path());
   }
 };
+
+#if defined(__OBJC__)
+inline NSComparisonResult CompareKeys(const DocumentKey& lhs,
+                                      const DocumentKey& rhs) {
+  if (lhs < rhs) {
+    return NSOrderedAscending;
+  }
+  if (lhs > rhs) {
+    return NSOrderedDescending;
+  }
+  return NSOrderedSame;
+}
+
+#endif  // defined(__OBJC__)
 
 }  // namespace model
 

@@ -21,6 +21,7 @@
 #include <string.h>
 
 #include "src/core/lib/channel/channel_args.h"
+#include "src/core/lib/gpr/arena.h"
 #include "src/core/lib/gpr/string.h"
 #include "src/core/lib/security/context/security_context.h"
 #include "src/core/lib/surface/api_trace.h"
@@ -49,7 +50,7 @@ grpc_call_error grpc_call_set_credentials(grpc_call* call,
   ctx = static_cast<grpc_client_security_context*>(
       grpc_call_context_get(call, GRPC_CONTEXT_SECURITY));
   if (ctx == nullptr) {
-    ctx = grpc_client_security_context_create();
+    ctx = grpc_client_security_context_create(grpc_call_get_arena(call));
     ctx->creds = grpc_call_credentials_ref(creds);
     grpc_call_context_set(call, GRPC_CONTEXT_SECURITY, ctx,
                           grpc_client_security_context_destroy);
@@ -80,39 +81,45 @@ void grpc_auth_context_release(grpc_auth_context* context) {
 }
 
 /* --- grpc_client_security_context --- */
+grpc_client_security_context::~grpc_client_security_context() {
+  grpc_call_credentials_unref(creds);
+  GRPC_AUTH_CONTEXT_UNREF(auth_context, "client_security_context");
+  if (extension.instance != nullptr && extension.destroy != nullptr) {
+    extension.destroy(extension.instance);
+  }
+}
 
-grpc_client_security_context* grpc_client_security_context_create(void) {
-  return static_cast<grpc_client_security_context*>(
-      gpr_zalloc(sizeof(grpc_client_security_context)));
+grpc_client_security_context* grpc_client_security_context_create(
+    gpr_arena* arena) {
+  return new (gpr_arena_alloc(arena, sizeof(grpc_client_security_context)))
+      grpc_client_security_context();
 }
 
 void grpc_client_security_context_destroy(void* ctx) {
   grpc_core::ExecCtx exec_ctx;
   grpc_client_security_context* c =
       static_cast<grpc_client_security_context*>(ctx);
-  grpc_call_credentials_unref(c->creds);
-  GRPC_AUTH_CONTEXT_UNREF(c->auth_context, "client_security_context");
-  if (c->extension.instance != nullptr && c->extension.destroy != nullptr) {
-    c->extension.destroy(c->extension.instance);
-  }
-  gpr_free(ctx);
+  c->~grpc_client_security_context();
 }
 
 /* --- grpc_server_security_context --- */
+grpc_server_security_context::~grpc_server_security_context() {
+  GRPC_AUTH_CONTEXT_UNREF(auth_context, "server_security_context");
+  if (extension.instance != nullptr && extension.destroy != nullptr) {
+    extension.destroy(extension.instance);
+  }
+}
 
-grpc_server_security_context* grpc_server_security_context_create(void) {
-  return static_cast<grpc_server_security_context*>(
-      gpr_zalloc(sizeof(grpc_server_security_context)));
+grpc_server_security_context* grpc_server_security_context_create(
+    gpr_arena* arena) {
+  return new (gpr_arena_alloc(arena, sizeof(grpc_server_security_context)))
+      grpc_server_security_context();
 }
 
 void grpc_server_security_context_destroy(void* ctx) {
   grpc_server_security_context* c =
       static_cast<grpc_server_security_context*>(ctx);
-  GRPC_AUTH_CONTEXT_UNREF(c->auth_context, "server_security_context");
-  if (c->extension.instance != nullptr && c->extension.destroy != nullptr) {
-    c->extension.destroy(c->extension.instance);
-  }
-  gpr_free(ctx);
+  c->~grpc_server_security_context();
 }
 
 /* --- grpc_auth_context --- */

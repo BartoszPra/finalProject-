@@ -18,19 +18,18 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     @IBOutlet var passTF: UITextField!
     
+    @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    
+    @IBOutlet weak var facebookLoginSignInButton: FBSDKLoginButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let loginButton = FBSDKLoginButton()
-        view.addSubview(loginButton)
-        loginButton.center = view.center
-        loginButton.delegate = self
-        loginButton.readPermissions = ["email", "public_profile"]
         
-        // add googleSightInButton
-         let googleButton = GIDSignInButton()
-         googleButton.frame = CGRect(x: 16, y: 400, width: view.frame.width - 120, height: 50)
-         view.addSubview(googleButton)
         GIDSignIn.sharedInstance().uiDelegate = self
+        facebookLoginSignInButton.delegate = self
+        facebookLoginSignInButton.readPermissions = ["email", "public_profile"]
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,7 +51,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
          print("Did log out of facebook")
     }
     
-    
     func loginWithFcb(){
       let accesToken = FBSDKAccessToken.current()
       guard let stringAccesTok = accesToken?.tokenString else {return}
@@ -66,9 +64,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         })
     }
     
-
     @IBAction func onLoginCLick(_ sender: Any) {
-        
+
         guard let email = emailTF.text else {return}
         guard let password = passTF.text else {return}
         

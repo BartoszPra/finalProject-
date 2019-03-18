@@ -26,24 +26,28 @@
 
 extern grpc_core::DebugOnlyTraceFlag grpc_trace_auth_context_refcount;
 
+struct gpr_arena;
+
 /* --- grpc_auth_context ---
 
    High level authentication context object. Can optionally be chained. */
 
 /* Property names are always NULL terminated. */
 
-typedef struct {
-  grpc_auth_property* array;
-  size_t count;
-  size_t capacity;
-} grpc_auth_property_array;
+struct grpc_auth_property_array {
+  grpc_auth_property* array = nullptr;
+  size_t count = 0;
+  size_t capacity = 0;
+};
 
 struct grpc_auth_context {
-  struct grpc_auth_context* chained;
+  grpc_auth_context() { gpr_ref_init(&refcount, 0); }
+
+  struct grpc_auth_context* chained = nullptr;
   grpc_auth_property_array properties;
   gpr_refcount refcount;
-  const char* peer_identity_property_name;
-  grpc_pollset* pollset;
+  const char* peer_identity_property_name = nullptr;
+  grpc_pollset* pollset = nullptr;
 };
 
 /* Creation. */
@@ -74,34 +78,42 @@ void grpc_auth_property_reset(grpc_auth_property* property);
    Extension to the security context that may be set in a filter and accessed
    later by a higher level method on a grpc_call object. */
 
-typedef struct {
-  void* instance;
-  void (*destroy)(void*);
-} grpc_security_context_extension;
+struct grpc_security_context_extension {
+  void* instance = nullptr;
+  void (*destroy)(void*) = nullptr;
+};
 
 /* --- grpc_client_security_context ---
 
    Internal client-side security context. */
 
-typedef struct {
-  grpc_call_credentials* creds;
-  grpc_auth_context* auth_context;
-  grpc_security_context_extension extension;
-} grpc_client_security_context;
+struct grpc_client_security_context {
+  grpc_client_security_context() = default;
+  ~grpc_client_security_context();
 
-grpc_client_security_context* grpc_client_security_context_create(void);
+  grpc_call_credentials* creds = nullptr;
+  grpc_auth_context* auth_context = nullptr;
+  grpc_security_context_extension extension;
+};
+
+grpc_client_security_context* grpc_client_security_context_create(
+    gpr_arena* arena);
 void grpc_client_security_context_destroy(void* ctx);
 
 /* --- grpc_server_security_context ---
 
    Internal server-side security context. */
 
-typedef struct {
-  grpc_auth_context* auth_context;
-  grpc_security_context_extension extension;
-} grpc_server_security_context;
+struct grpc_server_security_context {
+  grpc_server_security_context() = default;
+  ~grpc_server_security_context();
 
-grpc_server_security_context* grpc_server_security_context_create(void);
+  grpc_auth_context* auth_context = nullptr;
+  grpc_security_context_extension extension;
+};
+
+grpc_server_security_context* grpc_server_security_context_create(
+    gpr_arena* arena);
 void grpc_server_security_context_destroy(void* ctx);
 
 /* --- Channel args for auth context --- */

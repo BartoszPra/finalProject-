@@ -8,21 +8,15 @@ import GoogleSignIn
 import Firebase
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
-
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        
-        FIRFirestoreService.shared.configure()
-        
+        FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        
-        
+        GIDSignIn.sharedInstance()?.delegate = self
         
         INPreferences.requestSiriAuthorization({status in
             print(String(reflecting: status))
@@ -31,16 +25,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    internal func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool
-    {
-        FIRFirestoreService.shared.configure()
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         
-        GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: [:])
-        GIDSignIn.sharedInstance().delegate = self as! GIDSignInDelegate 
+        if let error = error {
+            print("Error \(error.localizedDescription )")
+            return
+        }
         
-        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        guard let authentication = user.authentication else { return }
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
+                                                       accessToken: authentication.accessToken)
+        
+        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+            if error == nil {
+                self.window?.rootViewController!.performSegue(withIdentifier: "loginSuccessful", sender: nil)
+            } else {
+                print(error?.localizedDescription)
+                return
+            }
+        }
     }
     
+    func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
+        -> Bool {
+            return GIDSignIn.sharedInstance().handle(url,
+                                                     sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                     annotation: [:])
+    }
+
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
