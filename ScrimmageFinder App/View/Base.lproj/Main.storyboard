@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gDF-6J-Jqi">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -872,14 +872,14 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="uEd-Ow-TuU" firstAttribute="top" secondItem="3HY-Is-hrl" secondAttribute="top" constant="20" id="30Y-bE-NeG"/>
+                            <constraint firstItem="uEd-Ow-TuU" firstAttribute="top" secondItem="sBX-Lx-Dty" secondAttribute="top" id="30Y-bE-NeG"/>
                             <constraint firstItem="uEd-Ow-TuU" firstAttribute="trailing" secondItem="gTx-OK-UUb" secondAttribute="trailing" id="BM4-VP-Bac"/>
-                            <constraint firstItem="gTx-OK-UUb" firstAttribute="bottomMargin" secondItem="sBX-Lx-Dty" secondAttribute="bottom" constant="-8" id="Mme-tr-BqJ"/>
+                            <constraint firstItem="gTx-OK-UUb" firstAttribute="bottomMargin" secondItem="3HY-Is-hrl" secondAttribute="bottom" id="Mme-tr-BqJ"/>
                             <constraint firstItem="gTx-OK-UUb" firstAttribute="leading" secondItem="3HY-Is-hrl" secondAttribute="leading" id="NMy-bE-qXP"/>
-                            <constraint firstItem="b7m-sE-TdG" firstAttribute="top" secondItem="ycS-7i-wI4" secondAttribute="bottom" constant="30" id="RXG-Yx-vVf"/>
+                            <constraint firstItem="ycS-7i-wI4" firstAttribute="top" secondItem="uEd-Ow-TuU" secondAttribute="bottom" constant="84" id="OvO-ax-HgG"/>
+                            <constraint firstItem="b7m-sE-TdG" firstAttribute="top" secondItem="ycS-7i-wI4" secondAttribute="bottom" constant="130" id="RXG-Yx-vVf"/>
                             <constraint firstItem="gTx-OK-UUb" firstAttribute="trailing" secondItem="sBX-Lx-Dty" secondAttribute="trailing" id="YfR-EY-LGF"/>
-                            <constraint firstItem="sBX-Lx-Dty" firstAttribute="bottom" secondItem="b7m-sE-TdG" secondAttribute="bottom" constant="80" id="biR-O3-gKa"/>
-                            <constraint firstItem="gTx-OK-UUb" firstAttribute="top" secondItem="3HY-Is-hrl" secondAttribute="top" constant="64" id="coZ-mM-DSU"/>
+                            <constraint firstItem="gTx-OK-UUb" firstAttribute="top" secondItem="sBX-Lx-Dty" secondAttribute="top" id="coZ-mM-DSU"/>
                             <constraint firstItem="b7m-sE-TdG" firstAttribute="centerX" secondItem="3HY-Is-hrl" secondAttribute="centerX" id="m04-cw-XXU"/>
                             <constraint firstItem="uEd-Ow-TuU" firstAttribute="leading" secondItem="gTx-OK-UUb" secondAttribute="leading" id="sEO-nf-bMa"/>
                             <constraint firstItem="ycS-7i-wI4" firstAttribute="centerX" secondItem="3HY-Is-hrl" secondAttribute="centerX" id="uh0-X6-1wF"/>
