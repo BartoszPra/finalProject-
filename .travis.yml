@@ -2,4 +2,4 @@ language: objective-c  #1
 osx_image: xcode10 #2
 xcode_project: ScrimmageFinder App.xcworkspace #3
 xcode_scheme: ScrimmageFinder App #4
-xcode_sdk: iphonesimulator10 #5
+xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X
