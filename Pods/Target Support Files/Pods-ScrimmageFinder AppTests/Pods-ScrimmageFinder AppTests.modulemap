@@ -1,0 +1,6 @@
+framework module Pods_ScrimmageFinder_AppTests {
+  umbrella header "Pods-ScrimmageFinder AppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
