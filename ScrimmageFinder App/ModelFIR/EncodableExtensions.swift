@@ -7,7 +7,7 @@ enum MyError: Error {
 }
 
 extension Encodable {
-    
+   // function to encode json taken from my firebase 
     func toJson(excluding keys: [String] = [String]()) throws -> [String: Any] {
         
         let objectData = try JSONEncoder().encode(self)

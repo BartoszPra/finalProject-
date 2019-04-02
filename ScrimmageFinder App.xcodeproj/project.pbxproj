@@ -11,7 +11,7 @@
 		034D429320E54FCA00D59F8C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 034D429220E54FCA00D59F8C /* GoogleService-Info.plist */; };
 		034D429720E7F0EC00D59F8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034D429620E7F0EC00D59F8C /* Assets.xcassets */; };
 		0369DAEA20E121B1006B7507 /* SavedScrimmagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAE920E121B1006B7507 /* SavedScrimmagesViewController.swift */; };
-		0369DAEF20E13635006B7507 /* Detail1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAEE20E13635006B7507 /* Detail1ViewController.swift */; };
+		0369DAEF20E13635006B7507 /* DetailOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAEE20E13635006B7507 /* DetailOneViewController.swift */; };
 		0369DAF320E14308006B7507 /* addScrimmageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAF220E14308006B7507 /* addScrimmageViewController.swift */; };
 		0369DAF520E25365006B7507 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAF420E25365006B7507 /* CoreDataController.swift */; };
 		0369DAF920E27319006B7507 /* SavedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAF820E27319006B7507 /* SavedDetailViewController.swift */; };
@@ -77,7 +77,7 @@
 		034D429220E54FCA00D59F8C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		034D429620E7F0EC00D59F8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0369DAE920E121B1006B7507 /* SavedScrimmagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedScrimmagesViewController.swift; sourceTree = "<group>"; };
-		0369DAEE20E13635006B7507 /* Detail1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail1ViewController.swift; sourceTree = "<group>"; };
+		0369DAEE20E13635006B7507 /* DetailOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailOneViewController.swift; sourceTree = "<group>"; };
 		0369DAF220E14308006B7507 /* addScrimmageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addScrimmageViewController.swift; sourceTree = "<group>"; };
 		0369DAF420E25365006B7507 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		0369DAF820E27319006B7507 /* SavedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDetailViewController.swift; sourceTree = "<group>"; };
@@ -174,7 +174,7 @@
 		0369DAED20E135D3006B7507 /* Detail Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0369DAEE20E13635006B7507 /* Detail1ViewController.swift */,
+				0369DAEE20E13635006B7507 /* DetailOneViewController.swift */,
 				0369DAF820E27319006B7507 /* SavedDetailViewController.swift */,
 			);
 			path = "Detail Controllers";
@@ -567,7 +567,7 @@
 				0369DAF320E14308006B7507 /* addScrimmageViewController.swift in Sources */,
 				03C6E1EC20DD5557001DFD01 /* FIRCollectionReference.swift in Sources */,
 				0369DAF520E25365006B7507 /* CoreDataController.swift in Sources */,
-				0369DAEF20E13635006B7507 /* Detail1ViewController.swift in Sources */,
+				0369DAEF20E13635006B7507 /* DetailOneViewController.swift in Sources */,
 				03C6E1E820DD357D001DFD01 /* FIRFiestoreService.swift in Sources */,
 				0369DAEA20E121B1006B7507 /* SavedScrimmagesViewController.swift in Sources */,
 				03C6E1F020DD63E0001DFD01 /* SnapshotExtensions.swift in Sources */,

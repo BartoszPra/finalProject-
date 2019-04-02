@@ -6,11 +6,13 @@ import EventKit
 
 class SavedDetailViewController: UIViewController {
     
+    
     var scrimmagePassedOver2: ScrimmageD?
 
+    //outlet for background image
     @IBOutlet var DT2backGroundPhotoImg: UIImageView!
     
-    
+    //labels outlets
     @IBOutlet var nameLbl: UILabel!
     
     @IBOutlet var venueNameLbl: UILabel!
@@ -31,9 +33,9 @@ class SavedDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //register user defaults
         UserDefaults.standard.register(defaults: [String : Any]())
-
+        //assinging data to labels
         nameLbl.text = scrimmagePassedOver2?.name
         venueNameLbl.text = scrimmagePassedOver2?.venueName
         postCode.text = scrimmagePassedOver2?.postCode
@@ -44,7 +46,7 @@ class SavedDetailViewController: UIViewController {
         dateLbl.text = scrimmagePassedOver2?.date
         
     }
-    
+    //changing theme
     override func viewWillAppear(_ animated: Bool) {
         let userDefaults = UserDefaults.standard
         guard let themes = userDefaults.string(forKey: "user_theme") else {return}
@@ -56,7 +58,7 @@ class SavedDetailViewController: UIViewController {
             
         }
     }
-    
+    //creating a new contact
     func createCNContactWithFirstName(_ firstName: String, phone: String?) {
         // create contact with mandatory values: first and last name
         let newContact = CNMutableContact()
@@ -73,7 +75,7 @@ class SavedDetailViewController: UIViewController {
             print("I was unable to create the new contact. An error occurred.")
         }
     }
-    
+     //function to implememnt adding to contacts
     @IBAction func addToContacts(_ sender: Any) {
         let firstName = scrimmagePassedOver2?.managersName
         let phone = scrimmagePassedOver2?.managersNumber!
@@ -85,6 +87,7 @@ class SavedDetailViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
         
     }
+     //function to implememnt activity controller
     @IBAction func share(_ sender: Any) {
         
         let shareItem = "Hey Im going to \(scrimmagePassedOver2!.name!),do you want to join me?"
@@ -95,8 +98,8 @@ class SavedDetailViewController: UIViewController {
         
     }
     
+    //function that adds to the callendar
     @IBAction func addToCallendar(_ sender: Any) {
-        
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"

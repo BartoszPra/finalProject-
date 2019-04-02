@@ -8,16 +8,19 @@ import SilentScrolly
 
 class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SilentScrollable
     {
-
+    // vaariable of the silent scrollly controll
     var silentScrolly: SilentScrolly?
     
+    //tableView outlet
     @IBOutlet var savedTableView: UITableView!
     
+   //background image outlet
     @IBOutlet var SVbackGroundPhotoImg: UIImageView!
     
-    
+   // reference to coredata
     let coreDataController = CoreDataController.shared
-    
+  
+    //array for coredata scrimmages
     var coreScrimmages = [ScrimmageD]()
     
     
@@ -26,13 +29,14 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         
         UserDefaults.standard.register(defaults: [String : Any]())
         fetchScrimmages()
+        //notification to observ for notification for other controller
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
-        
+     //user defaults for choosing theme
         let userDefaults = UserDefaults.standard
         guard let themes = userDefaults.string(forKey: "user_theme") else {return}
         
@@ -62,11 +66,11 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-  
+        //segue trigger
         self.performSegue(withIdentifier: "go2SVDetails", sender: indexPath)
        
 }
-    
+    // long press function to add long press to table view and then delete the spacific row
     @objc func longTap(gestureReconizer: UILongPressGestureRecognizer) {
        
         let longPress = gestureReconizer as UILongPressGestureRecognizer
@@ -74,9 +78,11 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         let locationInView = longPress.location(in: self.savedTableView)
         guard  let indexPath = self.savedTableView.indexPathForRow(at: locationInView) else {return}
         
+        // aller to asf if you sure to delete
         let alert = UIAlertController(title: "Delete?", message: "Do you really want to delete this Scrimmage.", preferredStyle: UIAlertControllerStyle.alert)
         let Action = UIAlertAction.init(title: "Yes", style: .default) { (UIAlertAction) in
         
+            // completeion to delete the scrimmage for m coredata
             let donara = self.coreScrimmages.remove(at: indexPath.row)
             self.savedTableView.deleteRows(at: [indexPath], with: .automatic)
             self.coreDataController.mainContext.delete(donara)
@@ -84,12 +90,14 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
             print("Long tap")
            
         }
+        //allert action button to cancle
         alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
         alert.addAction(Action)
+        //presenting the allert
         self.present(alert, animated: true, completion: nil)
        
     }
-    
+    // function to prepare for seque for selecter row
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier?.caseInsensitiveCompare("go2SVDetails") == .orderedSame {
@@ -102,7 +110,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
             }
         }
     }
-   
+   // swipe left to delte additiional posibility ot delte.
         func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
            guard editingStyle == .delete else { return }
     
@@ -133,7 +141,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         }
         
     }
-    
+    /// functions for silentScrolly controll.------------
     @objc func loadList(notification: NSNotification){
         //load data here
     fetchScrimmages()
