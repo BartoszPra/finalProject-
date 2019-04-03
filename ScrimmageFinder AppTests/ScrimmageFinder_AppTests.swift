@@ -17,7 +17,7 @@ class ScrimmageFinder_AppTests: XCTestCase {
 
     let VC = addScrimmageViewController()
     // date example
-        let exDate  = "30.07.2018 15.00"
+        let exDate  = "30.07.2020 15.00"
     //ate example 2
         let exDate2 = "cdscnds"
         
