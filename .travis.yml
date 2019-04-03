@@ -1,5 +1,5 @@
 language: objective-c  #1
 osx_image: xcode10 #2
-xcode_project: ScrimmageFinder App.xcworkspace #3
+xcode_project: ScrimmageFinder_App.xcworkspace #3
 xcode_scheme: ScrimmageFinder App #4
 xcode_sdk: iphonesimulator12.0 #5
