@@ -6,83 +6,198 @@
 	<dict>
 		<key>BoringSSL.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
 		<key>FirebaseCore.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
 		<key>FirebaseFirestore.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
 		<key>Pods-ScrimmageFinder App.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>11</integer>
 		</dict>
 		<key>Pods-ScrimmageFinder AppTests.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>12</integer>
 		</dict>
 		<key>Pods-ScrimmageFinder AppUITests.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>13</integer>
 		</dict>
 		<key>Protobuf.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
 		<key>SilentScrolly.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
 		<key>gRPC-Core.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
 		<key>gRPC-ProtoRPC.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
 		<key>gRPC-RxLibrary.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
 		<key>gRPC-gRPCCertificates.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
 		<key>gRPC.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
 		<key>leveldb-library.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>9</integer>
 		</dict>
 		<key>nanopb.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>10</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>1BC96BED8E82CC4984352C8705A764D8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>262C2B0B0360F0DDB72971FF6864301C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>280090C22EFE1AB01E8B1D6988A59666</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4605323355D78230ED08F1D597760F49</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4B22366BE7AFEFF9A4C2BA6C9BC67B8A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6065EB28ADC7F71191B75730BE6D225D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>609DACC69E8D766BE18B9776830BA04F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>83A834013382DA258FBB99DA2AD05FD3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>874DFD4D599DE6564D2325C31E4CEE6D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>95C14328C1EF165F06ADA3FF997FDC0A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A39B6E777E6A7D628D096B3D06D631FC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C65DF776DB355C1BB911B7DF475DC423</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CD524CD4F880A87D9887923709E52D61</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D6C19B6E0C2DC86BC7FF05FCD1C54267</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DE41D141761BD09B9869F82668B6D2E0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F3535EDFA606E7F458C510BC81D8F03A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
