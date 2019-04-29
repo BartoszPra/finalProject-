@@ -47,7 +47,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
             if error == nil {
-                self.window?.rootViewController!.performSegue(withIdentifier: "loginSuccessful", sender: nil)
+                //self.window?.rootViewController!.performSegue(withIdentifier: "loginSuccessful", sender: nil)
+                self.coordinator?.startTabBarCoordinator(viewController: (self.window?.rootViewController)!)
             } else {
                 print(error?.localizedDescription)
                 return

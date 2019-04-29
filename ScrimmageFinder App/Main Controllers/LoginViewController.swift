@@ -33,7 +33,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     override func viewDidAppear(_ animated: Bool) {
             if let user = Auth.auth().currentUser {
-            self.performSegue(withIdentifier: "loginSuccessful", sender: self)
+            self.coordinator?.startTabBarCoordinator(viewController: self)
         }
     }
     
@@ -58,8 +58,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
             if let error = error {
                 print("Error logging in", error)
             } else {
-                self.performSegue(withIdentifier: "loginSuccessful", sender: self)
-              //  self.coordinator?.startTabBarCoordinator(viewController: self)
+                self.coordinator?.startTabBarCoordinator(viewController: self)
             }
         })
     }
