@@ -11,8 +11,9 @@ import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate, Storyboarded {
    
+    weak var coordinator: MainCoordinator?
     
     @IBOutlet var emailTF: UITextField!
     
@@ -22,14 +23,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     @IBOutlet weak var facebookLoginSignInButton: FBSDKLoginButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         GIDSignIn.sharedInstance().uiDelegate = self
         facebookLoginSignInButton.delegate = self
         facebookLoginSignInButton.readPermissions = ["email", "public_profile"]
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,9 +59,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
                 print("Error logging in", error)
             } else {
                 self.performSegue(withIdentifier: "loginSuccessful", sender: self)
+              //  self.coordinator?.startTabBarCoordinator(viewController: self)
             }
         })
     }
+    
+    @IBAction func registerClicked(_ sender: Any) {
+        coordinator?.goToRegister()
+    }
+    
     
     @IBAction func onLoginCLick(_ sender: Any) {
 
@@ -77,6 +82,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         Auth.auth().signIn(withEmail: email, password: password) { user, error in
             if (error == nil) && (user != nil) {
                 self.performSegue(withIdentifier: "loginSuccessful", sender: self)
+               // self.coordinator?.startTabBarCoordinator(viewController: self)
             } else {
                 print("Error logging in: \(String(describing: error?.localizedDescription))")
             }

@@ -11,8 +11,17 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     var window: UIWindow?
+    var coordinator: MainCoordinator?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        let navController = UINavigationController()
+        coordinator = MainCoordinator(navigationController: navController)
+        coordinator?.start()
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
         
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID

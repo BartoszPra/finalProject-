@@ -7,8 +7,9 @@ import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
 
-class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable {
+class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable, Storyboarded {
     
+    //let main = MainCoordinator(navigationController: UINavigationController())
     
     @IBOutlet var titleItem: UINavigationItem!
     

@@ -5,7 +5,7 @@ import FirebaseFirestore
 import CoreData
 
 
-class Detail1ViewController: UIViewController {
+class Detail1ViewController: UIViewController, Storyboarded {
     
     
     var scrimmagePassedOver: Scrimmage?

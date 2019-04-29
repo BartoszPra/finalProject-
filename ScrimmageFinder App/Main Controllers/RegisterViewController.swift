@@ -9,7 +9,7 @@
 import UIKit
 import FirebaseAuth
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, Storyboarded {
 
     @IBOutlet var userNameTF: UITextField!
     
