@@ -12,7 +12,6 @@
 		034D429720E7F0EC00D59F8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034D429620E7F0EC00D59F8C /* Assets.xcassets */; };
 		0369DAEA20E121B1006B7507 /* SavedScrimmagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAE920E121B1006B7507 /* SavedScrimmagesViewController.swift */; };
 		0369DAEF20E13635006B7507 /* Detail1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAEE20E13635006B7507 /* Detail1ViewController.swift */; };
-		0369DAF320E14308006B7507 /* addScrimmageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAF220E14308006B7507 /* addScrimmageViewController.swift */; };
 		0369DAF520E25365006B7507 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAF420E25365006B7507 /* CoreDataController.swift */; };
 		0369DAF920E27319006B7507 /* SavedDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAF820E27319006B7507 /* SavedDetailViewController.swift */; };
 		03C6E1E820DD357D001DFD01 /* FIRFiestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C6E1E720DD357D001DFD01 /* FIRFiestoreService.swift */; };
@@ -24,8 +23,8 @@
 		03F10DCB20DC55BF00F8C62B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03F10DC920DC55BF00F8C62B /* Main.storyboard */; };
 		03F10DCE20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DCC20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld */; };
 		03F10DD320DC55C300F8C62B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03F10DD120DC55C300F8C62B /* LaunchScreen.storyboard */; };
-		03F10DDE20DC55C300F8C62B /* ScrimmageFinder_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DDD20DC55C300F8C62B /* ScrimmageFinder_AppTests.swift */; };
-		03F10DE920DC55C300F8C62B /* ScrimmageFinder_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DE820DC55C300F8C62B /* ScrimmageFinder_AppUITests.swift */; };
+		03F10DDE20DC55C300F8C62B /* ScrimmageFinderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DDD20DC55C300F8C62B /* ScrimmageFinderAppTests.swift */; };
+		03F10DE920DC55C300F8C62B /* ScrimmageFinderAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DE820DC55C300F8C62B /* ScrimmageFinderAppUITests.swift */; };
 		03F10DF720DD0F7400F8C62B /* Scrimmage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DF620DD0F7300F8C62B /* Scrimmage.swift */; };
 		0491940120EB6C060063671E /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491940020EB6C060063671E /* IntentHandler.swift */; };
 		0491940520EB6C060063671E /* SiriScrimmageWorkouts.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 049193FE20EB6C060063671E /* SiriScrimmageWorkouts.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -38,6 +37,7 @@
 		C751B37C225922710060D1B2 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751B37B225922710060D1B2 /* Storyboarded.swift */; };
 		C751B37E225922970060D1B2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751B37D225922970060D1B2 /* Coordinator.swift */; };
 		C751B3A2225F94510060D1B2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751B3A1225F94510060D1B2 /* TabBarController.swift */; };
+		C7B8EEF2227E63FF00AB253F /* AddScrimmageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B8EEF1227E63FF00AB253F /* AddScrimmageViewController.swift */; };
 		EC3967E19098D337F43DBB05 /* Pods_ScrimmageFinder_AppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C50FD11D4357864F28C6CD8 /* Pods_ScrimmageFinder_AppUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,7 +85,6 @@
 		034D429620E7F0EC00D59F8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0369DAE920E121B1006B7507 /* SavedScrimmagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedScrimmagesViewController.swift; sourceTree = "<group>"; };
 		0369DAEE20E13635006B7507 /* Detail1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Detail1ViewController.swift; sourceTree = "<group>"; };
-		0369DAF220E14308006B7507 /* addScrimmageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addScrimmageViewController.swift; sourceTree = "<group>"; };
 		0369DAF420E25365006B7507 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		0369DAF820E27319006B7507 /* SavedDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedDetailViewController.swift; sourceTree = "<group>"; };
 		03C6E1E720DD357D001DFD01 /* FIRFiestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRFiestoreService.swift; sourceTree = "<group>"; };
@@ -100,10 +99,10 @@
 		03F10DD220DC55C300F8C62B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03F10DD420DC55C300F8C62B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03F10DD920DC55C300F8C62B /* ScrimmageFinder AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ScrimmageFinder AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		03F10DDD20DC55C300F8C62B /* ScrimmageFinder_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageFinder_AppTests.swift; sourceTree = "<group>"; };
+		03F10DDD20DC55C300F8C62B /* ScrimmageFinderAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageFinderAppTests.swift; sourceTree = "<group>"; };
 		03F10DDF20DC55C300F8C62B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03F10DE420DC55C300F8C62B /* ScrimmageFinder AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ScrimmageFinder AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		03F10DE820DC55C300F8C62B /* ScrimmageFinder_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageFinder_AppUITests.swift; sourceTree = "<group>"; };
+		03F10DE820DC55C300F8C62B /* ScrimmageFinderAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageFinderAppUITests.swift; sourceTree = "<group>"; };
 		03F10DEA20DC55C300F8C62B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03F10DF620DD0F7300F8C62B /* Scrimmage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrimmage.swift; sourceTree = "<group>"; };
 		049193C620EA56800063671E /* ScrimmageFinder App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ScrimmageFinder App.entitlements"; sourceTree = "<group>"; };
@@ -123,6 +122,7 @@
 		C751B37B225922710060D1B2 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		C751B37D225922970060D1B2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C751B3A1225F94510060D1B2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		C7B8EEF1227E63FF00AB253F /* AddScrimmageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScrimmageViewController.swift; sourceTree = "<group>"; };
 		CCB790D9F83C6EDD4B016A99 /* Pods-ScrimmageFinder App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrimmageFinder App.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrimmageFinder App/Pods-ScrimmageFinder App.release.xcconfig"; sourceTree = "<group>"; };
 		D061B63F1F8C86543645DDC0 /* Pods-ScrimmageFinder AppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrimmageFinder AppTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrimmageFinder AppTests/Pods-ScrimmageFinder AppTests.release.xcconfig"; sourceTree = "<group>"; };
 		D3D79C37139A66C9C3C2FA7E /* Pods-ScrimmageFinder AppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrimmageFinder AppUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ScrimmageFinder AppUITests/Pods-ScrimmageFinder AppUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 				04C8F37920FF2A2E00AF48E4 /* RegisterViewController.swift */,
 				03D14CF120E0EBA300D76E38 /* ScrimmagesViewController.swift */,
 				0369DAE920E121B1006B7507 /* SavedScrimmagesViewController.swift */,
-				0369DAF220E14308006B7507 /* addScrimmageViewController.swift */,
+				C7B8EEF1227E63FF00AB253F /* AddScrimmageViewController.swift */,
 			);
 			path = "Main Controllers";
 			sourceTree = "<group>";
@@ -245,7 +245,7 @@
 		03F10DDC20DC55C300F8C62B /* ScrimmageFinder AppTests */ = {
 			isa = PBXGroup;
 			children = (
-				03F10DDD20DC55C300F8C62B /* ScrimmageFinder_AppTests.swift */,
+				03F10DDD20DC55C300F8C62B /* ScrimmageFinderAppTests.swift */,
 				03F10DDF20DC55C300F8C62B /* Info.plist */,
 			);
 			path = "ScrimmageFinder AppTests";
@@ -254,7 +254,7 @@
 		03F10DE720DC55C300F8C62B /* ScrimmageFinder AppUITests */ = {
 			isa = PBXGroup;
 			children = (
-				03F10DE820DC55C300F8C62B /* ScrimmageFinder_AppUITests.swift */,
+				03F10DE820DC55C300F8C62B /* ScrimmageFinderAppUITests.swift */,
 				03F10DEA20DC55C300F8C62B /* Info.plist */,
 			);
 			path = "ScrimmageFinder AppUITests";
@@ -345,6 +345,7 @@
 				79FF2FDF895D6F38C7A5E009 /* [CP] Embed Pods Frameworks */,
 				0491940920EB6C060063671E /* Embed App Extensions */,
 				EB6BD368CC3BB89D7EE3A85D /* [CP] Copy Pods Resources */,
+				C7B8EEF0227E39F000AB253F /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -423,6 +424,7 @@
 				TargetAttributes = {
 					03F10DC120DC55BF00F8C62B = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 1;
@@ -434,14 +436,17 @@
 					};
 					03F10DD820DC55C300F8C62B = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
 						TestTargetID = 03F10DC120DC55BF00F8C62B;
 					};
 					03F10DE320DC55C300F8C62B = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
 						TestTargetID = 03F10DC120DC55BF00F8C62B;
 					};
 					049193FD20EB6C060063671E = {
 						CreatedOnToolsVersion = 9.4;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -583,6 +588,24 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ScrimmageFinder App/Pods-ScrimmageFinder App-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C7B8EEF0227E39F000AB253F /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
 		E07444182F945A06B6371929 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -629,7 +652,6 @@
 				C751B37A2259225D0060D1B2 /* MainCoordinator.swift in Sources */,
 				04C8F37820FF2A0E00AF48E4 /* LoginViewController.swift in Sources */,
 				0369DAF920E27319006B7507 /* SavedDetailViewController.swift in Sources */,
-				0369DAF320E14308006B7507 /* addScrimmageViewController.swift in Sources */,
 				03C6E1EC20DD5557001DFD01 /* FIRCollectionReference.swift in Sources */,
 				C751B37C225922710060D1B2 /* Storyboarded.swift in Sources */,
 				C751B37E225922970060D1B2 /* Coordinator.swift in Sources */,
@@ -645,6 +667,7 @@
 				04C8F37E20FFFDA400AF48E4 /* AlertController.swift in Sources */,
 				03F10DF720DD0F7400F8C62B /* Scrimmage.swift in Sources */,
 				03F10DCE20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld in Sources */,
+				C7B8EEF2227E63FF00AB253F /* AddScrimmageViewController.swift in Sources */,
 				03C6E1EE20DD59C3001DFD01 /* EncodableExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -653,7 +676,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03F10DDE20DC55C300F8C62B /* ScrimmageFinder_AppTests.swift in Sources */,
+				03F10DDE20DC55C300F8C62B /* ScrimmageFinderAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,7 +684,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03F10DE920DC55C300F8C62B /* ScrimmageFinder_AppUITests.swift in Sources */,
+				03F10DE920DC55C300F8C62B /* ScrimmageFinderAppUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -844,7 +867,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Tae.ScrimmageFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -866,7 +889,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Tae.ScrimmageFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -887,7 +910,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Tae.ScrimmageFinder-AppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScrimmageFinder App.app/ScrimmageFinder App";
 			};
@@ -909,7 +932,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Tae.ScrimmageFinder-AppTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScrimmageFinder App.app/ScrimmageFinder App";
 			};
@@ -930,7 +953,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Tae.ScrimmageFinder-AppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "ScrimmageFinder App";
 			};
@@ -951,7 +974,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Tae.ScrimmageFinder-AppUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "ScrimmageFinder App";
 			};
@@ -972,7 +995,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Tae.ScrimmageFinder.SiriScrimmageWorkouts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -992,7 +1015,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Tae.ScrimmageFinder.SiriScrimmageWorkouts;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

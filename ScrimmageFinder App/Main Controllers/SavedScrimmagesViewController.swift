@@ -1,13 +1,8 @@
-
-
 import UIKit
 import CoreData
 import SilentScrolly
 
-
-
-class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SilentScrollable
-    {
+class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SilentScrollable {
     // vaariable of the silent scrollly controll
     var silentScrolly: SilentScrolly?
     
@@ -23,17 +18,15 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     //array for coredata scrimmages
     var coreScrimmages = [ScrimmageD]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UserDefaults.standard.register(defaults: [String : Any]())
+        UserDefaults.standard.register(defaults: [String: Any]())
         fetchScrimmages()
         //notification to observ for notification for other controller
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
      //user defaults for choosing theme
@@ -44,12 +37,9 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
             SVbackGroundPhotoImg.image = #imageLiteral(resourceName: "background2Bball70")
         } else {
             SVbackGroundPhotoImg.image = #imageLiteral(resourceName: "theme2Background260%")
-            
         }
-        
     }
 
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return coreScrimmages.count
     }
@@ -58,7 +48,12 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         let cell = tableView.dequeueReusableCell(withIdentifier: "SVcell", for: indexPath)
         let coreScrimmage = coreScrimmages[indexPath.row]
         cell.textLabel?.text = coreScrimmage.name
-        cell.detailTextLabel?.text = "Details: \(coreScrimmage.venueName!), Price: £\(String(format:"%.2f",coreScrimmage.price)), Time: \(String(format:"%.2f",coreScrimmage.time))"
+        
+        guard let name = coreScrimmage.venueName else {return UITableViewCell()}
+        let price = coreScrimmage.price
+        let time = coreScrimmage.time
+        
+        cell.detailTextLabel?.text = "Details: \(name), Price: £\(String(format: "%.2f", price)), Time: \(String(format: "%.2f", time))"
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(SavedScrimmagesViewController.longTap))
         cell.addGestureRecognizer(longGesture)
   
@@ -79,8 +74,10 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         guard  let indexPath = self.savedTableView.indexPathForRow(at: locationInView) else {return}
         
         // aller to asf if you sure to delete
-        let alert = UIAlertController(title: "Delete?", message: "Do you really want to delete this Scrimmage.", preferredStyle: UIAlertControllerStyle.alert)
-        let Action = UIAlertAction.init(title: "Yes", style: .default) { (UIAlertAction) in
+        let alert = UIAlertController(title: "Delete?",
+                                      message: "Do you really want to delete this Scrimmage.",
+                                      preferredStyle: UIAlertController.Style.alert)
+        let action = UIAlertAction.init(title: "Yes", style: .default) { (_) in
         
             // completeion to delete the scrimmage for m coredata
             let donara = self.coreScrimmages.remove(at: indexPath.row)
@@ -91,8 +88,8 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
            
         }
         //allert action button to cancle
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
-        alert.addAction(Action)
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+        alert.addAction(action)
         //presenting the allert
         self.present(alert, animated: true, completion: nil)
        
@@ -103,7 +100,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         if segue.identifier?.caseInsensitiveCompare("go2SVDetails") == .orderedSame {
             
             if let indexPath = savedTableView.indexPathForSelectedRow {
-                let destinationViewController = segue.destination as! SavedDetailViewController
+                guard let destinationViewController = segue.destination as? SavedDetailViewController else {return}
                 let topic = coreScrimmages[indexPath.row]
                 destinationViewController.scrimmagePassedOver2 = topic
                 
@@ -111,7 +108,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         }
     }
    // swipe left to delte additiional posibility ot delte.
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
            guard editingStyle == .delete else { return }
     
         let donara = coreScrimmages.remove(at: indexPath.row)
@@ -142,13 +139,11 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         
     }
     /// functions for silentScrolly controll.------------
-    @objc func loadList(notification: NSNotification){
+    @objc func loadList(notification: NSNotification) {
         //load data here
     fetchScrimmages()
     savedTableView.reloadData()
    }
-    
-    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -186,7 +181,4 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         showNavigationBar() // Optional
         return true
     }
-    
-    
-    
 }

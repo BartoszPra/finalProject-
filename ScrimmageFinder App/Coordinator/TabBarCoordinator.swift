@@ -9,7 +9,6 @@
 import Foundation
 
 import UIKit
-import Foundation
 
 class TabBarCoordinator: Coordinator {
     
@@ -21,23 +20,19 @@ class TabBarCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = LoginViewController.instantiate()
+        let viewController = LoginViewController.instantiate()
         vc.coordinator = self
-        controller.pushViewController(vc, animated: false)
+        controller.pushViewController(viewController, animated: false)
         
     }
     
     func goToRegister() {
-        let vc = RegisterViewController.instantiate()
-        controller.pushViewController(vc, animated: false)
+        let viewController = RegisterViewController.instantiate()
+        controller.pushViewController(viewController, animated: false)
     }
     
     func goToScrimages() {
-        let vc = ScrimmagesViewController.instantiate()
-        controller.pushViewController(vc, animated: false)
+        let viewController = ScrimmagesViewController.instantiate()
+        controller.pushViewController(viewController, animated: false)
     }
-    
-    
-    
-    
 }

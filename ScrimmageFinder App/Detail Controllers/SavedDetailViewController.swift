@@ -1,11 +1,8 @@
-
-
 import UIKit
 import Contacts
 import EventKit
 
 class SavedDetailViewController: UIViewController {
-    
     
     var scrimmagePassedOver2: ScrimmageD?
 
@@ -29,20 +26,18 @@ class SavedDetailViewController: UIViewController {
     
     @IBOutlet var dateLbl: UILabel!
     
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //register user defaults
-        UserDefaults.standard.register(defaults: [String : Any]())
+        UserDefaults.standard.register(defaults: [String: Any]())
         //assinging data to labels
         nameLbl.text = scrimmagePassedOver2?.name
         venueNameLbl.text = scrimmagePassedOver2?.venueName
         postCode.text = scrimmagePassedOver2?.postCode
-        time.text = "\(String(format:"%.2f", scrimmagePassedOver2!.time))"
+        time.text = "\(String(format: "%.2f", scrimmagePassedOver2!.time))"
         manName.text = scrimmagePassedOver2?.managersName
         manNumber.text = scrimmagePassedOver2?.managersNumber
-        price.text = "£ \(String(format:"%.2f",scrimmagePassedOver2!.price))"
+        price.text = "£ \(String(format: "%.2f", scrimmagePassedOver2!.price))"
         dateLbl.text = scrimmagePassedOver2?.date
         
     }
@@ -80,10 +75,12 @@ class SavedDetailViewController: UIViewController {
         let firstName = scrimmagePassedOver2?.managersName
         let phone = scrimmagePassedOver2?.managersNumber!
         createCNContactWithFirstName(firstName!, phone: phone)
-        let alert = UIAlertController(title: "Contact Added", message: "You have added this contact to you list.", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Contact Added",
+                                      message: "You have added this contact to you list.",
+                                      preferredStyle: UIAlertController.Style.alert)
         
         //  add an action (button)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
     }
@@ -94,7 +91,7 @@ class SavedDetailViewController: UIViewController {
         
         let activityController = UIActivityViewController(activityItems: [shareItem], applicationActivities: nil)
         activityController.popoverPresentationController?.sourceView = self.view
-        present(activityController,animated: true, completion: nil)
+        present(activityController, animated: true, completion: nil)
         
     }
     
@@ -104,9 +101,11 @@ class SavedDetailViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy HH:mm"
         
-        
-        guard let date = dateFormatter.date(from: "\(String(describing: scrimmagePassedOver2!.date!)) \(String(describing: scrimmagePassedOver2!.time))") else {
-            fatalError("ERROR: Date conversion failed due to mismatched format.")}
+        guard let scrimmageDate = scrimmagePassedOver2?.date else {return}
+        guard let scrimmageTime = scrimmagePassedOver2?.time else {return}
+        guard let date = dateFormatter.date(from: "\(String(describing: scrimmageDate)) \(String(describing: scrimmageTime))")
+            else {
+                fatalError("ERROR: Date conversion failed due to mismatched format.")}
         
         let calendar = Calendar.current
         guard let endDate = calendar.date(byAdding: .hour, value: 2, to: date) else {return}
@@ -121,11 +120,14 @@ class SavedDetailViewController: UIViewController {
                 print("granted \(granted)")
                 print("error \(String(describing: error))")
                 
-                let event:EKEvent = EKEvent(eventStore: eventStore)
+                let event: EKEvent = EKEvent(eventStore: eventStore)
                 event.title = self.scrimmagePassedOver2?.name
                 event.startDate = date
                 event.endDate = endDate
-                event.notes = "\(String(describing: self.scrimmagePassedOver2!.venueName!)), \(String(describing: self.scrimmagePassedOver2!.postCode!)), \(String(format: "%.2f", self.scrimmagePassedOver2!.time))"
+                guard let scrimmageVenue = self.scrimmagePassedOver2?.venueName else {return}
+                guard let scrimmagePostCode = self.scrimmagePassedOver2?.postCode else {return}
+                guard let srgeTime = self.scrimmagePassedOver2?.time else {return}
+                event.notes = "\(String(describing: scrimmageVenue)), \(String(describing: scrimmagePostCode)), \(String(format: "%.2f", srgeTime))"
                 event.calendar = eventStore.defaultCalendarForNewEvents
                 
                 do {
@@ -135,21 +137,22 @@ class SavedDetailViewController: UIViewController {
                 }
                 print("Save Event")
                 
-                let alert = UIAlertController(title: "Added!", message: "You have added your Scrimmage to Callendar.", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "Added!",
+                                              message: "You have added your Scrimmage to Callendar.",
+                                              preferredStyle: UIAlertController.Style.alert)
                 //  add an action (button)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
-                
-            }
-            else {
+            } else {
                 print("error: \(String(describing: error))")
-                let alert = UIAlertController(title: "Error!", message: "Sorry Couldn't add it to Callendar", preferredStyle: UIAlertControllerStyle.alert)
-
+                let alert = UIAlertController(title: "Error!",
+                                              message: "Sorry Couldn't add it to Callendar",
+                                              preferredStyle: UIAlertController.Style.alert)
+                
                 //  add an action (button)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
-            
         }
     }
 }

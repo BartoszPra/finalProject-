@@ -19,22 +19,19 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = LoginViewController.instantiate()
-        vc.coordinator = self
-        controller.pushViewController(vc, animated: false)
+        let viewController = LoginViewController.instantiate()
+        viewController.coordinator = self
+        controller.pushViewController(viewController, animated: false)
         
     }
     
     func goToRegister() {
-        let vc = RegisterViewController.instantiate()
-        controller.pushViewController(vc, animated: false)
+        let viewController = RegisterViewController.instantiate()
+        controller.pushViewController(viewController, animated: false)
     }
     
-    func startTabBarCoordinator(viewController: UIViewController){
-        let vc = TabBarController.instantiate()
-        viewController.present(vc, animated: false, completion: nil)
+    func startTabBarCoordinator(viewController: UIViewController) {
+        let viewController = TabBarController.instantiate()
+        viewController.present(viewController, animated: false, completion: nil)
     }
-    
-    
-    
 }

@@ -1,6 +1,4 @@
 //
-
-
 import Foundation
 import Firebase
 import FirebaseFirestore
@@ -50,8 +48,6 @@ class FIRFirestoreService {
             } catch {
                 print(error)
             }
-            
-            
         }
         
     }
@@ -60,33 +56,23 @@ class FIRFirestoreService {
     func update<T: Encodable & Identifiable>(for encodableObject: T, in collectionReference: FIRCollectionReference) {
         
         do {
-            
             let json = try encodableObject.toJson(excluding: ["id"])
-            guard let id = encodableObject.id else { throw MyError.encodingError }
-            reference(to: collectionReference).document(id).setData(json)
+            guard let oId = encodableObject.id else { throw MyError.encodingError }
+            reference(to: collectionReference).document(oId).setData(json)
             
         } catch {
             print(error)
         }
-        
-        
-        
     }
     // delete function inclding id  to delete records in firebase -  using it only when testing to easy delete dummy data
     func delete<T: Identifiable>(_ identifiableObject: T, in collectionReference: FIRCollectionReference) {
         
         do {
-            
-            guard let id = identifiableObject.id else { throw MyError.encodingError }
-            reference(to: collectionReference).document(id).delete()
+            guard let oId = identifiableObject.id else { throw MyError.encodingError }
+            reference(to: collectionReference).document(oId).delete()
             
         } catch {
             print(error)
         }
-        
-        
     }
-    
-    
 }
-

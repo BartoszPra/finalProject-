@@ -33,6 +33,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     override func viewDidAppear(_ animated: Bool) {
             if let user = Auth.auth().currentUser {
+                print(String(describing: user.displayName))
             self.coordinator?.startTabBarCoordinator(viewController: self)
         }
     }
@@ -42,7 +43,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
             print(error)
             return
         }
-        
+    
         self.loginWithFcb()
     }
     
@@ -50,14 +51,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
          print("Did log out of facebook")
     }
     
-    func loginWithFcb(){
+    func loginWithFcb() {
       let accesToken = FBSDKAccessToken.current()
       guard let stringAccesTok = accesToken?.tokenString else {return}
       let credential = FacebookAuthProvider.credential(withAccessToken: stringAccesTok)
-        Auth.auth().signInAndRetrieveData(with: credential, completion: { (user, error) in
+      Auth.auth().signInAndRetrieveData(with: credential, completion: { (user, error) in
             if let error = error {
                 print("Error logging in", error)
             } else {
+                print("username\(String(describing: user))")
                 self.coordinator?.startTabBarCoordinator(viewController: self)
             }
         })
@@ -67,7 +69,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         coordinator?.goToRegister()
     }
     
-    
     @IBAction func onLoginCLick(_ sender: Any) {
 
         guard let email = emailTF.text else {return}
@@ -75,9 +76,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         
         if email.trimmingCharacters(in: .whitespaces).isEmpty {
             AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Email")
-        }else if password.trimmingCharacters(in: .whitespaces).isEmpty {
+        } else if password.trimmingCharacters(in: .whitespaces).isEmpty {
             AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Password")
-        }else {
+        } else {
         Auth.auth().signIn(withEmail: email, password: password) { user, error in
             if (error == nil) && (user != nil) {
                 self.performSegue(withIdentifier: "loginSuccessful", sender: self)

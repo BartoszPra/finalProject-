@@ -1,5 +1,3 @@
-
-
 import Foundation
 //protocol for when the function will need id to be performed like delete and update
 protocol  Identifiable {
@@ -7,7 +5,7 @@ protocol  Identifiable {
 }
 
 //scrimmgage struct with properties
-struct Scrimmage: Codable, Identifiable  {
+struct Scrimmage: Codable, Identifiable {
     var id: String? = nil
     var name: String
     var venueName: String
@@ -20,7 +18,7 @@ struct Scrimmage: Codable, Identifiable  {
     var participants: Int
 
     //scrimmage struct init
-    init (name: String, vanueName: String, postCode: String, time: Double, managerName: String, managerNumber: String, price: Double, date: String){
+    init (name: String, vanueName: String, postCode: String, time: Double, managerName: String, managerNumber: String, price: Double, date: String) {
          self.name = name
          self.venueName = vanueName
          self.postCode = postCode
@@ -32,6 +30,4 @@ struct Scrimmage: Codable, Identifiable  {
          self.participants = 0
         
     }
-    
 }
-

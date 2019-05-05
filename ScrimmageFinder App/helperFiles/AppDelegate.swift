@@ -1,5 +1,3 @@
-
-
 import UIKit
 import CoreData
 import Intents
@@ -13,7 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     var window: UIWindow?
     var coordinator: MainCoordinator?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let navController = UINavigationController()
         coordinator = MainCoordinator(navigationController: navController)
@@ -45,27 +43,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
         
-        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+        Auth.auth().signInAndRetrieveData(with: credential) { (_, error) in
             if error == nil {
                 //self.window?.rootViewController!.performSegue(withIdentifier: "loginSuccessful", sender: nil)
                 self.coordinator?.startTabBarCoordinator(viewController: (self.window?.rootViewController)!)
             } else {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
                 return
             }
         }
     }
     
-    func application(_ application: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any])
         -> Bool {
             GIDSignIn.sharedInstance().handle(url,
-                                                     sourceApplication:options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String,
+                                                     sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
                                                      annotation: [:])
             
         //   FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
           return true
     }
-
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -90,6 +87,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         CoreDataController.shared.saveContext()
     }
-
 }
-

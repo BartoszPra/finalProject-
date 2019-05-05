@@ -1,6 +1,5 @@
 import UIKit
 
-
 class AlertController {
     static func showAllert (_ inViewController: UIViewController, title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -9,4 +8,3 @@ class AlertController {
         inViewController.present(alert, animated: true, completion: nil)
     }
 }
-

@@ -126,6 +126,7 @@ PODS:
   - nanopb/encode (0.3.901)
   - Protobuf (3.7.0)
   - SilentScrolly (1.0.8)
+  - SwiftLint (0.31.0)
 
 DEPENDENCIES:
   - FacebookCore
@@ -135,6 +136,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - GoogleSignIn
   - SilentScrolly
+  - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -161,6 +163,7 @@ SPEC REPOS:
     - nanopb
     - Protobuf
     - SilentScrolly
+    - SwiftLint
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
@@ -186,7 +189,8 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
   SilentScrolly: 0d85996304048c9e6c49788823c9c2a64185be76
+  SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
 
-PODFILE CHECKSUM: 5306eea075dad335b29bd6df9cff1c5d91686193
+PODFILE CHECKSUM: 168200e2bc7b6fcd39716c8c0574819ac07b1fe9
 
 COCOAPODS: 1.5.3

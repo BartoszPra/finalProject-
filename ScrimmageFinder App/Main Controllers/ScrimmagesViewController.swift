@@ -1,5 +1,3 @@
-
-
 import UIKit
 import SilentScrolly
 import MobileCoreServices
@@ -7,9 +5,7 @@ import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
 
-class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable, Storyboarded {
-    
-    //let main = MainCoordinator(navigationController: UINavigationController())
+class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable {
     
     @IBOutlet var titleItem: UINavigationItem!
     
@@ -40,7 +36,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         searchBar.returnKeyType = UIReturnKeyType.done
         titleItem.title = Auth.auth().currentUser?.displayName
         //userdefaults register
-        UserDefaults.standard.register(defaults: [String : Any]())
+        UserDefaults.standard.register(defaults: [String: Any]())
        
         // reading from database
         FIRFirestoreService.shared.read(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
@@ -61,10 +57,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             backGroundPhotoImg.image = #imageLiteral(resourceName: "theme2bacground270%")
             
         }
-        
     }
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       //checking is searchng is on and adjusting the tableview
         if isSearching {
@@ -81,21 +74,23 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         if isSearching {
             let filteredScrimmage = filteredScrimmages[indexPath.row]
             cell.textLabel?.text = String(filteredScrimmage.name)
-        }
-        else {
+        } else {
             let scrimmage = scrimmages[indexPath.row]
             cell.textLabel?.text = String(scrimmage.name)
-            cell.detailTextLabel?.text = "\(scrimmage.venueName), Price: £\(String(format:"%.2f",scrimmage.price)), Time: \(String(format:"%.2f",scrimmage.time))"
+            
+            let name = scrimmage.venueName
+            let price = scrimmage.price
+            let time = scrimmage.time
+            
+            cell.detailTextLabel?.text = "\(name), Price: £\(String(format: "%.2f", price)), Time: \(String(format: "%.2f", time))"
         }
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     //performing segue
         self.performSegue(withIdentifier: "go2Details", sender: indexPath)
-    
-    
+        
     }
     // function to prepare for seque for selecter row
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -103,7 +98,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         if segue.identifier?.caseInsensitiveCompare("go2Details") == .orderedSame {
             
             if let indexPath = scrimmagesTableView.indexPathForSelectedRow {
-                let destinationViewController = segue.destination as! Detail1ViewController
+                guard let destinationViewController = segue.destination as? Detail1ViewController else {return}
                 //checking if user is serching and adjusting seque
                 if isSearching {
                 let topic = filteredScrimmages[indexPath.row]
@@ -125,7 +120,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     //function to filter the searcBar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         //check for spaces and empty searchbar
-        if searchBar.text == nil || searchBar.text == "" {
+        if searchBar.text == nil || searchBar.text!.isEmpty {
             isSearching = false
             view.endEditing(true)
             scrimmagesTableView.reloadData()
@@ -137,13 +132,13 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             let firstTwo = searchBar.text?.prefix(3).uppercased()
             
             //checking is first two characters from post code are match with scrimmages post code
-            filteredScrimmages = scrimmages.filter{$0.postCode.hasPrefix(String(firstTwo!))}
+            filteredScrimmages = scrimmages.filter {$0.postCode.hasPrefix(String(firstTwo!))}
             scrimmagesTableView.reloadData()
         }
     }
     
     //ONLY If YOU WANT TO DELETE - use for testing to quickly delete unwanterd scrimmages
-     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         let scrimmage = scrimmages[indexPath.row]
         FIRFirestoreService.shared.delete(scrimmage, in: .scrimmages)
@@ -152,7 +147,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
      deleteOFOld checks if the date of the all scrimmages is older that today and if so delete is as those scrimmages already outdated. 
      */
     
-    func deleteIfOld(){
+    func deleteIfOld() {
         
         let current = Date()
         
@@ -187,15 +182,18 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     }
     // function to start drag and drop
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true);
+        self.view.endEditing(true)
     }
-    
-    
+
     @IBAction func logOutClicked(_ sender: Any) {
-        try! Auth.auth().signOut()
-        try! GIDSignIn.sharedInstance()?.signOut()
-        self.dismiss(animated: true, completion: nil)
+        do {
+            try Auth.auth().signOut()
+        } catch let err {
+            print(err)
+        }
+        GIDSignIn.sharedInstance()?.signOut()
         FBSDKLoginManager().logOut()
+        self.dismiss(animated: true, completion: nil)
         
     }
     
@@ -247,4 +245,3 @@ extension ScrimmagesViewController: UITableViewDragDelegate {
     }
     
 }
-

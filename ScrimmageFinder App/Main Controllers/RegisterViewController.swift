@@ -17,7 +17,6 @@ class RegisterViewController: UIViewController, Storyboarded {
     
     @IBOutlet var passTF: UITextField!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,11 +30,11 @@ class RegisterViewController: UIViewController, Storyboarded {
         !email.trimmingCharacters(in: .whitespaces).isEmpty,
         let password = passTF.text,
         !password.trimmingCharacters(in: .whitespaces).isEmpty
-            else{
+            else {
                 AlertController.showAllert(self, title: "Missing Info", message: "Please Insert All Data")
                 return
         }
-        Auth.auth().createUser(withEmail: email, password: password, completion:{ (user, error) in
+        Auth.auth().createUser(withEmail: email, password: password, completion: {(user, error) in
             if error == nil && user != nil {
                 AlertController.showAllert(self, title: "Awesome", message: "You have created your account")
                 let changeRequest  = Auth.auth().currentUser?.createProfileChangeRequest()
@@ -52,15 +51,7 @@ class RegisterViewController: UIViewController, Storyboarded {
             guard error  == nil else {
                 AlertController.showAllert(self, title: "Error", message: error!.localizedDescription)
                 return
-                
-                
             }
-            
-            
-           
-            
         })
     }
-    
-
 }

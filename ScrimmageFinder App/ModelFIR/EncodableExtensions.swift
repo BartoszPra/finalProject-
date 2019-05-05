@@ -1,5 +1,3 @@
-
-
 import Foundation
 
 enum MyError: Error {
@@ -21,6 +19,4 @@ extension Encodable {
         return json
         
     }
-    
-    
 }

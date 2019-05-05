@@ -91,10 +91,10 @@ public extension SilentScrollable where Self: UIViewController {
 
         if let isAddObserver = silentScrolly?.isAddObserver {
             if isAddObserver {
-                NotificationCenter.default.addObserver(forName: .UIDeviceOrientationDidChange, object: nil, queue: nil) { [weak self] in
+                NotificationCenter.default.addObserver(forName: UIDevice.orientationDidChangeNotification, object: nil, queue: nil) { [weak self] in
                     self?.orientationDidChange($0)
                 }
-                NotificationCenter.default.addObserver(forName: .UIApplicationDidEnterBackground, object: nil, queue: nil) { [weak self] in
+                NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { [weak self] in
                     self?.didEnterBackground($0)
                 }
             }

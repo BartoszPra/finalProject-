@@ -1,19 +1,13 @@
-
 import UIKit
 import Firebase
 import FirebaseFirestore
 import CoreData
 
-
 class Detail1ViewController: UIViewController, Storyboarded {
     
-    
     var scrimmagePassedOver: Scrimmage?
-    
-   let coreDataController = CoreDataController.shared
-
+    let coreDataController = CoreDataController.shared
     @IBOutlet var DT1backGroundPhotoImg: UIImageView!
-    
     
     @IBOutlet var nameLbl: UILabel!
     
@@ -33,20 +27,19 @@ class Detail1ViewController: UIViewController, Storyboarded {
     
     @IBOutlet var participantsLbl: UILabel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UserDefaults.standard.register(defaults: [String : Any]())
+        UserDefaults.standard.register(defaults: [String: Any]())
         
         //assigning data to labels
         nameLbl.text = scrimmagePassedOver?.name
         venueNameLbl.text = scrimmagePassedOver?.venueName
         postCodeLbl.text = scrimmagePassedOver?.postCode
-        timeLbl.text = String(format:"%.2f",scrimmagePassedOver!.time)
+        timeLbl.text = String(format: "%.2f", scrimmagePassedOver!.time)
         manNameLbl.text = scrimmagePassedOver?.managerName
         manNumberLbl.text = scrimmagePassedOver?.managerNumber
-        priceLbl.text = "£ \(String(format:"%.2f", scrimmagePassedOver!.price))"
+        priceLbl.text = "£ \(String(format: "%.2f", scrimmagePassedOver!.price))"
         dateLbl.text = scrimmagePassedOver?.date
         participantsLbl.text = "\(String(describing: scrimmagePassedOver!.participants))"
         
@@ -63,11 +56,10 @@ class Detail1ViewController: UIViewController, Storyboarded {
         }
     }
     
-    
     //function that adds to CoreData
     @IBAction func add2Saved(_ sender: Any) {
         //checks if it already exist
-        if entityExists(name: (scrimmagePassedOver?.name)!) == true{
+        if entityExists(name: (scrimmagePassedOver?.name)!) == true {
        
         // Crete new Scrimmage object
         let newScrimmage = ScrimmageD(context: self.coreDataController.mainContext)
@@ -88,19 +80,19 @@ class Detail1ViewController: UIViewController, Storyboarded {
         coreDataController.saveContext()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
         //add allert
-        let alert = UIAlertController(title: "Saved!", message: "You have saved your Scrimmage.", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Saved!", message: "You have saved your Scrimmage.", preferredStyle: UIAlertController.Style.alert)
         
        // add an action (button)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
-       }
-        
-        else {
+       } else {
          //add allert
-        let alert = UIAlertController(title: "Sorry.", message: "You have saved this Scrimmage before.", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Sorry.",
+                                      message: "You have saved this Scrimmage before.",
+                                      preferredStyle: UIAlertController.Style.alert)
        //add button to allert
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
        self.present(alert, animated: true, completion: nil)
         }
     }
@@ -116,8 +108,7 @@ class Detail1ViewController: UIViewController, Storyboarded {
         do {
             entitiesCount = try coreDataController.mainContext.count(for: fetchRequest)
             print (entitiesCount)
-        }
-        catch {
+        } catch {
             print("error executing fetch request: \(error)")
         }
         
@@ -136,16 +127,19 @@ class Detail1ViewController: UIViewController, Storyboarded {
         var updatedParticipants = scrimmagePassedOver!
         updatedParticipants.participants = (updatedParticipants.participants) + 1
         FIRFirestoreService.shared.update(for: updatedParticipants, in: .scrimmages)
-        let alert = UIAlertController(title: "Added.", message: "You have added one more person to participants.", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Added.",
+                                      message: "You have added one more person to participants.",
+                                      preferredStyle: UIAlertController.Style.alert)
         //add button to allert
         
-        let Action = UIAlertAction.init(title: "OK", style: .default) { (UIAlertAction) in
-            
-            let loginVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ScrimmagesViewController") as! ScrimmagesViewController
+        let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
+            let idt = "ScrimmagesViewController"
+            guard let loginVC = UIStoryboard(name: "Main",
+                                             bundle: nil).instantiateViewController(withIdentifier: idt) as? ScrimmagesViewController else {return}
             self.navigationController?.pushViewController(loginVC, animated: true)
             
         }
-        alert.addAction(Action)
+        alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
         
     }
@@ -158,7 +152,7 @@ class Detail1ViewController: UIViewController, Storyboarded {
         
         activityController.popoverPresentationController?.sourceView = self.view
         
-        present(activityController,animated: true, completion: nil)
+        present(activityController, animated: true, completion: nil)
         
     }
    
