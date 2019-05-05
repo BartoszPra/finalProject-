@@ -8,7 +8,7 @@
 
 import XCTest
 
-class ScrimmageFinder_AppUITests: XCTestCase {
+class ScrimmageFinderAppUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()
