@@ -7,10 +7,9 @@ import CoreData
 
 class Detail1ViewController: UIViewController, Storyboarded {
     
-    
+    var coordinator: ScrimmagesCoordinator?
     var scrimmagePassedOver: Scrimmage?
-    
-   let coreDataController = CoreDataController.shared
+    let coreDataController = CoreDataController.shared
 
     @IBOutlet var DT1backGroundPhotoImg: UIImageView!
     

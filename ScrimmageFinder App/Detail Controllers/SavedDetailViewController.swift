@@ -4,9 +4,9 @@ import UIKit
 import Contacts
 import EventKit
 
-class SavedDetailViewController: UIViewController {
+class SavedDetailViewController: UIViewController, Storyboarded {
     
-    
+    var coordinator: SavedScrimmagesCoordinator?
     var scrimmagePassedOver2: ScrimmageD?
 
     //outlet for background image

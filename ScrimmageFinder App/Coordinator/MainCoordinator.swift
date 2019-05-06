@@ -10,24 +10,24 @@ import UIKit
 import Foundation
 
 class MainCoordinator: Coordinator {
-    
-    var controller: UINavigationController
+    var navigationController: CoordinatedNavigationController
+    //var controller: UINavigationController
     var children = [Coordinator]()
     
-    init(navigationController: UINavigationController) {
-        self.controller = navigationController
+    init(navigationController: CoordinatedNavigationController) {
+        self.navigationController = navigationController
     }
     
     func start() {
         let vc = LoginViewController.instantiate()
         vc.coordinator = self
-        controller.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: false)
         
     }
     
     func goToRegister() {
         let vc = RegisterViewController.instantiate()
-        controller.pushViewController(vc, animated: false)
+        navigationController.pushViewController(vc, animated: false)
     }
     
     func startTabBarCoordinator(viewController: UIViewController){

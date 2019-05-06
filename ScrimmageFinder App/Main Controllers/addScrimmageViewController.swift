@@ -3,10 +3,10 @@ import Firebase
 import FirebaseFirestore
 import UIKit
 
-class addScrimmageViewController: UIViewController {
+class addScrimmageViewController: UIViewController, Storyboarded {
    
-    //text fields outlets 
-   
+    
+    //text fields outlets
     @IBOutlet var addSCBackGroundPhotoImg: UIImageView!
     
     @IBOutlet var nameTF: UITextField!
@@ -24,7 +24,6 @@ class addScrimmageViewController: UIViewController {
     @IBOutlet var priceTF: UITextField!
     
     @IBOutlet var dateTF: UITextField!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

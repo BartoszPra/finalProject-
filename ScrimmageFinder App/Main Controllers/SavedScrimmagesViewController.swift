@@ -6,8 +6,10 @@ import SilentScrolly
 
 
 
-class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SilentScrollable
-    {
+class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SilentScrollable, Storyboarded {
+    
+    var coordinator: SavedScrimmagesCoordinator?
+    
     // vaariable of the silent scrollly controll
     var silentScrolly: SilentScrolly?
     
@@ -66,8 +68,8 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //segue trigger
-        self.performSegue(withIdentifier: "go2SVDetails", sender: indexPath)
+        
+        self.coordinator?.goToDetail(with: coreScrimmages[indexPath.row])
        
 }
     // long press function to add long press to table view and then delete the spacific row

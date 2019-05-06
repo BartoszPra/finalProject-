@@ -9,7 +9,7 @@ import GoogleSignIn
 
 class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable, Storyboarded {
     
-    //let main = MainCoordinator(navigationController: UINavigationController())
+    var coordinator: ScrimmagesCoordinator?
     
     @IBOutlet var titleItem: UINavigationItem!
     
@@ -64,7 +64,11 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
-    
+    @IBAction func addButtonPressed(_ sender: Any) {
+        
+        self.coordinator?.goToAddScrimmage()
+        
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       //checking is searchng is on and adjusting the tableview
         if isSearching {
@@ -93,7 +97,9 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     //performing segue
-        self.performSegue(withIdentifier: "go2Details", sender: indexPath)
+        //self.performSegue(withIdentifier: "go2Details", sender: indexPath)
+        let scrimmage = scrimmages[indexPath.row]
+        self.coordinator?.goToDetail(with: scrimmage)
     
     
     }

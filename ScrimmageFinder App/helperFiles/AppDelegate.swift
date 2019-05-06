@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let navController = UINavigationController()
+        let navController = CoordinatedNavigationController()
         coordinator = MainCoordinator(navigationController: navController)
         coordinator?.start()
         
