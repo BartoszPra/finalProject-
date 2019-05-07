@@ -10,6 +10,7 @@ import GoogleSignIn
 class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable, Storyboarded {
     
     var coordinator: ScrimmagesCoordinator?
+    let coreDataController = CoreDataController.shared
     
     @IBOutlet var titleItem: UINavigationItem!
     
@@ -47,6 +48,31 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             self.scrimmages = scrimmages
             self.deleteIfOld() // function to delete outdated scrimmages
             self.scrimmagesTableView.reloadData()
+            
+            if !scrimmages.isEmpty {
+                self.coreDataController.resetAllRecords(in: "ScrimmageSaved")
+            
+            for i in self.scrimmages {
+                let newScrimmage = ScrimmageSaved(context: self.coreDataController.mainContext)
+                //  Add parts of the scrimmage
+                newScrimmage.name = i.name
+                newScrimmage.venueName = i.venueName
+                newScrimmage.managersName = i.managerName
+                newScrimmage.managersNumber = i.managerNumber
+                newScrimmage.postCode = i.postCode
+                newScrimmage.time = i.time
+                newScrimmage.price = i.price
+                newScrimmage.date = i.date
+                newScrimmage.participants = Int16(i.participants)
+
+                // SAVE THE CONTEXT and check if it already exist
+                //saving contextf
+                self.coreDataController.saveContext()
+            }
+            } else {
+                self.coreDataController.resetAllRecords(in: "ScrimmageSaved")
+            }
+            
     }
 }
     
