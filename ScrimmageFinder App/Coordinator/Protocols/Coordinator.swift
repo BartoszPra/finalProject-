@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-protocol Coordinator {
+protocol Coordinator: AnyObject {
     
-    var controller: UINavigationController {get set}
+    var navigationController: CoordinatedNavigationController {get set}
     var children: [Coordinator] {get set}
     func start()
     

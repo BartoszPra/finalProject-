@@ -7,6 +7,7 @@ class Detail1ViewController: UIViewController, Storyboarded {
     
     var scrimmagePassedOver: Scrimmage?
     let coreDataController = CoreDataController.shared
+    
     @IBOutlet var DT1backGroundPhotoImg: UIImageView!
     
     @IBOutlet var nameLbl: UILabel!
@@ -62,7 +63,7 @@ class Detail1ViewController: UIViewController, Storyboarded {
         if entityExists(name: (scrimmagePassedOver?.name)!) == true {
        
         // Crete new Scrimmage object
-        let newScrimmage = ScrimmageD(context: self.coreDataController.mainContext)
+        let newScrimmage = ScrimmageSaved(context: self.coreDataController.mainContext)
         
        //  Add parts of the scrimmage
         newScrimmage.name = scrimmagePassedOver?.name
@@ -99,7 +100,7 @@ class Detail1ViewController: UIViewController, Storyboarded {
     //function to check if Entity exist in the core data
     func entityExists(name: String) -> Bool {
         //fetching all the entities using predicate
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ScrimmageD")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ScrimmageSaved")
         let predicate = NSPredicate(format: "name = %@", name)
         fetchRequest.predicate = predicate
         

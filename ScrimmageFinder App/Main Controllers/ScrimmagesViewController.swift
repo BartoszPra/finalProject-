@@ -5,10 +5,13 @@ import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
 
-class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable {
+class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable, Storyboarded {
+    
+   
+    var coordinator: ScrimmagesCoordinator?
+    let coreDataController = CoreDataController.shared
     
     @IBOutlet var titleItem: UINavigationItem!
-    
     // vaariable of the silent scrollly controll
     var silentScrolly: SilentScrolly?
     
@@ -89,29 +92,17 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     //performing segue
-        self.performSegue(withIdentifier: "go2Details", sender: indexPath)
+        var topic: Scrimmage
         
-    }
-    // function to prepare for seque for selecter row
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier?.caseInsensitiveCompare("go2Details") == .orderedSame {
+        if isSearching {
+             topic = filteredScrimmages[indexPath.row]
             
-            if let indexPath = scrimmagesTableView.indexPathForSelectedRow {
-                guard let destinationViewController = segue.destination as? Detail1ViewController else {return}
-                //checking if user is serching and adjusting seque
-                if isSearching {
-                let topic = filteredScrimmages[indexPath.row]
-                destinationViewController.scrimmagePassedOver = topic
-                } else {
-                let topic = scrimmages[indexPath.row]
-                destinationViewController.scrimmagePassedOver = topic
-                }
-                
-            }
+        } else {
+             topic = scrimmages[indexPath.row]
         }
+        coordinator?.goTodetail(with: topic)
+        
     }
-    
     /**
      Below function is checking user taped sth in search bar.It first check for spaces and empty search bar and if so the bool is searching is set to false. Else the bool is true and function filters the array of all scrimmages
      with matching firts three characters.

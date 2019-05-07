@@ -2,7 +2,10 @@ import UIKit
 import CoreData
 import SilentScrolly
 
-class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SilentScrollable {
+class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SilentScrollable, Storyboarded {
+    
+    var coordinator: SavedScrimmagesCoordinator?
+    
     // vaariable of the silent scrollly controll
     var silentScrolly: SilentScrolly?
     
@@ -16,7 +19,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     let coreDataController = CoreDataController.shared
   
     //array for coredata scrimmages
-    var coreScrimmages = [ScrimmageD]()
+    var coreScrimmages = [ScrimmageSaved]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +65,8 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //segue trigger
-        self.performSegue(withIdentifier: "go2SVDetails", sender: indexPath)
+        let topic = coreScrimmages[indexPath.row]
+        self.coordinator?.goToDetail(with: topic)
        
 }
     // long press function to add long press to table view and then delete the spacific row
@@ -94,19 +98,6 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         self.present(alert, animated: true, completion: nil)
        
     }
-    // function to prepare for seque for selecter row
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier?.caseInsensitiveCompare("go2SVDetails") == .orderedSame {
-            
-            if let indexPath = savedTableView.indexPathForSelectedRow {
-                guard let destinationViewController = segue.destination as? SavedDetailViewController else {return}
-                let topic = coreScrimmages[indexPath.row]
-                destinationViewController.scrimmagePassedOver2 = topic
-                
-            }
-        }
-    }
    // swipe left to delte additiional posibility ot delte.
         func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
            guard editingStyle == .delete else { return }
@@ -120,7 +111,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     func fetchScrimmages() {
         
         // Create a request to fetch ALL scrimmages
-        let fetchRequest = ScrimmageD.fetchRequest() as NSFetchRequest<ScrimmageD>
+        let fetchRequest = ScrimmageSaved.fetchRequest() as NSFetchRequest<ScrimmageSaved>
         
         // Create sort decriptors to sort via age and firstName
         let nameSort = NSSortDescriptor(key: "name", ascending: true)

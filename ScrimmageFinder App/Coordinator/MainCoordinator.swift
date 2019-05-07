@@ -11,27 +11,27 @@ import Foundation
 
 class MainCoordinator: Coordinator {
     
-    var controller: UINavigationController
+    var navigationController: CoordinatedNavigationController
     var children = [Coordinator]()
     
-    init(navigationController: UINavigationController) {
-        self.controller = navigationController
+    init(navigationController: CoordinatedNavigationController) {
+        self.navigationController = navigationController
     }
     
     func start() {
         let viewController = LoginViewController.instantiate()
         viewController.coordinator = self
-        controller.pushViewController(viewController, animated: false)
+        navigationController.pushViewController(viewController, animated: false)
         
     }
     
     func goToRegister() {
         let viewController = RegisterViewController.instantiate()
-        controller.pushViewController(viewController, animated: false)
+        navigationController.pushViewController(viewController, animated: false)
     }
     
     func startTabBarCoordinator(viewController: UIViewController) {
-        let viewController = TabBarController.instantiate()
-        viewController.present(viewController, animated: false, completion: nil)
+        let tabViewController = TabBarController.instantiate()
+        viewController.present(tabViewController, animated: false, completion: nil)
     }
 }

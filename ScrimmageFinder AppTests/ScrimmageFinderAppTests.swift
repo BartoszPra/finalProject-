@@ -68,7 +68,7 @@ class ScrimmageFinderAppTests: XCTestCase {
     func testSavingToCoreData() {
         
         let coreDataController = CoreDataController.shared
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ScrimmageD")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ScrimmageSaved")
         var entitiesCount = 0
         do {
             entitiesCount = try coreDataController.mainContext.count(for: fetchRequest)
@@ -77,7 +77,7 @@ class ScrimmageFinderAppTests: XCTestCase {
             print("error executing fetch request: \(error)")
         }
         
-        let newScrimmage = ScrimmageD(context: coreDataController.mainContext)
+        let newScrimmage = ScrimmageSaved(context: coreDataController.mainContext)
         
         newScrimmage.name = "name"
         newScrimmage.venueName = "venueNAme"
@@ -109,7 +109,7 @@ class ScrimmageFinderAppTests: XCTestCase {
         
         let viewController = Detail1ViewController()
         let coreDataController = CoreDataController.shared
-        let newScrimmage = ScrimmageD(context: coreDataController.mainContext)
+        let newScrimmage = ScrimmageSaved(context: coreDataController.mainContext)
         
         newScrimmage.name = "name"
         newScrimmage.venueName = "venueNAme"

@@ -2,7 +2,7 @@ import Firebase
 import FirebaseFirestore
 import UIKit
 
-class AddScrimmageViewController: UIViewController {
+class AddScrimmageViewController: UIViewController, Storyboarded {
    
     //text fields outlets 
    

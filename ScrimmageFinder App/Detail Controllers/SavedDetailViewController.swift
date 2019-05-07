@@ -2,9 +2,11 @@ import UIKit
 import Contacts
 import EventKit
 
-class SavedDetailViewController: UIViewController {
+class SavedDetailViewController: UIViewController, Storyboarded {
     
-    var scrimmagePassedOver2: ScrimmageD?
+    var coordiantor: SavedScrimmagesCoordinator?
+    
+    var scrimmagePassedOver2: ScrimmageSaved?
 
     //outlet for background image
     @IBOutlet var DT2backGroundPhotoImg: UIImageView!

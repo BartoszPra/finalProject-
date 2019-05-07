@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="ScrimmageD" representedClassName="ScrimmageD" syncable="YES" codeGenerationType="class">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18C54" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ScrimmageSaved" representedClassName="ScrimmageSaved" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managersName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="managersNumber" optional="YES" attributeType="String" syncable="YES"/>
@@ -12,6 +12,6 @@
         <attribute name="venueName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ScrimmageD" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="ScrimmageSaved" positionX="160" positionY="192" width="128" height="180"/>
     </elements>
 </model>

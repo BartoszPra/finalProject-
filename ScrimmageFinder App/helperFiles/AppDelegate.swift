@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let navController = UINavigationController()
+        let navController = CoordinatedNavigationController()
         coordinator = MainCoordinator(navigationController: navController)
         coordinator?.start()
         
@@ -45,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         
         Auth.auth().signInAndRetrieveData(with: credential) { (_, error) in
             if error == nil {
-                //self.window?.rootViewController!.performSegue(withIdentifier: "loginSuccessful", sender: nil)
                 self.coordinator?.startTabBarCoordinator(viewController: (self.window?.rootViewController)!)
             } else {
                 print(error?.localizedDescription as Any)

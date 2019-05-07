@@ -81,7 +81,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         } else {
         Auth.auth().signIn(withEmail: email, password: password) { user, error in
             if (error == nil) && (user != nil) {
-                self.performSegue(withIdentifier: "loginSuccessful", sender: self)
+                //self.performSegue(withIdentifier: "loginSuccessful", sender: self)
                // self.coordinator?.startTabBarCoordinator(viewController: self)
             } else {
                 print("Error logging in: \(String(describing: error?.localizedDescription))")
