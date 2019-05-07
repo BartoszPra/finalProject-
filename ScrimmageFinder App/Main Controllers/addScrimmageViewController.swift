@@ -25,10 +25,17 @@ class addScrimmageViewController: UIViewController, Storyboarded {
     
     @IBOutlet var dateTF: UITextField!
     
+    var currentUserId: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         UserDefaults.standard.register(defaults: [String : Any]())
+        let user = Auth.auth().currentUser
+        if let user = user {
+            currentUserId = user.uid
+    
+        }
     
     }
     
@@ -124,7 +131,8 @@ class addScrimmageViewController: UIViewController, Storyboarded {
                                       time: time!, managerName: self.managerNameTF.text!,
                                       managerNumber: self.managersNumberTF.text!,
                                       price: price!,
-                                      date: self.dateTF.text!)
+                                      date: self.dateTF.text!,
+                                      createdById: currentUserId)
             // creating a scrimmage
                 FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
             //allert if added

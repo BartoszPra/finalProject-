@@ -4,6 +4,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
+import CoreData
 
 // CRUD operations for forebase
 class FIRFirestoreService {
@@ -43,6 +44,7 @@ class FIRFirestoreService {
                 for document in snapshot.documents {
                     let object = try document.decode(as: objectType.self)
                     objects.append(object)
+                    
                 }
                 
                 completion(objects)

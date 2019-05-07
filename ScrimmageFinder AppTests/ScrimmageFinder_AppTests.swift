@@ -90,7 +90,7 @@ class ScrimmageFinder_AppTests: XCTestCase {
             print("error executing fetch request: \(error)")
         }
         
-        let newScrimmage = ScrimmageD(context: coreDataController.mainContext)
+        let newScrimmage = ScrimmageSaved(context: coreDataController.mainContext)
         
         newScrimmage.name = "name"
         newScrimmage.venueName = "venueNAme"
@@ -124,7 +124,7 @@ class ScrimmageFinder_AppTests: XCTestCase {
         let vc = Detail1ViewController()
         
         let coreDataController = CoreDataController.shared
-        let newScrimmage = ScrimmageD(context: coreDataController.mainContext)
+        let newScrimmage = ScrimmageSaved(context: coreDataController.mainContext)
         
         newScrimmage.name = "name"
         newScrimmage.venueName = "venueNAme"

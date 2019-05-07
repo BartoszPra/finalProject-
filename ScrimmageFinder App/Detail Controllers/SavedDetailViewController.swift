@@ -7,7 +7,7 @@ import EventKit
 class SavedDetailViewController: UIViewController, Storyboarded {
     
     var coordinator: SavedScrimmagesCoordinator?
-    var scrimmagePassedOver2: ScrimmageD?
+    var scrimmagePassedOver2: ScrimmageSaved?
 
     //outlet for background image
     @IBOutlet var DT2backGroundPhotoImg: UIImageView!

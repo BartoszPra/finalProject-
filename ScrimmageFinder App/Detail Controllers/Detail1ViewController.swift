@@ -69,7 +69,7 @@ class Detail1ViewController: UIViewController, Storyboarded {
         if entityExists(name: (scrimmagePassedOver?.name)!) == true{
        
         // Crete new Scrimmage object
-        let newScrimmage = ScrimmageD(context: self.coreDataController.mainContext)
+        let newScrimmage = ScrimmageSaved(context: self.coreDataController.mainContext)
         
        //  Add parts of the scrimmage
         newScrimmage.name = scrimmagePassedOver?.name

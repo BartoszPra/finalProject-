@@ -23,7 +23,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     let coreDataController = CoreDataController.shared
   
     //array for coredata scrimmages
-    var coreScrimmages = [ScrimmageD]()
+    var coreScrimmages = [ScrimmageSaved]()
     
     
     override func viewDidLoad() {
@@ -125,7 +125,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     func fetchScrimmages() {
         
         // Create a request to fetch ALL scrimmages
-        let fetchRequest = ScrimmageD.fetchRequest() as NSFetchRequest<ScrimmageD>
+        let fetchRequest = ScrimmageSaved.fetchRequest() as NSFetchRequest<ScrimmageSaved>
         
         // Create sort decriptors to sort via age and firstName
         let nameSort = NSSortDescriptor(key: "name", ascending: true)
