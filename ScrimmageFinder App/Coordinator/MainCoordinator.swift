@@ -10,8 +10,8 @@ import UIKit
 import Foundation
 
 class MainCoordinator: Coordinator {
+    
     var navigationController: CoordinatedNavigationController
-    //var controller: UINavigationController
     var children = [Coordinator]()
     
     init(navigationController: CoordinatedNavigationController) {

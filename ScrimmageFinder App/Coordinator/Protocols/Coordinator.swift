@@ -12,7 +12,6 @@ import UIKit
 protocol Coordinator: AnyObject {
     
     var navigationController: CoordinatedNavigationController { get set }
-    //var controller: UINavigationController {get set}
     var children: [Coordinator] {get set}
     func start()
     
