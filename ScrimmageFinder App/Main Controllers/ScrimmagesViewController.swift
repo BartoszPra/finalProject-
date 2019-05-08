@@ -7,7 +7,6 @@ import GoogleSignIn
 
 class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable, Storyboarded {
     
-   
     var coordinator: ScrimmagesCoordinator?
     let coreDataController = CoreDataController.shared
     
@@ -100,7 +99,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         } else {
              topic = scrimmages[indexPath.row]
         }
-        coordinator?.goTodetail(with: topic)
+        coordinator?.goToDetail(with: topic)
         
     }
     /**
@@ -175,7 +174,12 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-
+    
+    @IBAction func goToAddScrimmagesClicked(_ sender: Any) {
+        self.coordinator?.goToAddScrimmage()
+        
+    }
+    
     @IBAction func logOutClicked(_ sender: Any) {
         do {
             try Auth.auth().signOut()
