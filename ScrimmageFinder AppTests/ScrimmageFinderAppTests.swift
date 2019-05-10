@@ -38,7 +38,7 @@ class ScrimmageFinderAppTests: XCTestCase {
         let VContr = ScrimmagesViewController()
         
   // function for pulling data from database
-        FIRFirestoreService.shared.read(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
+        FIRFirestoreService.shared.readAll(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
             VContr.scrimmages = scrimmages}
   //counting scrimmages
         let counting = VContr.scrimmages.count
@@ -54,7 +54,7 @@ class ScrimmageFinderAppTests: XCTestCase {
    // adding the created scrimmage
         FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
   //reading from database
-       FIRFirestoreService.shared.read(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
+       FIRFirestoreService.shared.readAll(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
             VContr.scrimmages = scrimmages }
   //counting the resoults
         let count2 = VContr.scrimmages.count
@@ -144,7 +144,7 @@ class ScrimmageFinderAppTests: XCTestCase {
     func testReadingFirebase() {
         var scrimmages2 = [Scrimmage]()
         
-       FIRFirestoreService.shared.read(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
+       FIRFirestoreService.shared.readAll(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
             scrimmages2 = scrimmages}
         print("count \(scrimmages2.count)")
     }

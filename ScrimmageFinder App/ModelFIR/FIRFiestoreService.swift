@@ -29,7 +29,7 @@ class FIRFirestoreService {
     }
    
     // read function exluding id it will be added automatically by fireabase to pull data from firebase
-    func read<T: Decodable>(from collectionReference: FIRCollectionReference, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
+    func readAll<T: Decodable>(from collectionReference: FIRCollectionReference, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
         
         reference(to: collectionReference).addSnapshotListener { (snapshot, _) in
             
@@ -51,6 +51,33 @@ class FIRFirestoreService {
         }
         
     }
+    
+    func readWhere<T: Decodable>(from collectionReference: FIRCollectionReference, whereFld: String, equalsTo: Any, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
+        
+        reference(to: collectionReference).whereField(whereFld, isEqualTo: equalsTo).addSnapshotListener { (snapshot, _) in
+            
+            guard let snapshot = snapshot else { return }
+            
+            do {
+                
+                var objects = [T]()
+                for document in snapshot.documents {
+                    let object = try document.decode(as: objectType.self)
+                    objects.append(object)
+                }
+                
+                completion(objects)
+                
+            } catch {
+                print(error)
+            }
+        }
+        
+    }
+    
+    
+    
+    
    
    // update function inclding id  to update record in firebase - not using it yet maybe in future
     func update<T: Encodable & Identifiable>(for encodableObject: T, in collectionReference: FIRCollectionReference) {

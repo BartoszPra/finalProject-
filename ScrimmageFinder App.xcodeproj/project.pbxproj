@@ -32,6 +32,9 @@
 		04C8F37A20FF2A2F00AF48E4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F37920FF2A2E00AF48E4 /* RegisterViewController.swift */; };
 		04C8F37E20FFFDA400AF48E4 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F37D20FFFDA400AF48E4 /* AlertController.swift */; };
 		662BB2BE39AEF80F674AC8B2 /* Pods_ScrimmageFinder_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06025A504561BDBE1220B5F6 /* Pods_ScrimmageFinder_App.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A50F4247228472CC007841A2 /* MyScrimmagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F4245228472CC007841A2 /* MyScrimmagesViewController.swift */; };
+		A50F4248228472CC007841A2 /* MyScrimmagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50F4246228472CC007841A2 /* MyScrimmagesViewController.xib */; };
+		A50F424C2284785E007841A2 /* MyScrimmagesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F424B2284785E007841A2 /* MyScrimmagesCoordinator.swift */; };
 		A59068642282CA1800186C0D /* SavedScrimmagesCoordiantor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59068632282CA1800186C0D /* SavedScrimmagesCoordiantor.swift */; };
 		C53B747BEB4E8E432E213461 /* Pods_ScrimmageFinder_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF1BFFC0D3C64B94DB6675A /* Pods_ScrimmageFinder_AppTests.framework */; };
 		C751B37A2259225D0060D1B2 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751B3792259225D0060D1B2 /* MainCoordinator.swift */; };
@@ -118,6 +121,9 @@
 		06025A504561BDBE1220B5F6 /* Pods_ScrimmageFinder_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrimmageFinder_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF1BFFC0D3C64B94DB6675A /* Pods_ScrimmageFinder_AppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrimmageFinder_AppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C50FD11D4357864F28C6CD8 /* Pods_ScrimmageFinder_AppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrimmageFinder_AppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A50F4245228472CC007841A2 /* MyScrimmagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrimmagesViewController.swift; sourceTree = "<group>"; };
+		A50F4246228472CC007841A2 /* MyScrimmagesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyScrimmagesViewController.xib; sourceTree = "<group>"; };
+		A50F424B2284785E007841A2 /* MyScrimmagesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrimmagesCoordinator.swift; sourceTree = "<group>"; };
 		A59068632282CA1800186C0D /* SavedScrimmagesCoordiantor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedScrimmagesCoordiantor.swift; sourceTree = "<group>"; };
 		BD1AF697CE9CBB669D028A8B /* Pods-ScrimmageFinder App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrimmageFinder App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScrimmageFinder App/Pods-ScrimmageFinder App.debug.xcconfig"; sourceTree = "<group>"; };
 		C70F3FE3222F60F400703859 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +180,7 @@
 		0369DAEB20E121BF006B7507 /* Main Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A50F4244228472A0007841A2 /* MyScrimmages */,
 				C7BFC25222820AB000EE6EB4 /* TabBarController.swift */,
 				04C8F37720FF2A0E00AF48E4 /* LoginViewController.swift */,
 				04C8F37920FF2A2E00AF48E4 /* RegisterViewController.swift */,
@@ -315,6 +322,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A50F4244228472A0007841A2 /* MyScrimmages */ = {
+			isa = PBXGroup;
+			children = (
+				A50F4245228472CC007841A2 /* MyScrimmagesViewController.swift */,
+				A50F4246228472CC007841A2 /* MyScrimmagesViewController.xib */,
+			);
+			path = MyScrimmages;
+			sourceTree = "<group>";
+		};
 		B8C987C956CAA1F8FF1199E7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +351,7 @@
 				C751B3792259225D0060D1B2 /* MainCoordinator.swift */,
 				C7BFC24E2282084F00EE6EB4 /* ScrimmagesCoordinator.swift */,
 				A59068632282CA1800186C0D /* SavedScrimmagesCoordiantor.swift */,
+				A50F424B2284785E007841A2 /* MyScrimmagesCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -494,6 +511,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03F10DD320DC55C300F8C62B /* LaunchScreen.storyboard in Resources */,
+				A50F4248228472CC007841A2 /* MyScrimmagesViewController.xib in Resources */,
 				034D429120E4E8FD00D59F8C /* Settings.bundle in Resources */,
 				034D429320E54FCA00D59F8C /* GoogleService-Info.plist in Resources */,
 				03F10DCB20DC55BF00F8C62B /* Main.storyboard in Resources */,
@@ -684,10 +702,12 @@
 				C7BFC24F2282084F00EE6EB4 /* ScrimmagesCoordinator.swift in Sources */,
 				C7BFC251228209A000EE6EB4 /* CoordinatedNavigationController.swift in Sources */,
 				03D14CF220E0EBA300D76E38 /* ScrimmagesViewController.swift in Sources */,
+				A50F424C2284785E007841A2 /* MyScrimmagesCoordinator.swift in Sources */,
 				04C8F37E20FFFDA400AF48E4 /* AlertController.swift in Sources */,
 				03F10DF720DD0F7400F8C62B /* Scrimmage.swift in Sources */,
 				03F10DCE20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld in Sources */,
 				C7B8EEF2227E63FF00AB253F /* AddScrimmageViewController.swift in Sources */,
+				A50F4247228472CC007841A2 /* MyScrimmagesViewController.swift in Sources */,
 				03C6E1EE20DD59C3001DFD01 /* EncodableExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
