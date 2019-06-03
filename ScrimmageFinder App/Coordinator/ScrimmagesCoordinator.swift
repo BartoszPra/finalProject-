@@ -22,7 +22,7 @@ class ScrimmagesCoordinator: Coordinator {
         viewController.coordinator = self
         navigationController.viewControllers = [viewController]
     }
-    func goToDetail(with scrimmage: Scrimmage) {
+    func goTodetail(with scrimmage: Scrimmage) {
         let viewController = Detail1ViewController.instantiate()
         viewController.scrimmagePassedOver = scrimmage
         navigationController.pushViewController(viewController, animated: true)

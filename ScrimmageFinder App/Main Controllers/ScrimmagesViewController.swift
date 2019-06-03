@@ -7,8 +7,9 @@ import GoogleSignIn
 
 class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable, Storyboarded {
     
+   
     var coordinator: ScrimmagesCoordinator?
-    //let coreDataController = CoreDataController.shared
+    let coreDataController = CoreDataController.shared
     
     @IBOutlet var titleItem: UINavigationItem!
     // vaariable of the silent scrollly controll
@@ -41,7 +42,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         UserDefaults.standard.register(defaults: [String: Any]())
        
         // reading from database
-        FIRFirestoreService.shared.readAll(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
+        FIRFirestoreService.shared.read(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
             self.scrimmages = scrimmages
             self.deleteIfOld() // function to delete outdated scrimmages
             self.scrimmagesTableView.reloadData()
@@ -99,7 +100,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         } else {
              topic = scrimmages[indexPath.row]
         }
-        coordinator?.goToDetail(with: topic)
+        coordinator?.goTodetail(with: topic)
         
     }
     /**
@@ -174,12 +175,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-    @IBAction func goToAddScrimmagesClicked(_ sender: Any) {
-        self.coordinator?.goToAddScrimmage()
-        
-    }
-    
+
     @IBAction func logOutClicked(_ sender: Any) {
         do {
             try Auth.auth().signOut()
