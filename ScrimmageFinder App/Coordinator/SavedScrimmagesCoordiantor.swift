@@ -18,7 +18,7 @@ class SavedScrimmagesCoordinator: Coordinator {
         self.navigationController = navigationController
         navigationController.coordinator = self
         let viewController = SavedScrimmagesViewController.instantiate()
-        viewController.tabBarItem = UITabBarItem(title: "Saved Scrimmages", image: UIImage(named: "tabBarImage"), tag: 0)
+        viewController.tabBarItem = UITabBarItem(title: "Scrimmages", image: UIImage(named: "tabBarImage"), tag: 0)
         viewController.coordinator = self
         navigationController.viewControllers = [viewController]
     }
