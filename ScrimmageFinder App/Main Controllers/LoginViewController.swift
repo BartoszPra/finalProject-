@@ -11,7 +11,7 @@ import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate, Storyboarded {
+class LoginViewController: UIViewController, LoginButtonDelegate, GIDSignInUIDelegate, Storyboarded {
    
     weak var coordinator: MainCoordinator?
     
@@ -21,14 +21,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
     
-    @IBOutlet weak var facebookLoginSignInButton: FBSDKLoginButton!
+    @IBOutlet weak var facebookLoginSignInButton: FBLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         GIDSignIn.sharedInstance().uiDelegate = self
         facebookLoginSignInButton.delegate = self
-        facebookLoginSignInButton.readPermissions = ["email", "public_profile"]
+        facebookLoginSignInButton.permissions = ["email", "public_profile"]
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -38,24 +38,24 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         }
     }
     
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         if error != nil {
-            print(error)
+            print(error!)
             return
         }
     
         self.loginWithFcb()
     }
     
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
          print("Did log out of facebook")
     }
     
     func loginWithFcb() {
-      let accesToken = FBSDKAccessToken.current()
+      let accesToken = AccessToken.current
       guard let stringAccesTok = accesToken?.tokenString else {return}
       let credential = FacebookAuthProvider.credential(withAccessToken: stringAccesTok)
-      Auth.auth().signInAndRetrieveData(with: credential, completion: { (user, error) in
+      Auth.auth().signIn(with: credential, completion: { (user, error) in
             if let error = error {
                 print("Error logging in", error)
             } else {
@@ -81,10 +81,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         } else {
         Auth.auth().signIn(withEmail: email, password: password) { user, error in
             if (error == nil) && (user != nil) {
-                //self.performSegue(withIdentifier: "loginSuccessful", sender: self)
-               // self.coordinator?.startTabBarCoordinator(viewController: self)
+                self.coordinator?.startTabBarCoordinator(viewController: self)
             } else {
-                print("Error logging in: \(String(describing: error?.localizedDescription))")
+                AlertController.showAllert(self, title: "Wrong username or password", message: "Plese insert correct credentials")
             }
         }
         }

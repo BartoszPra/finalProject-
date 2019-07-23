@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
         
-        Auth.auth().signInAndRetrieveData(with: credential) { (_, error) in
+        Auth.auth().signIn(with: credential) { (_, error) in
             if error == nil {
                 self.coordinator?.startTabBarCoordinator(viewController: (self.window?.rootViewController)!)
             } else {

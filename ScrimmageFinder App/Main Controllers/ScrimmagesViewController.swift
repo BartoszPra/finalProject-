@@ -6,8 +6,7 @@ import FBSDKLoginKit
 import GoogleSignIn
 
 class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, SilentScrollable, Storyboarded {
-    
-   
+       
     var coordinator: ScrimmagesCoordinator?
     let coreDataController = CoreDataController.shared
     
@@ -183,7 +182,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             print(err)
         }
         GIDSignIn.sharedInstance()?.signOut()
-        FBSDKLoginManager().logOut()
+        LoginManager().logOut()
         self.dismiss(animated: true, completion: nil)
         
     }

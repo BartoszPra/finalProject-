@@ -38,4 +38,11 @@ cyclomatic_complexity:
     warning: 15
     error: 25
 
+variable_name:
+  max_length:
+    warning: 45
+    error: 60
+  min_length:
+    warning: 1
+
 reporter: "xcode"

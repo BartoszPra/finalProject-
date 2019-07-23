@@ -6,7 +6,7 @@ protocol  Identifiable {
 
 //scrimmgage struct with properties
 struct Scrimmage: Codable, Identifiable {
-    var id: String? = nil
+    var id: String?
     var name: String
     var venueName: String
     var postCode: String
