@@ -11,7 +11,10 @@ import UIKit
 class MyScrimmagesCell: UITableViewCell {
 
     @IBOutlet weak var cellLBL: UILabel!
-        
+    @IBOutlet weak var addressLbl: UILabel!
+    @IBOutlet weak var timeLbl: UILabel!
+    @IBOutlet weak var cellImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -1,4 +1,5 @@
 import Foundation
+import FirebaseAuth
 //protocol for when the function will need id to be performed like delete and update
 protocol  Identifiable {
     var id: String? {get set}
@@ -16,9 +17,10 @@ struct Scrimmage: Codable, Identifiable {
     var price: Double
     var date: String
     var participants: Int
+    var createdById: String
 
     //scrimmage struct init
-    init (name: String, vanueName: String, postCode: String, time: Double, managerName: String, managerNumber: String, price: Double, date: String) {
+    init (name: String, vanueName: String, postCode: String, time: Double, managerName: String, managerNumber: String, price: Double, date: String, createdById: String) {
          self.name = name
          self.venueName = vanueName
          self.postCode = postCode
@@ -28,6 +30,7 @@ struct Scrimmage: Codable, Identifiable {
          self.price = price
          self.date = date
          self.participants = 0
+         self.createdById = Auth.auth().currentUser!.uid
         
     }
 }

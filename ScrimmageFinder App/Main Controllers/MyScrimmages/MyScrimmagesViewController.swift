@@ -20,7 +20,6 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -37,12 +36,11 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
                                              returning: Scrimmage.self) { (scrimmages) in
                                              self.scrimmages = scrimmages
                                              self.tableView.reloadData()
-                                            
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return self.scrimmages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,6 +48,9 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
         if !self.scrimmages.isEmpty {
             let scrimmage = scrimmages[indexPath.row]
             cell.cellLBL.text = scrimmage.name
+            cell.addressLbl.text = scrimmage.venueName
+            cell.timeLbl.text = scrimmage.date
+            cell.cellImage.image = UIImage.init(named: "imageJordan")
             return cell
         } else {
             cell.cellLBL.text = ""

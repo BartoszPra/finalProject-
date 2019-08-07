@@ -1,6 +1,7 @@
 import UIKit
 import CoreData
 import SilentScrolly
+import FirebaseAuth
 
 class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SilentScrollable, Storyboarded {
     
@@ -20,6 +21,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
   
     //array for coredata scrimmages
     var coreScrimmages = [ScrimmageSaved]()
+    var savedScrimmages = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,6 +109,15 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         coreDataController.mainContext.delete(donara)
         coreDataController.saveContext()
        }
+    
+    func getSavedScrimmagesIdList() -> [String] {
+        
+        var currentUserId = Auth.auth().currentUser?.uid
+        FIRFirestoreService.shared.readWhere(from: .SavedScrimmages, whereFld: userId, equalsTo: userId , returning: savedScrimmages, completion: ({ (savedScrimmages) in
+            
+        }))
+        
+    }
     
     func fetchScrimmages() {
         
