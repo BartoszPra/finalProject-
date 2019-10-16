@@ -21,7 +21,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
   
     //array for coredata scrimmages
     var coreScrimmages = [ScrimmageSaved]()
-    var savedScrimmages = [String]()
+    var savedScrimmages = [Scrimmage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,15 +46,16 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return coreScrimmages.count
+       // return coreScrimmages.count
+        return savedScrimmages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SVcell", for: indexPath)
-        let coreScrimmage = coreScrimmages[indexPath.row]
+        let coreScrimmage = savedScrimmages[indexPath.row]
         cell.textLabel?.text = coreScrimmage.name
         
-        guard let name = coreScrimmage.venueName else {return UITableViewCell()}
+        let name = coreScrimmage.venueName
         let price = coreScrimmage.price
         let time = coreScrimmage.time
         
@@ -110,12 +111,19 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         coreDataController.saveContext()
        }
     
-    func getSavedScrimmagesIdList() -> [String] {
+    func getSavedScrimmagesIdList() {
         
-        var currentUserId = Auth.auth().currentUser?.uid
-        FIRFirestoreService.shared.readWhere(from: .SavedScrimmages, whereFld: userId, equalsTo: userId , returning: savedScrimmages, completion: ({ (savedScrimmages) in
-            
-        }))
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        FIRFirestoreService.shared.readWhereArray(from: .scrimmages,
+                                             whereArray: "savedById",
+                                             contains: userID,
+                                             returning: Scrimmage.self) { (scrimmages) in
+                                             self.savedScrimmages = scrimmages
+                                             self.savedTableView.reloadData()
+        }
+    }
+    
+    func fetchScrimmagesFromRemote() {
         
     }
     
@@ -155,6 +163,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         configureSilentScrolly(savedTableView, followBottomView: tabBarController?.tabBar)
+        self.getSavedScrimmagesIdList()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

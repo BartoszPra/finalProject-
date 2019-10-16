@@ -115,7 +115,7 @@ class AddScrimmageViewController: UIViewController, Storyboarded {
             //converting price to double
             let priceString = priceTF.text!
             let price = Double(priceString)
-            
+                        
             // composing a scrimmage
             let scrimmage = Scrimmage(name: self.nameTF.text!,
                                       vanueName: self.venueNameTF.text!,
@@ -124,7 +124,8 @@ class AddScrimmageViewController: UIViewController, Storyboarded {
                                       managerNumber: self.managersNumberTF.text!,
                                       price: price!,
                                       date: self.dateTF.text!,
-                                      createdById: Auth.auth().currentUser!.uid)
+                                      createdById: Auth.auth().currentUser!.uid,
+                                      savedBy: [:])
             // creating a scrimmage
                 FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
             //allert if added

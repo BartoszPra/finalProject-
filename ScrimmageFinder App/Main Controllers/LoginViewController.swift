@@ -75,15 +75,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         guard let password = passTF.text else {return}
         
         if email.trimmingCharacters(in: .whitespaces).isEmpty {
-            AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Email")
+            AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Email format")
         } else if password.trimmingCharacters(in: .whitespaces).isEmpty {
             AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Password")
         } else {
         Auth.auth().signIn(withEmail: email, password: password) { user, error in
             if (error == nil) && (user != nil) {
-                //self.performSegue(withIdentifier: "loginSuccessful", sender: self)
-               // self.coordinator?.startTabBarCoordinator(viewController: self)
+               self.coordinator?.startTabBarCoordinator(viewController: self)
             } else {
+                AlertController.showAllert(self, title: "Oops", message: String(describing: error?.localizedDescription))
                 print("Error logging in: \(String(describing: error?.localizedDescription))")
             }
         }

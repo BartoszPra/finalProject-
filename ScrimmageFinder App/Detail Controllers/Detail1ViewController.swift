@@ -9,30 +9,20 @@ class Detail1ViewController: UIViewController, Storyboarded {
     let coreDataController = CoreDataController.shared
     
     @IBOutlet var DT1backGroundPhotoImg: UIImageView!
-    
     @IBOutlet var nameLbl: UILabel!
-    
     @IBOutlet var venueNameLbl: UILabel!
-    
     @IBOutlet var postCodeLbl: UILabel!
-    
     @IBOutlet var timeLbl: UILabel!
-    
     @IBOutlet var manNameLbl: UILabel!
-    
     @IBOutlet var manNumberLbl: UILabel!
-    
     @IBOutlet var priceLbl: UILabel!
-    
     @IBOutlet var dateLbl: UILabel!
-    
     @IBOutlet var participantsLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         UserDefaults.standard.register(defaults: [String: Any]())
-        
         //assigning data to labels
         nameLbl.text = scrimmagePassedOver?.name
         venueNameLbl.text = scrimmagePassedOver?.venueName
@@ -59,44 +49,53 @@ class Detail1ViewController: UIViewController, Storyboarded {
     
     //function that adds to CoreData
     @IBAction func add2Saved(_ sender: Any) {
+        
+        saveScrimmageOnRemote()
         //checks if it already exist
-        if entityExists(name: (scrimmagePassedOver?.name)!) == true {
-       
-        // Crete new Scrimmage object
-        let newScrimmage = ScrimmageSaved(context: self.coreDataController.mainContext)
-        
-       //  Add parts of the scrimmage
-        newScrimmage.name = scrimmagePassedOver?.name
-        newScrimmage.venueName = scrimmagePassedOver?.venueName
-        newScrimmage.managersName = scrimmagePassedOver?.managerName
-        newScrimmage.managersNumber = scrimmagePassedOver?.managerNumber
-        newScrimmage.postCode = scrimmagePassedOver?.postCode
-        newScrimmage.time = (scrimmagePassedOver!.time)
-        newScrimmage.price = (scrimmagePassedOver!.price)
-        newScrimmage.date = (scrimmagePassedOver!.date)
-        newScrimmage.participants = Int16((scrimmagePassedOver!.participants))
-        
-       // SAVE THE CONTEXT and check if it already exist
-        //saving contextf
-        coreDataController.saveContext()
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-        //add allert
-        let alert = UIAlertController(title: "Saved!", message: "You have saved your Scrimmage.", preferredStyle: UIAlertController.Style.alert)
-        
-       // add an action (button)
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        
-        self.present(alert, animated: true, completion: nil)
-       } else {
-         //add allert
-        let alert = UIAlertController(title: "Sorry.",
-                                      message: "You have saved this Scrimmage before.",
-                                      preferredStyle: UIAlertController.Style.alert)
-       //add button to allert
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-       self.present(alert, animated: true, completion: nil)
-        }
+//        if entityExists(name: (scrimmagePassedOver?.name)!) == true {
+//
+//        // Crete new Scrimmage object
+//        let newScrimmage = ScrimmageSaved(context: self.coreDataController.mainContext)
+//
+//       //  Add parts of the scrimmage
+//        newScrimmage.name = scrimmagePassedOver?.name
+//        newScrimmage.venueName = scrimmagePassedOver?.venueName
+//        newScrimmage.managersName = scrimmagePassedOver?.managerName
+//        newScrimmage.managersNumber = scrimmagePassedOver?.managerNumber
+//        newScrimmage.postCode = scrimmagePassedOver?.postCode
+//        newScrimmage.time = (scrimmagePassedOver!.time)
+//        newScrimmage.price = (scrimmagePassedOver!.price)
+//        newScrimmage.date = (scrimmagePassedOver!.date)
+//        newScrimmage.participants = Int16((scrimmagePassedOver!.participants))
+//
+//       // SAVE THE CONTEXT and check if it already exist
+//        //saving contextf
+//        coreDataController.saveContext()
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+//        //add allert
+//        let alert = UIAlertController(title: "Saved!", message: "You have saved your Scrimmage.", preferredStyle: UIAlertController.Style.alert)
+//
+//       // add an action (button)
+//        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
+//
+//       } else {
+//         //add allert
+//        let alert = UIAlertController(title: "Sorry.",
+//                                      message: "You have saved this Scrimmage before.",
+//                                      preferredStyle: UIAlertController.Style.alert)
+//       //add button to allert
+//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+//       self.present(alert, animated: true, completion: nil)
+//        }
     }
+    
+    func saveScrimmageOnRemote() {
+        guard let currentScrimmageId = self.scrimmagePassedOver?.id else { return }
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        FIRFirestoreService.shared.updateSavedTable(for: currentScrimmageId, with: userID)
+    }
+    
     //function to check if Entity exist in the core data
     func entityExists(name: String) -> Bool {
         //fetching all the entities using predicate
@@ -132,13 +131,8 @@ class Detail1ViewController: UIViewController, Storyboarded {
                                       message: "You have added one more person to participants.",
                                       preferredStyle: UIAlertController.Style.alert)
         //add button to allert
-        
         let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
-            let idt = "ScrimmagesViewController"
-            guard let loginVC = UIStoryboard(name: "Main",
-                                             bundle: nil).instantiateViewController(withIdentifier: idt) as? ScrimmagesViewController else {return}
-            self.navigationController?.pushViewController(loginVC, animated: true)
-            
+            self.navigationController?.popViewController(animated: true)
         }
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)

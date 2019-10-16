@@ -44,7 +44,7 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyScrimmagesCell", for: indexPath) as? MyScrimmagesCell else {return MyScrimmagesCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyScrimmagesCell", for: indexPath) as? MyScrimmagesCell else { return MyScrimmagesCell() }
         if !self.scrimmages.isEmpty {
             let scrimmage = scrimmages[indexPath.row]
             cell.cellLBL.text = scrimmage.name
