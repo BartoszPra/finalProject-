@@ -12,15 +12,8 @@ import FirebaseAuth
 class RegisterViewController: UIViewController, Storyboarded {
 
     @IBOutlet var userNameTF: UITextField!
-    
     @IBOutlet var emailTF: UITextField!
-    
     @IBOutlet var passTF: UITextField!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
 
     @IBAction func registeClick(_ sender: Any) {
         

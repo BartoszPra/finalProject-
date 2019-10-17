@@ -16,14 +16,6 @@ class TabBarController: UITabBarController, Storyboarded {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewControllers = [scrimmages.navigationController, savedScrimmages.navigationController, myScrimmages.navigationController]
-        let tabBar = self.tabBar
-        //tabBar.tintColor = UIColor.darkGray
-        tabBar.barTintColor = UIColor.darkGray
-        tabBar.unselectedItemTintColor = UIColor.darkGray
-        
-        guard let tabBarItem = self.tabBarItem else { return }
-        tabBarItem.badgeColor = UIColor.white
-        
+        viewControllers = [scrimmages.navigationController, savedScrimmages.navigationController, myScrimmages.navigationController]        
     }
 }

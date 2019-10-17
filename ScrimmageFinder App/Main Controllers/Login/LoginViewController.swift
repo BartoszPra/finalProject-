@@ -14,18 +14,13 @@ import GoogleSignIn
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate, Storyboarded {
    
     weak var coordinator: MainCoordinator?
-    
     @IBOutlet var emailTF: UITextField!
-    
     @IBOutlet var passTF: UITextField!
-    
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
-    
     @IBOutlet weak var facebookLoginSignInButton: FBSDKLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         GIDSignIn.sharedInstance().uiDelegate = self
         facebookLoginSignInButton.delegate = self
         facebookLoginSignInButton.readPermissions = ["email", "public_profile"]

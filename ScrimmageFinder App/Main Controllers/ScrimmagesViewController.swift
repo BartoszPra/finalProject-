@@ -9,26 +9,19 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     
     var coordinator: ScrimmagesCoordinator?
     //let coreDataController = CoreDataController.shared
-    
     @IBOutlet var titleItem: UINavigationItem!
     // vaariable of the silent scrollly controll
     var silentScrolly: SilentScrolly?
-    
     // array of Scrimmages from firebase
     var scrimmages = [Scrimmage]()
-    
     //array of filltered scrimmages by searchBar
     var filteredScrimmages = [Scrimmage]()
-    
     //bool for searchBar
     var isSearching = false
-    
     //searchbar outlet
     @IBOutlet var searchBar: UISearchBar!
-    
     //background photo image outlet
-    @IBOutlet var backGroundPhotoImg: UIImageView!
-    
+    @IBOutlet var backGroundPhotoImg: UIImageView!    
     @IBOutlet var scrimmagesTableView: UITableView!
     
     override func viewDidLoad() {
@@ -90,16 +83,16 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //performing segue
-        var topic: Scrimmage
+        var scrimmage: Scrimmage
         
         if isSearching {
-             topic = filteredScrimmages[indexPath.row]
+             scrimmage = filteredScrimmages[indexPath.row]
             
         } else {
-             topic = scrimmages[indexPath.row]
+             scrimmage = scrimmages[indexPath.row]
         }
-        coordinator?.goToDetail(with: topic)
+        coordinator?.goToNewDetail(with: scrimmage)
+        //coordinator?.goToDetail(with: scrimmage)
         
     }
     /**

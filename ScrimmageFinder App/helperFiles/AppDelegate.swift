@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        SFAppearance.setUpApperance()
         let navController = CoordinatedNavigationController()
         coordinator = MainCoordinator(navigationController: navController)
         coordinator?.start()

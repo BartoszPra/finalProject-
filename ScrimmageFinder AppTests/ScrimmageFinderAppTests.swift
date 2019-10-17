@@ -107,7 +107,7 @@ class ScrimmageFinderAppTests: XCTestCase {
   
     func testEntityExistCoreData() {
         
-        let viewController = Detail1ViewController()
+        let viewController = SFdetailViewController()
         let coreDataController = CoreDataController.shared
         let newScrimmage = ScrimmageSaved(context: coreDataController.mainContext)
         
