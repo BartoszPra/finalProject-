@@ -18,10 +18,10 @@ struct Scrimmage: Codable, Identifiable {
     var date: String
     var participants: Int
     var createdById: String
-    var savedBy: [String: String]?
+    var savedById: [String]?
 
     //scrimmage struct init
-    init (name: String, vanueName: String, postCode: String, time: Double, managerName: String, managerNumber: String, price: Double, date: String, createdById: String, savedBy: [String: String]?) {
+    init (name: String, vanueName: String, postCode: String, time: Double, managerName: String, managerNumber: String, price: Double, date: String, createdById: String, savedById: [String]?) {
          self.name = name
          self.venueName = vanueName
          self.postCode = postCode
@@ -32,7 +32,7 @@ struct Scrimmage: Codable, Identifiable {
          self.date = date
          self.participants = 0
          self.createdById = Auth.auth().currentUser!.uid
-         self.savedBy = [:]
+         self.savedById = savedById
         
     }
 }

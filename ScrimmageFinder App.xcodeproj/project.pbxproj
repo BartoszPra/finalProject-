@@ -38,6 +38,7 @@
 		A57BD1262357A33E00A324BC /* SFNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD1252357A33E00A324BC /* SFNames.swift */; };
 		A57BD12C2357AE4C00A324BC /* SFdetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A57BD12B2357AE4C00A324BC /* SFdetailViewController.xib */; };
 		A57BD12E2357EEE400A324BC /* SFAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD12D2357EEE400A324BC /* SFAppearance.swift */; };
+		A57BD1302365FDBD00A324BC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A57BD12F2365FDBD00A324BC /* LoginViewController.xib */; };
 		A59068642282CA1800186C0D /* SavedScrimmagesCoordiantor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59068632282CA1800186C0D /* SavedScrimmagesCoordiantor.swift */; };
 		A5D7433A22F79D840047E9E0 /* MyScrimmagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D7433822F79D840047E9E0 /* MyScrimmagesCell.swift */; };
 		A5D7433D22F7A17F0047E9E0 /* MyScrimmagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5D7433922F79D840047E9E0 /* MyScrimmagesCell.xib */; };
@@ -134,6 +135,7 @@
 		A57BD1252357A33E00A324BC /* SFNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNames.swift; sourceTree = "<group>"; };
 		A57BD12B2357AE4C00A324BC /* SFdetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SFdetailViewController.xib; sourceTree = "<group>"; };
 		A57BD12D2357EEE400A324BC /* SFAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFAppearance.swift; sourceTree = "<group>"; };
+		A57BD12F2365FDBD00A324BC /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		A59068632282CA1800186C0D /* SavedScrimmagesCoordiantor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedScrimmagesCoordiantor.swift; sourceTree = "<group>"; };
 		A5D7433822F79D840047E9E0 /* MyScrimmagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrimmagesCell.swift; sourceTree = "<group>"; };
 		A5D7433922F79D840047E9E0 /* MyScrimmagesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyScrimmagesCell.xib; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				04C8F37720FF2A0E00AF48E4 /* LoginViewController.swift */,
+				A57BD12F2365FDBD00A324BC /* LoginViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -580,6 +583,7 @@
 				03F10DD320DC55C300F8C62B /* LaunchScreen.storyboard in Resources */,
 				A50F4248228472CC007841A2 /* MyScrimmagesViewController.xib in Resources */,
 				034D429120E4E8FD00D59F8C /* Settings.bundle in Resources */,
+				A57BD1302365FDBD00A324BC /* LoginViewController.xib in Resources */,
 				034D429320E54FCA00D59F8C /* GoogleService-Info.plist in Resources */,
 				03F10DCB20DC55BF00F8C62B /* Main.storyboard in Resources */,
 				A57BD12C2357AE4C00A324BC /* SFdetailViewController.xib in Resources */,

@@ -29,10 +29,10 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let userID = Auth.auth().currentUser?.uid
+        guard let userID = Auth.auth().currentUser?.uid else { return }
         FIRFirestoreService.shared.readWhere(from: .scrimmages,
                                              whereFld: "createdById",
-                                             equalsTo: userID!,
+                                             equalsTo: userID,
                                              returning: Scrimmage.self) { (scrimmages) in
                                              self.scrimmages = scrimmages
                                              self.tableView.reloadData()

@@ -16,7 +16,7 @@ class FIRFirestoreService {
     private func reference(to collectionReference: FIRCollectionReference) -> CollectionReference {
         return Firestore.firestore().collection(collectionReference.rawValue)
     }
-    
+        
     // create function exluding id it will be added automatically by fireabase
     func create<T: Encodable>(for encodableObject: T, in collectionReference: FIRCollectionReference) {
         do {
@@ -134,10 +134,35 @@ class FIRFirestoreService {
         
     }
     
+    func readOne<T: Decodable>(from collectionReference: FIRCollectionReference, with id: String, returning objectType: T.Type, completion: @escaping (T) -> Void) {
+        
+        reference(to: collectionReference).document(id).addSnapshotListener { (snapshot, _) in
+            
+            guard let snapshot = snapshot else { return }
+            
+            do {
+                
+                let object = try snapshot.decode(as: objectType.self)
+                completion(object)
+                
+            } catch {
+                print(error)
+            }
+        }
+        
+    }
+    
     func updateSavedTable(for scrimmageID: String, with userId: String) {
         
         let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
-        
         currentScrimmage.updateData(["savedById": FieldValue.arrayUnion([userId])])
+    }
+    
+    func refresh_getScrimmage(for id: String) -> Scrimmage {
+        var scrimmagee: Scrimmage!
+        readOne(from: .scrimmages, with: id, returning: Scrimmage.self) { (scrimmage) in
+            scrimmagee = scrimmage
+        }
+        return scrimmagee
     }
 }

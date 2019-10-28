@@ -694,7 +694,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="miu-f3-pQL">
-                                <rect key="frame" x="0.0" y="170" width="375" height="593"/>
+                                <rect key="frame" x="0.0" y="170" width="375" height="559"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SCcell" textLabel="x4a-3Z-UxD" detailTextLabel="xBy-xn-UXo" style="IBUITableViewCellStyleSubtitle" id="kCv-vW-KpJ">
@@ -729,7 +729,7 @@
                                 </connections>
                             </tableView>
                             <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l9c-zC-SYV">
-                                <rect key="frame" x="0.0" y="763" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="729" width="375" height="83"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <tabBarItem systemItem="favorites" id="EI2-zI-lTi"/>
@@ -847,7 +847,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="810"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="ycS-7i-wI4">
-                                <rect key="frame" x="62.666666666666657" y="172" width="249.99999999999997" height="126"/>
+                                <rect key="frame" x="62.666666666666657" y="343" width="249.99999999999997" height="126"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email                              " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="60s-GK-wBi">
                                         <rect key="frame" x="0.0" y="0.0" width="250" height="45"/>
@@ -873,7 +873,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="b7m-sE-TdG">
-                                <rect key="frame" x="87.666666666666686" y="428" width="200" height="184"/>
+                                <rect key="frame" x="87.666666666666686" y="549" width="200" height="184"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pJm-ji-KS7">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
@@ -938,29 +938,16 @@
                                     <constraint firstAttribute="width" constant="200" id="3tM-ov-Wta"/>
                                 </constraints>
                             </stackView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEd-Ow-TuU">
-                                <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="1gq-qS-mE2"/>
-                                </constraints>
-                                <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <navigationItem title="Login" id="ipT-7S-DWz"/>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="uEd-Ow-TuU" firstAttribute="top" secondItem="wfv-Ic-zzp" secondAttribute="bottom" id="30Y-bE-NeG"/>
-                            <constraint firstItem="uEd-Ow-TuU" firstAttribute="trailing" secondItem="gTx-OK-UUb" secondAttribute="trailing" id="BM4-VP-Bac"/>
                             <constraint firstItem="gTx-OK-UUb" firstAttribute="bottomMargin" secondItem="3HY-Is-hrl" secondAttribute="bottom" id="Mme-tr-BqJ"/>
                             <constraint firstItem="gTx-OK-UUb" firstAttribute="leading" secondItem="3HY-Is-hrl" secondAttribute="leading" id="NMy-bE-qXP"/>
-                            <constraint firstItem="ycS-7i-wI4" firstAttribute="top" secondItem="uEd-Ow-TuU" secondAttribute="bottom" constant="84" id="OvO-ax-HgG"/>
-                            <constraint firstItem="b7m-sE-TdG" firstAttribute="top" secondItem="ycS-7i-wI4" secondAttribute="bottom" constant="130" id="RXG-Yx-vVf"/>
+                            <constraint firstItem="b7m-sE-TdG" firstAttribute="top" secondItem="ycS-7i-wI4" secondAttribute="bottom" constant="80" id="RXG-Yx-vVf"/>
+                            <constraint firstItem="ycS-7i-wI4" firstAttribute="centerY" secondItem="3HY-Is-hrl" secondAttribute="centerY" id="VKj-L6-Xbl"/>
                             <constraint firstItem="gTx-OK-UUb" firstAttribute="trailing" secondItem="3HY-Is-hrl" secondAttribute="trailing" id="YfR-EY-LGF"/>
                             <constraint firstItem="gTx-OK-UUb" firstAttribute="top" secondItem="wfv-Ic-zzp" secondAttribute="bottom" id="coZ-mM-DSU"/>
                             <constraint firstItem="b7m-sE-TdG" firstAttribute="centerX" secondItem="3HY-Is-hrl" secondAttribute="centerX" id="m04-cw-XXU"/>
-                            <constraint firstItem="uEd-Ow-TuU" firstAttribute="leading" secondItem="gTx-OK-UUb" secondAttribute="leading" id="sEO-nf-bMa"/>
                             <constraint firstItem="ycS-7i-wI4" firstAttribute="centerX" secondItem="3HY-Is-hrl" secondAttribute="centerX" id="uh0-X6-1wF"/>
                         </constraints>
                     </view>
@@ -1049,7 +1036,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nio-Zv-ZIL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="736.875" y="-625.35211267605632"/>
+            <point key="canvasLocation" x="1142" y="-617"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="kn6-7Q-p0v">
@@ -1083,10 +1070,10 @@
                                 <rect key="frame" x="0.0" y="33" width="375" height="44"/>
                             </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" image="backgoundBBall70" translatesAutoresizingMaskIntoConstraints="NO" id="q2U-9x-Fqc">
-                                <rect key="frame" x="0.0" y="77" width="375" height="686"/>
+                                <rect key="frame" x="0.0" y="77" width="375" height="652"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8gf-tg-3DJ">
-                                <rect key="frame" x="140" y="695" width="95" height="38"/>
+                                <rect key="frame" x="140" y="661" width="95" height="38"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="Add">
@@ -1104,7 +1091,7 @@
                                 </connections>
                             </button>
                             <tabBar contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUb-Ak-RKP">
-                                <rect key="frame" x="0.0" y="763" width="375" height="49"/>
+                                <rect key="frame" x="0.0" y="729" width="375" height="83"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <tabBarItem systemItem="favorites" id="doO-fH-nkk"/>

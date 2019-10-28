@@ -21,6 +21,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        uiSetup()
         GIDSignIn.sharedInstance().uiDelegate = self
         facebookLoginSignInButton.delegate = self
         facebookLoginSignInButton.readPermissions = ["email", "public_profile"]
@@ -43,7 +44,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-         print("Did log out of facebook")
+         print("User did log out of facebook")
     }
     
     func loginWithFcb() {
@@ -83,5 +84,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
             }
         }
         }
+    }
+    
+    func uiSetup() {
+        self.title = "Login"
     }
 }

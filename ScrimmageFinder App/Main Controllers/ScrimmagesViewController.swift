@@ -91,9 +91,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         } else {
              scrimmage = scrimmages[indexPath.row]
         }
-        coordinator?.goToNewDetail(with: scrimmage)
-        //coordinator?.goToDetail(with: scrimmage)
-        
+        coordinator?.goToNewDetail(with: scrimmage, from: self)        
     }
     /**
      Below function is checking user taped sth in search bar.It first check for spaces and empty search bar and if so the bool is searching is set to false. Else the bool is true and function filters the array of all scrimmages
