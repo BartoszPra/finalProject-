@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController" customModule="ScrimmageFinder_App" customModuleProvider="target">
+            <connections>
+                <outlet property="emailTF" destination="vXP-MB-VEz" id="z7I-VO-9dc"/>
+                <outlet property="passTF" destination="2kx-C7-8of" id="8uX-Gs-zMw"/>
+                <outlet property="userNameTF" destination="L2r-oD-vfF" id="rTq-rN-gJs"/>
+                <outlet property="view" destination="iN0-l3-epB" id="5Nc-Zn-sWe"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="theme2Background260%" translatesAutoresizingMaskIntoConstraints="NO" id="qLm-jc-34P">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="edU-w9-P3G">
+                    <rect key="frame" x="15" y="326" width="384" height="244"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="L2r-oD-vfF">
+                            <rect key="frame" x="0.0" y="0.0" width="384" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="uhC-Qv-EQY"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" textContentType="username"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vXP-MB-VEz">
+                            <rect key="frame" x="0.0" y="68" width="384" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="Oae-Em-CqQ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" textContentType="email"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2kx-C7-8of">
+                            <rect key="frame" x="0.0" y="136" width="384" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="cnq-Qb-PL3"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypv-Bm-LoW">
+                            <rect key="frame" x="0.0" y="204" width="384" height="40"/>
+                            <color key="backgroundColor" red="0.78039215689999997" green="0.61960784310000006" blue="0.47450980390000003" alpha="0.74571917809999999" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="ftz-h8-F9z"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <state key="normal" title="Register">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="registeClick:" destination="-1" eventType="touchUpInside" id="5X2-EU-Glh"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="qLm-jc-34P" secondAttribute="trailing" id="MVe-uH-c8Y"/>
+                <constraint firstItem="qLm-jc-34P" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Tdd-R3-qUZ"/>
+                <constraint firstItem="edU-w9-P3G" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="VSd-yy-pi1"/>
+                <constraint firstItem="edU-w9-P3G" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="gs0-Nl-GKr"/>
+                <constraint firstAttribute="bottom" secondItem="qLm-jc-34P" secondAttribute="bottom" id="jYc-8y-Pus"/>
+                <constraint firstItem="qLm-jc-34P" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="reL-oN-QTv"/>
+                <constraint firstAttribute="trailing" secondItem="edU-w9-P3G" secondAttribute="trailing" constant="15" id="vs9-Oe-7hd"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="97.767857142857139"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="theme2Background260%" width="815" height="1297"/>
+    </resources>
+</document>

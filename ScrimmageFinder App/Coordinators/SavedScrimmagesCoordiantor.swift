@@ -17,9 +17,9 @@ class SavedScrimmagesCoordinator: Coordinator {
     init(navigationController: CoordinatedNavigationController = CoordinatedNavigationController()) {
         self.navigationController = navigationController
         navigationController.coordinator = self
-        let viewController = SavedScrimmagesViewController.instantiate()
+        let viewController = SavedScrimmagesViewController.init(nibName: "SavedScrimmagesViewController", bundle: nil)
+        //let viewController = SavedScrimmagesViewController.instantiate()
         viewController.tabBarItem = UITabBarItem(title: "Saved Scrimmages", image: UIImage(named: "tabBarImage"), tag: 0)
-        viewController.tabBarItem.badgeColor = UIColor.white
         viewController.coordinator = self
         navigationController.viewControllers = [viewController]
     }

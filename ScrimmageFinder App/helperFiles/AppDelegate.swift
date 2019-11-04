@@ -26,12 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
         
-        // change navigation bar color
-        let navigationBarAppearace = UINavigationBar.appearance()
-        navigationBarAppearace.barTintColor = UIColor.darkGray
-        // change navigation item title color
-        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
         INPreferences.requestSiriAuthorization({status in
             print(String(reflecting: status))
         })

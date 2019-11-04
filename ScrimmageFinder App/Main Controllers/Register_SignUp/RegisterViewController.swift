@@ -14,6 +14,11 @@ class RegisterViewController: UIViewController, Storyboarded {
     @IBOutlet var userNameTF: UITextField!
     @IBOutlet var emailTF: UITextField!
     @IBOutlet var passTF: UITextField!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupUI()
+    }
 
     @IBAction func registeClick(_ sender: Any) {
         
@@ -46,5 +51,9 @@ class RegisterViewController: UIViewController, Storyboarded {
                 return
             }
         })
+    }
+    
+    func setupUI() {
+        self.title = "Register"
     }
 }

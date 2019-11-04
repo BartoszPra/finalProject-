@@ -8,13 +8,12 @@
 
 import UIKit
 
-class MyScrimmagesCell: UITableViewCell {
-    
+class SavedScrimmagesCell: UITableViewCell {
+
     @IBOutlet weak var cellLBL: UILabel!
-    @IBOutlet weak var addressLBL: UILabel!
-    @IBOutlet weak var timeLBL: UILabel!
-    @IBOutlet weak var cellImageView: UIImageView!
-    
+    @IBOutlet weak var addressLbl: UILabel!
+    @IBOutlet weak var timeLbl: UILabel!
+    @IBOutlet weak var cellImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

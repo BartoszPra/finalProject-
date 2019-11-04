@@ -6,26 +6,20 @@ import FirebaseAuth
 class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SilentScrollable, Storyboarded {
     
     var coordinator: SavedScrimmagesCoordinator?
-    
     // vaariable of the silent scrollly controll
     var silentScrolly: SilentScrolly?
-    
+    @IBOutlet weak var emptyListLabel: UILabel!
     //tableView outlet
     @IBOutlet var savedTableView: UITableView!
-    
-   //background image outlet
-    @IBOutlet var SVbackGroundPhotoImg: UIImageView!
-    
    // reference to coredata
     let coreDataController = CoreDataController.shared
-  
     //array for coredata scrimmages
     var coreScrimmages = [ScrimmageSaved]()
     var savedScrimmages = [Scrimmage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.title = "Saved Scrimmages"
         UserDefaults.standard.register(defaults: [String: Any]())
         fetchScrimmages()
         //notification to observ for notification for other controller
@@ -39,30 +33,37 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         guard let themes = userDefaults.string(forKey: "user_theme") else {return}
         
         if themes == "theme1" {
-            SVbackGroundPhotoImg.image = #imageLiteral(resourceName: "background2Bball70")
+           // SVbackGroundPhotoImg.image = #imageLiteral(resourceName: "background2Bball70")
         } else {
-            SVbackGroundPhotoImg.image = #imageLiteral(resourceName: "theme2Background260%")
+           // SVbackGroundPhotoImg.image = #imageLiteral(resourceName: "theme2Background260%")
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // return coreScrimmages.count
         return savedScrimmages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SVcell", for: indexPath)
-        let coreScrimmage = savedScrimmages[indexPath.row]
-        cell.textLabel?.text = coreScrimmage.name
         
-        let name = coreScrimmage.venueName
-        let price = coreScrimmage.price
-        let time = coreScrimmage.time
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SavedScrimmagesCell",
+                                                       for: indexPath) as? SavedScrimmagesCell else { return SavedScrimmagesCell() }
         
-        cell.detailTextLabel?.text = "Details: \(name), Price: £\(String(format: "%.2f", price)), Time: \(String(format: "%.2f", time))"
-        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(SavedScrimmagesViewController.longTap))
-        cell.addGestureRecognizer(longGesture)
-  
+        if !self.savedScrimmages.isEmpty {
+            self.emptyListLabel.isHidden = false
+            let scrimmage = savedScrimmages[indexPath.row]
+            cell.cellLBL.text = scrimmage.name
+            cell.addressLbl.text = scrimmage.venueName
+            cell.timeLbl.text = scrimmage.date
+            cell.cellImage.image = UIImage.init(named: "imageJordan")
+            return cell
+        } else {
+            self.emptyListLabel.isHidden = true
+            cell.cellLBL.text = ""
+            return cell
+        }
+        let longGesture = UILongPressGestureRecognizer(target: self,
+                                                       action: #selector(SavedScrimmagesViewController.longTap))
+        cell.addGestureRecognizer(longGesture)  
         return cell
     }
     
@@ -111,8 +112,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         coreDataController.saveContext()
        }
     
-    func getSavedScrimmagesIdList() {
-        
+    func getSavedScrimmagesIdList() {        
         guard let userID = Auth.auth().currentUser?.uid else {return}
         FIRFirestoreService.shared.readWhereArray(from: .scrimmages,
                                              whereArray: "savedById",
@@ -121,10 +121,6 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
                                              self.savedScrimmages = scrimmages
                                              self.savedTableView.reloadData()
         }
-    }
-    
-    func fetchScrimmagesFromRemote() {
-        
     }
     
     func fetchScrimmages() {

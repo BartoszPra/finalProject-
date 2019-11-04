@@ -17,12 +17,13 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
     var coordinator: MyScrimmagesCoordinator?
     var scrimmages = [Scrimmage]()
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyListLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
+        self.tableView.backgroundColor = UIColor.black
         self.title = "My Scrimmages"
         let nib = UINib(nibName: "MyScrimmagesCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "MyScrimmagesCell")
@@ -44,15 +45,18 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyScrimmagesCell", for: indexPath) as? MyScrimmagesCell else { return MyScrimmagesCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyScrimmagesCell",
+                                                       for: indexPath) as? MyScrimmagesCell else { return MyScrimmagesCell() }
         if !self.scrimmages.isEmpty {
+            self.emptyListLabel.isHidden = true
             let scrimmage = scrimmages[indexPath.row]
             cell.cellLBL.text = scrimmage.name
-            cell.addressLbl.text = scrimmage.venueName
-            cell.timeLbl.text = scrimmage.date
-            cell.cellImage.image = UIImage.init(named: "imageJordan")
+            cell.addressLBL.text = scrimmage.venueName
+            cell.timeLBL.text = scrimmage.date
+            cell.cellImageView.image = UIImage.init(named: "imageJordan")
             return cell
         } else {
+            self.emptyListLabel.isHidden = false
             cell.cellLBL.text = ""
             return cell
         }

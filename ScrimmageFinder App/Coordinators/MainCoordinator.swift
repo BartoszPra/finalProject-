@@ -19,14 +19,14 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let viewController = LoginViewController.instantiate()
-        viewController.coordinator = self
-        navigationController.pushViewController(viewController, animated: false)
+        let loginController = LoginViewController.init(nibName: "LoginViewController", bundle: nil)
+        loginController.coordinator = self
+        navigationController.pushViewController(loginController, animated: false)
         
     }
     
     func goToRegister() {
-        let viewController = RegisterViewController.instantiate()
+        let viewController = RegisterViewController.init(nibName: "RegisterViewController", bundle: nil)
         navigationController.pushViewController(viewController, animated: false)
     }
     

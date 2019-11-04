@@ -21,7 +21,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        uiSetup()
+        self.setupUI()
         GIDSignIn.sharedInstance().uiDelegate = self
         facebookLoginSignInButton.delegate = self
         facebookLoginSignInButton.readPermissions = ["email", "public_profile"]
@@ -39,7 +39,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
             print(error)
             return
         }
-    
+
         self.loginWithFcb()
     }
     
@@ -86,7 +86,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         }
     }
     
-    func uiSetup() {
+    func setupUI() {
         self.title = "Login"
     }
 }

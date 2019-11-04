@@ -13,13 +13,22 @@ class SFAppearance {
     
     static func setUpApperance() {
         self.setupNavigationBar()
+        self.setutNavigationBarAppearance()
     }
     
     static func setupNavigationBar() {
         
-        let appearance = UITabBar.appearance()
-        appearance.tintColor = UIColor.yellow
-        appearance.barTintColor = UIColor.darkGray
-        appearance.unselectedItemTintColor = UIColor.white        
+        let tabBarAppearance = UITabBar.appearance()
+        tabBarAppearance.tintColor = UIColor.yellow
+        tabBarAppearance.barTintColor = UIColor.black
+        tabBarAppearance.unselectedItemTintColor = UIColor.white
+        
+    }
+    
+    static func setutNavigationBarAppearance() {
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.barTintColor = UIColor.black
+        navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
     }
 }
