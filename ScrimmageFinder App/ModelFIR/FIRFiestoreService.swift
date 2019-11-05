@@ -75,24 +75,25 @@ class FIRFirestoreService {
         
     }
     
-    func readWhereArray<T: Decodable>(from collectionReference: FIRCollectionReference, whereArray: String, contains: Any, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
+    func readWhereArray<T: Decodable>(from collectionReference: FIRCollectionReference, whereArray: String, contains: String, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
         
-        reference(to: collectionReference).whereField(whereArray, arrayContains: contains).addSnapshotListener { (snapshot, _) in
-            
-            guard let snapshot = snapshot else { return }
-            
-            do {
-                
-                var objects = [T]()
-                for document in snapshot.documents {
-                    let object = try document.decode(as: objectType.self)
-                    objects.append(object)
+        reference(to: collectionReference).whereField(whereArray, arrayContains: contains).addSnapshotListener { (snapshot, error) in
+            if error == nil {
+                guard let snapshot = snapshot else { return }
+                do {
+                    var objects = [T]()
+                    for document in snapshot.documents {
+                        let object = try document.decode(as: objectType.self)
+                        objects.append(object)
+                    }
+                    
+                    completion(objects)
+                    
+                } catch {
+                    print(error)
                 }
-                
-                completion(objects)
-                
-            } catch {
-                print(error)
+            } else {
+                print(error?.localizedDescription)
             }
         }
         
@@ -158,11 +159,11 @@ class FIRFirestoreService {
         currentScrimmage.updateData(["savedById": FieldValue.arrayUnion([userId])])
     }
     
-    func refresh_getScrimmage(for id: String) -> Scrimmage {
-        var scrimmagee: Scrimmage!
-        readOne(from: .scrimmages, with: id, returning: Scrimmage.self) { (scrimmage) in
-            scrimmagee = scrimmage
-        }
-        return scrimmagee
-    }
+//    func refresh_getScrimmage(for id: String) -> Scrimmage {
+//        var scrimmagee: Scrimmage!
+//        readOne(from: .scrimmages, with: id, returning: Scrimmage.self) { (scrimmage) in
+//            scrimmagee = scrimmage
+//        }
+//        return scrimmagee
+//    }
 }

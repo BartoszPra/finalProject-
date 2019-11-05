@@ -89,7 +89,7 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
     func saveScrimmageOnRemote() {
         guard let currentScrimmageId = self.scrimmagePassedOver?.id else { return }
         FIRFirestoreService.shared.updateSavedTable(for: currentScrimmageId, with: self.userID)
-        self.scrimmagePassedOver = FIRFirestoreService.shared.refresh_getScrimmage(for: currentScrimmageId)
+       // self.scrimmagePassedOver = FIRFirestoreService.shared.refresh_getScrimmage(for: currentScrimmageId)
         self.setupUI()
     }
     

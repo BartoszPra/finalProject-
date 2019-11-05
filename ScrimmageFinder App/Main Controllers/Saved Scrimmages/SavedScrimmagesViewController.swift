@@ -22,9 +22,12 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         self.title = "Saved Scrimmages"
         UserDefaults.standard.register(defaults: [String: Any]())
         fetchScrimmages()
+        self.savedTableView.delegate = self
+        self.savedTableView.dataSource = self        
         //notification to observ for notification for other controller
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
-        
+        let nib = UINib(nibName: "SavedScrimmagesCell", bundle: nil)
+        savedTableView.register(nib, forCellReuseIdentifier: "SavedScrimmagesCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
