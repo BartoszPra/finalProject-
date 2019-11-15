@@ -44,6 +44,7 @@
 		A591A306236E57A60075F8E4 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A591A305236E57A60075F8E4 /* RegisterViewController.xib */; };
 		A591A312236F30010075F8E4 /* SavedScrimmagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A591A310236F30010075F8E4 /* SavedScrimmagesCell.swift */; };
 		A591A316236F57CB0075F8E4 /* SavedScrimmagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A591A315236F57CB0075F8E4 /* SavedScrimmagesViewController.xib */; };
+		A5D2FA46237F512400FAAC8A /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */; };
 		A5D7433F22F7A2C20047E9E0 /* MyScrimmagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F4245228472CC007841A2 /* MyScrimmagesViewController.swift */; };
 		C53B747BEB4E8E432E213461 /* Pods_ScrimmageFinder_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF1BFFC0D3C64B94DB6675A /* Pods_ScrimmageFinder_AppTests.framework */; };
 		C751B37A2259225D0060D1B2 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751B3792259225D0060D1B2 /* MainCoordinator.swift */; };
@@ -143,6 +144,7 @@
 		A591A30F236F30010075F8E4 /* SavedScrimmagesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavedScrimmagesCell.xib; sourceTree = "<group>"; };
 		A591A310236F30010075F8E4 /* SavedScrimmagesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedScrimmagesCell.swift; sourceTree = "<group>"; };
 		A591A315236F57CB0075F8E4 /* SavedScrimmagesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedScrimmagesViewController.xib; sourceTree = "<group>"; };
+		A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		BD1AF697CE9CBB669D028A8B /* Pods-ScrimmageFinder App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrimmageFinder App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScrimmageFinder App/Pods-ScrimmageFinder App.debug.xcconfig"; sourceTree = "<group>"; };
 		C70F3FE3222F60F400703859 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70F3FE5222F614100703859 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -312,6 +314,7 @@
 		04F4301520F0A90400E5D8ED /* helperFiles */ = {
 			isa = PBXGroup;
 			children = (
+				A5D2FA44237F50F200FAAC8A /* Extensions */,
 				03F10DC520DC55BF00F8C62B /* AppDelegate.swift */,
 				04C8F37D20FFFDA400AF48E4 /* AlertController.swift */,
 				C7BFC250228209A000EE6EB4 /* CoordinatedNavigationController.swift */,
@@ -428,6 +431,14 @@
 				A591A310236F30010075F8E4 /* SavedScrimmagesCell.swift */,
 			);
 			path = ScrimmageCell;
+			sourceTree = "<group>";
+		};
+		A5D2FA44237F50F200FAAC8A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		B8C987C956CAA1F8FF1199E7 /* Pods */ = {
@@ -791,6 +802,7 @@
 				A5D7433F22F7A2C20047E9E0 /* MyScrimmagesViewController.swift in Sources */,
 				A57BD1262357A33E00A324BC /* SFNames.swift in Sources */,
 				C751B37A2259225D0060D1B2 /* MainCoordinator.swift in Sources */,
+				A5D2FA46237F512400FAAC8A /* UIViewController+Extensions.swift in Sources */,
 				A57BD12E2357EEE400A324BC /* SFAppearance.swift in Sources */,
 				A59068642282CA1800186C0D /* SavedScrimmagesCoordiantor.swift in Sources */,
 				04C8F37820FF2A0E00AF48E4 /* LoginViewController.swift in Sources */,

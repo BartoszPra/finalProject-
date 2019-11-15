@@ -11,7 +11,7 @@ import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate, Storyboarded {
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate, Storyboarded, UITextFieldDelegate {
    
     weak var coordinator: MainCoordinator?
     @IBOutlet var emailTF: UITextField!
@@ -21,10 +21,19 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.emailTF.delegate = self
+        self.passTF.delegate = self
+        self.navigationController?.navigationBar.isHidden = true
         self.setupUI()
         GIDSignIn.sharedInstance().uiDelegate = self
         facebookLoginSignInButton.delegate = self
         facebookLoginSignInButton.readPermissions = ["email", "public_profile"]
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
+        view.addGestureRecognizer(tap)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,7 +48,6 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
             print(error)
             return
         }
-
         self.loginWithFcb()
     }
     
@@ -74,6 +82,8 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
             AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Email format")
         } else if password.trimmingCharacters(in: .whitespaces).isEmpty {
             AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Password")
+        } else if password.trimmingCharacters(in: .whitespaces).isEmpty {
+            AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Password")
         } else {
         Auth.auth().signIn(withEmail: email, password: password) { user, error in
             if (error == nil) && (user != nil) {
@@ -88,5 +98,25 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     func setupUI() {
         self.title = "Login"
+    }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= (keyboardSize.height * 0.3)
+            }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        emailTF.resignFirstResponder()
+        passTF.resignFirstResponder()
+        return true
     }
 }
