@@ -21,7 +21,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         super.viewDidLoad()
         self.title = "Saved Scrimmages"
         UserDefaults.standard.register(defaults: [String: Any]())
-        fetchScrimmages()
+        //fetchScrimmages()
         self.savedTableView.delegate = self
         self.savedTableView.dataSource = self        
         //notification to observ for notification for other controller
@@ -72,7 +72,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //segue trigger
-        let topic = coreScrimmages[indexPath.row]
+        let topic = savedScrimmages[indexPath.row]
         self.coordinator?.goToDetail(with: topic)
        
 }
@@ -129,28 +129,28 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     func fetchScrimmages() {
         
         // Create a request to fetch ALL scrimmages
-        let fetchRequest = ScrimmageSaved.fetchRequest() as NSFetchRequest<ScrimmageSaved>
+       // let fetchRequest = ScrimmageSaved.fetchRequest() as NSFetchRequest<ScrimmageSaved>
         
         // Create sort decriptors to sort via age and firstName
-        let nameSort = NSSortDescriptor(key: "name", ascending: true)
+       // let nameSort = NSSortDescriptor(key: "name", ascending: true)
         
         // Add the sort descriptors to the fetch request
-        fetchRequest.sortDescriptors = [nameSort]
+      //  fetchRequest.sortDescriptors = [nameSort]
         
         // Execute the fetch request & handle the error(s)
-        do {
-            let items = try coreDataController.mainContext.fetch(fetchRequest)
-            coreScrimmages = items
-           // savedTableView.reloadData()
-        } catch {
-            print("Error \(error.localizedDescription)")
-        }
+//        do {
+//            let items = try coreDataController.mainContext.fetch(fetchRequest)
+//            coreScrimmages = items
+//           // savedTableView.reloadData()
+//        } catch {
+//            print("Error \(error.localizedDescription)")
+//        }
         
     }
     /// functions for silentScrolly controll.------------
     @objc func loadList(notification: NSNotification) {
         //load data here
-    fetchScrimmages()
+   // fetchScrimmages()
     savedTableView.reloadData()
    }
     

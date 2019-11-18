@@ -6,26 +6,17 @@ class SavedDetailViewController: UIViewController, Storyboarded {
     
     var coordiantor: SavedScrimmagesCoordinator?
     
-    var scrimmagePassedOver2: ScrimmageSaved?
-
+    var scrimmagePassedOver2: Scrimmage?
     //outlet for background image
     @IBOutlet var DT2backGroundPhotoImg: UIImageView!
-    
     //labels outlets
     @IBOutlet var nameLbl: UILabel!
-    
     @IBOutlet var venueNameLbl: UILabel!
-    
     @IBOutlet var postCode: UILabel!
-    
     @IBOutlet var time: UILabel!
-    
     @IBOutlet var manName: UILabel!
-    
     @IBOutlet var manNumber: UILabel!
-    
-    @IBOutlet var price: UILabel!
-    
+    @IBOutlet var price: UILabel!    
     @IBOutlet var dateLbl: UILabel!
     
     override func viewDidLoad() {
@@ -37,8 +28,8 @@ class SavedDetailViewController: UIViewController, Storyboarded {
         venueNameLbl.text = scrimmagePassedOver2?.venueName
         postCode.text = scrimmagePassedOver2?.postCode
         time.text = "\(String(format: "%.2f", scrimmagePassedOver2!.time))"
-        manName.text = scrimmagePassedOver2?.managersName
-        manNumber.text = scrimmagePassedOver2?.managersNumber
+        manName.text = scrimmagePassedOver2?.managerName
+        manNumber.text = scrimmagePassedOver2?.managerNumber
         price.text = "£ \(String(format: "%.2f", scrimmagePassedOver2!.price))"
         dateLbl.text = scrimmagePassedOver2?.date
         
@@ -74,8 +65,8 @@ class SavedDetailViewController: UIViewController, Storyboarded {
     }
      //function to implememnt adding to contacts
     @IBAction func addToContacts(_ sender: Any) {
-        let firstName = scrimmagePassedOver2?.managersName
-        let phone = scrimmagePassedOver2?.managersNumber!
+        let firstName = scrimmagePassedOver2?.managerName
+        let phone = scrimmagePassedOver2?.managerNumber
         createCNContactWithFirstName(firstName!, phone: phone)
         let alert = UIAlertController(title: "Contact Added",
                                       message: "You have added this contact to you list.",
@@ -89,7 +80,7 @@ class SavedDetailViewController: UIViewController, Storyboarded {
      //function to implememnt activity controller
     @IBAction func share(_ sender: Any) {
         
-        let shareItem = "Hey Im going to \(scrimmagePassedOver2!.name!),do you want to join me?"
+        let shareItem = "Hey Im going to \(scrimmagePassedOver2!.name),do you want to join me?"
         
         let activityController = UIActivityViewController(activityItems: [shareItem], applicationActivities: nil)
         activityController.popoverPresentationController?.sourceView = self.view
@@ -112,7 +103,7 @@ class SavedDetailViewController: UIViewController, Storyboarded {
         let calendar = Calendar.current
         guard let endDate = calendar.date(byAdding: .hour, value: 2, to: date) else {return}
         
-        print("\(String(describing: scrimmagePassedOver2!.date!)) \(String(describing: scrimmagePassedOver2!.time))")
+        print("\(String(describing: scrimmagePassedOver2!.date)) \(String(describing: scrimmagePassedOver2!.time))")
         
         let eventStore: EKEventStore = EKEventStore()
         eventStore.requestAccess(to: .event) { ( granted, error) in

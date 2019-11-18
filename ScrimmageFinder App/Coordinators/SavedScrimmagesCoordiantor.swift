@@ -23,7 +23,7 @@ class SavedScrimmagesCoordinator: Coordinator {
         viewController.coordinator = self
         navigationController.viewControllers = [viewController]
     }
-    func goToDetail(with scrimmage: ScrimmageSaved) {
+    func goToDetail(with scrimmage: Scrimmage) {
         let viewController = SavedDetailViewController.instantiate()
         viewController.scrimmagePassedOver2 = scrimmage
         navigationController.pushViewController(viewController, animated: true)
