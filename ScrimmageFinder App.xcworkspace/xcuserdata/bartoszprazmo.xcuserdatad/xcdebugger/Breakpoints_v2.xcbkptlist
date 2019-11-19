@@ -96,7 +96,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "158"
             endingLineNumber = "158"
-            landmarkName = "updateSavedTable(for:with:)"
+            landmarkName = "readOne(from:with:returning:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -112,8 +112,40 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "163"
             endingLineNumber = "163"
-            landmarkName = "FIRFirestoreService"
-            landmarkType = "3">
+            landmarkName = "readOne(from:with:returning:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "600CED06-94D5-47BB-B272-2088D33EE242 - 3db09ff7994e5ca7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ScrimmageFinder_App.FIRFirestoreService.readOne&lt;A where A: Swift.Decodable&gt;(from: ScrimmageFinder_App.FIRCollectionReference, with: Swift.String, returning: A.Type, completion: (A) -&gt; ()) -&gt; ()"
+                  moduleName = "ScrimmageFinder App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/ModelFIR/FIRFiestoreService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "443">
+               </Location>
+               <Location
+                  uuid = "600CED06-94D5-47BB-B272-2088D33EE242 - 3db09ff7994e5ca7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ScrimmageFinder_App.FIRFirestoreService.readOne&lt;A where A: Swift.Decodable&gt;(from: ScrimmageFinder_App.FIRCollectionReference, with: Swift.String, returning: A.Type, completion: (A) -&gt; ()) -&gt; ()"
+                  moduleName = "ScrimmageFinder App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/ModelFIR/FIRFiestoreService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "570">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -128,8 +160,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "165"
             endingLineNumber = "165"
-            landmarkName = "FIRFirestoreService"
-            landmarkType = "3">
+            landmarkName = "readOne(from:with:returning:completion:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -144,119 +176,71 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "140"
             endingLineNumber = "140"
-            landmarkName = "readOne(from:with:returning:completion:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "3076329D-EC78-4A33-A6F6-68631C00EE08 - 29da264607b43e10"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ScrimmageFinder_App.FIRFirestoreService.readOne&lt;A where A: Swift.Decodable&gt;(from: ScrimmageFinder_App.FIRCollectionReference, with: Swift.String, returning: A.Type, completion: (A) -&gt; ()) -&gt; ()"
-                  moduleName = "ScrimmageFinder App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/ModelFIR/FIRFiestoreService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "140"
-                  endingLineNumber = "140"
-                  offsetFromSymbolStart = "116">
-               </Location>
-               <Location
-                  uuid = "3076329D-EC78-4A33-A6F6-68631C00EE08 - 3db09ff7994e5ca7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.FIRDocumentSnapshot&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in ScrimmageFinder_App.FIRFirestoreService.readOne&lt;A where A: Swift.Decodable&gt;(from: ScrimmageFinder_App.FIRCollectionReference, with: Swift.String, returning: A.Type, completion: (A) -&gt; ()) -&gt; ()"
-                  moduleName = "ScrimmageFinder App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/ModelFIR/FIRFiestoreService.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "142"
-                  endingLineNumber = "142"
-                  offsetFromSymbolStart = "129">
-               </Location>
-            </Locations>
+            landmarkName = "FIRFirestoreService"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "770E4C55-4A1B-48FA-93F3-C730C5AAB072"
+            uuid = "654DD272-93F4-4AAF-9564-D80065888BDE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Main Controllers/MyScrimmages/MyScrimmagesViewController.swift"
+            filePath = "ScrimmageFinder App/Main Controllers/Saved Scrimmages/SavedScrimmagesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "deleteFromSavedList(for:at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AECA255E-838F-4EE1-9110-6F3815B5FC8C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Main Controllers/MyScrimmages/MyScrimmagesViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F5911F70-36DF-4DF1-84A8-B8C0A38011D2"
+            uuid = "5414654F-CAB5-4B55-A623-CC0206204BDD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScrimmageFinder App/ModelFIR/FIRFiestoreService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "readWhereArray(from:whereArray:contains:returning:completion:)"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "deleteFromSavedBy(for:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "92738BDB-B676-42DD-8D55-DE37A85CE0FE"
+            uuid = "7610E0FA-1646-47C8-BF6F-45545762DCC7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Main Controllers/Saved Scrimmages/SavedScrimmagesViewController.swift"
+            filePath = "ScrimmageFinder App/ModelFIR/FIRFiestoreService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "deleteFromSavedBy(for:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5C3F24EB-82AA-442E-8BAF-AA7B487B01E4"
+            uuid = "04B81FAE-4243-442E-9C51-99C7EB0F5584"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Main Controllers/Saved Scrimmages/SavedScrimmagesViewController.swift"
+            filePath = "ScrimmageFinder App/ModelFIR/FIRFiestoreService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "tableView(_:numberOfRowsInSection:)"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "deleteFromSavedBy(for:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

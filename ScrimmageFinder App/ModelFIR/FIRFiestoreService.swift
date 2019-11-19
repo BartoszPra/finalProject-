@@ -75,6 +75,22 @@ class FIRFirestoreService {
         
     }
     
+    func deleteFromSavedBy(for scrimmageID: String, with userId: String) -> Bool {
+        
+        var boolToReturn = false
+        let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
+        currentScrimmage.updateData(["savedById": FieldValue.arrayRemove([userId])]) { (error) in
+            if let err = error {
+                print(err.localizedDescription)
+                boolToReturn = false
+            } else {
+                print("scrimmage unsaved")
+                boolToReturn = true
+            }
+        }
+        return boolToReturn
+    }
+    
     func readWhereArray<T: Decodable>(from collectionReference: FIRCollectionReference, whereArray: String, contains: String, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
         
         reference(to: collectionReference).whereField(whereArray, arrayContains: contains).addSnapshotListener { (snapshot, error) in
@@ -96,7 +112,6 @@ class FIRFirestoreService {
                 print(error?.localizedDescription)
             }
         }
-        
     }
    
    // update function inclding id  to update record in firebase - not using it yet maybe in future

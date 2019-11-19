@@ -11,7 +11,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     @IBOutlet weak var emptyListLabel: UILabel!
     //tableView outlet
     @IBOutlet var savedTableView: UITableView!
-   // reference to coredata
+    // reference to coredata
     let coreDataController = CoreDataController.shared
     //array for coredata scrimmages
     var coreScrimmages = [ScrimmageSaved]()
@@ -31,17 +31,17 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     }
     
     override func viewWillAppear(_ animated: Bool) {
-     //user defaults for choosing theme
+        //user defaults for choosing theme
         let userDefaults = UserDefaults.standard
         guard let themes = userDefaults.string(forKey: "user_theme") else {return}
         
         if themes == "theme1" {
-           // SVbackGroundPhotoImg.image = #imageLiteral(resourceName: "background2Bball70")
+            // SVbackGroundPhotoImg.image = #imageLiteral(resourceName: "background2Bball70")
         } else {
-           // SVbackGroundPhotoImg.image = #imageLiteral(resourceName: "theme2Background260%")
+            // SVbackGroundPhotoImg.image = #imageLiteral(resourceName: "theme2Background260%")
         }
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return savedScrimmages.count
     }
@@ -52,7 +52,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
                                                        for: indexPath) as? SavedScrimmagesCell else { return SavedScrimmagesCell() }
         
         if !self.savedScrimmages.isEmpty {
-            self.emptyListLabel.isHidden = false
+            updateUI()
             let scrimmage = savedScrimmages[indexPath.row]
             cell.cellLBL.text = scrimmage.name
             cell.addressLbl.text = scrimmage.venueName
@@ -60,99 +60,61 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
             cell.cellImage.image = UIImage.init(named: "imageJordan")
             return cell
         } else {
-            self.emptyListLabel.isHidden = true
+            updateUI()
             cell.cellLBL.text = ""
             return cell
         }
-        let longGesture = UILongPressGestureRecognizer(target: self,
-                                                       action: #selector(SavedScrimmagesViewController.longTap))
-        cell.addGestureRecognizer(longGesture)  
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //segue trigger
         let topic = savedScrimmages[indexPath.row]
         self.coordinator?.goToDetail(with: topic)
-       
-}
-    // long press function to add long press to table view and then delete the spacific row
-    @objc func longTap(gestureReconizer: UILongPressGestureRecognizer) {
-       
-        let longPress = gestureReconizer as UILongPressGestureRecognizer
-        _ = longPress.state
-        let locationInView = longPress.location(in: self.savedTableView)
-        guard  let indexPath = self.savedTableView.indexPathForRow(at: locationInView) else {return}
         
-        // aller to asf if you sure to delete
-        let alert = UIAlertController(title: "Delete?",
-                                      message: "Do you really want to delete this Scrimmage.",
-                                      preferredStyle: UIAlertController.Style.alert)
-        let action = UIAlertAction.init(title: "Yes", style: .default) { (_) in
-        
-            // completeion to delete the scrimmage for m coredata
-            let donara = self.coreScrimmages.remove(at: indexPath.row)
-            self.savedTableView.deleteRows(at: [indexPath], with: .automatic)
-            self.coreDataController.mainContext.delete(donara)
-            self.coreDataController.saveContext()
-            print("Long tap")
-           
-        }
-        //allert action button to cancle
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
-        alert.addAction(action)
-        //presenting the allert
-        self.present(alert, animated: true, completion: nil)
-       
     }
-   // swipe left to delte additiional posibility ot delte.
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-           guard editingStyle == .delete else { return }
     
-        let donara = coreScrimmages.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
-        coreDataController.mainContext.delete(donara)
-        coreDataController.saveContext()
-       }
+    // swipe left to delte additiional posibility ot delte.
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        
+        let toRemoveSavedScrimmage = savedScrimmages[indexPath.row]
+        
+        guard let toRemoveFromSavedId = toRemoveSavedScrimmage.id else {return}
+        self.deleteFromSavedList(for: toRemoveFromSavedId, at: indexPath)
+        // core data delete
+        //        let donara = coreScrimmages.remove(at: indexPath.row)
+        //        tableView.deleteRows(at: [indexPath], with: .automatic)
+        //        coreDataController.mainContext.delete(donara)
+        //        coreDataController.saveContext()
+    }
     
     func getSavedScrimmagesIdList() {        
         guard let userID = Auth.auth().currentUser?.uid else {return}
         FIRFirestoreService.shared.readWhereArray(from: .scrimmages,
-                                             whereArray: "savedById",
-                                             contains: userID,
-                                             returning: Scrimmage.self) { (scrimmages) in
-                                             self.savedScrimmages = scrimmages
-                                             self.savedTableView.reloadData()
+                                                  whereArray: "savedById",
+                                                  contains: userID,
+                                                  returning: Scrimmage.self) { (scrimmages) in
+                                                    self.savedScrimmages = scrimmages
+                                                    self.savedTableView.reloadData()
         }
     }
     
-    func fetchScrimmages() {
+    func deleteFromSavedList(for scrimmageId: String, at indexPath: IndexPath) {
         
-        // Create a request to fetch ALL scrimmages
-       // let fetchRequest = ScrimmageSaved.fetchRequest() as NSFetchRequest<ScrimmageSaved>
-        
-        // Create sort decriptors to sort via age and firstName
-       // let nameSort = NSSortDescriptor(key: "name", ascending: true)
-        
-        // Add the sort descriptors to the fetch request
-      //  fetchRequest.sortDescriptors = [nameSort]
-        
-        // Execute the fetch request & handle the error(s)
-//        do {
-//            let items = try coreDataController.mainContext.fetch(fetchRequest)
-//            coreScrimmages = items
-//           // savedTableView.reloadData()
-//        } catch {
-//            print("Error \(error.localizedDescription)")
-//        }
-        
+        guard let userID = Auth.auth().currentUser?.uid else {return}
+        if FIRFirestoreService.shared.deleteFromSavedBy(for: scrimmageId, with: userID) {
+            savedScrimmages.remove(at: indexPath.row)
+            self.savedTableView.deleteRows(at: [indexPath], with: .automatic)
+            self.savedTableView.reloadData()
+        }
     }
+    
     /// functions for silentScrolly controll.------------
     @objc func loadList(notification: NSNotification) {
         //load data here
-   // fetchScrimmages()
-    savedTableView.reloadData()
-   }
+        // fetchScrimmages()
+        savedTableView.reloadData()
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -163,6 +125,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         super.viewDidAppear(animated)
         configureSilentScrolly(savedTableView, followBottomView: tabBarController?.tabBar)
         self.getSavedScrimmagesIdList()
+        self.updateUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -190,5 +153,13 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
         showNavigationBar() // Optional
         return true
+    }
+    
+    func updateUI() {
+        if self.savedScrimmages.isEmpty {
+            self.emptyListLabel.text = "No saved Scrimmages"
+        } else {
+            self.emptyListLabel.text = ""
+        }
     }
 }
