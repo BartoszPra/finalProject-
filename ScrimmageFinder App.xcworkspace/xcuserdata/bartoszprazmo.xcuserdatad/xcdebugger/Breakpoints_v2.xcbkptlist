@@ -190,8 +190,8 @@
             filePath = "ScrimmageFinder App/Main Controllers/Saved Scrimmages/SavedScrimmagesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "deleteFromSavedList(for:at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -241,6 +241,22 @@
             startingLineNumber = "87"
             endingLineNumber = "87"
             landmarkName = "deleteFromSavedBy(for:with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "47574495-66C4-4227-817E-80577BB634EF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScrimmageFinder App/Detail Controllers/Detail/SFdetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
+            landmarkName = "setupUI()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

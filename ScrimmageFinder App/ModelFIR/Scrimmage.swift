@@ -16,7 +16,7 @@ struct Scrimmage: Codable, Identifiable {
     var managerNumber: String
     var price: Double
     var date: String
-    var participants: Int
+    var participants: [String]
     var createdById: String
     var savedById: [String]?
 
@@ -30,7 +30,7 @@ struct Scrimmage: Codable, Identifiable {
          self.managerNumber = managerNumber
          self.price = price
          self.date = date
-         self.participants = 0
+         self.participants = [String]()
          self.createdById = Auth.auth().currentUser!.uid
          self.savedById = savedById
         

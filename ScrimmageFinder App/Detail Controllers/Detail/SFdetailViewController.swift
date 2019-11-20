@@ -25,6 +25,7 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var participateButton: UIButton!
     
     init(nibName nibNameOrNil: String, bundle nibBundleOrNil: Bundle?, scrimmage: Scrimmage, isSaveUsed: Bool) {
         super.init(nibName: nibNameOrNil as String, bundle: nibBundleOrNil)
@@ -72,18 +73,33 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
     }
     
     @IBAction func participateButtonPressed(_ sender: Any) {
-        var updatedParticipants = scrimmagePassedOver!
-        updatedParticipants.participants = (updatedParticipants.participants) + 1
-        FIRFirestoreService.shared.update(for: updatedParticipants, in: .scrimmages)
-        let alert = UIAlertController(title: "Added.",
-                                      message: "You have added one more person to participants.",
-                                      preferredStyle: UIAlertController.Style.alert)
-        //add button to allert
-        let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
-            self.navigationController?.popViewController(animated: true)
+        guard let currentScrimmageId = self.scrimmagePassedOver?.id else { return }
+        if !scrimmagePassedOver.participants.contains(userID) {
+            if FIRFirestoreService.shared.addToParticipantsTable(for: currentScrimmageId, with: self.userID) {
+                
+                let alert = UIAlertController(title: "Added.",
+                                              message: "You are participants participating.",
+                                              preferredStyle: UIAlertController.Style.alert)
+                //add button to allert
+                let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
+                    self.navigationController?.popViewController(animated: true)
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
+        } else {
+            if FIRFirestoreService.shared.removeFromParticipantsTable(for: currentScrimmageId, with: self.userID) {
+                let alert = UIAlertController(title: "Removed",
+                                              message: "You are removed from participants.",
+                                              preferredStyle: UIAlertController.Style.alert)
+                //add button to allert
+                let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
+                    self.navigationController?.popViewController(animated: true)
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            }
         }
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
     }
     
     func saveScrimmageOnRemote() {
@@ -98,39 +114,39 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
     }
     
     //function that adds to CoreData -- not used
-    func saveScrimmageToLocalSaved() {
-        if coreDataController.entityExists(scrimmage: scrimmagePassedOver!) {
-            // Crete new Scrimmage object
-            let newScrimmage = ScrimmageSaved(context: self.coreDataController.mainContext)
-            //  Add parts of the scrimmage
-            newScrimmage.name = scrimmagePassedOver?.name
-            newScrimmage.venueName = scrimmagePassedOver?.venueName
-            newScrimmage.managersName = scrimmagePassedOver?.managerName
-            newScrimmage.managersNumber = scrimmagePassedOver?.managerNumber
-            newScrimmage.postCode = scrimmagePassedOver?.postCode
-            newScrimmage.time = (scrimmagePassedOver!.time)
-            newScrimmage.price = (scrimmagePassedOver!.price)
-            newScrimmage.date = (scrimmagePassedOver!.date)
-            newScrimmage.participants = Int16((scrimmagePassedOver!.participants))
-            //SAVE THE CONTEXT and check if it already exist
-            //saving context
-            coreDataController.saveContext()
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-            //add allert
-            let alert = UIAlertController(title: "Saved!", message: "You have saved your Scrimmage.", preferredStyle: UIAlertController.Style.alert)
-            //add an action (button)
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        } else {
-            //add allert
-            let alert = UIAlertController(title: "Sorry.",
-                                          message: "You have saved this Scrimmage before.",
-                                          preferredStyle: UIAlertController.Style.alert)
-            //add button to allert
-            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
+//    func saveScrimmageToLocalSaved() {
+//        if coreDataController.entityExists(scrimmage: scrimmagePassedOver!) {
+//            // Crete new Scrimmage object
+//            let newScrimmage = ScrimmageSaved(context: self.coreDataController.mainContext)
+//            //  Add parts of the scrimmage
+//            newScrimmage.name = scrimmagePassedOver?.name
+//            newScrimmage.venueName = scrimmagePassedOver?.venueName
+//            newScrimmage.managersName = scrimmagePassedOver?.managerName
+//            newScrimmage.managersNumber = scrimmagePassedOver?.managerNumber
+//            newScrimmage.postCode = scrimmagePassedOver?.postCode
+//            newScrimmage.time = (scrimmagePassedOver!.time)
+//            newScrimmage.price = (scrimmagePassedOver!.price)
+//            newScrimmage.date = (scrimmagePassedOver!.date)
+//            newScrimmage.participants = Int16((scrimmagePassedOver!.participants))
+//            //SAVE THE CONTEXT and check if it already exist
+//            //saving context
+//            coreDataController.saveContext()
+//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+//            //add allert
+//            let alert = UIAlertController(title: "Saved!", message: "You have saved your Scrimmage.", preferredStyle: UIAlertController.Style.alert)
+//            //add an action (button)
+//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        } else {
+//            //add allert
+//            let alert = UIAlertController(title: "Sorry.",
+//                                          message: "You have saved this Scrimmage before.",
+//                                          preferredStyle: UIAlertController.Style.alert)
+//            //add button to allert
+//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//    }
     
     func setupUI() {
         //assigning data to labels
@@ -142,7 +158,14 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
         contactNumberLabel.text = "Contact Number: " + scrimmagePassedOver.managerNumber
         priceLabel.text = "Price: £" + String(format: "%.2f", scrimmagePassedOver.price)
         dateLabel.text = "Date: " + scrimmagePassedOver.date
-        numberOfParticipantsLabel.text = "People attending: " + String(describing: scrimmagePassedOver.participants)
+        numberOfParticipantsLabel.text = "People attending: " + String(describing: scrimmagePassedOver.participants.count)
+        
+        if isUserAlreadyParticipating(scrimmage: self.scrimmagePassedOver) {
+            self.participateButton.setTitle("Unparticipate", for: .normal)
+        } else {
+            self.participateButton.setTitle("Participate", for: .normal)
+        }
+        
         if isSaveUsed {
             saveButton.isHidden = checkIfScrimmageSaved(scrimmage: self.scrimmagePassedOver)
         } else {
@@ -151,6 +174,17 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
         
     }
     
+    func isUserAlreadyParticipating(scrimmage: Scrimmage) -> Bool {
+        if !scrimmage.participants.isEmpty {
+                if let _ = scrimmage.participants.first(where: {$0 == self.userID}) {
+                    return true
+                } else {
+                    return false
+                }
+        }
+        return false
+    }
+
     func checkIfScrimmageSaved(scrimmage: Scrimmage) -> Bool {
         if scrimmage.savedById != nil {
             if !scrimmage.savedById!.isEmpty {

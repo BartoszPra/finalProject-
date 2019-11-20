@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,6 +19,7 @@
                 <outlet property="navigationBar" destination="GXJ-jm-VCa" id="cZd-2Q-coz"/>
                 <outlet property="numberOfParticipantsLabel" destination="zVW-YA-zMT" id="bE3-n7-H3k"/>
                 <outlet property="organizerNameLabel" destination="wfn-vZ-Z4h" id="Luo-h2-veK"/>
+                <outlet property="participateButton" destination="w5H-5U-P3Z" id="hJb-uk-ugh"/>
                 <outlet property="priceLabel" destination="clu-se-f5l" id="CsA-Kh-tj6"/>
                 <outlet property="saveButton" destination="og4-YI-ON0" id="Pk6-DK-NH1"/>
                 <outlet property="startTimeLabel" destination="UiQ-HB-Amx" id="Wfr-2L-gN6"/>
@@ -158,7 +159,7 @@
                         <navigationItem title="Details" id="scv-XZ-6r9">
                             <barButtonItem key="leftBarButtonItem" style="plain" id="Nyw-YG-Ud8">
                                 <button key="customView" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9w2-AL-UNk">
-                                    <rect key="frame" x="16" y="0.0" width="50" height="44"/>
+                                    <rect key="frame" x="16" y="0.0" width="100" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="back arrow"/>
                                     <connections>
