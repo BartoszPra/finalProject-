@@ -157,7 +157,6 @@ class FIRFirestoreService {
             guard let snapshot = snapshot else { return }
             
             do {
-                
                 let object = try snapshot.decode(as: objectType.self)
                 completion(object)
                 
@@ -168,47 +167,51 @@ class FIRFirestoreService {
         
     }
     
-    func addToParticipantsTable(for scrimmageID: String, with userId: String) -> Bool {
+    func addToParticipantsTable(for scrimmageID: String, with userId: String, completion: @escaping (Bool) -> Void) {
         var isSuccesful = false
         let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
         currentScrimmage.updateData(["participants": FieldValue.arrayUnion([userId])]) { (error) in
             if let err = error {
                 print(err.localizedDescription)
                 isSuccesful = false
+                completion (isSuccesful)
             } else {
                 print("succesfully added to participants")
                 isSuccesful = true
+                completion (isSuccesful)
             }
         }
-        return isSuccesful
     }
     
-    func removeFromParticipantsTable(for scrimmageID: String, with userId: String) -> Bool {
+    func removeFromParticipantsTable(for scrimmageID: String, with userId: String, completion: @escaping (Bool) -> Void) {
         var isSuccesful = false
         let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
         currentScrimmage.updateData(["participants": FieldValue.arrayRemove([userId])]) { (error) in
             if let err = error {
                 print(err.localizedDescription)
                 isSuccesful = false
+                completion(isSuccesful)
             } else {
                 print("succesfully removed from participants")
                 isSuccesful = true
+                completion(isSuccesful)
             }
         }
-        return isSuccesful
     }
     
-    func updateSavedTable(for scrimmageID: String, with userId: String) {
-        
+    func updateSavedTable(for scrimmageID: String, with userId: String, completion: @escaping (Bool) -> Void) {
+        var isSuccesful = false
         let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
-        currentScrimmage.updateData(["savedById": FieldValue.arrayUnion([userId])])
+        currentScrimmage.updateData(["savedById": FieldValue.arrayUnion([userId])]) { (error) in
+            if let err = error {
+                print(err.localizedDescription)
+                isSuccesful = false
+                completion(isSuccesful)
+            } else {
+                print("succesfully removed from participants")
+                isSuccesful = true
+                completion(isSuccesful)
+            }
+        }
     }
-    
-//    func refresh_getScrimmage(for id: String) -> Scrimmage {
-//        var scrimmagee: Scrimmage!
-//        readOne(from: .scrimmages, with: id, returning: Scrimmage.self) { (scrimmage) in
-//            scrimmagee = scrimmage
-//        }
-//        return scrimmagee
-//    }
 }

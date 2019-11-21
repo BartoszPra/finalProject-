@@ -23,6 +23,9 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
     @IBOutlet weak var numberOfParticipantsLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var participateButton: UIButton!
@@ -75,38 +78,85 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
     @IBAction func participateButtonPressed(_ sender: Any) {
         guard let currentScrimmageId = self.scrimmagePassedOver?.id else { return }
         if !scrimmagePassedOver.participants.contains(userID) {
-            if FIRFirestoreService.shared.addToParticipantsTable(for: currentScrimmageId, with: self.userID) {
-                
-                let alert = UIAlertController(title: "Added.",
-                                              message: "You are participants participating.",
-                                              preferredStyle: UIAlertController.Style.alert)
-                //add button to allert
-                let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
-                    self.navigationController?.popViewController(animated: true)
+            
+            FIRFirestoreService.shared.addToParticipantsTable(for: currentScrimmageId, with: self.userID) { (succesful) in
+                if succesful {
+                    let alert = UIAlertController(title: "Added.",
+                                                  message: "You are participating in this scrimmage.",
+                                                  preferredStyle: UIAlertController.Style.alert)
+                    //add button to allert
+                    let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
+                        self.reloadScrimmage()
+                    }
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Sorry",
+                                                  message: "Couldn't add you as participant.",
+                                                  preferredStyle: UIAlertController.Style.alert)
+                    //add button to allert
+                    let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
+                    }
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
                 }
-                alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
             }
         } else {
-            if FIRFirestoreService.shared.removeFromParticipantsTable(for: currentScrimmageId, with: self.userID) {
-                let alert = UIAlertController(title: "Removed",
-                                              message: "You are removed from participants.",
-                                              preferredStyle: UIAlertController.Style.alert)
-                //add button to allert
-                let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
-                    self.navigationController?.popViewController(animated: true)
+            
+            FIRFirestoreService.shared.removeFromParticipantsTable(for: currentScrimmageId, with: self.userID) { (success) in
+                if success {
+                    let alert = UIAlertController(title: "Removed",
+                                                  message: "You are removed from participants.",
+                                                  preferredStyle: UIAlertController.Style.alert)
+                    //add button to allert
+                    let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
+                        self.reloadScrimmage()
+                    }
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Sorry",
+                                                  message: "There was a problem removing you from participants.",
+                                                  preferredStyle: UIAlertController.Style.alert)
+                    //add button to allert
+                    let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
+                        self.reloadScrimmage()
+                    }
+                    alert.addAction(action)
+                    self.present(alert, animated: true, completion: nil)
                 }
-                alert.addAction(action)
-                self.present(alert, animated: true, completion: nil)
             }
+            
         }
     }
     
     func saveScrimmageOnRemote() {
         guard let currentScrimmageId = self.scrimmagePassedOver?.id else { return }
-        FIRFirestoreService.shared.updateSavedTable(for: currentScrimmageId, with: self.userID)
-       // self.scrimmagePassedOver = FIRFirestoreService.shared.refresh_getScrimmage(for: currentScrimmageId)
-        self.setupUI()
+        FIRFirestoreService.shared.updateSavedTable(for: currentScrimmageId, with: self.userID) { (success) in
+            if success {
+                
+                let alert = UIAlertController(title: "Saved",
+                                              message: "This Scrimmage is added to your saved",
+                                              preferredStyle: UIAlertController.Style.alert)
+                //add button to allert
+                let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
+                    self.reloadScrimmage()
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                let alert = UIAlertController(title: "Sorry",
+                                              message: "There was a problem saving you scrimmage.",
+                                              preferredStyle: UIAlertController.Style.alert)
+                //add button to allert
+                let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
+                    self.reloadScrimmage()
+                }
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
+                
+            }
+        }
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
@@ -159,6 +209,8 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
         priceLabel.text = "Price: £" + String(format: "%.2f", scrimmagePassedOver.price)
         dateLabel.text = "Date: " + scrimmagePassedOver.date
         numberOfParticipantsLabel.text = "People attending: " + String(describing: scrimmagePassedOver.participants.count)
+        self.typeLabel.text = "Scrimmage type: " + String(describing: scrimmagePassedOver.currentType)
+        self.statusLabel.text = "Scrimmage status: " + String(describing: scrimmagePassedOver.currentStatus)
         
         if isUserAlreadyParticipating(scrimmage: self.scrimmagePassedOver) {
             self.participateButton.setTitle("Unparticipate", for: .normal)
@@ -186,16 +238,22 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
     }
 
     func checkIfScrimmageSaved(scrimmage: Scrimmage) -> Bool {
-        if scrimmage.savedById != nil {
-            if !scrimmage.savedById!.isEmpty {
-                if let _ = scrimmage.savedById?.first(where: {$0 == self.userID}) {
-                    return true
-                } else {
-                    return false
-                }
+        if !scrimmage.savedById.isEmpty {
+            if let _ = scrimmage.savedById.first(where: {$0 == self.userID}) {
+                return true
+            } else {
+                return false
             }
-            return false
         }
         return false
+        
+    }
+    
+    func reloadScrimmage() {
+        guard let scrimmageId = scrimmagePassedOver.id else { return }
+        FIRFirestoreService.shared.readOne(from: .scrimmages, with: scrimmageId, returning: Scrimmage.self) { (scrimmage) in
+            self.scrimmagePassedOver = scrimmage
+            self.setupUI()
+        }
     }
 }

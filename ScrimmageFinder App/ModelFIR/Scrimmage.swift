@@ -7,6 +7,7 @@ protocol  Identifiable {
 
 //scrimmgage struct with properties
 struct Scrimmage: Codable, Identifiable {
+    
     var id: String? = nil
     var name: String
     var venueName: String
@@ -18,21 +19,25 @@ struct Scrimmage: Codable, Identifiable {
     var date: String
     var participants: [String]
     var createdById: String
-    var savedById: [String]?
-
+    var savedById: [String]
+    var currentStatus: ScrimmageStatus
+    var currentType: ScrimmageType
+    
     //scrimmage struct init
-    init (name: String, vanueName: String, postCode: String, time: Double, managerName: String, managerNumber: String, price: Double, date: String, createdById: String, savedById: [String]?) {
-         self.name = name
-         self.venueName = vanueName
-         self.postCode = postCode
-         self.time = time
-         self.managerName = managerName
-         self.managerNumber = managerNumber
-         self.price = price
-         self.date = date
-         self.participants = [String]()
-         self.createdById = Auth.auth().currentUser!.uid
-         self.savedById = savedById
-        
+    init (name: String, vanueName: String, postCode: String, time: Double, managerName: String, managerNumber: String, price: Double, date: String, createdById: String, currentStatus: ScrimmageStatus, currentType: ScrimmageType) {
+        self.name = name
+        self.venueName = vanueName
+        self.postCode = postCode
+        self.time = time
+        self.managerName = managerName
+        self.managerNumber = managerNumber
+        self.price = price
+        self.date = date
+        self.participants = [String]()
+        self.createdById = Auth.auth().currentUser!.uid
+        self.savedById = [String]()
+        self.currentStatus = currentStatus
+        self.currentType = currentType
+                
     }
 }

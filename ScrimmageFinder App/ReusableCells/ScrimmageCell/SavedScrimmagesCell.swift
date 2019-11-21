@@ -14,6 +14,7 @@ class SavedScrimmagesCell: UITableViewCell {
     @IBOutlet weak var addressLbl: UILabel!
     @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var cellImage: UIImageView!
+    @IBOutlet weak var statusImage: UIImageView!    
     
     override func awakeFromNib() {
         super.awakeFromNib()

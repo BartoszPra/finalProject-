@@ -56,8 +56,9 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
             let scrimmage = savedScrimmages[indexPath.row]
             cell.cellLBL.text = scrimmage.name
             cell.addressLbl.text = scrimmage.venueName
-            cell.timeLbl.text = scrimmage.date
+            cell.timeLbl.text = scrimmage.date + "  Players: " + String(scrimmage.participants.count)
             cell.cellImage.image = UIImage.init(named: "imageJordan")
+            cell.statusImage.image = scrimmage.currentStatus.statusImage
             return cell
         } else {
             updateUI()
@@ -68,8 +69,9 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //segue trigger
-        let topic = savedScrimmages[indexPath.row]
-        self.coordinator?.goToDetail(with: topic)
+        let scrimmage = savedScrimmages[indexPath.row]
+        //self.coordinator?.goToDetail(with: topic)
+        self.coordinator?.goToNewDetail(with: scrimmage, from: self)
         
     }
     

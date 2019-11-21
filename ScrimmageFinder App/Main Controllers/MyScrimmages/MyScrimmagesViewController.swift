@@ -61,4 +61,9 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
             return cell
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let scrimmage = self.scrimmages[indexPath.row]
+        self.coordinator?.goToDetail(with: scrimmage, from: self)
+    }
 }

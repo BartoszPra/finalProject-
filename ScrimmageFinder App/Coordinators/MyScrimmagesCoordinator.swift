@@ -25,4 +25,9 @@ class MyScrimmagesCoordinator: Coordinator {
     
     func start() {
     }
+    
+    func goToDetail(with scrimmage: Scrimmage, from controller: UIViewController) {
+        let viewController = SFdetailViewController.init(nibName: "SFdetailViewController", bundle: nil, scrimmage:scrimmage, isSaveUsed: true) as SFdetailViewController
+        controller.present(viewController, animated: true, completion: nil)
+    }
 }

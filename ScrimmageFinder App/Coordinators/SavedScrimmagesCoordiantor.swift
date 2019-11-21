@@ -23,10 +23,10 @@ class SavedScrimmagesCoordinator: Coordinator {
         viewController.coordinator = self
         navigationController.viewControllers = [viewController]
     }
-    func goToDetail(with scrimmage: Scrimmage) {
-        let viewController = SavedDetailViewController.instantiate()
-        viewController.scrimmagePassedOver2 = scrimmage
-        navigationController.pushViewController(viewController, animated: true)
+    
+    func goToNewDetail(with scrimmage: Scrimmage, from controller: UIViewController) {
+        let viewController = SFdetailViewController.init(nibName: "SFdetailViewController", bundle: nil, scrimmage:scrimmage, isSaveUsed: false) as SFdetailViewController
+        controller.present(viewController, animated: true, completion: nil)
     }
     
     func start() {

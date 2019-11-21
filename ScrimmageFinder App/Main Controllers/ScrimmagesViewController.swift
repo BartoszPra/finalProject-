@@ -71,12 +71,12 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             cell.textLabel?.text = String(filteredScrimmage.name)
         } else {
             let scrimmage = scrimmages[indexPath.row]
-            cell.textLabel?.text = String(scrimmage.name)
-            
+            let status = scrimmage.currentStatus.description
             let name = scrimmage.venueName
             let price = scrimmage.price
             let time = scrimmage.time
             
+            cell.textLabel?.text = String(scrimmage.name) + "    " + status
             cell.detailTextLabel?.text = "\(name), Price: £\(String(format: "%.2f", price)), Time: \(String(format: "%.2f", time))"
         }
         return cell
