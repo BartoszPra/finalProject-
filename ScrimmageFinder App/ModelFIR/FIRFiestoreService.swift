@@ -167,6 +167,22 @@ class FIRFirestoreService {
         
     }
     
+    func addToParticipants2Table(for scrimmageID: String, with userId: String, status: Int, completion: @escaping (Bool) -> Void) {
+        var isSuccesful = false
+        let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
+        currentScrimmage.updateData(["participants2": FieldValue.arrayUnion([[userId: 1]])]) { (error) in
+        if let err = error {
+            print(err.localizedDescription)
+            isSuccesful = false
+            completion (isSuccesful)
+        } else {
+            print("succesfully added to participants")
+            isSuccesful = true
+            completion (isSuccesful)
+        }
+        }
+    }
+    
     func addToParticipantsTable(for scrimmageID: String, with userId: String, completion: @escaping (Bool) -> Void) {
         var isSuccesful = false
         let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
@@ -179,6 +195,23 @@ class FIRFirestoreService {
                 print("succesfully added to participants")
                 isSuccesful = true
                 completion (isSuccesful)
+            }
+        }
+    }
+    
+    func removeFromParticipants2Table(for scrimmageID: String, with userId: String, completion: @escaping (Bool) -> Void) {
+        var isSuccesful = false
+        let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
+        
+        currentScrimmage.updateData(["participants2": FieldValue.arrayRemove([[userId:1]])]) { (error) in
+            if let err = error {
+                print(err.localizedDescription)
+                isSuccesful = false
+                completion(isSuccesful)
+            } else {
+                print("succesfully removed from participants")
+                isSuccesful = true
+                completion(isSuccesful)
             }
         }
     }

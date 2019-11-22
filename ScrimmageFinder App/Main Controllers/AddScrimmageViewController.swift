@@ -126,7 +126,8 @@ class AddScrimmageViewController: UIViewController, Storyboarded {
                                       date: self.dateTF.text!,
                                       createdById: Auth.auth().currentUser!.uid,
                                       currentStatus: .on,
-                                      currentType: .open)
+                                      currentType: .open,
+                                      participants: [[String : ParticipantsStatus]]())
             // creating a scrimmage
                 FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
             //allert if added

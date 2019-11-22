@@ -126,8 +126,8 @@
                   urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/ModelFIR/FIRFiestoreService.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "164"
-                  endingLineNumber = "164"
+                  startingLineNumber = "163"
+                  endingLineNumber = "163"
                   offsetFromSymbolStart = "443">
                </Location>
                <Location
@@ -141,8 +141,8 @@
                   urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/ModelFIR/FIRFiestoreService.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "164"
-                  endingLineNumber = "164"
+                  startingLineNumber = "163"
+                  endingLineNumber = "163"
                   offsetFromSymbolStart = "570">
                </Location>
             </Locations>
@@ -254,8 +254,8 @@
             filePath = "ScrimmageFinder App/Detail Controllers/Detail/SFdetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
             landmarkName = "reloadScrimmage()"
             landmarkType = "7">
          </BreakpointContent>

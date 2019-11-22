@@ -77,9 +77,10 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
     
     @IBAction func participateButtonPressed(_ sender: Any) {
         guard let currentScrimmageId = self.scrimmagePassedOver?.id else { return }
-        if !scrimmagePassedOver.participants.contains(userID) {
+        
+        if !self.isUserAlreadyParticipating(scrimmage: self.scrimmagePassedOver) {
             
-            FIRFirestoreService.shared.addToParticipantsTable(for: currentScrimmageId, with: self.userID) { (succesful) in
+            FIRFirestoreService.shared.addToParticipants2Table(for: currentScrimmageId, with: self.userID, status: 1) { (succesful) in
                 if succesful {
                     let alert = UIAlertController(title: "Added.",
                                                   message: "You are participating in this scrimmage.",
@@ -101,9 +102,32 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
                     self.present(alert, animated: true, completion: nil)
                 }
             }
-        } else {
             
-            FIRFirestoreService.shared.removeFromParticipantsTable(for: currentScrimmageId, with: self.userID) { (success) in
+//            FIRFirestoreService.shared.addToParticipantsTable(for: currentScrimmageId, with: self.userID) { (succesful) in
+//                if succesful {
+//                    let alert = UIAlertController(title: "Added.",
+//                                                  message: "You are participating in this scrimmage.",
+//                                                  preferredStyle: UIAlertController.Style.alert)
+//                    //add button to allert
+//                    let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
+//                        self.reloadScrimmage()
+//                    }
+//                    alert.addAction(action)
+//                    self.present(alert, animated: true, completion: nil)
+//                } else {
+//                    let alert = UIAlertController(title: "Sorry",
+//                                                  message: "Couldn't add you as participant.",
+//                                                  preferredStyle: UIAlertController.Style.alert)
+//                    //add button to allert
+//                    let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
+//                    }
+//                    alert.addAction(action)
+//                    self.present(alert, animated: true, completion: nil)
+//                }
+//            }
+        } else {
+                        
+            FIRFirestoreService.shared.removeFromParticipants2Table(for: currentScrimmageId, with: self.userID) { (success) in
                 if success {
                     let alert = UIAlertController(title: "Removed",
                                                   message: "You are removed from participants.",
@@ -228,7 +252,8 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
     
     func isUserAlreadyParticipating(scrimmage: Scrimmage) -> Bool {
         if !scrimmage.participants.isEmpty {
-                if let _ = scrimmage.participants.first(where: {$0 == self.userID}) {
+            
+            if let _ = scrimmage.participants.first(where: { $0.keys.contains(self.userID)}) {
                     return true
                 } else {
                     return false

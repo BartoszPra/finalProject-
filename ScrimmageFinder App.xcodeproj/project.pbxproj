@@ -47,6 +47,7 @@
 		A5AEC476238612E00095796A /* ScrimmageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AEC475238612E00095796A /* ScrimmageType.swift */; };
 		A5D2FA46237F512400FAAC8A /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */; };
 		A5D7433F22F7A2C20047E9E0 /* MyScrimmagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F4245228472CC007841A2 /* MyScrimmagesViewController.swift */; };
+		A5E574AE2387076700DD7C27 /* ParticipantsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E574AD2387076700DD7C27 /* ParticipantsStatus.swift */; };
 		C53B747BEB4E8E432E213461 /* Pods_ScrimmageFinder_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF1BFFC0D3C64B94DB6675A /* Pods_ScrimmageFinder_AppTests.framework */; };
 		C751B37A2259225D0060D1B2 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751B3792259225D0060D1B2 /* MainCoordinator.swift */; };
 		C751B37C225922710060D1B2 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751B37B225922710060D1B2 /* Storyboarded.swift */; };
@@ -147,6 +148,7 @@
 		A5AEC4722385710F0095796A /* ScrimmageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageStatus.swift; sourceTree = "<group>"; };
 		A5AEC475238612E00095796A /* ScrimmageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageType.swift; sourceTree = "<group>"; };
 		A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		A5E574AD2387076700DD7C27 /* ParticipantsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsStatus.swift; sourceTree = "<group>"; };
 		BD1AF697CE9CBB669D028A8B /* Pods-ScrimmageFinder App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrimmageFinder App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScrimmageFinder App/Pods-ScrimmageFinder App.debug.xcconfig"; sourceTree = "<group>"; };
 		C70F3FE3222F60F400703859 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70F3FE5222F614100703859 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				03F10DF620DD0F7300F8C62B /* Scrimmage.swift */,
+				A5E574AD2387076700DD7C27 /* ParticipantsStatus.swift */,
 				A5AEC4722385710F0095796A /* ScrimmageStatus.swift */,
 				03C6E1E720DD357D001DFD01 /* FIRFiestoreService.swift */,
 				03C6E1ED20DD59C3001DFD01 /* EncodableExtensions.swift */,
@@ -805,6 +808,7 @@
 				A5D7433F22F7A2C20047E9E0 /* MyScrimmagesViewController.swift in Sources */,
 				A57BD1262357A33E00A324BC /* SFNames.swift in Sources */,
 				C751B37A2259225D0060D1B2 /* MainCoordinator.swift in Sources */,
+				A5E574AE2387076700DD7C27 /* ParticipantsStatus.swift in Sources */,
 				A5D2FA46237F512400FAAC8A /* UIViewController+Extensions.swift in Sources */,
 				A5AEC476238612E00095796A /* ScrimmageType.swift in Sources */,
 				A57BD12E2357EEE400A324BC /* SFAppearance.swift in Sources */,
