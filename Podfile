@@ -11,6 +11,7 @@ target 'ScrimmageFinder App' do
 
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
+    pod 'Firebase/Storage'
 	pod 'SilentScrolly'
 	pod 'Firebase/Auth'
 	pod 'FacebookCore'

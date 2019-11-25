@@ -21,10 +21,10 @@ struct Scrimmage: Codable, Identifiable {
     var savedById: [String]
     var currentStatus: ScrimmageStatus
     var currentType: ScrimmageType
-    var participants:[[String : ParticipantsStatus]]
+    var participants: [[String: ParticipantsStatus]]
     
     //scrimmage struct init
-    init (name: String, vanueName: String, postCode: String, time: Double, managerName: String, managerNumber: String, price: Double, date: String, createdById: String, currentStatus: ScrimmageStatus, currentType: ScrimmageType, participants:[[String: ParticipantsStatus]]) {
+    init (name: String, vanueName: String, postCode: String, time: Double, managerName: String, managerNumber: String, price: Double, date: String, createdById: String, currentStatus: ScrimmageStatus, currentType: ScrimmageType, participants: [[String: ParticipantsStatus]]) {
         self.name = name
         self.venueName = vanueName
         self.postCode = postCode

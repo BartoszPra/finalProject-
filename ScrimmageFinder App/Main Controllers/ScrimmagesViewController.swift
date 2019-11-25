@@ -28,9 +28,8 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         scrimmagesTableView.dragDelegate = self
         searchBar.delegate = self
-        searchBar.returnKeyType = UIReturnKeyType.done
-        titleItem.title = Auth.auth().currentUser?.displayName
-        //userdefaults register
+        searchBar.returnKeyType = UIReturnKeyType.done        
+        ViewHelpers.setLogoAsNavigationTitle(imageName: "logoNoBackgroundBrighter", on: self)
         UserDefaults.standard.register(defaults: [String: Any]())
        
         // reading from database

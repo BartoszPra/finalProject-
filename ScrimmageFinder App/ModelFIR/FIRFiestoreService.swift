@@ -16,6 +16,10 @@ class FIRFirestoreService {
     private func reference(to collectionReference: FIRCollectionReference) -> CollectionReference {
         return Firestore.firestore().collection(collectionReference.rawValue)
     }
+    
+    private func filesReference(url:String) -> Storage{
+        return Storage.storage(url: url)
+    }
         
     // create function exluding id it will be added automatically by fireabase
     func create<T: Encodable>(for encodableObject: T, in collectionReference: FIRCollectionReference) {
@@ -167,10 +171,10 @@ class FIRFirestoreService {
         
     }
     
-    func addToParticipants2Table(for scrimmageID: String, with userId: String, status: Int, completion: @escaping (Bool) -> Void) {
+    func addToParticipantsTable(for scrimmageID: String, with userId: String, status: Int, completion: @escaping (Bool) -> Void) {
         var isSuccesful = false
         let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
-        currentScrimmage.updateData(["participants2": FieldValue.arrayUnion([[userId: 1]])]) { (error) in
+        currentScrimmage.updateData(["participants": FieldValue.arrayUnion([[userId: status]])]) { (error) in
         if let err = error {
             print(err.localizedDescription)
             isSuccesful = false
@@ -183,43 +187,11 @@ class FIRFirestoreService {
         }
     }
     
-    func addToParticipantsTable(for scrimmageID: String, with userId: String, completion: @escaping (Bool) -> Void) {
-        var isSuccesful = false
-        let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
-        currentScrimmage.updateData(["participants": FieldValue.arrayUnion([userId])]) { (error) in
-            if let err = error {
-                print(err.localizedDescription)
-                isSuccesful = false
-                completion (isSuccesful)
-            } else {
-                print("succesfully added to participants")
-                isSuccesful = true
-                completion (isSuccesful)
-            }
-        }
-    }
-    
-    func removeFromParticipants2Table(for scrimmageID: String, with userId: String, completion: @escaping (Bool) -> Void) {
+    func removeFromParticipantsTable(for scrimmageID: String, with userId: String, status: ParticipantsStatus, completion: @escaping (Bool) -> Void) {
         var isSuccesful = false
         let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
         
-        currentScrimmage.updateData(["participants2": FieldValue.arrayRemove([[userId:1]])]) { (error) in
-            if let err = error {
-                print(err.localizedDescription)
-                isSuccesful = false
-                completion(isSuccesful)
-            } else {
-                print("succesfully removed from participants")
-                isSuccesful = true
-                completion(isSuccesful)
-            }
-        }
-    }
-    
-    func removeFromParticipantsTable(for scrimmageID: String, with userId: String, completion: @escaping (Bool) -> Void) {
-        var isSuccesful = false
-        let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
-        currentScrimmage.updateData(["participants": FieldValue.arrayRemove([userId])]) { (error) in
+        currentScrimmage.updateData(["participants": FieldValue.arrayRemove([[userId: status]])]) { (error) in
             if let err = error {
                 print(err.localizedDescription)
                 isSuccesful = false

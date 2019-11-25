@@ -4,13 +4,16 @@ import FirebaseFirestore
 import CoreData
 import MapKit
 
-class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate, UINavigationBarDelegate {
+class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate {
     
-    private var coordinator: MyScrimmagesCoordinator?
+    //var coordinator: Coordinator?
+    var coordinator: ScrimmagesDetailCoordinator?
     private var scrimmagePassedOver: Scrimmage!
     private let coreDataController = CoreDataController.shared
     private var userID: String!
     private var isSaveUsed: Bool!
+    private var isParticipating: Bool!
+    private var participantStatus: ParticipantsStatus!
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var backgroundImage: UIImageView!
@@ -25,10 +28,9 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-    
-    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var participateButton: UIButton!
+    @IBOutlet weak var userStatusLabel: UILabel!
     
     init(nibName nibNameOrNil: String, bundle nibBundleOrNil: Bundle?, scrimmage: Scrimmage, isSaveUsed: Bool) {
         super.init(nibName: nibNameOrNil as String, bundle: nibBundleOrNil)
@@ -43,7 +45,6 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         userID = Auth.auth().currentUser?.uid
-        navigationBar.delegate = self
         setupUI()
         UserDefaults.standard.register(defaults: [String: Any]())
     }
@@ -78,9 +79,9 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
     @IBAction func participateButtonPressed(_ sender: Any) {
         guard let currentScrimmageId = self.scrimmagePassedOver?.id else { return }
         
-        if !self.isUserAlreadyParticipating(scrimmage: self.scrimmagePassedOver) {
+        if !self.isUserAlreadyParticipating() {
             
-            FIRFirestoreService.shared.addToParticipants2Table(for: currentScrimmageId, with: self.userID, status: 1) { (succesful) in
+            FIRFirestoreService.shared.addToParticipantsTable(for: currentScrimmageId, with: self.userID, status: 1) { (succesful) in
                 if succesful {
                     let alert = UIAlertController(title: "Added.",
                                                   message: "You are participating in this scrimmage.",
@@ -102,32 +103,9 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
                     self.present(alert, animated: true, completion: nil)
                 }
             }
-            
-//            FIRFirestoreService.shared.addToParticipantsTable(for: currentScrimmageId, with: self.userID) { (succesful) in
-//                if succesful {
-//                    let alert = UIAlertController(title: "Added.",
-//                                                  message: "You are participating in this scrimmage.",
-//                                                  preferredStyle: UIAlertController.Style.alert)
-//                    //add button to allert
-//                    let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
-//                        self.reloadScrimmage()
-//                    }
-//                    alert.addAction(action)
-//                    self.present(alert, animated: true, completion: nil)
-//                } else {
-//                    let alert = UIAlertController(title: "Sorry",
-//                                                  message: "Couldn't add you as participant.",
-//                                                  preferredStyle: UIAlertController.Style.alert)
-//                    //add button to allert
-//                    let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
-//                    }
-//                    alert.addAction(action)
-//                    self.present(alert, animated: true, completion: nil)
-//                }
-//            }
         } else {
                         
-            FIRFirestoreService.shared.removeFromParticipants2Table(for: currentScrimmageId, with: self.userID) { (success) in
+            FIRFirestoreService.shared.removeFromParticipantsTable(for: currentScrimmageId, with: self.userID, status: .confirmed) { (success) in
                 if success {
                     let alert = UIAlertController(title: "Removed",
                                                   message: "You are removed from participants.",
@@ -236,7 +214,7 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
         self.typeLabel.text = "Scrimmage type: " + String(describing: scrimmagePassedOver.currentType)
         self.statusLabel.text = "Scrimmage status: " + String(describing: scrimmagePassedOver.currentStatus)
         
-        if isUserAlreadyParticipating(scrimmage: self.scrimmagePassedOver) {
+        if isUserAlreadyParticipating() {
             self.participateButton.setTitle("Unparticipate", for: .normal)
         } else {
             self.participateButton.setTitle("Participate", for: .normal)
@@ -248,18 +226,37 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate,
             saveButton.isHidden = true
         }
         
+        if isUserAlreadyParticipating() {
+            self.userStatusLabel.isHidden = false
+            if self.participantStatus == .confirmed {
+                self.userStatusLabel.textColor = .green
+            } else {
+                self.userStatusLabel.textColor = .red
+            }
+            self.userStatusLabel.text = "Me: " + self.participantStatus.description
+        } else {
+            self.userStatusLabel.isHidden = true
+        }
+        
     }
     
-    func isUserAlreadyParticipating(scrimmage: Scrimmage) -> Bool {
-        if !scrimmage.participants.isEmpty {
-            
-            if let _ = scrimmage.participants.first(where: { $0.keys.contains(self.userID)}) {
-                    return true
-                } else {
-                    return false
-                }
+    @IBAction func viewParticipatingUsersButtonClicked(_ sender: Any) {
+        self.coordinator?.goToViewUsers(with: scrimmagePassedOver!.participants, from: self)
+    }
+    
+    func isUserAlreadyParticipating() -> Bool {
+        if !self.scrimmagePassedOver.participants.isEmpty {
+            if let participant = self.scrimmagePassedOver.participants.first(where: { $0.keys.contains(self.userID)}) {
+                self.participantStatus = participant.values.first
+                self.isParticipating = true
+                return true
+            } else {
+                self.participantStatus = .none
+                self.isParticipating = false
+                return false
+            }
         }
-        return false
+        return true
     }
 
     func checkIfScrimmageSaved(scrimmage: Scrimmage) -> Bool {

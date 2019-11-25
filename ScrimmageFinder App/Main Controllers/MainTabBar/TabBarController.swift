@@ -13,9 +13,10 @@ class TabBarController: UITabBarController, Storyboarded {
     let scrimmages = ScrimmagesCoordinator()
     let savedScrimmages = SavedScrimmagesCoordinator()
     let myScrimmages = MyScrimmagesCoordinator()
+    let userProfile = UserProfileCoordinator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewControllers = [scrimmages.navigationController, savedScrimmages.navigationController, myScrimmages.navigationController]        
+        viewControllers = [scrimmages.navigationController, savedScrimmages.navigationController, myScrimmages.navigationController, userProfile.navigationController]        
     }
 }

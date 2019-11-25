@@ -8,23 +8,40 @@
 
 import UIKit
 
-class UserProfileViewController: UIViewController {
+class UserProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    var coordinator: UserProfileCoordinator!
+    @IBOutlet weak var profileImageView: UIImageView!
+    var imagePicker = UIImagePickerController()
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        profileImageView.isUserInteractionEnabled = true
+        imagePicker.delegate = self
+        profileImageView.addGestureRecognizer(tapGestureRecognizer)
 
-        // Do any additional setup after loading the view.
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .photoLibrary
+        self.navigationController?.present(imagePicker, animated: true, completion: nil)
+        
+        
+        
     }
-    */
-
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        
+        if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+               profileImageView.contentMode = .scaleAspectFit
+               profileImageView.image = pickedImage
+           } else if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+           profileImageView.contentMode = .scaleAspectFit
+           profileImageView.image = pickedImage
+        }
+           dismiss(animated: true, completion: nil)
+    }
 }

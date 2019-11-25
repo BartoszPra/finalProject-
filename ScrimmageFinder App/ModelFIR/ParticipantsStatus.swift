@@ -10,8 +10,7 @@ import Foundation
 
 enum ParticipantsStatus: Int, Codable, CustomStringConvertible {
     case confirmed = 1, unconfirmed
-    
-    
+        
     var description: String {
         switch self {
         case .confirmed: return "confirmed"

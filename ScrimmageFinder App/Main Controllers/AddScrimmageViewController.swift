@@ -6,22 +6,14 @@ class AddScrimmageViewController: UIViewController, Storyboarded {
    
     //text fields outlets 
    
-    @IBOutlet var addSCBackGroundPhotoImg: UIImageView!
-    
+    @IBOutlet var addSCBackGroundPhotoImg: UIImageView!    
     @IBOutlet var nameTF: UITextField!
-    
     @IBOutlet var venueNameTF: UITextField!
-    
     @IBOutlet var postCodeTF: UITextField!
-    
     @IBOutlet var timeTF: UITextField!
-    
     @IBOutlet var managerNameTF: UITextField!
-    
     @IBOutlet var managersNumberTF: UITextField!
-    
     @IBOutlet var priceTF: UITextField!
-    
     @IBOutlet var dateTF: UITextField!
     
     override func viewDidLoad() {
@@ -127,7 +119,7 @@ class AddScrimmageViewController: UIViewController, Storyboarded {
                                       createdById: Auth.auth().currentUser!.uid,
                                       currentStatus: .on,
                                       currentType: .open,
-                                      participants: [[String : ParticipantsStatus]]())
+                                      participants: [[String: ParticipantsStatus]]())
             // creating a scrimmage
                 FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
             //allert if added
@@ -138,20 +130,13 @@ class AddScrimmageViewController: UIViewController, Storyboarded {
             //clearing the text fields
             let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
                 
-                self.nameTF.text = ""
-                
+                self.nameTF.text = ""                
                 self.venueNameTF.text = ""
-                
                 self.postCodeTF.text = ""
-                
                 self.timeTF.text = ""
-                
                 self.managerNameTF.text = ""
-                
                 self.managersNumberTF.text = ""
-                
                 self.priceTF.text = ""
-                
                 self.dateTF.text = ""
             }
             

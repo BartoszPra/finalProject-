@@ -24,8 +24,8 @@ class ScrimmagesCoordinator: Coordinator {
     }
     
     func goToNewDetail(with scrimmage: Scrimmage, from controller: UIViewController) {
-        let viewController = SFdetailViewController.init(nibName: "SFdetailViewController", bundle: nil, scrimmage:scrimmage, isSaveUsed: true) as SFdetailViewController
-        controller.present(viewController, animated: true, completion: nil)
+        
+        ScrimmagesDetailCoordinator(navigationController: navigationController, scrimmage: scrimmage, isSavedUsed: true)
     }
         
     func goToAddScrimmage() {
@@ -34,5 +34,9 @@ class ScrimmagesCoordinator: Coordinator {
     }
     
     func start() {
+    }
+    
+    func goTodetail() {
+        
     }
 }

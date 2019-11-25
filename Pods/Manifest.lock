@@ -29,6 +29,9 @@ PODS:
   - Firebase/Firestore (5.18.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (= 1.0.2)
+  - Firebase/Storage (5.18.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (= 3.1.0)
   - FirebaseAnalytics (5.7.0):
     - FirebaseCore (~> 5.3)
     - FirebaseInstanceID (~> 3.6)
@@ -65,6 +68,10 @@ PODS:
     - FirebaseCore (~> 5.3)
     - GoogleUtilities/Environment (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
+  - FirebaseStorage (3.1.0):
+    - FirebaseAuthInterop (~> 1.0)
+    - FirebaseCore (~> 5.2)
+    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleAppMeasurement (5.7.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -134,12 +141,13 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
+  - Firebase/Storage
   - GoogleSignIn
   - SilentScrolly
   - SwiftLint
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Bolts
     - BoringSSL-GRPC
     - FacebookCore
@@ -164,6 +172,8 @@ SPEC REPOS:
     - Protobuf
     - SilentScrolly
     - SwiftLint
+  trunk:
+    - FirebaseStorage
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
@@ -178,6 +188,7 @@ SPEC CHECKSUMS:
   FirebaseCore: 52f851b30e11360f1e67cf04b1edfebf0a47a2d3
   FirebaseFirestore: ccdaffb8a73c591ff61872b8f7905ad0c237ef50
   FirebaseInstanceID: 7221670e908b41e7ae669600db9d0d201417d0cd
+  FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
   GoogleAppMeasurement: 6cf307834da065863f9faf4c0de0a936d81dd832
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
@@ -191,6 +202,6 @@ SPEC CHECKSUMS:
   SilentScrolly: 0d85996304048c9e6c49788823c9c2a64185be76
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
 
-PODFILE CHECKSUM: 168200e2bc7b6fcd39716c8c0574819ac07b1fe9
+PODFILE CHECKSUM: 27d3e30e5cfdd47e08b0b58a169480d3f71edd95
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.8.3
