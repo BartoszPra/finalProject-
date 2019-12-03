@@ -17,8 +17,8 @@ class FIRFirestoreService {
         return Firestore.firestore().collection(collectionReference.rawValue)
     }
     
-    private func filesReference(url:String) -> Storage{
-        return Storage.storage(url: url)
+    private func filesReference() -> Storage {
+        return Storage.storage()
     }
         
     // create function exluding id it will be added automatically by fireabase
@@ -219,4 +219,78 @@ class FIRFirestoreService {
             }
         }
     }
+    
+    func getProfileImage(for user: String, completion: @escaping (UIImage) -> Void) -> UIImage {
+
+        var imageToReturn = UIImage()
+        
+        let imageReference = "ProfileImage/" + user + ".jpg"
+        
+        let ref = filesReference().reference().child(imageReference)
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        ref.getData(maxSize: 1 * 1024 * 1024) { data, error in
+          if let error = error {
+            print(error.localizedDescription)
+            // Uh-oh, an error occurred!
+          } else {
+            // Data for "images/island.jpg" is returned
+            guard let image = UIImage(data: data!) else {return}
+            completion(image)
+            imageToReturn = image
+          }
+        }
+        return imageToReturn        
+    }
+    
+    func uploadProfileImage(image: UIImage, for userId: String ) {
+        
+        // Create the file metadata
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpg"
+        
+        guard let uploadImageData = image.jpegData(compressionQuality: 0.5) else {return}
+
+        // Upload file and metadata to the object 'images/mountains.jpg'
+        let uploadTask = filesReference().reference().child("ProfileImage/" + userId + ".jpg").putData(uploadImageData, metadata: metadata) { (data, error) in
+            guard let data = data else {
+                print("there was an error uploading" + error!.localizedDescription)
+              return
+            }
+        }
+
+        uploadTask.observe(.progress) { snapshot in
+          // Upload reported progress
+          let percentComplete = 100.0 * Double(snapshot.progress!.completedUnitCount)
+            / Double(snapshot.progress!.totalUnitCount)
+          print(String(percentComplete) + "% upload complete")
+        }
+
+        uploadTask.observe(.success) { snapshot in
+          print("Your profile has been uploaded")
+            // Upload completed successfully
+        }
+
+        uploadTask.observe(.failure) { snapshot in
+          if let error = snapshot.error as? NSError {
+            switch (StorageErrorCode(rawValue: error.code)!) {
+            case .objectNotFound:
+              // File doesn't exist
+              break
+            case .unauthorized:
+              // User doesn't have permission to access file
+              break
+            case .cancelled:
+              // User canceled the upload
+              break
+            case .unknown:
+              // Unknown error occurred, inspect the server response
+              break
+            default:
+              // A separate error occurred. This is a good place to retry the upload.
+              break
+            }
+          }
+        }
+    }
+    
 }

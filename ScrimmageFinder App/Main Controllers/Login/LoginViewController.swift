@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
+import Dispatch
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate, Storyboarded, UITextFieldDelegate {
    
@@ -18,6 +19,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     @IBOutlet var passTF: UITextField!
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
     @IBOutlet weak var facebookLoginSignInButton: FBSDKLoginButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
