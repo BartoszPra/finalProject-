@@ -256,7 +256,7 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
                 return false
             }
         }
-        return true
+        return false
     }
 
     func checkIfScrimmageSaved(scrimmage: Scrimmage) -> Bool {

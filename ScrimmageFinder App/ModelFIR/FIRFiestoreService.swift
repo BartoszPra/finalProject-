@@ -220,29 +220,23 @@ class FIRFirestoreService {
         }
     }
     
-    func getProfileImage(for user: String, completion: @escaping (UIImage) -> Void) -> UIImage {
-
-        var imageToReturn = UIImage()
+    func getProfileImage(for user: String, completion: @escaping (UIImage) -> Void) {
         
         let imageReference = "ProfileImage/" + user + ".jpg"
-        
         let ref = filesReference().reference().child(imageReference)
         // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
         ref.getData(maxSize: 1 * 1024 * 1024) { data, error in
           if let error = error {
-            print(error.localizedDescription)
-            // Uh-oh, an error occurred!
+            print("User didn't upload image" + error.localizedDescription)
           } else {
             // Data for "images/island.jpg" is returned
             guard let image = UIImage(data: data!) else {return}
             completion(image)
-            imageToReturn = image
           }
         }
-        return imageToReturn        
     }
     
-    func uploadProfileImage(image: UIImage, for userId: String ) {
+    func uploadProfileImage(image: UIImage, for userId: String, success: @escaping (Bool) -> Void) {
         
         // Create the file metadata
         let metadata = StorageMetadata()
@@ -254,8 +248,11 @@ class FIRFirestoreService {
         let uploadTask = filesReference().reference().child("ProfileImage/" + userId + ".jpg").putData(uploadImageData, metadata: metadata) { (data, error) in
             guard let data = data else {
                 print("there was an error uploading" + error!.localizedDescription)
+                success(false)
               return
             }
+            success(true)
+            print(data)
         }
 
         uploadTask.observe(.progress) { snapshot in

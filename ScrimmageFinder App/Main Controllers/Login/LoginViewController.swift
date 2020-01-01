@@ -18,9 +18,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     @IBOutlet var emailTF: UITextField!
     @IBOutlet var passTF: UITextField!
     @IBOutlet weak var googleSignInButton: GIDSignInButton!
+    let coreDataController = CoreDataController.shared
+    @IBOutlet weak var googleButton: GIDSignInButton!
     @IBOutlet weak var facebookLoginSignInButton: FBSDKLoginButton!
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.emailTF.delegate = self
@@ -44,7 +45,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
             self.coordinator?.startTabBarCoordinator(viewController: self)
         }
     }
-    
+        
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         if error != nil {
             print(error)
@@ -54,7 +55,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     }
     
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-         print("User did log out of facebook")
+        print("User did log out of facebook")        
     }
     
     func loginWithFcb() {
@@ -65,8 +66,14 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
             if let error = error {
                 print("Error logging in", error)
             } else {
-                print("username\(String(describing: user))")
-                self.coordinator?.startTabBarCoordinator(viewController: self)
+                print("username\(String(describing: user?.user.displayName))")
+                FIRFirestoreService.shared.getProfileImage(for: String(describing: user!.user.uid)) { (image) in
+                    self.coreDataController.prepareImageForSaving(image: image)
+                }
+                DispatchQueue.main.async {
+                    self.coordinator?.startTabBarCoordinator(viewController: self)
+                }
+                
             }
         })
     }

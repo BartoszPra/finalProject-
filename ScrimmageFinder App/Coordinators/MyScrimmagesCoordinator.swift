@@ -18,7 +18,7 @@ class MyScrimmagesCoordinator: Coordinator {
         self.navigationController = navigationController
         navigationController.coordinator = self
         let viewController = MyScrimmagesViewController(nibName: "MyScrimmagesViewController", bundle: nil) as MyScrimmagesViewController
-        viewController.tabBarItem = UITabBarItem(title: "MyScrimmages", image: UIImage(named: "tabBarImage"), tag: 0)
+        viewController.tabBarItem = UITabBarItem(title: "  MyScrimmages", image: UIImage(named: "tabBarImage"), tag: 0)
         viewController.coordinator = self
         navigationController.viewControllers = [viewController]
     }
@@ -27,7 +27,7 @@ class MyScrimmagesCoordinator: Coordinator {
     }
     
     func goToDetail(with scrimmage: Scrimmage, from controller: UIViewController) {
-        let viewController = SFdetailViewController.init(nibName: "SFdetailViewController", bundle: nil, scrimmage:scrimmage, isSaveUsed: true) as SFdetailViewController
-        controller.present(viewController, animated: true, completion: nil)
+        
+        ScrimmagesDetailCoordinator(navigationController: navigationController, scrimmage: scrimmage, isSavedUsed: true)
     }
 }

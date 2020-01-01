@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="FullRes" representedClassName="FullRes" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <relationship name="thumbnail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Thumbnail" inverseName="fullRes" inverseEntity="Thumbnail"/>
     </entity>
@@ -21,8 +22,8 @@
         <relationship name="fullRes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FullRes" inverseName="thumbnail" inverseEntity="FullRes"/>
     </entity>
     <elements>
+        <element name="FullRes" positionX="372.33203125" positionY="274.97265625" width="128" height="88"/>
         <element name="ScrimmageSaved" positionX="160" positionY="192" width="128" height="180"/>
-        <element name="FullRes" positionX="372.33203125" positionY="274.97265625" width="128" height="73"/>
         <element name="Thumbnail" positionX="686.3671875" positionY="409.0625" width="128" height="88"/>
     </elements>
 </model>

@@ -9,18 +9,19 @@
 import Foundation
 import UIKit
 
-var vSpinner : UIView?
+var vSpinner: UIView?
 
 extension UIViewController {
-    func showSpinner(onView : UIView) {
+    
+    func showSpinner(onView: UIView) {
         let spinnerView = UIView.init(frame: onView.bounds)
         spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-        let ai = UIActivityIndicatorView.init(style: .whiteLarge)
-        ai.startAnimating()
-        ai.center = spinnerView.center
+        let activityIndicator = UIActivityIndicatorView.init(style: .whiteLarge)
+        activityIndicator.startAnimating()
+        activityIndicator.center = spinnerView.center
         
         DispatchQueue.main.async {
-            spinnerView.addSubview(ai)
+            spinnerView.addSubview(activityIndicator)
             onView.addSubview(spinnerView)
         }
         
@@ -32,5 +33,15 @@ extension UIViewController {
             vSpinner?.removeFromSuperview()
             vSpinner = nil
         }
+    }
+    
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

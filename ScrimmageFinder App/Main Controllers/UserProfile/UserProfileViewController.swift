@@ -16,20 +16,28 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
     var imagePicker = UIImagePickerController()
     var profileImage: UIImage!
     var userID: String!
+    let coreDataController = CoreDataController.shared
     
-    override func viewDidAppear(_ animated: Bool) {
-        FIRFirestoreService.shared.getProfileImage(for: userID) { (image) in
-            self.profileImageView.image = image
-        }
-    }
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        self.navigationItem.title = Auth.auth().currentUser?.email
         userID = Auth.auth().currentUser?.uid
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         profileImageView.isUserInteractionEnabled = true
         imagePicker.delegate = self
         profileImageView.addGestureRecognizer(tapGestureRecognizer)
-
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+                
+        coreDataController.loadImage(for: userID) { (images) in
+            if images != nil {
+                guard let photoData = images?.first?.imageData else {return}
+                profileImage = UIImage(data: photoData)
+                self.profileImageView.image = profileImage
+            }
+        }
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -44,12 +52,20 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
         if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             profileImageView.contentMode = .scaleAspectFit
             profileImageView.image = pickedImage
-            FIRFirestoreService.shared.uploadProfileImage(image: pickedImage, for: userID)
+            FIRFirestoreService.shared.uploadProfileImage(image: pickedImage, for: userID) { (success) in
+                if success {
+                    self.coreDataController.removeProfileImage()
+                    self.coreDataController.prepareImageForSaving(image: pickedImage)
+                }
+            }
         } else if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             profileImageView.contentMode = .scaleAspectFit
             profileImageView.image = pickedImage
-            FIRFirestoreService.shared.uploadProfileImage(image: pickedImage, for: userID)
-            
+            FIRFirestoreService.shared.uploadProfileImage(image: pickedImage, for: userID) { (success) in
+                if success {
+                    self.coreDataController.prepareImageForSaving(image: pickedImage)
+                }
+            }
         }
         dismiss(animated: true, completion: nil)
     }

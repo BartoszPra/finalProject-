@@ -23,6 +23,8 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     //background photo image outlet
     @IBOutlet var backGroundPhotoImg: UIImageView!    
     @IBOutlet var scrimmagesTableView: UITableView!
+    let coreDataController = CoreDataController.shared
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -166,11 +168,12 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     @IBAction func goToAddScrimmagesClicked(_ sender: Any) {
-        self.coordinator?.goToAddScrimmage()
-        
+        self.coordinator?.goToAddScrimmage()        
     }
     
     @IBAction func logOutClicked(_ sender: Any) {
+        
+        CoreDataController.shared.removeProfileImage()
         do {
             try Auth.auth().signOut()
         } catch let err {

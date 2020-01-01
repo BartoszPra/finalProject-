@@ -18,25 +18,23 @@ class ScrimmagesCoordinator: Coordinator {
         self.navigationController = navigationController
         navigationController.coordinator = self
         let viewController = ScrimmagesViewController.instantiate()
-        viewController.tabBarItem = UITabBarItem(title: "Scrimmages", image: UIImage(named: "tabBarImage"), tag: 0)
+        viewController.tabBarItem = UITabBarItem(title: " Scrimmages ", image: UIImage(named: "tabBarImage"), tag: 0)
         viewController.coordinator = self
         navigationController.viewControllers = [viewController]
     }
     
     func goToNewDetail(with scrimmage: Scrimmage, from controller: UIViewController) {
-        
         ScrimmagesDetailCoordinator(navigationController: navigationController, scrimmage: scrimmage, isSavedUsed: true)
     }
         
     func goToAddScrimmage() {
-        let viewController = AddScrimmageViewController.instantiate()
+//        let viewController = AddScrimmageViewController.instantiate()
+//        navigationController.pushViewController(viewController, animated: true)
+        
+        let viewController = CreateScrimmageViewController.init(nibName: "CreateScrimmageViewController", bundle: nil)
         navigationController.pushViewController(viewController, animated: true)
     }
     
     func start() {
-    }
-    
-    func goTodetail() {
-        
     }
 }

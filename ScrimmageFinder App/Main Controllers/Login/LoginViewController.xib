@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="emailTF" destination="0ac-sP-wqL" id="1Qj-NM-GUa"/>
                 <outlet property="facebookLoginSignInButton" destination="btm-WF-TfO" id="egI-TU-htQ"/>
+                <outlet property="googleButton" destination="EHB-ee-OYO" id="YNf-3c-jap"/>
                 <outlet property="googleSignInButton" destination="EHB-ee-OYO" id="sly-zg-eJ0"/>
                 <outlet property="passTF" destination="d9M-Ne-79y" id="J8I-QG-PwX"/>
                 <outlet property="view" destination="iN0-l3-epB" id="FaZ-2O-49b"/>
@@ -169,6 +170,9 @@
                                             <integer key="value" value="5"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="loginWithGoogle:" destination="-1" eventType="valueChanged" id="JXF-6A-tRA"/>
+                                    </connections>
                                 </view>
                             </subviews>
                         </stackView>

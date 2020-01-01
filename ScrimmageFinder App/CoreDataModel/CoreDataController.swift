@@ -16,7 +16,7 @@ class CoreDataController {
     private init() {}
     
     static let shared = CoreDataController()
-    
+        
     // dispatch queues
     let convertQueue = DispatchQueue(label: "convertQueue", attributes: .concurrent)
     let saveQueue = DispatchQueue(label: "saveQueue", attributes: .concurrent)
@@ -37,7 +37,7 @@ class CoreDataController {
     }()
     
     // MARK: - Core Data Saving support
-    func saveContext () {
+    func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
@@ -65,31 +65,28 @@ class CoreDataController {
     }
     
     func prepareImageForSaving(image: UIImage) {
-
-           // use date as unique id
-           let date : Double = NSDate().timeIntervalSince1970
-
-           // dispatch with gcd.
-
-               // create NSData from UIImage
+        
+        // use date as unique id
+        let date : Double = NSDate().timeIntervalSince1970
+        // create NSData from UIImage
         guard let imageData = image.jpegData(compressionQuality: 1) else {
             // handle failed conversion
             print("jpg error")
             return
         }
-
-               // scale image, I chose the size of the VC because it is easy
-        let thumbnail = image.resizeImage(targetSize: 100f)//image.scale(toSize: self.view.frame.size)
-
-               guard let thumbnailData  = UIImageJPEGRepresentation(thumbnail, 0.7) else {
-                   // handle failed conversion
-                   print("jpg error")
-                   return
-               }
-
-               // send to save function
-               self.saveImage(imageData, thumbnailData: thumbnailData, date: date)
-       }
+        
+        // scale image, I chose the size of the VC because it is easy
+        let thumbnail = image.resizeImage(targetSize: CGSize(width: 100, height: 100))
+        
+        guard let thumbnailData  = thumbnail.jpegData(compressionQuality: 0.7) else {
+            // handle failed conversion
+            print("jpg error")
+            return
+        }
+        
+        // send to save function
+        self.saveImage(imageData: imageData as NSData, thumbnailData: thumbnailData as NSData, date: date)
+    }
     
     func saveImage(imageData: NSData, thumbnailData: NSData, date: Double) {
         
@@ -120,5 +117,49 @@ class CoreDataController {
         
         // clear the moc
         moc.refreshAllObjects()
+    }
+    
+    enum ImageType: String {
+        case fullSize, thumbnail
+        
+        var description: String {
+            switch self {
+            case .fullSize: return "FullRes"
+            case .thumbnail: return "Thumbnail"
+            }
+        }
+    }
+    
+    func removeProfileImage() {
+        
+        let context = persistentContainer.viewContext
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "FullRes")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        let deleteFetchThumbnail = NSFetchRequest<NSFetchRequestResult>(entityName: "Thumbnail")
+        let deleteThumbnailsRequest = NSBatchDeleteRequest(fetchRequest: deleteFetchThumbnail)
+        do {
+            try context.execute(deleteRequest)
+            try context.execute(deleteThumbnailsRequest)
+            try context.save()
+            print("Profile image deleted")
+        } catch {
+            print ("There was an error")
+        }
+    }
+    
+    func loadImage(for userId: String, images: ([FullRes]?) -> Void) {
+        
+        let moc = persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FullRes")
+        
+        do {
+            let results = try moc.fetch(fetchRequest)
+            let imageData = results as? [FullRes]
+            images(imageData)
+            
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
+            return
+        }
     }
 }

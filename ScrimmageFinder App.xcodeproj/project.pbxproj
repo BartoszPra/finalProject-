@@ -34,6 +34,19 @@
 		A50F4248228472CC007841A2 /* MyScrimmagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50F4246228472CC007841A2 /* MyScrimmagesViewController.xib */; };
 		A50F424C2284785E007841A2 /* MyScrimmagesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F424B2284785E007841A2 /* MyScrimmagesCoordinator.swift */; };
 		A518D7CB2370D7F400DBDC1A /* SavedScrimmagesCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = A591A30F236F30010075F8E4 /* SavedScrimmagesCell.xib */; };
+		A5531F8A23B22EEF0054DA0A /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5531F8923B22EEF0054DA0A /* UIButton+Extensions.swift */; };
+		A5531F8E23B2377F0054DA0A /* CreateScrimmageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5531F8C23B2377F0054DA0A /* CreateScrimmageViewController.swift */; };
+		A5531F8F23B2377F0054DA0A /* CreateScrimmageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5531F8D23B2377F0054DA0A /* CreateScrimmageViewController.xib */; };
+		A5531F9323B246E10054DA0A /* TextViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5531F9123B246E10054DA0A /* TextViewTableViewCell.swift */; };
+		A5531F9423B246E10054DA0A /* TextViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5531F9223B246E10054DA0A /* TextViewTableViewCell.xib */; };
+		A5531F9923B572670054DA0A /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5531F9723B572670054DA0A /* PickerTableViewCell.swift */; };
+		A5531F9A23B572670054DA0A /* PickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5531F9823B572670054DA0A /* PickerTableViewCell.xib */; };
+		A5531F9E23BA05E10054DA0A /* LogoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5531F9C23BA05E10054DA0A /* LogoTableViewCell.swift */; };
+		A5531F9F23BA05E10054DA0A /* LogoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5531F9D23BA05E10054DA0A /* LogoTableViewCell.xib */; };
+		A5531FA323BA31E80054DA0A /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5531FA123BA31E80054DA0A /* ButtonTableViewCell.swift */; };
+		A5531FA423BA31E80054DA0A /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5531FA223BA31E80054DA0A /* ButtonTableViewCell.xib */; };
+		A5531FA823BB5CAF0054DA0A /* CustomPickerCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5531FA623BB5CAF0054DA0A /* CustomPickerCellTableViewCell.swift */; };
+		A5531FA923BB5CAF0054DA0A /* CustomPickerCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5531FA723BB5CAF0054DA0A /* CustomPickerCellTableViewCell.xib */; };
 		A57BD1232357A09F00A324BC /* SFTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD1222357A09F00A324BC /* SFTheme.swift */; };
 		A57BD1262357A33E00A324BC /* SFNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD1252357A33E00A324BC /* SFNames.swift */; };
 		A57BD12C2357AE4C00A324BC /* SFdetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A57BD12B2357AE4C00A324BC /* SFdetailViewController.xib */; };
@@ -147,6 +160,19 @@
 		A50F4245228472CC007841A2 /* MyScrimmagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrimmagesViewController.swift; sourceTree = "<group>"; };
 		A50F4246228472CC007841A2 /* MyScrimmagesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyScrimmagesViewController.xib; sourceTree = "<group>"; };
 		A50F424B2284785E007841A2 /* MyScrimmagesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrimmagesCoordinator.swift; sourceTree = "<group>"; };
+		A5531F8923B22EEF0054DA0A /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
+		A5531F8C23B2377F0054DA0A /* CreateScrimmageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScrimmageViewController.swift; sourceTree = "<group>"; };
+		A5531F8D23B2377F0054DA0A /* CreateScrimmageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateScrimmageViewController.xib; sourceTree = "<group>"; };
+		A5531F9123B246E10054DA0A /* TextViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewTableViewCell.swift; sourceTree = "<group>"; };
+		A5531F9223B246E10054DA0A /* TextViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewTableViewCell.xib; sourceTree = "<group>"; };
+		A5531F9723B572670054DA0A /* PickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
+		A5531F9823B572670054DA0A /* PickerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerTableViewCell.xib; sourceTree = "<group>"; };
+		A5531F9C23BA05E10054DA0A /* LogoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoTableViewCell.swift; sourceTree = "<group>"; };
+		A5531F9D23BA05E10054DA0A /* LogoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoTableViewCell.xib; sourceTree = "<group>"; };
+		A5531FA123BA31E80054DA0A /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		A5531FA223BA31E80054DA0A /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
+		A5531FA623BB5CAF0054DA0A /* CustomPickerCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerCellTableViewCell.swift; sourceTree = "<group>"; };
+		A5531FA723BB5CAF0054DA0A /* CustomPickerCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomPickerCellTableViewCell.xib; sourceTree = "<group>"; };
 		A57BD1222357A09F00A324BC /* SFTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFTheme.swift; sourceTree = "<group>"; };
 		A57BD1252357A33E00A324BC /* SFNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNames.swift; sourceTree = "<group>"; };
 		A57BD12B2357AE4C00A324BC /* SFdetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SFdetailViewController.xib; sourceTree = "<group>"; };
@@ -239,7 +265,7 @@
 				A591A307236F285D0075F8E4 /* Saved Scrimmages */,
 				A57BD1282357A64D00A324BC /* MainTabBar */,
 				03D14CF120E0EBA300D76E38 /* ScrimmagesViewController.swift */,
-				C7B8EEF1227E63FF00AB253F /* AddScrimmageViewController.swift */,
+				A5531F8B23B2372E0054DA0A /* Add Scrimmage ViewController */,
 			);
 			path = "Main Controllers";
 			sourceTree = "<group>";
@@ -397,9 +423,77 @@
 		A518D7CD2370DE1E00DBDC1A /* ReusableCells */ = {
 			isa = PBXGroup;
 			children = (
+				A5531F9023B2467C0054DA0A /* CreateScrmmageCells */,
 				A591A30A236F2F610075F8E4 /* ScrimmageCell */,
 			);
 			path = ReusableCells;
+			sourceTree = "<group>";
+		};
+		A5531F8B23B2372E0054DA0A /* Add Scrimmage ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C7B8EEF1227E63FF00AB253F /* AddScrimmageViewController.swift */,
+				A5531F8C23B2377F0054DA0A /* CreateScrimmageViewController.swift */,
+				A5531F8D23B2377F0054DA0A /* CreateScrimmageViewController.xib */,
+			);
+			path = "Add Scrimmage ViewController";
+			sourceTree = "<group>";
+		};
+		A5531F9023B2467C0054DA0A /* CreateScrmmageCells */ = {
+			isa = PBXGroup;
+			children = (
+				A5531FA523BB5C8F0054DA0A /* CustomPickerCell */,
+				A5531FA023BA31CF0054DA0A /* ButtonCell */,
+				A5531F9B23BA05C20054DA0A /* Logo Cell */,
+				A5531F9623B247120054DA0A /* PickerCell */,
+				A5531F9523B246FD0054DA0A /* TextViewCell */,
+			);
+			path = CreateScrmmageCells;
+			sourceTree = "<group>";
+		};
+		A5531F9523B246FD0054DA0A /* TextViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A5531F9123B246E10054DA0A /* TextViewTableViewCell.swift */,
+				A5531F9223B246E10054DA0A /* TextViewTableViewCell.xib */,
+			);
+			path = TextViewCell;
+			sourceTree = "<group>";
+		};
+		A5531F9623B247120054DA0A /* PickerCell */ = {
+			isa = PBXGroup;
+			children = (
+				A5531F9723B572670054DA0A /* PickerTableViewCell.swift */,
+				A5531F9823B572670054DA0A /* PickerTableViewCell.xib */,
+			);
+			path = PickerCell;
+			sourceTree = "<group>";
+		};
+		A5531F9B23BA05C20054DA0A /* Logo Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A5531F9C23BA05E10054DA0A /* LogoTableViewCell.swift */,
+				A5531F9D23BA05E10054DA0A /* LogoTableViewCell.xib */,
+			);
+			path = "Logo Cell";
+			sourceTree = "<group>";
+		};
+		A5531FA023BA31CF0054DA0A /* ButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				A5531FA123BA31E80054DA0A /* ButtonTableViewCell.swift */,
+				A5531FA223BA31E80054DA0A /* ButtonTableViewCell.xib */,
+			);
+			path = ButtonCell;
+			sourceTree = "<group>";
+		};
+		A5531FA523BB5C8F0054DA0A /* CustomPickerCell */ = {
+			isa = PBXGroup;
+			children = (
+				A5531FA623BB5CAF0054DA0A /* CustomPickerCellTableViewCell.swift */,
+				A5531FA723BB5CAF0054DA0A /* CustomPickerCellTableViewCell.xib */,
+			);
+			path = CustomPickerCell;
 			sourceTree = "<group>";
 		};
 		A57BD1242357A30E00A324BC /* Constants */ = {
@@ -481,6 +575,7 @@
 			children = (
 				A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */,
 				A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */,
+				A5531F8923B22EEF0054DA0A /* UIButton+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -695,16 +790,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				A591A306236E57A60075F8E4 /* RegisterViewController.xib in Resources */,
+				A5531F9423B246E10054DA0A /* TextViewTableViewCell.xib in Resources */,
 				A5F762C72388BB0F002CD1B3 /* UsersListViewController.xib in Resources */,
 				03F10DD320DC55C300F8C62B /* LaunchScreen.storyboard in Resources */,
 				A50F4248228472CC007841A2 /* MyScrimmagesViewController.xib in Resources */,
 				034D429120E4E8FD00D59F8C /* Settings.bundle in Resources */,
 				A57BD1302365FDBD00A324BC /* LoginViewController.xib in Resources */,
 				A5F762D8238AD365002CD1B3 /* UserProfileViewController.xib in Resources */,
+				A5531F9F23BA05E10054DA0A /* LogoTableViewCell.xib in Resources */,
 				034D429320E54FCA00D59F8C /* GoogleService-Info.plist in Resources */,
+				A5531F9A23B572670054DA0A /* PickerTableViewCell.xib in Resources */,
 				A5F762CF23899EBA002CD1B3 /* SFUserTableViewCell.xib in Resources */,
 				03F10DCB20DC55BF00F8C62B /* Main.storyboard in Resources */,
+				A5531FA423BA31E80054DA0A /* ButtonTableViewCell.xib in Resources */,
 				A591A316236F57CB0075F8E4 /* SavedScrimmagesViewController.xib in Resources */,
+				A5531F8F23B2377F0054DA0A /* CreateScrimmageViewController.xib in Resources */,
+				A5531FA923BB5CAF0054DA0A /* CustomPickerCellTableViewCell.xib in Resources */,
 				A57BD12C2357AE4C00A324BC /* SFdetailViewController.xib in Resources */,
 				034D429720E7F0EC00D59F8C /* Assets.xcassets in Resources */,
 			);
@@ -850,6 +951,7 @@
 				A518D7CB2370D7F400DBDC1A /* SavedScrimmagesCell.xib in Sources */,
 				A5D7433F22F7A2C20047E9E0 /* MyScrimmagesViewController.swift in Sources */,
 				A57BD1262357A33E00A324BC /* SFNames.swift in Sources */,
+				A5531FA323BA31E80054DA0A /* ButtonTableViewCell.swift in Sources */,
 				A5CC95702395EA6C004A0810 /* UIImage+Extensions.swift in Sources */,
 				A59034E92391A3A200CB7284 /* FIRStorageReference.swift in Sources */,
 				C751B37A2259225D0060D1B2 /* MainCoordinator.swift in Sources */,
@@ -869,13 +971,16 @@
 				0369DAEF20E13635006B7507 /* SFdetailViewController.swift in Sources */,
 				A5F762C62388BB0F002CD1B3 /* UsersListViewController.swift in Sources */,
 				04C8F37A20FF2A2F00AF48E4 /* RegisterViewController.swift in Sources */,
+				A5531FA823BB5CAF0054DA0A /* CustomPickerCellTableViewCell.swift in Sources */,
 				03C6E1E820DD357D001DFD01 /* FIRFiestoreService.swift in Sources */,
+				A5531F9923B572670054DA0A /* PickerTableViewCell.swift in Sources */,
 				0369DAEA20E121B1006B7507 /* SavedScrimmagesViewController.swift in Sources */,
 				A5F762D7238AD365002CD1B3 /* UserProfileViewController.swift in Sources */,
 				03C6E1F020DD63E0001DFD01 /* SnapshotExtensions.swift in Sources */,
 				A5F762CE23899EBA002CD1B3 /* SFUserTableViewCell.swift in Sources */,
 				A57BD1232357A09F00A324BC /* SFTheme.swift in Sources */,
 				03F10DC620DC55BF00F8C62B /* AppDelegate.swift in Sources */,
+				A5531F8E23B2377F0054DA0A /* CreateScrimmageViewController.swift in Sources */,
 				A5F762DC238AE1A9002CD1B3 /* UserProfileCoordinator.swift in Sources */,
 				C7BFC25322820AB000EE6EB4 /* TabBarController.swift in Sources */,
 				C7BFC24F2282084F00EE6EB4 /* ScrimmagesCoordinator.swift in Sources */,
@@ -887,8 +992,11 @@
 				03F10DCE20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld in Sources */,
 				A5F762CA2388BB7E002CD1B3 /* User.swift in Sources */,
 				C7B8EEF2227E63FF00AB253F /* AddScrimmageViewController.swift in Sources */,
+				A5531F8A23B22EEF0054DA0A /* UIButton+Extensions.swift in Sources */,
 				A591A312236F30010075F8E4 /* SavedScrimmagesCell.swift in Sources */,
 				03C6E1EE20DD59C3001DFD01 /* EncodableExtensions.swift in Sources */,
+				A5531F9323B246E10054DA0A /* TextViewTableViewCell.swift in Sources */,
+				A5531F9E23BA05E10054DA0A /* LogoTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1079,7 +1187,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "ScrimmageFinder App/Other/ScrimmageFinder App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JHKQ35KX57;
+				DEVELOPMENT_TEAM = NXGZ2MBM6T;
 				INFOPLIST_FILE = "ScrimmageFinder App/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1101,7 +1209,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "ScrimmageFinder App/Other/ScrimmageFinder App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JHKQ35KX57;
+				DEVELOPMENT_TEAM = NXGZ2MBM6T;
 				INFOPLIST_FILE = "ScrimmageFinder App/Other/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (

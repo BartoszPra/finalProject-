@@ -66,4 +66,5 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
         let scrimmage = self.scrimmages[indexPath.row]
         self.coordinator?.goToDetail(with: scrimmage, from: self)
     }
+    
 }
