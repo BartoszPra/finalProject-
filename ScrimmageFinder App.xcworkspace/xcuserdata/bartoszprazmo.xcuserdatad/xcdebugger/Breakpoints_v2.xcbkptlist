@@ -398,58 +398,10 @@
             filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C2195D7A-3A21-4466-AB9B-3B66E0238026"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C2195D7A-3A21-4466-AB9B-3B66E0238026 - bf24daa63dc2b34b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ScrimmageFinder_App.CreateScrimmageViewController.imagePickerController(_: __C.UIImagePickerController, didFinishPickingMediaWithInfo: Swift.Dictionary&lt;__C.UIImagePickerControllerInfoKey, Any&gt;) -&gt; ()"
-                  moduleName = "ScrimmageFinder App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/Main%20Controllers/Add%20Scrimmage%20ViewController/CreateScrimmageViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "178"
-                  endingLineNumber = "178"
-                  offsetFromSymbolStart = "1975">
-               </Location>
-               <Location
-                  uuid = "C2195D7A-3A21-4466-AB9B-3B66E0238026 - bf24daa63dc2b34b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ScrimmageFinder_App.CreateScrimmageViewController.imagePickerController(_: __C.UIImagePickerController, didFinishPickingMediaWithInfo: Swift.Dictionary&lt;__C.UIImagePickerControllerInfoKey, Any&gt;) -&gt; ()"
-                  moduleName = "ScrimmageFinder App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/Main%20Controllers/Add%20Scrimmage%20ViewController/CreateScrimmageViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "178"
-                  endingLineNumber = "178"
-                  offsetFromSymbolStart = "2099">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

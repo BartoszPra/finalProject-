@@ -25,6 +25,8 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
         imagePicker.delegate = self
         self.title = "New Scrimmage"
         self.setupTableView()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     func setupTableView() {
@@ -182,5 +184,19 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
             tableView.reloadData()
         }
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+       if let _ = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+           if self.view.frame.origin.y == 0 {
+               self.view.frame.origin.y -= 25 //keyboardSize.height
+           }
+       }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
 }
