@@ -16,17 +16,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="lPw-OC-cD8">
-                        <rect key="frame" x="10" y="0.0" width="300" height="44"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8zQ-Qk-Nwu">
+                        <rect key="frame" x="15" y="5" width="290" height="34"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bfa-or-8qq">
-                                <rect key="frame" x="0.0" y="12" width="147.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="   title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bfa-or-8qq">
+                                <rect key="frame" x="0.0" y="0.0" width="290" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Please insert date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="27r-Hb-cby">
-                                <rect key="frame" x="152.5" y="8" width="147.5" height="28.5"/>
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="Please insert date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="27r-Hb-cby">
+                                <rect key="frame" x="0.0" y="14.5" width="290" height="19.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -37,10 +37,10 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="lPw-OC-cD8" firstAttribute="top" secondItem="WkX-TN-NuP" secondAttribute="top" id="Cw3-SY-SJi"/>
-                    <constraint firstAttribute="bottom" secondItem="lPw-OC-cD8" secondAttribute="bottom" id="Olv-bY-Azj"/>
-                    <constraint firstItem="lPw-OC-cD8" firstAttribute="leading" secondItem="WkX-TN-NuP" secondAttribute="leading" constant="10" id="kqJ-D8-HS4"/>
-                    <constraint firstAttribute="trailing" secondItem="lPw-OC-cD8" secondAttribute="trailing" constant="10" id="z8I-s6-UTb"/>
+                    <constraint firstItem="8zQ-Qk-Nwu" firstAttribute="leading" secondItem="WkX-TN-NuP" secondAttribute="leading" constant="15" id="cEr-m6-jcw"/>
+                    <constraint firstAttribute="bottom" secondItem="8zQ-Qk-Nwu" secondAttribute="bottom" constant="5" id="in4-h7-KKs"/>
+                    <constraint firstItem="8zQ-Qk-Nwu" firstAttribute="top" secondItem="WkX-TN-NuP" secondAttribute="top" constant="5" id="m9z-j9-Jl0"/>
+                    <constraint firstAttribute="trailing" secondItem="8zQ-Qk-Nwu" secondAttribute="trailing" constant="15" id="srF-jx-F6Y"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

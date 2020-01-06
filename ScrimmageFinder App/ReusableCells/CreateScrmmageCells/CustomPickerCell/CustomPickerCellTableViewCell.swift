@@ -30,7 +30,7 @@ class CustomPickerCellTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPi
         self.inputTextField.delegate = self
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         self.inputTextField.attributedPlaceholder = attributedPlaceHolder        
-        self.titleLabel.text = title
+        self.titleLabel.text = "   " + title
         pickerData = pickerData(for: type)
         self.picker = UIPickerView()
         self.picker.backgroundColor = .black

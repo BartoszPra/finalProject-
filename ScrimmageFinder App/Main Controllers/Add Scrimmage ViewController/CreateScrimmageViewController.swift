@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GooglePlaces
 
 struct CellDefinition {
     
@@ -15,7 +16,7 @@ struct CellDefinition {
 }
 
 class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+        
     @IBOutlet weak var tableView: UITableView!
     var addScrimmageArray: [CellDefinition]!
     var imagePicker = UIImagePickerController()
@@ -48,10 +49,11 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         if indexPath.row == 0 {
             return 65
         } else {
-            return 54
+            return 58
         }
     }
     
@@ -95,9 +97,9 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
             cell = celldef
             
         case 6:
-            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "textFieldCell",
-                                                              for: indexPath) as? TextViewTableViewCell else { return TextViewTableViewCell()}
-            celldef.cofnfigureCell(with: "Address", placeHolder: "Please add the venue Address", keyboardType: UIKeyboardType.default)
+            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "addressCell",
+                                                              for: indexPath) as? AddressCellTableViewCell else { return AddressCellTableViewCell()}
+            celldef.configureCell(with: "Please add address", target: self, action: #selector(self.autocompleteClicked))
             cell = celldef
             
         case 7:
@@ -141,6 +143,8 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
         tableView.register(buttonNib, forCellReuseIdentifier: "buttonCell")
         let customPickerNib = UINib(nibName: "CustomPickerCellTableViewCell", bundle: nil)
         tableView.register(customPickerNib, forCellReuseIdentifier: "customPickerCell")
+        let addressPickerNib = UINib(nibName: "AddressCellTableViewCell", bundle: nil)
+        tableView.register(addressPickerNib, forCellReuseIdentifier: "addressCell")
     }
     
     @objc func invitePlayers() {
@@ -198,5 +202,44 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
         if self.view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
+    }
+    
+    @objc func autocompleteClicked(_ sender: UIButton) {
+      let autocompleteController = GMSAutocompleteViewController()
+      autocompleteController.delegate = self
+
+      // Specify the place data types to return.
+      let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+        UInt(GMSPlaceField.formattedAddress.rawValue) | UInt(GMSPlaceField.coordinate.rawValue) | UInt(GMSPlaceField.placeID.rawValue))!
+      autocompleteController.placeFields = fields
+
+      // Specify a filter.
+      let filter = GMSAutocompleteFilter()
+        filter.type = .noFilter
+      autocompleteController.autocompleteFilter = filter
+
+      // Display the autocomplete view controller.
+      present(autocompleteController, animated: true, completion: nil)
+    }
+        
+}
+
+extension CreateScrimmageViewController: GMSAutocompleteViewControllerDelegate {
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        dismiss(animated: true, completion: nil)
+        let index = IndexPath(row: 6, section: 0)
+        guard let cell = tableView.cellForRow(at: index) as? AddressCellTableViewCell else { return }        
+        cell.addressTextField.text = (place.name ?? "") + ", " + (place.formattedAddress ?? "")
+        tableView.reloadData()                
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        print("Canceled")
+        viewController.dismiss(animated: true, completion: nil)
     }
 }

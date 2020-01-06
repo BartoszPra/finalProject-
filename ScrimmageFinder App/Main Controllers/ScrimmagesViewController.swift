@@ -24,13 +24,14 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet var backGroundPhotoImg: UIImageView!    
     @IBOutlet var scrimmagesTableView: UITableView!
     let coreDataController = CoreDataController.shared
-    
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         scrimmagesTableView.dragDelegate = self
         searchBar.delegate = self
-        searchBar.returnKeyType = UIReturnKeyType.done        
+        searchBar.returnKeyType = UIReturnKeyType.done
+        searchBar.barStyle = .blackOpaque
+        searchBar.setTextField(color: .black)
         ViewHelpers.setLogoAsNavigationTitle(imageName: "logoNoBackgroundBrighter", on: self)
         UserDefaults.standard.register(defaults: [String: Any]())
        

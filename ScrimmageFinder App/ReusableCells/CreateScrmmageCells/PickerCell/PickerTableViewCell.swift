@@ -26,7 +26,7 @@ class PickerTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         self.inputField.attributedPlaceholder = attributedPlaceHolder
-        self.title.text = title        
+        self.title.text = "    " + title        
         self.picker = UIDatePicker()
         self.picker.datePickerMode = pickerType
         self.picker.minimumDate = Date()

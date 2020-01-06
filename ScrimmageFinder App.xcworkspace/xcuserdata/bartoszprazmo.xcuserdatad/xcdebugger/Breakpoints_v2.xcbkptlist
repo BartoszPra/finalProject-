@@ -320,7 +320,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
             endingLineNumber = "36"
-            landmarkName = "sign(_:didSignInFor:withError:)"
+            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -366,25 +366,9 @@
             filePath = "ScrimmageFinder App/Main Controllers/ScrimmagesViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "logOutClicked(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "825E73A8-A14E-4C7E-9BD4-B47553DBF856"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/ReusableCells/CreateScrmmageCells/PickerCell/PickerTableViewCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
-            landmarkName = "datePickerValueChanged(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -398,9 +382,25 @@
             filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
+            landmarkName = "CreateScrimmageViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9C3B5699-553A-460C-98BE-2284F319C8ED"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "viewController(_:didAutocompleteWith:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

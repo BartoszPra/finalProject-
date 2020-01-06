@@ -4,6 +4,7 @@ import Intents
 import FBSDKCoreKit
 import GoogleSignIn
 import Firebase
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
@@ -13,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        GMSPlacesClient.provideAPIKey("AIzaSyApO0USOcr2lPn-RRy1Jdfg9UPv2UINosU")
         SFAppearance.setUpApperance()
         let navController = CoordinatedNavigationController()
         coordinator = MainCoordinator(navigationController: navController)

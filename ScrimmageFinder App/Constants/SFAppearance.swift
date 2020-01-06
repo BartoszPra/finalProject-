@@ -14,6 +14,7 @@ class SFAppearance {
     static func setUpApperance() {
         self.setupNavigationBar()
         self.setutNavigationBarAppearance()
+        setupSearchBarAppearance()
     }
     
     static func setupNavigationBar() {
@@ -30,5 +31,9 @@ class SFAppearance {
         navigationBarAppearace.barTintColor = UIColor.black
         navigationBarAppearace.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
+    }
+    
+    static func setupSearchBarAppearance() {
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
 }

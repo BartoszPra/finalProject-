@@ -78,6 +78,9 @@ PODS:
     - GoogleUtilities/Network (~> 5.2)
     - "GoogleUtilities/NSData+zlib (~> 5.2)"
     - nanopb (~> 0.3)
+  - GoogleMaps/Base (3.7.0)
+  - GooglePlaces (3.7.0):
+    - GoogleMaps/Base (= 3.7.0)
   - GoogleSignIn (4.4.0):
     - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
     - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
@@ -142,6 +145,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
   - Firebase/Storage
+  - GooglePlaces
   - GoogleSignIn
   - SilentScrolly
   - SwiftLint
@@ -174,6 +178,8 @@ SPEC REPOS:
     - SwiftLint
   trunk:
     - FirebaseStorage
+    - GoogleMaps
+    - GooglePlaces
 
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
@@ -190,6 +196,8 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 7221670e908b41e7ae669600db9d0d201417d0cd
   FirebaseStorage: 29075f874c2b3cf61e5221a62c4ceefc809e5412
   GoogleAppMeasurement: 6cf307834da065863f9faf4c0de0a936d81dd832
+  GoogleMaps: 55da829c68aa931f3ae982b9e341cc2f3d89c587
+  GooglePlaces: a62077320f9d64239245af63aa1aa136393ebeb6
   GoogleSignIn: 7ff245e1a7b26d379099d3243a562f5747e23d39
   GoogleToolboxForMac: ff31605b7d66400dcec09bed5861689aebadda4d
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0
@@ -202,6 +210,6 @@ SPEC CHECKSUMS:
   SilentScrolly: 0d85996304048c9e6c49788823c9c2a64185be76
   SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
 
-PODFILE CHECKSUM: 27d3e30e5cfdd47e08b0b58a169480d3f71edd95
+PODFILE CHECKSUM: 1b9dabb317e67a9647ce2e6336c79074a15ff938
 
 COCOAPODS: 1.8.3

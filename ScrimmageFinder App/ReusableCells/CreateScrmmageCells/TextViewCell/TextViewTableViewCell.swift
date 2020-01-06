@@ -20,7 +20,7 @@ class TextViewTableViewCell: UITableViewCell, UITextFieldDelegate {
     func cofnfigureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType ) {
         
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
-        titleLabel.text = title
+        titleLabel.text = "    " + title
         inputTextField.attributedPlaceholder = attributedPlaceHolder
         inputTextField.keyboardType = keyboardType
     }
