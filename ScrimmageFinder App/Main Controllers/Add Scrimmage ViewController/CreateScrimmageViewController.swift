@@ -229,9 +229,13 @@ extension CreateScrimmageViewController: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         dismiss(animated: true, completion: nil)
         let index = IndexPath(row: 6, section: 0)
-        guard let cell = tableView.cellForRow(at: index) as? AddressCellTableViewCell else { return }        
-        cell.addressTextField.text = (place.name ?? "") + ", " + (place.formattedAddress ?? "")
-        tableView.reloadData()                
+        guard let cell = tableView.cellForRow(at: index) as? AddressCellTableViewCell else { return }
+        
+        cell.addressTextField.text = (place.name ?? "") + ",\n " + (place.formattedAddress ?? "")
+        
+        cell.addressTextField.textColor = .white
+        tableView.reloadData()
+        
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {

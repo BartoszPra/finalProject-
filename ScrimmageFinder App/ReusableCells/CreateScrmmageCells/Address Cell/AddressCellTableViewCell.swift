@@ -10,16 +10,14 @@ import UIKit
 
 class AddressCellTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var addressTextField: UITextView!
+    @IBOutlet weak var addressTextField: UILabel!
     
     func configureCell(with placeHolder: String, target: UIViewController, action: Selector) {
         self.addressTextField.layer.borderColor = UIColor.lightGray.cgColor
-        self.addressTextField.layer.borderWidth = 1
-        //let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        self.addressTextField.layer.borderWidth = 1.5
+        //self.addressTextField.textColor = .lightGray
         //self.addressTextField.text = placeHolder
-        
         let gesture = UITapGestureRecognizer(target: target, action: action)
-        self.addressTextField.addGestureRecognizer(gesture)
-        
+        self.addressTextField.addGestureRecognizer(gesture)        
     }
 }
