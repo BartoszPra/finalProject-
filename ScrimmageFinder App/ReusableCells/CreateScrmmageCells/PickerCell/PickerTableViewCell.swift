@@ -16,6 +16,7 @@ class PickerTableViewCell: UITableViewCell, UITextFieldDelegate {
     var selectedDate: Date!
     var isFilled = false
     var selectedDateString: String!
+	var returnValue: ((_ value: String) -> Void)?
         
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,7 +24,7 @@ class PickerTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
         
     func setupCell(with pickerType: UIDatePicker.Mode, title: String, placeHolder: String) {
-        
+		self.inputField.delegate = self
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         self.inputField.attributedPlaceholder = attributedPlaceHolder
         self.title.text = "    " + title        
@@ -53,10 +54,6 @@ class PickerTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     @objc func donePicker() {
-        if selectedDate != nil {
-            self.isFilled = true
-        }
-        inputField.text = selectedDateString
         inputField.resignFirstResponder()
     }
     
@@ -68,15 +65,41 @@ class PickerTableViewCell: UITableViewCell, UITextFieldDelegate {
             dateFormatter.dateFormat = "dd/MM/yyyy"
             selectedDate = picker.date
             selectedDateString = dateFormatter.string(from: picker.date)
+			inputField.text = dateFormatter.string(from: picker.date)
             print("Selected value" + selectedDateString)
         
         } else if picker.datePickerMode == .time {
             
             let dateFormatter: DateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "HH:mm:ss"
+            dateFormatter.dateFormat = "HH:mm"
             selectedDate = picker.date
             selectedDateString = dateFormatter.string(from: picker.date)
+			inputField.text = dateFormatter.string(from: picker.date)
             print("Selected value" + selectedDateString)
         }
+    }
+	
+	func textFieldDidBeginEditing(_ textField: UITextField) {
+       
+		if textField == inputField {
+			let dateFormatter: DateFormatter = DateFormatter()
+			if picker.datePickerMode == .date {
+				dateFormatter.dateFormat = "dd/MM/yyyy"
+				picker.date = Date()
+				selectedDate = Date()
+				inputField.text = dateFormatter.string(from: picker.date)
+			} else if picker.datePickerMode == .time {
+				let theDateAnHourFromNow = NSDate().addingTimeInterval(3600)
+				dateFormatter.dateFormat = "HH:mm"
+				picker.date = theDateAnHourFromNow as Date
+				selectedDate = theDateAnHourFromNow as Date
+				inputField.text = dateFormatter.string(from: picker.date)
+
+			}
+		}
+    }
+		
+	func textFieldDidEndEditing(_ textField: UITextField) {
+        returnValue?(inputField.text ?? "") // Use callback to return data
     }
 }

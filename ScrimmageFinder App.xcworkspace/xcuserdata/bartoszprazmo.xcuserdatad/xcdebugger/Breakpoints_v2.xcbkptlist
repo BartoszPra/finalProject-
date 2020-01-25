@@ -382,41 +382,41 @@
             filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "CreateScrimmageViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9C3B5699-553A-460C-98BE-2284F319C8ED"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "viewController(_:didAutocompleteWith:)"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "imageTapped(tapGestureRecognizer:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "992CD615-A6A9-4078-AD35-B448CD2BE2E0"
+            uuid = "A3EF9FD4-EB02-419A-9BE4-C94A7DADD095"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
+            landmarkName = "submitStringmmage()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CDDD7CAB-38D0-4160-92C3-F6B11F73F8F0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "submitStringmmage()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

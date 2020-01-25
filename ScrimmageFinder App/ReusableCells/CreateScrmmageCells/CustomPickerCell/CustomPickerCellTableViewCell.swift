@@ -20,7 +20,9 @@ class CustomPickerCellTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPi
     var pickerData: [String]!
     var isFilled = false
     var selectedInput: String!
+	var selectedIntValue: Int?
     var picker: UIPickerView!
+	var returnValue: ((_ value: Int) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,6 +68,7 @@ class CustomPickerCellTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPi
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.selectedInput = pickerData[row]
+		self.selectedIntValue = row + 1
         self.inputTextField.text = self.selectedInput
     }
     
@@ -104,10 +107,16 @@ class CustomPickerCellTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPi
             self.picker.selectRow(0, inComponent: 0, animated: true)
             self.pickerView(picker, attributedTitleForRow: 0, forComponent: 0)
             self.selectedInput = pickerData.first
+			self.selectedIntValue = 1
         }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return false
     }
+	
+	func textFieldDidEndEditing(_ textField: UITextField) {
+        returnValue?(selectedIntValue ?? 0) // Use callback to return data
+    }
+	
 }

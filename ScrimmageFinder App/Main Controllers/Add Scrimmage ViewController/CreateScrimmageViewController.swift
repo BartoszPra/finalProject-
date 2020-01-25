@@ -8,6 +8,7 @@
 
 import UIKit
 import GooglePlaces
+import Firebase
 
 struct CellDefinition {
     
@@ -21,6 +22,19 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
     var addScrimmageArray: [CellDefinition]!
     var imagePicker = UIImagePickerController()
     
+	//scrimmage variables
+	var name: String!
+	var contactName: String!
+	var contactNumber: String!
+	var address: String!
+	var geolocation: CLLocationCoordinate2D!
+	var currentStatus: Int!
+	var currentType: Int!
+	var image: UIImage!
+	var price: Double!
+	var time: String!
+	var date: String!
+		
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
@@ -71,29 +85,46 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
             guard let celldef = tableView.dequeueReusableCell(withIdentifier: "textFieldCell",
                                                               for: indexPath) as? TextViewTableViewCell else { return TextViewTableViewCell()}
             celldef.cofnfigureCell(with: "Name", placeHolder: "Please insert name", keyboardType: UIKeyboardType.default)
-            cell = celldef
+            celldef.returnValue = { value in
+				 self.name = value
+			}
+			
+			cell = celldef
+						
         case 2:
             guard let celldef = tableView.dequeueReusableCell(withIdentifier: "pickerCell",
                                                               for: indexPath) as? PickerTableViewCell else { return PickerTableViewCell()}
             celldef.setupCell(with: UIDatePicker.Mode.date, title: "Date", placeHolder: "Please insert date")
+			celldef.returnValue = { value in
+				 self.date = value
+			}
             cell = celldef
             
         case 3:
             guard let celldef = tableView.dequeueReusableCell(withIdentifier: "pickerCell",
                                                               for: indexPath) as? PickerTableViewCell else { return PickerTableViewCell()}
             celldef.setupCell(with: UIDatePicker.Mode.time, title: "Time", placeHolder: "Please insert time")
+			celldef.returnValue = { value in
+				 self.time = value
+			}
             cell = celldef
             
         case 4:
             guard let celldef = tableView.dequeueReusableCell(withIdentifier: "textFieldCell",
                                                               for: indexPath) as? TextViewTableViewCell else { return TextViewTableViewCell()}
             celldef.cofnfigureCell(with: "Contact Number", placeHolder: "Please insert contact number", keyboardType: UIKeyboardType.phonePad)
+			celldef.returnValue = { value in
+				 self.contactNumber = value
+			}
             cell = celldef
             
         case 5:
             guard let celldef = tableView.dequeueReusableCell(withIdentifier: "textFieldCell",
                                                               for: indexPath) as? TextViewTableViewCell else { return TextViewTableViewCell()}
             celldef.cofnfigureCell(with: "Contact Name", placeHolder: "Please insert contact name", keyboardType: UIKeyboardType.default)
+			celldef.returnValue = { value in
+				 self.contactName = value
+			}
             cell = celldef
             
         case 6:
@@ -106,12 +137,18 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
             guard let celldef = tableView.dequeueReusableCell(withIdentifier: "customPickerCell",
                                                               for: indexPath) as? CustomPickerCellTableViewCell else { return CustomPickerCellTableViewCell()}
             celldef.setupCell(with: "Status", placeHolder: "Please insert scrimmage status", type: .status)
+			celldef.returnValue = { value in
+				 self.currentStatus = value
+			}
             cell = celldef
         
         case 8:
             guard let celldef = tableView.dequeueReusableCell(withIdentifier: "customPickerCell",
                                                               for: indexPath) as? CustomPickerCellTableViewCell else { return CustomPickerCellTableViewCell()}
             celldef.setupCell(with: "Type", placeHolder: "Please insert scrimmage type", type: .type)
+			celldef.returnValue = { value in
+				 self.currentType = value
+			}
             cell = celldef
         
         case 9:
@@ -153,6 +190,16 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
     
     @objc func submitStringmmage() {
         print("Scrimmage Added")
+		
+		// swiftlint:disable:next line_length
+		print("Name: " + name +  "\n" + "contactName" + contactName + "\n" + "contactNumber" + contactNumber + "\n" + "address" + address + "\n")
+		//print("grjeipogjhreioghjioreghiroeghrieoghreioghrieoghrieoghreiogh")
+		print("currentStatus: \(self.currentStatus)" + "\n" + "currentType:" + "\(self.currentType)" + "\n" + "date:" + "\(self.date)" + "\n")
+					
+		// swiftlint:enable:next line_length
+		// missing
+		//		var geolocation: GeoPoint!
+		//		var price: Double!		
     }
     
     func createCellDictionaryArray() {
@@ -193,7 +240,7 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
     @objc private func keyboardWillShow(notification: NSNotification) {
        if let _ = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
            if self.view.frame.origin.y == 0 {
-               self.view.frame.origin.y -= 25 //keyboardSize.height
+               self.view.frame.origin.y -= 60  //keyboardSize.height
            }
        }
     }
@@ -232,7 +279,8 @@ extension CreateScrimmageViewController: GMSAutocompleteViewControllerDelegate {
         guard let cell = tableView.cellForRow(at: index) as? AddressCellTableViewCell else { return }
         
         cell.addressTextField.text = (place.name ?? "") + ",\n " + (place.formattedAddress ?? "")
-        
+		self.address = place.formattedAddress
+		self.geolocation = place.coordinate
         cell.addressTextField.textColor = .white
         tableView.reloadData()
         
@@ -246,4 +294,8 @@ extension CreateScrimmageViewController: GMSAutocompleteViewControllerDelegate {
         print("Canceled")
         viewController.dismiss(animated: true, completion: nil)
     }
+	
+	func createNewScrimmage() {
+		
+	}
 }

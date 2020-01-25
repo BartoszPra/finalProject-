@@ -15,8 +15,6 @@ class AddressCellTableViewCell: UITableViewCell {
     func configureCell(with placeHolder: String, target: UIViewController, action: Selector) {
         self.addressTextField.layer.borderColor = UIColor.lightGray.cgColor
         self.addressTextField.layer.borderWidth = 1.5
-        //self.addressTextField.textColor = .lightGray
-        //self.addressTextField.text = placeHolder
         let gesture = UITapGestureRecognizer(target: target, action: action)
         self.addressTextField.addGestureRecognizer(gesture)        
     }
