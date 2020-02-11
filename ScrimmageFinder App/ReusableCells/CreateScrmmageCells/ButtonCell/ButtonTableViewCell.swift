@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ButtonTableViewCell: UITableViewCell {
+class ButtonTableViewCell: MainCreateScrimmageCellTableViewCell {
     
     @IBOutlet weak var actionButton: UIButton!
     
@@ -16,10 +16,16 @@ class ButtonTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func configureCell(with buttonTitle: String, buttonColor: UIColor, action: Selector, target: UIViewController) {
-        self.actionButton.setTitle(buttonTitle, for: .normal)
+    override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
+		var buttonColor: UIColor
+		if title == "Add Scrimmage" {
+			buttonColor = UIColor.orange
+		} else {
+			buttonColor = UIColor.black
+		}
+        self.actionButton.setTitle(title, for: .normal)
         self.actionButton.backgroundColor = buttonColor
-        self.actionButton.addTarget(target, action: action, for: .touchUpInside)
+		self.actionButton.addTarget(target, action: action!, for: .touchUpInside)
     }
     
 }

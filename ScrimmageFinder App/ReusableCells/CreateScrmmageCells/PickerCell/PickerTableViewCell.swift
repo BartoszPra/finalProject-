@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PickerTableViewCell: UITableViewCell, UITextFieldDelegate {
+class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDelegate {
 
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var inputField: UITextField!
@@ -23,13 +23,13 @@ class PickerTableViewCell: UITableViewCell, UITextFieldDelegate {
        
     }
         
-    func setupCell(with pickerType: UIDatePicker.Mode, title: String, placeHolder: String) {
+	override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
 		self.inputField.delegate = self
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         self.inputField.attributedPlaceholder = attributedPlaceHolder
         self.title.text = "    " + title        
         self.picker = UIDatePicker()
-        self.picker.datePickerMode = pickerType
+		self.picker.datePickerMode = self.decidePickerType(for: title)
         self.picker.minimumDate = Date()
         self.picker.backgroundColor = .black
         self.picker.tintColor = .white
@@ -52,6 +52,17 @@ class PickerTableViewCell: UITableViewCell, UITextFieldDelegate {
         inputField.inputView = picker
         inputField.inputAccessoryView = toolBar
     }
+	
+	func decidePickerType(for title: String) -> UIDatePicker.Mode {
+		
+		if title == "Date" {
+			return UIDatePicker.Mode.date
+			
+		} else if title == "Time" {
+			return UIDatePicker.Mode.time
+		}
+		return UIDatePicker.Mode.date
+	}
     
     @objc func donePicker() {
         inputField.resignFirstResponder()

@@ -11,9 +11,11 @@ import UIKit
 enum CellType {
     case type
     case status
+	case price
+	case occurance
 }
 
-class CustomPickerCellTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class CustomPickerCellTableViewCell: MainCreateScrimmageCellTableViewCell, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var inputTextField: UITextField!
@@ -28,12 +30,12 @@ class CustomPickerCellTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPi
         super.awakeFromNib()
     }
         
-    func setupCell(with title: String, placeHolder: String, type: CellType) {
+    override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
         self.inputTextField.delegate = self
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         self.inputTextField.attributedPlaceholder = attributedPlaceHolder        
         self.titleLabel.text = "   " + title
-        pickerData = pickerData(for: type)
+        pickerData = pickerData(for: type!)
         self.picker = UIPickerView()
         self.picker.backgroundColor = .black
 
@@ -72,19 +74,20 @@ class CustomPickerCellTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPi
         self.inputTextField.text = self.selectedInput
     }
     
-    @objc func pickerValueChanged(_ picker: UIPickerView) {
-        
-    }
-    
     func pickerData(for type: CellType) -> [String] {
         
         var pickerData = [String]()
-        
-        if type == .status {
-            pickerData = ["Confirmed", "Not confirmed"]
-        } else if  type == .type {
-            pickerData = ["Private", "Public"]
-        }
+		
+		switch type {
+		case .status:
+			pickerData = ["Confirmed", "Provisional"]
+		case .type:
+			pickerData = ["Private", "Public"]
+		case .occurance:
+			pickerData = ["one-time", "weekly"]
+		case .price:
+			pickerData = ["Free", "£1", "£2", "£3", "£4", "£5", "£6", "£7", "£8", "£10", "£11"]
+		}
         return pickerData
     }
     
@@ -99,7 +102,7 @@ class CustomPickerCellTableViewCell: UITableViewCell, UIPickerViewDelegate, UIPi
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 2
+		return pickerData.count
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

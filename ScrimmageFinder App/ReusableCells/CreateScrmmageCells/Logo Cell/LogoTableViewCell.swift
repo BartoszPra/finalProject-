@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LogoTableViewCell: UITableViewCell, UIImagePickerControllerDelegate {
+class LogoTableViewCell: MainCreateScrimmageCellTableViewCell, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var photoView: UIView!
     @IBOutlet weak var logoImage: UIImageView!
@@ -20,7 +20,7 @@ class LogoTableViewCell: UITableViewCell, UIImagePickerControllerDelegate {
         super.awakeFromNib()
     }
     
-    func configureCell(with target: UIViewController, action: Selector) {
+	override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
         scrimmageLogo = logoImage.image
         let gestureRecognizer = UITapGestureRecognizer(target: target, action: action)
         photoView.addGestureRecognizer(gestureRecognizer)

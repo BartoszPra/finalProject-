@@ -19,8 +19,8 @@ struct CellDefinition {
 class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         
     @IBOutlet weak var tableView: UITableView!
-    var addScrimmageArray: [CellDefinition]!
     var imagePicker = UIImagePickerController()
+	var cellArray: [CellDefinitionHelper]!
     
 	//scrimmage variables
 	var name: String!
@@ -34,9 +34,11 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 	var price: Double!
 	var time: String!
 	var date: String!
+	var notes: String!
 		
     override func viewDidLoad() {
         super.viewDidLoad()
+		createCells()
         imagePicker.delegate = self
         self.title = "New Scrimmage"
         self.setupTableView()
@@ -55,118 +57,28 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 11
+		return cellArray.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if indexPath.row == 0 {
-            return 65
-        } else {
-            return 58
-        }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {        
+		return cellArray[indexPath.row].height
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        var cell: UITableViewCell        
-        switch indexPath.row {
-            
-        case 0:
-            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "logoCell",
-                                                              for: indexPath) as? LogoTableViewCell else { return LogoTableViewCell()}
-            celldef.configureCell(with: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-            cell = celldef
-        case 1:
-            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "textFieldCell",
-                                                              for: indexPath) as? TextViewTableViewCell else { return TextViewTableViewCell()}
-            celldef.cofnfigureCell(with: "Name", placeHolder: "Please insert name", keyboardType: UIKeyboardType.default)
-            celldef.returnValue = { value in
-				 self.name = value
-			}
-			
-			cell = celldef
-						
-        case 2:
-            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "pickerCell",
-                                                              for: indexPath) as? PickerTableViewCell else { return PickerTableViewCell()}
-            celldef.setupCell(with: UIDatePicker.Mode.date, title: "Date", placeHolder: "Please insert date")
-			celldef.returnValue = { value in
-				 self.date = value
-			}
-            cell = celldef
-            
-        case 3:
-            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "pickerCell",
-                                                              for: indexPath) as? PickerTableViewCell else { return PickerTableViewCell()}
-            celldef.setupCell(with: UIDatePicker.Mode.time, title: "Time", placeHolder: "Please insert time")
-			celldef.returnValue = { value in
-				 self.time = value
-			}
-            cell = celldef
-            
-        case 4:
-            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "textFieldCell",
-                                                              for: indexPath) as? TextViewTableViewCell else { return TextViewTableViewCell()}
-            celldef.cofnfigureCell(with: "Contact Number", placeHolder: "Please insert contact number", keyboardType: UIKeyboardType.phonePad)
-			celldef.returnValue = { value in
-				 self.contactNumber = value
-			}
-            cell = celldef
-            
-        case 5:
-            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "textFieldCell",
-                                                              for: indexPath) as? TextViewTableViewCell else { return TextViewTableViewCell()}
-            celldef.cofnfigureCell(with: "Contact Name", placeHolder: "Please insert contact name", keyboardType: UIKeyboardType.default)
-			celldef.returnValue = { value in
-				 self.contactName = value
-			}
-            cell = celldef
-            
-        case 6:
-            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "addressCell",
-                                                              for: indexPath) as? AddressCellTableViewCell else { return AddressCellTableViewCell()}
-            celldef.configureCell(with: "Please add address", target: self, action: #selector(self.autocompleteClicked))
-            cell = celldef
-            
-        case 7:
-            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "customPickerCell",
-                                                              for: indexPath) as? CustomPickerCellTableViewCell else { return CustomPickerCellTableViewCell()}
-            celldef.setupCell(with: "Status", placeHolder: "Please insert scrimmage status", type: .status)
-			celldef.returnValue = { value in
-				 self.currentStatus = value
-			}
-            cell = celldef
-        
-        case 8:
-            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "customPickerCell",
-                                                              for: indexPath) as? CustomPickerCellTableViewCell else { return CustomPickerCellTableViewCell()}
-            celldef.setupCell(with: "Type", placeHolder: "Please insert scrimmage type", type: .type)
-			celldef.returnValue = { value in
-				 self.currentType = value
-			}
-            cell = celldef
-        
-        case 9:
-            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "buttonCell",
-                                                              for: indexPath) as? ButtonTableViewCell else { return ButtonTableViewCell()}
-            celldef.configureCell(with: "Invite Players", buttonColor: UIColor.clear, action: #selector(self.invitePlayers), target: self)
-            cell = celldef
-            
-        case 10:
-            guard let celldef = tableView.dequeueReusableCell(withIdentifier: "buttonCell",
-                                                              for: indexPath) as? ButtonTableViewCell else { return ButtonTableViewCell()}
-            celldef.configureCell(with: "Submit Scrimmage", buttonColor: UIColor.orange, action: #selector(self.submitStringmmage), target: self)
-            cell = celldef
-            
-        default:
-            cell = UITableViewCell()
-        }
-        return cell
+        			
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: cellArray[indexPath.row].identifier,
+													   for: indexPath) as? MainCreateScrimmageCellTableViewCell else {return MainCreateScrimmageCellTableViewCell()}
+		
+		cell.configureCell(with: cellArray[indexPath.row].cellTitle,
+						   placeHolder: cellArray[indexPath.row].placeHolder,
+						   keyboardType: cellArray[indexPath.row].keboardType,
+						   target: self,
+						   action: cellArray[indexPath.row].action, type: cellArray[indexPath.row].type)
+		return cell
     }
     
     func setupCells() {
@@ -182,6 +94,8 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
         tableView.register(customPickerNib, forCellReuseIdentifier: "customPickerCell")
         let addressPickerNib = UINib(nibName: "AddressCellTableViewCell", bundle: nil)
         tableView.register(addressPickerNib, forCellReuseIdentifier: "addressCell")
+		let textViewNib = UINib(nibName: "TextViewCellTableViewCell", bundle: nil)
+        tableView.register(textViewNib, forCellReuseIdentifier: "textViewCell")
     }
     
     @objc func invitePlayers() {
@@ -192,22 +106,10 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
         print("Scrimmage Added")
 		
 		// swiftlint:disable:next line_length
-		print("Name: " + name +  "\n" + "contactName" + contactName + "\n" + "contactNumber" + contactNumber + "\n" + "address" + address + "\n")
-		//print("grjeipogjhreioghjioreghiroeghrieoghreioghrieoghrieoghreiogh")
-		print("currentStatus: \(self.currentStatus)" + "\n" + "currentType:" + "\(self.currentType)" + "\n" + "date:" + "\(self.date)" + "\n")
-					
+		print("Name: " + name +  "\n" + "contactName: " + contactName + "\n" + "contactNumber" + contactNumber + "\n" + "address: " + address + "\n")
+		print("currentStatus: \(self.currentStatus!)" + "\n" + "currentType: " + "\(self.currentType!)" + "\n" + "date: " + "\(self.date!)" + "\n")
+		print("lat: " + "\(self.geolocation.latitude)\n" + "lon: " + "\(self.geolocation.longitude)")
 		// swiftlint:enable:next line_length
-		// missing
-		//		var geolocation: GeoPoint!
-		//		var price: Double!		
-    }
-    
-    func createCellDictionaryArray() {
-        let scrimmageName = CellDefinition(title: "Name:", type: TextViewTableViewCell())
-        let scrimmageDate = CellDefinition(title: "Date", type: PickerTableViewCell())
-        
-        self.addScrimmageArray = [scrimmageName, scrimmageDate]
-                
     }
     
     @objc func dismisssKeyboard() {
@@ -251,23 +153,30 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
         }
     }
     
-    @objc func autocompleteClicked(_ sender: UIButton) {
-      let autocompleteController = GMSAutocompleteViewController()
-      autocompleteController.delegate = self
-
-      // Specify the place data types to return.
-      let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-        UInt(GMSPlaceField.formattedAddress.rawValue) | UInt(GMSPlaceField.coordinate.rawValue) | UInt(GMSPlaceField.placeID.rawValue))!
-      autocompleteController.placeFields = fields
-
-      // Specify a filter.
-      let filter = GMSAutocompleteFilter()
-        filter.type = .noFilter
-      autocompleteController.autocompleteFilter = filter
-
-      // Display the autocomplete view controller.
-      present(autocompleteController, animated: true, completion: nil)
-    }
+	func createNewScrimmage() {
+		
+	}
+	
+	func createCells() {
+		
+		let pictureCell = CellDefinitionHelper(cellTitle: "Picture", object: LogoTableViewCell(), identifier: "logoCell", keboardType: nil, target: self, action: #selector(imageTapped(tapGestureRecognizer:)), placeHolder: "selectPicture", color: nil, type: nil, height: 58)
+		let nameCell = CellDefinitionHelper(cellTitle: "Name", object: TextViewTableViewCell(), identifier: "textFieldCell", keboardType: .default, target: nil, action: nil, placeHolder: "Name", color: nil, type: nil, height: 58)
+		let timeCell = CellDefinitionHelper(cellTitle: "Time", object: PickerTableViewCell(), identifier: "pickerCell", keboardType: nil, target: nil, action: nil, placeHolder: "Time", color: nil, type: nil, height: 58)
+		let priceCell = CellDefinitionHelper(cellTitle: "Price", object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil, target: self, action: #selector(imageTapped(tapGestureRecognizer:)), placeHolder: "select Price", color: nil, type: .price, height: 58)
+		let organizerName = CellDefinitionHelper(cellTitle: "Organizer Name", object: TextViewTableViewCell(), identifier: "textFieldCell", keboardType: .default, target: nil, action: nil, placeHolder: "Specify organizers name", color: nil, type: nil, height: 58)
+		let dateCell = CellDefinitionHelper(cellTitle: "Date", object: PickerTableViewCell(), identifier: "pickerCell", keboardType: nil, target: nil, action: nil, placeHolder: "Date", color: nil, type: nil, height: 58)
+		let contactNumberCell = CellDefinitionHelper(cellTitle: "Contact Number", object: TextViewTableViewCell(), identifier: "textFieldCell", keboardType: .phonePad, target: nil, action: nil, placeHolder: "Specify contact number", color: nil, type: nil, height: 58)
+		let addressCell = CellDefinitionHelper(cellTitle: "Address", object: AddressCellTableViewCell(), identifier: "addressCell", keboardType: nil, target: self, action: #selector(autocompleteClicked), placeHolder: "select address", color: nil, type: nil, height: 58)
+		let typeCell = CellDefinitionHelper(cellTitle: "Type", object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil, target: self, action: nil, placeHolder: "select type", color: nil, type: .type, height: 58)
+		let statusCell = CellDefinitionHelper(cellTitle: "Status", object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil, target: self, action: nil, placeHolder: "select status", color: nil, type: .status, height: 58)
+		let occuranceCell = CellDefinitionHelper(cellTitle: "Occurance", object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil, target: self, action: nil, placeHolder: "select status", color: nil, type: .occurance, height: 58)
+		let inviteButtonCell = CellDefinitionHelper(cellTitle: "Invite Players", object: ButtonTableViewCell(), identifier: "buttonCell", keboardType: nil, target: self, action: #selector(invitePlayers), placeHolder: "", color: nil, type: nil, height: 58)
+		let submitButtonCell = CellDefinitionHelper(cellTitle: "Add Scrimmage", object: ButtonTableViewCell(), identifier: "buttonCell", keboardType: nil, target: self, action: #selector(submitStringmmage), placeHolder: "", color: nil, type: nil, height: 58)
+		let notesCell = CellDefinitionHelper(cellTitle: "Notes", object: TextViewTableViewCell(), identifier: "textViewCell", keboardType: nil, target: self, action: #selector(submitStringmmage), placeHolder: "Please issert mesage to players", color: nil, type: nil, height: 75)
+		
+		cellArray = [pictureCell, nameCell, organizerName, contactNumberCell, timeCell, dateCell, addressCell, priceCell, typeCell, statusCell, occuranceCell, notesCell, inviteButtonCell, submitButtonCell]
+				
+	}
         
 }
 
@@ -295,7 +204,21 @@ extension CreateScrimmageViewController: GMSAutocompleteViewControllerDelegate {
         viewController.dismiss(animated: true, completion: nil)
     }
 	
-	func createNewScrimmage() {
-		
-	}
+	@objc func autocompleteClicked(_ sender: UIButton) {
+      let autocompleteController = GMSAutocompleteViewController()
+      autocompleteController.delegate = self
+
+      // Specify the place data types to return.
+      let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+        UInt(GMSPlaceField.formattedAddress.rawValue) | UInt(GMSPlaceField.coordinate.rawValue) | UInt(GMSPlaceField.placeID.rawValue))!
+      autocompleteController.placeFields = fields
+
+      // Specify a filter.
+      let filter = GMSAutocompleteFilter()
+        filter.type = .noFilter
+      autocompleteController.autocompleteFilter = filter
+
+      // Display the autocomplete view controller.
+      present(autocompleteController, animated: true, completion: nil)
+    }
 }

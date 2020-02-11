@@ -8,11 +8,11 @@
 
 import UIKit
 
-class AddressCellTableViewCell: UITableViewCell {
+class AddressCellTableViewCell: MainCreateScrimmageCellTableViewCell {
     
     @IBOutlet weak var addressTextField: UILabel!
     
-    func configureCell(with placeHolder: String, target: UIViewController, action: Selector) {
+    override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
         self.addressTextField.layer.borderColor = UIColor.lightGray.cgColor
         self.addressTextField.layer.borderWidth = 1.5
         let gesture = UITapGestureRecognizer(target: target, action: action)

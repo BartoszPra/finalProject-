@@ -8,23 +8,23 @@
 
 import UIKit
 
-class TextViewTableViewCell: UITableViewCell, UITextFieldDelegate {
+class TextViewTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDelegate {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var inputTextField: UITextField!
 	
-	var returnValue: ((_ value: String)->Void)?
+	var returnValue: ((_ value: String) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    func cofnfigureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType ) {
+	override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
 		self.inputTextField.delegate = self
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         titleLabel.text = "    " + title
         inputTextField.attributedPlaceholder = attributedPlaceHolder
-        inputTextField.keyboardType = keyboardType
+        inputTextField.keyboardType = keyboardType!
     }
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
