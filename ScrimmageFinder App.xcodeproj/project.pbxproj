@@ -63,6 +63,7 @@
 		A591A306236E57A60075F8E4 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A591A305236E57A60075F8E4 /* RegisterViewController.xib */; };
 		A591A312236F30010075F8E4 /* SavedScrimmagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A591A310236F30010075F8E4 /* SavedScrimmagesCell.swift */; };
 		A591A316236F57CB0075F8E4 /* SavedScrimmagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A591A315236F57CB0075F8E4 /* SavedScrimmagesViewController.xib */; };
+		A59A0CA3240498D400C4C71A /* CodableGeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59A0CA2240498D400C4C71A /* CodableGeoPoint.swift */; };
 		A5AEC4732385710F0095796A /* ScrimmageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AEC4722385710F0095796A /* ScrimmageStatus.swift */; };
 		A5AEC476238612E00095796A /* ScrimmageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AEC475238612E00095796A /* ScrimmageType.swift */; };
 		A5CC95702395EA6C004A0810 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */; };
@@ -201,6 +202,7 @@
 		A591A30F236F30010075F8E4 /* SavedScrimmagesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavedScrimmagesCell.xib; sourceTree = "<group>"; };
 		A591A310236F30010075F8E4 /* SavedScrimmagesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedScrimmagesCell.swift; sourceTree = "<group>"; };
 		A591A315236F57CB0075F8E4 /* SavedScrimmagesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedScrimmagesViewController.xib; sourceTree = "<group>"; };
+		A59A0CA2240498D400C4C71A /* CodableGeoPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableGeoPoint.swift; sourceTree = "<group>"; };
 		A5AEC4722385710F0095796A /* ScrimmageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageStatus.swift; sourceTree = "<group>"; };
 		A5AEC475238612E00095796A /* ScrimmageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageType.swift; sourceTree = "<group>"; };
 		A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				03C6E1EB20DD5557001DFD01 /* FIRCollectionReference.swift */,
 				A5AEC475238612E00095796A /* ScrimmageType.swift */,
 				A5F762C92388BB7E002CD1B3 /* User.swift */,
+				A59A0CA2240498D400C4C71A /* CodableGeoPoint.swift */,
 			);
 			path = ModelFIR;
 			sourceTree = "<group>";
@@ -482,26 +485,26 @@
 		A5531F9023B2467C0054DA0A /* CreateScrmmageCells */ = {
 			isa = PBXGroup;
 			children = (
-				A5ED86DF23E0FA8E00753B6F /* MainCell */,
 				A51AF9CD23DE53C30042D925 /* Cell Creation Helper */,
+				A5ED86DF23E0FA8E00753B6F /* MainCell */,
+				A5531FA023BA31CF0054DA0A /* ButtonCell */,
 				A54BC0BB23BE9A3C0087178B /* Address Cell */,
 				A5531FA523BB5C8F0054DA0A /* CustomPickerCell */,
-				A5531FA023BA31CF0054DA0A /* ButtonCell */,
 				A5531F9B23BA05C20054DA0A /* Logo Cell */,
 				A5531F9623B247120054DA0A /* PickerCell */,
 				A5002FC923E428FB00CB8F63 /* TextView Cell */,
-				A5531F9523B246FD0054DA0A /* TextViewCell */,
+				A5531F9523B246FD0054DA0A /* TextField Cell */,
 			);
 			path = CreateScrmmageCells;
 			sourceTree = "<group>";
 		};
-		A5531F9523B246FD0054DA0A /* TextViewCell */ = {
+		A5531F9523B246FD0054DA0A /* TextField Cell */ = {
 			isa = PBXGroup;
 			children = (
 				A5531F9123B246E10054DA0A /* TextViewTableViewCell.swift */,
 				A5531F9223B246E10054DA0A /* TextViewTableViewCell.xib */,
 			);
-			path = TextViewCell;
+			path = "TextField Cell";
 			sourceTree = "<group>";
 		};
 		A5531F9623B247120054DA0A /* PickerCell */ = {
@@ -1019,6 +1022,7 @@
 				04C8F37820FF2A0E00AF48E4 /* LoginViewController.swift in Sources */,
 				03C6E1EC20DD5557001DFD01 /* FIRCollectionReference.swift in Sources */,
 				A5F762DA238ADD84002CD1B3 /* ViewsHelpers.swift in Sources */,
+				A59A0CA3240498D400C4C71A /* CodableGeoPoint.swift in Sources */,
 				C751B37C225922710060D1B2 /* Storyboarded.swift in Sources */,
 				C751B37E225922970060D1B2 /* Coordinator.swift in Sources */,
 				A5AEC4732385710F0095796A /* ScrimmageStatus.swift in Sources */,

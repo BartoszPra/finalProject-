@@ -12,21 +12,41 @@ class TextViewCellTableViewCell: MainCreateScrimmageCellTableViewCell, UITextVie
 
 	@IBOutlet weak var label: UILabel!
 	@IBOutlet weak var notesTextView: UITextView!
+	var placeHolderString = "Please issert mesage to players"
 	var placeHolder: String!
-	
+	var isDataValid = true
 	
 	override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
+		self.setupCellUI()
 		self.placeHolder = placeHolder
 		self.label.text = "    " + title
 		notesTextView.text = placeHolder
 		notesTextView.textColor = UIColor.lightGray
 		notesTextView.textAlignment = .center
 		notesTextView.becomeFirstResponder()
-		notesTextView.selectedTextRange = notesTextView.textRange(from: notesTextView.beginningOfDocument, to: notesTextView.beginningOfDocument)
-		
+		notesTextView.selectedTextRange = notesTextView.textRange(from: notesTextView.beginningOfDocument, to: notesTextView.beginningOfDocument)		
 		notesTextView.delegate = self
-		notesTextView.layer.borderColor = UIColor.white.cgColor
-		notesTextView.layer.borderWidth = 0.8
+	}
+	
+	override func hasValidData() -> Bool {
+		if notesTextView.text == nil || notesTextView.text.isEmpty || notesTextView.text == placeHolderString {
+			isDataValid = false
+			return false
+		} else {
+			isDataValid = true
+			return true
+		}
+	}
+	
+	func setupCellUI() {
+		if !isDataValid {
+			self.notesTextView.layer.borderColor = UIColor.red.cgColor
+			self.notesTextView.layer.borderWidth = 1.5
+		} else {
+			self.notesTextView.layer.borderColor = UIColor.lightGray.cgColor
+			self.notesTextView.layer.borderWidth = 1.5
+		}
+		
 	}
 	
 	func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
@@ -66,6 +86,10 @@ class TextViewCellTableViewCell: MainCreateScrimmageCellTableViewCell, UITextVie
 		// ...otherwise return false since the updates have already
 		// been made
 		return false
+	}
+	
+	func textViewDidEndEditing(_ textView: UITextView) {
+		returnValue?(notesTextView.text ?? "")
 	}
 	
 	func textViewDidChangeSelection(_ textView: UITextView) {

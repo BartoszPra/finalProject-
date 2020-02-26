@@ -15,6 +15,7 @@ class LogoTableViewCell: MainCreateScrimmageCellTableViewCell, UIImagePickerCont
     @IBOutlet weak var addLogoImage: UIImageView!
     var imagePicker = UIImagePickerController()
     var scrimmageLogo: UIImage!
+	var isDataValid = true
         
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,4 +27,15 @@ class LogoTableViewCell: MainCreateScrimmageCellTableViewCell, UIImagePickerCont
         photoView.addGestureRecognizer(gestureRecognizer)
         
     }
+	
+	override func hasValidData() -> Bool {
+		
+		if logoImage.image != nil {
+			isDataValid = true
+			return true
+		} else {
+			isDataValid = false
+			return false
+		}
+	}
 }

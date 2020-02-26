@@ -21,5 +21,6 @@ struct CellDefinitionHelper {
 	var color: UIColor?
 	var type: CellType?
 	var height: CGFloat
+	var value: Any?
 	
 }

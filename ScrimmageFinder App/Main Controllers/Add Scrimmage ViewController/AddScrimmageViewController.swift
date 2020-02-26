@@ -109,19 +109,19 @@ class AddScrimmageViewController: UIViewController, Storyboarded {
             let price = Double(priceString)
                         
             // composing a scrimmage
-            let scrimmage = Scrimmage(name: self.nameTF.text!,
-                                      vanueName: self.venueNameTF.text!,
-                                      postCode: self.postCodeTF.text!.uppercased(),
-                                      time: time!, managerName: self.managerNameTF.text!,
-                                      managerNumber: self.managersNumberTF.text!,
-                                      price: price!,
-                                      date: self.dateTF.text!,
-                                      createdById: Auth.auth().currentUser!.uid,
-                                      currentStatus: .on,
-                                      currentType: .open,
-                                      participants: [[String: ParticipantsStatus]]())
+//            let scrimmage = Scrimmage(name: self.nameTF.text!,
+//                                      vanueName: self.venueNameTF.text!,
+//                                      postCode: self.postCodeTF.text!.uppercased(),
+//                                      time: time!, managerName: self.managerNameTF.text!,
+//                                      managerNumber: self.managersNumberTF.text!,
+//                                      price: price!,
+//                                      date: self.dateTF.text!,
+//                                      createdById: Auth.auth().currentUser!.uid,
+//                                      currentStatus: .on,
+//                                      currentType: .open,
+//                                      participants: [[String: ParticipantsStatus]]())
             // creating a scrimmage
-                FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
+            //    FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
             //allert if added
             let alert = UIAlertController(title: "Added!",
                                           message: "You have added your Scrimmage to Data Base.",

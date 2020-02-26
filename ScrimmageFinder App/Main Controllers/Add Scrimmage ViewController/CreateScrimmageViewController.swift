@@ -27,7 +27,7 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 	var contactName: String!
 	var contactNumber: String!
 	var address: String!
-	var geolocation: CLLocationCoordinate2D!
+	var geolocation: GeoPoint!
 	var currentStatus: Int!
 	var currentType: Int!
 	var image: UIImage!
@@ -35,6 +35,8 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 	var time: String!
 	var date: String!
 	var notes: String!
+	
+	var scrimmageValues = [String:Any]()
 		
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +80,10 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 						   keyboardType: cellArray[indexPath.row].keboardType,
 						   target: self,
 						   action: cellArray[indexPath.row].action, type: cellArray[indexPath.row].type)
+		
+		cell.returnValue = { value in
+			self.scrimmageValues.updateValue(value, forKey: self.cellArray[indexPath.row].cellTitle)
+		}
 		return cell
     }
     
@@ -103,13 +109,13 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
     }
     
     @objc func submitStringmmage() {
-        print("Scrimmage Added")
 		
-		// swiftlint:disable:next line_length
-		print("Name: " + name +  "\n" + "contactName: " + contactName + "\n" + "contactNumber" + contactNumber + "\n" + "address: " + address + "\n")
-		print("currentStatus: \(self.currentStatus!)" + "\n" + "currentType: " + "\(self.currentType!)" + "\n" + "date: " + "\(self.date!)" + "\n")
-		print("lat: " + "\(self.geolocation.latitude)\n" + "lon: " + "\(self.geolocation.longitude)")
-		// swiftlint:enable:next line_length
+		if self.checkIfAllDatailsFilled() {
+			createNewScrimmage()
+			AlertController.showAllert(self, title: "Congratulations", message: "Your Scrimmage has been added")
+		} else {
+			AlertController.showAllert(self, title: "Missing Information", message: "Please fill the marked fields")
+		}
     }
     
     @objc func dismisssKeyboard() {
@@ -122,10 +128,26 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
         self.navigationController?.present(imagePicker, animated: true, completion: nil)
         
     }
-    
+	
+	func checkIfAllDatailsFilled() -> Bool {
+		
+		var boolToReturn = true
+		
+		for cell in cellArray.dropFirst().indices {
+			let index2 = IndexPath(row: cell, section: 0)
+            let cell2 = tableView.cellForRow(at: index2) as? MainCreateScrimmageCellTableViewCell
+			if !cell2!.hasValidData() {
+				boolToReturn = false
+			}
+		}
+		tableView.reloadData()
+		return boolToReturn
+	}
+	    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         
         if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+			
             let index = IndexPath(row: 0, section: 0)
             let cell = tableView.cellForRow(at: index) as? LogoTableViewCell
             cell!.logoImage.image = pickedImage
@@ -154,26 +176,92 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
     }
     
 	func createNewScrimmage() {
+		// composing a scrimmage
 		
+		let dateformat = DateFormatter()
+		dateformat.dateFormat =  "dd/MM/yyyy HH:mm"
+		 let date: String = (scrimmageValues["Date"] as? String)!
+		 let time: String = (scrimmageValues["Time"] as? String)!
+		guard let dateObj = dateformat.date(from: date + " " + time) else {return}
+		
+		let scrimmage = Scrimmage(name: (scrimmageValues["Name"] as? String)!,
+								  address: address,
+								  dateTime: dateObj,
+								  date: "",
+								  managerName: (scrimmageValues["Organizer Name"] as? String)!,
+								  managerNumber: (scrimmageValues["Contact Number"] as? String)!,
+								  price: (scrimmageValues["Price"] as? Double)!,
+								  createdById: Auth.auth().currentUser!.uid,
+								  currentStatus: (scrimmageValues["Status"] as? Int)!,
+								  currentType: (scrimmageValues["Type"] as? Int)!,
+								  participants: [[String: ParticipantsStatus]](),
+								  geopoint: geolocation,
+								  notes: (scrimmageValues["Notes"] as? String)!)
+		// creating a scrimmage
+		FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
 	}
 	
 	func createCells() {
-		
-		let pictureCell = CellDefinitionHelper(cellTitle: "Picture", object: LogoTableViewCell(), identifier: "logoCell", keboardType: nil, target: self, action: #selector(imageTapped(tapGestureRecognizer:)), placeHolder: "selectPicture", color: nil, type: nil, height: 58)
-		let nameCell = CellDefinitionHelper(cellTitle: "Name", object: TextViewTableViewCell(), identifier: "textFieldCell", keboardType: .default, target: nil, action: nil, placeHolder: "Name", color: nil, type: nil, height: 58)
-		let timeCell = CellDefinitionHelper(cellTitle: "Time", object: PickerTableViewCell(), identifier: "pickerCell", keboardType: nil, target: nil, action: nil, placeHolder: "Time", color: nil, type: nil, height: 58)
-		let priceCell = CellDefinitionHelper(cellTitle: "Price", object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil, target: self, action: #selector(imageTapped(tapGestureRecognizer:)), placeHolder: "select Price", color: nil, type: .price, height: 58)
-		let organizerName = CellDefinitionHelper(cellTitle: "Organizer Name", object: TextViewTableViewCell(), identifier: "textFieldCell", keboardType: .default, target: nil, action: nil, placeHolder: "Specify organizers name", color: nil, type: nil, height: 58)
-		let dateCell = CellDefinitionHelper(cellTitle: "Date", object: PickerTableViewCell(), identifier: "pickerCell", keboardType: nil, target: nil, action: nil, placeHolder: "Date", color: nil, type: nil, height: 58)
-		let contactNumberCell = CellDefinitionHelper(cellTitle: "Contact Number", object: TextViewTableViewCell(), identifier: "textFieldCell", keboardType: .phonePad, target: nil, action: nil, placeHolder: "Specify contact number", color: nil, type: nil, height: 58)
-		let addressCell = CellDefinitionHelper(cellTitle: "Address", object: AddressCellTableViewCell(), identifier: "addressCell", keboardType: nil, target: self, action: #selector(autocompleteClicked), placeHolder: "select address", color: nil, type: nil, height: 58)
-		let typeCell = CellDefinitionHelper(cellTitle: "Type", object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil, target: self, action: nil, placeHolder: "select type", color: nil, type: .type, height: 58)
-		let statusCell = CellDefinitionHelper(cellTitle: "Status", object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil, target: self, action: nil, placeHolder: "select status", color: nil, type: .status, height: 58)
-		let occuranceCell = CellDefinitionHelper(cellTitle: "Occurance", object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil, target: self, action: nil, placeHolder: "select status", color: nil, type: .occurance, height: 58)
-		let inviteButtonCell = CellDefinitionHelper(cellTitle: "Invite Players", object: ButtonTableViewCell(), identifier: "buttonCell", keboardType: nil, target: self, action: #selector(invitePlayers), placeHolder: "", color: nil, type: nil, height: 58)
-		let submitButtonCell = CellDefinitionHelper(cellTitle: "Add Scrimmage", object: ButtonTableViewCell(), identifier: "buttonCell", keboardType: nil, target: self, action: #selector(submitStringmmage), placeHolder: "", color: nil, type: nil, height: 58)
-		let notesCell = CellDefinitionHelper(cellTitle: "Notes", object: TextViewTableViewCell(), identifier: "textViewCell", keboardType: nil, target: self, action: #selector(submitStringmmage), placeHolder: "Please issert mesage to players", color: nil, type: nil, height: 75)
-		
+		// swiftlint:disable:next line_length
+		let pictureCell = CellDefinitionHelper(cellTitle: "Picture",
+											   object: LogoTableViewCell(), identifier: "logoCell",
+											   keboardType: nil, target: self, action: #selector(imageTapped(tapGestureRecognizer:)), placeHolder: "selectPicture", color: nil, type: nil, height: 58)
+		let nameCell = CellDefinitionHelper(cellTitle: "Name",
+											object: TextViewTableViewCell(), identifier: "textFieldCell",
+											keboardType: .default, target: nil, action: nil,
+											placeHolder: "Name", color: nil, type: nil, height: 58)
+		let timeCell = CellDefinitionHelper(cellTitle: "Time",
+											object: PickerTableViewCell(),
+											identifier: "pickerCell", keboardType: nil,
+											target: nil, action: nil, placeHolder: "Time", color: nil,
+											type: nil, height: 58)
+		let priceCell = CellDefinitionHelper(cellTitle: "Price",
+											 object: CustomPickerCellTableViewCell(),
+											 identifier: "customPickerCell", keboardType: nil, target: self, action: #selector(imageTapped(tapGestureRecognizer:)), placeHolder: "select Price", color: nil, type: .price, height: 58)
+		let organizerName = CellDefinitionHelper(cellTitle: "Organizer Name",
+												 object: TextViewTableViewCell(), identifier: "textFieldCell",
+												 keboardType: .default, target: nil, action: nil, placeHolder: "Specify organizers name", color: nil, type: nil, height: 58)
+		let dateCell = CellDefinitionHelper(cellTitle: "Date",
+											object: PickerTableViewCell(),
+											identifier: "pickerCell", keboardType: nil,
+											target: nil, action: nil, placeHolder: "Date", color: nil, type: nil, height: 58)
+		let contactNumberCell = CellDefinitionHelper(cellTitle: "Contact Number",
+													 object: TextViewTableViewCell(), identifier: "textFieldCell", keboardType: .phonePad, target: nil,
+													 action: nil, placeHolder: "Specify contact number", color: nil, type: nil, height: 58)
+		let addressCell = CellDefinitionHelper(cellTitle: "Address",
+											   object: AddressCellTableViewCell(),
+											   identifier: "addressCell", keboardType: nil, target: self,
+											   action: #selector(autocompleteClicked), placeHolder: "select address", color: nil, type: nil, height: 58)
+		let typeCell = CellDefinitionHelper(cellTitle: "Type",
+											object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil,
+											target: self, action: nil,
+											placeHolder: "select type", color: nil,
+											type: .type, height: 58)
+		let statusCell = CellDefinitionHelper(cellTitle: "Status",
+											  object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil,
+											  target: self, action: nil,
+											  placeHolder: "select status", color: nil,
+											  type: .status, height: 58)
+		let occuranceCell = CellDefinitionHelper(cellTitle: "Occurance",
+												 object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil,
+												 target: self, action: nil,
+												 placeHolder: "select status", color: nil, type: .occurance, height: 58)
+		let inviteButtonCell = CellDefinitionHelper(cellTitle: "Invite Players",
+													object: ButtonTableViewCell(),
+													identifier: "buttonCell",
+													keboardType: nil, target: self, action: #selector(invitePlayers), placeHolder: "",
+													color: nil, type: nil, height: 58)
+		let submitButtonCell = CellDefinitionHelper(cellTitle: "Add Scrimmage",
+													object: ButtonTableViewCell(),
+													identifier: "buttonCell",
+													keboardType: nil, target: self, action: #selector(submitStringmmage), placeHolder: "", color: nil, type: nil, height: 58)
+		let notesCell = CellDefinitionHelper(cellTitle: "Notes",
+											 object: TextViewTableViewCell(),
+											 identifier: "textViewCell",
+											 keboardType: nil,
+											 target: self,
+											 action: #selector(submitStringmmage), placeHolder: "Please issert mesage to players", color: nil, type: nil, height: 75)
+		// swiftlint:enable:next line_length
 		cellArray = [pictureCell, nameCell, organizerName, contactNumberCell, timeCell, dateCell, addressCell, priceCell, typeCell, statusCell, occuranceCell, notesCell, inviteButtonCell, submitButtonCell]
 				
 	}
@@ -189,7 +277,7 @@ extension CreateScrimmageViewController: GMSAutocompleteViewControllerDelegate {
         
         cell.addressTextField.text = (place.name ?? "") + ",\n " + (place.formattedAddress ?? "")
 		self.address = place.formattedAddress
-		self.geolocation = place.coordinate
+		self.geolocation = GeoPoint(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         cell.addressTextField.textColor = .white
         tableView.reloadData()
         

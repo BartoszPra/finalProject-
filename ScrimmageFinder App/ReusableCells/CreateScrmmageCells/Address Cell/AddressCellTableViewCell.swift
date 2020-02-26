@@ -11,11 +11,34 @@ import UIKit
 class AddressCellTableViewCell: MainCreateScrimmageCellTableViewCell {
     
     @IBOutlet weak var addressTextField: UILabel!
+	var isDataValid = true
+	let addressPlaceHolder = "Please add address"
     
     override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
-        self.addressTextField.layer.borderColor = UIColor.lightGray.cgColor
-        self.addressTextField.layer.borderWidth = 1.5
+		self.setupCellUI()
         let gesture = UITapGestureRecognizer(target: target, action: action)
         self.addressTextField.addGestureRecognizer(gesture)        
     }
+	
+	override func hasValidData() -> Bool {
+		
+		if addressTextField.text != addressPlaceHolder {
+			isDataValid = true
+			return true
+		} else {
+			isDataValid = false
+			return false
+		}
+	}
+	
+	func setupCellUI() {
+		if !isDataValid {
+			self.addressTextField.layer.borderColor = UIColor.red.cgColor
+			self.addressTextField.layer.borderWidth = 1.5
+		} else {
+			self.addressTextField.layer.borderColor = UIColor.lightGray.cgColor
+			self.addressTextField.layer.borderWidth = 1.5
+		}
+		
+	}
 }

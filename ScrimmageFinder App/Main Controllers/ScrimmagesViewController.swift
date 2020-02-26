@@ -38,7 +38,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         // reading from database
         FIRFirestoreService.shared.readAll(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
             self.scrimmages = scrimmages
-            self.deleteIfOld() // function to delete outdated scrimmages
+            //self.deleteIfOld() // function to delete outdated scrimmages
             self.scrimmagesTableView.reloadData()
     }
 }
@@ -74,9 +74,9 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         } else {
             let scrimmage = scrimmages[indexPath.row]
             let status = scrimmage.currentStatus.description
-            let name = scrimmage.venueName
+            let name = ""//scrimmage.venueName
             let price = scrimmage.price
-            let time = scrimmage.time
+            let time = "" //scrimmage.time
             
             cell.textLabel?.text = String(scrimmage.name) + "    " + status
             cell.detailTextLabel?.text = "\(name), Price: £\(String(format: "%.2f", price)), Time: \(String(format: "%.2f", time))"
@@ -115,7 +115,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             let firstTwo = searchBar.text?.prefix(3).uppercased()
             
             //checking is first two characters from post code are match with scrimmages post code
-            filteredScrimmages = scrimmages.filter {$0.postCode.hasPrefix(String(firstTwo!))}
+            //filteredScrimmages = scrimmages.filter {$0.postCode.hasPrefix(String(firstTwo!))}
             scrimmagesTableView.reloadData()
         }
     }

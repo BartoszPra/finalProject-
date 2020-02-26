@@ -27,5 +27,9 @@ class ButtonTableViewCell: MainCreateScrimmageCellTableViewCell {
         self.actionButton.backgroundColor = buttonColor
 		self.actionButton.addTarget(target, action: action!, for: .touchUpInside)
     }
+	
+	override func hasValidData() -> Bool {
+		return true
+	}
     
 }

@@ -10,6 +10,9 @@ import UIKit
 
 class MainCreateScrimmageCellTableViewCell: UITableViewCell {
 
-	func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
-	}
+	var returnValue: ((_ value: Any) -> Void)?
+	
+	func hasValidData() -> Bool {return false}
+	
+	func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {}
 }

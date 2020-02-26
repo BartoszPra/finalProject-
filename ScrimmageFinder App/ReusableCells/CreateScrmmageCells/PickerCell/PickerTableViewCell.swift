@@ -16,14 +16,25 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
     var selectedDate: Date!
     var isFilled = false
     var selectedDateString: String!
-	var returnValue: ((_ value: String) -> Void)?
+	var isDataValid = true
         
     override func awakeFromNib() {
         super.awakeFromNib()
        
     }
+	
+	override func hasValidData() -> Bool {
+		if inputField.text!.isEmpty {
+			isDataValid = false
+			return false
+		} else {
+			isDataValid = true
+			return true
+		}
+	}
         
 	override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
+		self.setupCellUI()
 		self.inputField.delegate = self
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         self.inputField.attributedPlaceholder = attributedPlaceHolder
@@ -52,6 +63,17 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
         inputField.inputView = picker
         inputField.inputAccessoryView = toolBar
     }
+	
+	func setupCellUI() {
+		if !isDataValid {
+			self.inputField.layer.borderColor = UIColor.red.cgColor
+			self.inputField.layer.borderWidth = 1.5
+		} else {
+			self.inputField.layer.borderColor = UIColor.lightGray.cgColor
+			self.inputField.layer.borderWidth = 1.5
+		}
+		
+	}
 	
 	func decidePickerType(for title: String) -> UIDatePicker.Mode {
 		

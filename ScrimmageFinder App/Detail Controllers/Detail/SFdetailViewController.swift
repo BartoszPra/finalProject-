@@ -203,9 +203,9 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
     func setupUI() {
         //assigning data to labels
         nameLabel.text = "Name: " + scrimmagePassedOver.name
-        venueLabel.text = "Venue Name: " + scrimmagePassedOver.venueName
-        addressLabel.text = "Addersss: " + scrimmagePassedOver.postCode
-        startTimeLabel.text = "Start Time: " + String(format: "%.2f", scrimmagePassedOver.time)
+        venueLabel.text = "Venue Name: " + "" //scrimmagePassedOver.venueName
+        addressLabel.text = "Addersss: " + "" //scrimmagePassedOver.postCode
+        startTimeLabel.text = "Start Time: " + ""//String(format: "%.2f", scrimmagePassedOver.time)
         organizerNameLabel.text = "Organizer: " + scrimmagePassedOver.managerName
         contactNumberLabel.text = "Contact Number: " + scrimmagePassedOver.managerNumber
         priceLabel.text = "Price: £" + String(format: "%.2f", scrimmagePassedOver.price)

@@ -23,14 +23,18 @@ class CustomPickerCellTableViewCell: MainCreateScrimmageCellTableViewCell, UIPic
     var isFilled = false
     var selectedInput: String!
 	var selectedIntValue: Int?
+	var selectedDoubleValue: Double!
     var picker: UIPickerView!
-	var returnValue: ((_ value: Int) -> Void)?
+	var isDataValid = true
+	var currentType: CellType!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
         
-    override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
+    override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target:
+		UIViewController?, action: Selector?, type: CellType?) {
+		self.setupCellUI()
         self.inputTextField.delegate = self
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         self.inputTextField.attributedPlaceholder = attributedPlaceHolder        
@@ -59,6 +63,28 @@ class CustomPickerCellTableViewCell: MainCreateScrimmageCellTableViewCell, UIPic
         self.inputTextField.inputView = picker
         self.inputTextField.inputAccessoryView = toolBar
     }
+	
+	override func hasValidData() -> Bool {
+		
+		if inputTextField.text!.isEmpty {
+			isDataValid = false
+			return false
+		} else {
+			isDataValid = true
+			return true
+		}
+	}
+	
+	func setupCellUI() {
+		if !isDataValid {
+			self.inputTextField.layer.borderColor = UIColor.red.cgColor
+			self.inputTextField.layer.borderWidth = 1.5
+		} else {
+			self.inputTextField.layer.borderColor = UIColor.lightGray.cgColor
+			self.inputTextField.layer.borderWidth = 1.5
+		}
+		
+	}
     
     @objc func donePicker() {
         if selectedInput != nil {
@@ -71,6 +97,7 @@ class CustomPickerCellTableViewCell: MainCreateScrimmageCellTableViewCell, UIPic
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.selectedInput = pickerData[row]
 		self.selectedIntValue = row + 1
+		self.selectedDoubleValue = Double(row)
         self.inputTextField.text = self.selectedInput
     }
     
@@ -81,12 +108,16 @@ class CustomPickerCellTableViewCell: MainCreateScrimmageCellTableViewCell, UIPic
 		switch type {
 		case .status:
 			pickerData = ["Confirmed", "Provisional"]
+			self.currentType = .status
 		case .type:
 			pickerData = ["Private", "Public"]
+			self.currentType = .type
 		case .occurance:
 			pickerData = ["one-time", "weekly"]
+			self.currentType = .occurance
 		case .price:
 			pickerData = ["Free", "£1", "£2", "£3", "£4", "£5", "£6", "£7", "£8", "£10", "£11"]
+			self.currentType = .price
 		}
         return pickerData
     }
@@ -111,6 +142,7 @@ class CustomPickerCellTableViewCell: MainCreateScrimmageCellTableViewCell, UIPic
             self.pickerView(picker, attributedTitleForRow: 0, forComponent: 0)
             self.selectedInput = pickerData.first
 			self.selectedIntValue = 1
+			self.selectedDoubleValue = 1.0
         }
     }
     
@@ -119,7 +151,12 @@ class CustomPickerCellTableViewCell: MainCreateScrimmageCellTableViewCell, UIPic
     }
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
-        returnValue?(selectedIntValue ?? 0) // Use callback to return data
+		if currentType == .price {
+			returnValue?(selectedDoubleValue ?? 0.0) // Use callback to return data
+		} else {
+			returnValue?(selectedIntValue ?? 0) // Use callback to return data
+		}
+        
     }
 	
 }

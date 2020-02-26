@@ -51,7 +51,7 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
             self.emptyListLabel.isHidden = true
             let scrimmage = scrimmages[indexPath.row]
             cell.cellLBL.text = scrimmage.name
-            cell.addressLbl.text = scrimmage.venueName
+            cell.addressLbl.text = "" //scrimmage.venueName
             cell.timeLbl.text = scrimmage.date
             cell.cellImage.image = UIImage.init(named: "imageJordan")
             return cell
