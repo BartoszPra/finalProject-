@@ -110,7 +110,7 @@ class CustomPickerCellTableViewCell: MainCreateScrimmageCellTableViewCell, UIPic
 			pickerData = ["Confirmed", "Provisional"]
 			self.currentType = .status
 		case .type:
-			pickerData = ["Private", "Public"]
+			pickerData = ["Public", "Private"]
 			self.currentType = .type
 		case .occurance:
 			pickerData = ["one-time", "weekly"]

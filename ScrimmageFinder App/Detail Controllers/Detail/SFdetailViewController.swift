@@ -4,6 +4,19 @@ import FirebaseFirestore
 import CoreData
 import MapKit
 
+
+class CustomPin: NSObject, MKAnnotation {
+	var coordinate: CLLocationCoordinate2D
+	var title: String?
+	var subtitle: String?
+	
+	init(pinTitle:String, pinSubtitle:String, location: CLLocationCoordinate2D) {
+		self.title = pinTitle
+		self.subtitle = pinSubtitle
+		self.coordinate = location
+	}
+}
+
 class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate {
     
     //var coordinator: Coordinator?
@@ -18,7 +31,6 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var venueLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var organizerNameLabel: UILabel!
     @IBOutlet weak var startTimeLabel: UILabel!
@@ -47,6 +59,7 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
         userID = Auth.auth().currentUser?.uid
         setupUI()
         UserDefaults.standard.register(defaults: [String: Any]())
+		setMap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -203,16 +216,15 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
     func setupUI() {
         //assigning data to labels
         nameLabel.text = "Name: " + scrimmagePassedOver.name
-        venueLabel.text = "Venue Name: " + "" //scrimmagePassedOver.venueName
-        addressLabel.text = "Addersss: " + "" //scrimmagePassedOver.postCode
-        startTimeLabel.text = "Start Time: " + ""//String(format: "%.2f", scrimmagePassedOver.time)
+        addressLabel.text = "Addersss: " + scrimmagePassedOver.address
+		startTimeLabel.text = "Start Time: " + scrimmagePassedOver.getTime()
         organizerNameLabel.text = "Organizer: " + scrimmagePassedOver.managerName
         contactNumberLabel.text = "Contact Number: " + scrimmagePassedOver.managerNumber
         priceLabel.text = "Price: £" + String(format: "%.2f", scrimmagePassedOver.price)
-        dateLabel.text = "Date: " + scrimmagePassedOver.date
+        dateLabel.text = "Date: " + scrimmagePassedOver.getDate()
         numberOfParticipantsLabel.text = "People attending: " + String(describing: scrimmagePassedOver.participants.count)
-        self.typeLabel.text = "Scrimmage type: " + String(describing: scrimmagePassedOver.currentType)
-        self.statusLabel.text = "Scrimmage status: " + String(describing: scrimmagePassedOver.currentStatus)
+		self.typeLabel.text = "Scrimmage type: " + ScrimmageType(rawValue: scrimmagePassedOver.currentType)!.description
+		self.statusLabel.text = "Scrimmage status: " + ScrimmageStatus(rawValue: scrimmagePassedOver.currentStatus)!.description
         
         if isUserAlreadyParticipating() {
             self.participateButton.setTitle("Unparticipate", for: .normal)
@@ -270,6 +282,15 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
         return false
         
     }
+	
+	func setMap() {
+		let location = CLLocationCoordinate2D(latitude: scrimmagePassedOver.geopoint.latitude, longitude: scrimmagePassedOver.geopoint.longitude)
+		let region = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+		self.mapView.setRegion(region, animated: true)
+		
+		let pin = CustomPin(pinTitle: scrimmagePassedOver.name, pinSubtitle: scrimmagePassedOver.getTime(), location: location)
+		self.mapView.addAnnotation(pin)
+	}
     
     func reloadScrimmage() {
         guard let scrimmageId = scrimmagePassedOver.id else { return }
