@@ -20,47 +20,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Insert first 3 letters of your Post Code" translatesAutoresizingMaskIntoConstraints="NO" id="uTm-t2-nQL">
-                                <rect key="frame" x="0.0" y="114" width="375" height="56"/>
-                                <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="miu-f3-pQL">
-                                <rect key="frame" x="0.0" y="170" width="375" height="559"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SCcell" textLabel="x4a-3Z-UxD" detailTextLabel="xBy-xn-UXo" style="IBUITableViewCellStyleSubtitle" id="kCv-vW-KpJ">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="55"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kCv-vW-KpJ" id="YGj-6C-bjf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="x4a-3Z-UxD">
-                                                    <rect key="frame" x="15" y="9.9999999999999982" width="33.333333333333336" height="20.333333333333332"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xBy-xn-UXo">
-                                                    <rect key="frame" x="14.999999999999996" y="31.333333333333332" width="43.666666666666664" height="14.333333333333334"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="0.94183665510000003" green="0.94253760580000001" blue="0.94536536930000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="Dy7-Ur-Un6" id="FL5-SY-g2S"/>
-                                    <outlet property="delegate" destination="Dy7-Ur-Un6" id="6Ft-gY-Yyg"/>
-                                </connections>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pwj-OS-wso" userLabel="UpcomingView">
                                 <rect key="frame" x="0.0" y="44" width="375" height="70"/>
                                 <subviews>
@@ -115,19 +74,32 @@
                                     <constraint firstAttribute="trailing" secondItem="KbW-Xk-49e" secondAttribute="trailing" constant="10" id="vy4-13-CH0"/>
                                 </constraints>
                             </view>
+                            <searchBar contentMode="redraw" placeholder="Insert first 3 letters of your Post Code" translatesAutoresizingMaskIntoConstraints="NO" id="uTm-t2-nQL">
+                                <rect key="frame" x="0.0" y="114" width="375" height="56"/>
+                                <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="miu-f3-pQL">
+                                <rect key="frame" x="0.0" y="170" width="375" height="642"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="Dy7-Ur-Un6" id="FL5-SY-g2S"/>
+                                    <outlet property="delegate" destination="Dy7-Ur-Un6" id="6Ft-gY-Yyg"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="miu-f3-pQL" firstAttribute="leading" secondItem="4DF-cT-xrV" secondAttribute="leading" id="0Yo-QI-pJz"/>
                             <constraint firstItem="pwj-OS-wso" firstAttribute="leading" secondItem="4DF-cT-xrV" secondAttribute="leading" id="5aW-ow-ZdX"/>
                             <constraint firstAttribute="trailing" secondItem="uTm-t2-nQL" secondAttribute="trailing" id="7UG-13-ehA"/>
-                            <constraint firstAttribute="trailing" secondItem="pwj-OS-wso" secondAttribute="trailing" id="DSB-OA-EXG"/>
                             <constraint firstItem="uTm-t2-nQL" firstAttribute="leading" secondItem="4DF-cT-xrV" secondAttribute="leading" id="PcO-Sa-eAZ"/>
                             <constraint firstItem="uTm-t2-nQL" firstAttribute="top" secondItem="pwj-OS-wso" secondAttribute="bottom" id="TNC-MO-BxP"/>
                             <constraint firstItem="miu-f3-pQL" firstAttribute="top" secondItem="uTm-t2-nQL" secondAttribute="bottom" id="W7m-vl-iPc"/>
                             <constraint firstAttribute="trailing" secondItem="miu-f3-pQL" secondAttribute="trailing" id="Wwc-sG-pi9"/>
-                            <constraint firstItem="UQd-R4-Nl8" firstAttribute="top" secondItem="miu-f3-pQL" secondAttribute="bottom" constant="49" id="aFO-bY-PV2"/>
+                            <constraint firstItem="UQd-R4-Nl8" firstAttribute="top" secondItem="miu-f3-pQL" secondAttribute="bottom" id="aFO-bY-PV2"/>
                             <constraint firstItem="pwj-OS-wso" firstAttribute="top" secondItem="tUc-q6-kdX" secondAttribute="bottom" id="ago-kE-U1a"/>
+                            <constraint firstAttribute="trailing" secondItem="pwj-OS-wso" secondAttribute="trailing" id="dqa-Eh-rJo"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="eKF-gB-Myf"/>
@@ -156,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sz3-RQ-Xds" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="266" y="682"/>
+            <point key="canvasLocation" x="264.80000000000001" y="681.2807881773399"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="kn6-7Q-p0v">

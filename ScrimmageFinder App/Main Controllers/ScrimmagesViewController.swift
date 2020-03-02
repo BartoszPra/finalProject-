@@ -34,6 +34,8 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         searchBar.setTextField(color: .black)
         ViewHelpers.setLogoAsNavigationTitle(imageName: "logoNoBackgroundBrighter", on: self)
         UserDefaults.standard.register(defaults: [String: Any]())
+		let nib = UINib(nibName: "SavedScrimmagesCell", bundle: nil)
+        scrimmagesTableView.register(nib, forCellReuseIdentifier: "SavedScrimmagesCell")
        
         // reading from database
         FIRFirestoreService.shared.readAll(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
@@ -52,7 +54,6 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             backGroundPhotoImg.image = #imageLiteral(resourceName: "backgoundBBall70")
         } else {
             backGroundPhotoImg.image = #imageLiteral(resourceName: "theme2bacground270%")
-            
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,25 +61,21 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         if isSearching {
             return filteredScrimmages.count
         }
-        
        return scrimmages.count
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SCcell", for: indexPath)
+        //let cell = tableView.dequeueReusableCell(withIdentifier: "SCcell", for: indexPath)
+		
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: "SavedScrimmagesCell",
+		for: indexPath) as? SavedScrimmagesCell else { return SavedScrimmagesCell() }
         //checking is searchng is on and adjusting the tableview
         if isSearching {
             let filteredScrimmage = filteredScrimmages[indexPath.row]
             cell.textLabel?.text = String(filteredScrimmage.name)
         } else {
             let scrimmage = scrimmages[indexPath.row]
-			let status = ScrimmageStatus(rawValue: scrimmage.currentStatus)?.description
-            let price = scrimmage.price
-			let time = scrimmage.getTime()
-            
-            cell.textLabel?.text = String(scrimmage.name) + " - Status: " + status!
-			cell.detailTextLabel?.text = "Price: £\(String(format: "%.2f", price)), Time: " + time
+			cell.configureCell(scrimmage: scrimmage)
         }
         return cell
     }
@@ -138,7 +135,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd.MM.yyyy"
             
-            let sCdate = dateFormatter.date(from: "\(String(describing: scr.date))")
+            let sCdate = dateFormatter.date(from: "\(String(describing: scr.dateTime))")
             
             if sCdate! < current {
                 FIRFirestoreService.shared.delete(scr, in: .scrimmages)
@@ -186,42 +183,42 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     /// functions for silentScrolly controll.------------
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        silentDidLayoutSubviews()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        configureSilentScrolly(scrimmagesTableView, followBottomView: tabBarController?.tabBar)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        silentWillDisappear()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        silentDidDisappear()
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        silentWillTranstion()
-    }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        silentDidScroll()
-    }
-    
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        silentDidZoom() // Optional
-    }
-    
-    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-        showNavigationBar() // Optional
-        return true
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        silentDidLayoutSubviews()
+//    }
+//    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        configureSilentScrolly(scrimmagesTableView, followBottomView: tabBarController?.tabBar)
+//    }
+//    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        silentWillDisappear()
+//    }
+//    
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        silentDidDisappear()
+//    }
+//    
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.viewWillTransition(to: size, with: coordinator)
+//        silentWillTranstion()
+//    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        silentDidScroll()
+//    }
+//    
+//    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+//        silentDidZoom() // Optional
+//    }
+//    
+//    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+//        showNavigationBar() // Optional
+//        return true
+//    }
     
 }
 // tableview drag delegate protocol functions 

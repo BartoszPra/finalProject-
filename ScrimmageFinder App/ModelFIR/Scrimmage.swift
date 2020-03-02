@@ -11,10 +11,10 @@ struct Scrimmage: Codable, Identifiable {
     
     var id: String? = nil
     var name: String
+	var venueName: String
     var managerName: String
     var managerNumber: String
     var price: Double
-    var date: String
     var createdById: String
     var savedById: [String]
     var currentStatus: Int
@@ -26,8 +26,9 @@ struct Scrimmage: Codable, Identifiable {
 	var notes: String
 	
 	//new scrimmaage struct init
-	init (name: String, address:String, dateTime: Date, date:String, managerName: String, managerNumber: String, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [[String: ParticipantsStatus]], geopoint: GeoPoint, notes: String) {
+	init (name: String, venueName: String, address:String, dateTime: Date, managerName: String, managerNumber: String, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [[String: ParticipantsStatus]], geopoint: GeoPoint, notes: String) {
         self.name = name
+		self.venueName = venueName
 		self.address = address
 		self.dateTime = dateTime
         self.managerName = managerName
@@ -39,20 +40,19 @@ struct Scrimmage: Codable, Identifiable {
         self.currentType = currentType
         self.participants = participants
 		self.geopoint = geopoint
-		self.date = date
 		self.notes = notes
     }
 	
 	func getTime() -> String {
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "HH:mm"//"EE" to get short style
+		dateFormatter.dateFormat = "HH:mm"
 		let mydt = dateFormatter.string(from: dateTime).capitalized
 		return "\(mydt)"
 	}
 	
 	func getDate() -> String {
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "dd.MM.yyyy"//"EE" to get short style
+		dateFormatter.dateFormat = "dd.MM.yyyy"
 		let mydt = dateFormatter.string(from: dateTime).capitalized
 		return "\(mydt)"
 	}

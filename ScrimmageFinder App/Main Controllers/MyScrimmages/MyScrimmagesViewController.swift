@@ -50,10 +50,7 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
         if !self.scrimmages.isEmpty {
             self.emptyListLabel.isHidden = true
             let scrimmage = scrimmages[indexPath.row]
-            cell.cellLBL.text = scrimmage.name
-            cell.addressLbl.text = "" //scrimmage.venueName
-			cell.timeLbl.text = scrimmage.date
-            cell.cellImage.image = UIImage.init(named: "imageJordan")
+			cell.configureCell(scrimmage: scrimmage)
             return cell
         } else {
             self.emptyListLabel.isHidden = false

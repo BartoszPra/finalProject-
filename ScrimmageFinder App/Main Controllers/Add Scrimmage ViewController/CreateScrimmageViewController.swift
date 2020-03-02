@@ -25,18 +25,20 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 	//scrimmage variables
 	var name: String!
 	var contactName: String!
+	var venueName: String!
 	var contactNumber: String!
 	var address: String!
 	var geolocation: GeoPoint!
 	var currentStatus: Int!
 	var currentType: Int!
-	var image: UIImage!
+	var image: UIImage = UIImage.init(named: "bballLogo")!
 	var price: Double!
 	var time: String!
 	var date: String!
 	var notes: String!
+	var newSid: String!
 	
-	var scrimmageValues = [String:Any]()
+	var scrimmageValues = [String: Any]()
 		
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,6 +88,24 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 		}
 		return cell
     }
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		
+		let dateformatter = DateFormatter()
+		
+//		if indexPath.row == 4 { //time
+//			dateformatter.dateFormat = "dd/MM/yyyy"
+//			let date = dateformatter.date(from:(scrimmageValues["Date"] as? String)!)
+//			let cell = tableView.cellForRow(at: indexPath) as? PickerTableViewCell
+//			cell!.date = date
+//		}
+		if indexPath.row == 5 { //date
+			dateformatter.dateFormat = "HH:mm"
+			let time = dateformatter.date(from: (scrimmageValues["Time"] as? String)!)
+			let cell = tableView.cellForRow(at: indexPath) as? PickerTableViewCell
+			cell!.time = time
+		}
+	}
     
     func setupCells() {
         let nib = UINib(nibName: "TextViewTableViewCell", bundle: nil)
@@ -112,6 +132,7 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 		
 		if self.checkIfAllDatailsFilled() {
 			createNewScrimmage()
+			uploadScrimmagePhoto()
 			AlertController.showAllert(self, title: "Congratulations", message: "Your Scrimmage has been added")
 		} else {
 			AlertController.showAllert(self, title: "Missing Information", message: "Please fill the marked fields")
@@ -151,11 +172,13 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
             let index = IndexPath(row: 0, section: 0)
             let cell = tableView.cellForRow(at: index) as? LogoTableViewCell
             cell!.logoImage.image = pickedImage
+			self.image = pickedImage
             tableView.reloadData()
         } else if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             let index = IndexPath(row: 0, section: 0)
             let cell = tableView.cellForRow(at: index) as? LogoTableViewCell
             cell!.logoImage.image = pickedImage
+			self.image = pickedImage
             tableView.reloadData()
         }
         dismiss(animated: true, completion: nil)
@@ -174,6 +197,17 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
             self.view.frame.origin.y = 0
         }
     }
+	
+	func uploadScrimmagePhoto() {
+		
+		FIRFirestoreService.shared.uploadImage(image: self.image, uploadType: .scrimmageImage, for: newSid, for: "123") { (success) in
+			if success {
+				print("Scrimmage photo updated")
+			} else {
+				print("There was error uploading photos")
+			}
+		}
+	}
     
 	func createNewScrimmage() {
 		// composing a scrimmage
@@ -185,9 +219,9 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 		guard let dateObj = dateformat.date(from: date + " " + time) else {return}
 		
 		let scrimmage = Scrimmage(name: (scrimmageValues["Name"] as? String)!,
+								  venueName: venueName,
 								  address: address,
 								  dateTime: dateObj,
-								  date: "",
 								  managerName: (scrimmageValues["Organizer Name"] as? String)!,
 								  managerNumber: (scrimmageValues["Contact Number"] as? String)!,
 								  price: (scrimmageValues["Price"] as? Double)!,
@@ -198,11 +232,12 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 								  geopoint: geolocation,
 								  notes: (scrimmageValues["Notes"] as? String)!)
 		// creating a scrimmage
-		FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
+		newSid = FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
+		print(newSid)
 	}
 	
 	func createCells() {
-		// swiftlint:disable:next line_length
+
 		let pictureCell = CellDefinitionHelper(cellTitle: "Picture",
 											   object: LogoTableViewCell(), identifier: "logoCell",
 											   keboardType: nil, target: self, action: #selector(imageTapped(tapGestureRecognizer:)), placeHolder: "selectPicture", color: nil, type: nil, height: 58)
@@ -261,7 +296,7 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 											 keboardType: nil,
 											 target: self,
 											 action: #selector(submitStringmmage), placeHolder: "Please issert mesage to players", color: nil, type: nil, height: 75)
-		// swiftlint:enable:next line_length
+		
 		cellArray = [pictureCell, nameCell, organizerName, contactNumberCell, timeCell, dateCell, addressCell, priceCell, typeCell, statusCell, occuranceCell, notesCell, inviteButtonCell, submitButtonCell]
 				
 	}
@@ -277,6 +312,8 @@ extension CreateScrimmageViewController: GMSAutocompleteViewControllerDelegate {
         
         cell.addressTextField.text = (place.name ?? "") + ",\n " + (place.formattedAddress ?? "")
 		self.address = place.formattedAddress
+		self.venueName = place.name
+		let components = place.addressComponents //for future if needed all the components of the address
 		self.geolocation = GeoPoint(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         cell.addressTextField.textColor = .white
         tableView.reloadData()
@@ -298,7 +335,7 @@ extension CreateScrimmageViewController: GMSAutocompleteViewControllerDelegate {
 
       // Specify the place data types to return.
       let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-        UInt(GMSPlaceField.formattedAddress.rawValue) | UInt(GMSPlaceField.coordinate.rawValue) | UInt(GMSPlaceField.placeID.rawValue))!
+		UInt(GMSPlaceField.formattedAddress.rawValue) | UInt(GMSPlaceField.coordinate.rawValue) | UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.addressComponents.rawValue))!
       autocompleteController.placeFields = fields
 
       // Specify a filter.

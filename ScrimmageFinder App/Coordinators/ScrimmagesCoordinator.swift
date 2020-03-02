@@ -28,9 +28,6 @@ class ScrimmagesCoordinator: Coordinator {
     }
         
     func goToAddScrimmage() {
-//        let viewController = AddScrimmageViewController.instantiate()
-//        navigationController.pushViewController(viewController, animated: true)
-//        
         let viewController = CreateScrimmageViewController.init(nibName: "CreateScrimmageViewController", bundle: nil)
         navigationController.pushViewController(viewController, animated: true)
     }

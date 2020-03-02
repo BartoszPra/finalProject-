@@ -17,6 +17,9 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
     var isFilled = false
     var selectedDateString: String!
 	var isDataValid = true
+	var time: Date!
+	var date: Date!
+	var titleString: String!
         
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,12 +39,13 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
 	override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
 		self.setupCellUI()
 		self.inputField.delegate = self
+		self.titleString = title
+		//calculateMaxDateAndTime(title: title)
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         self.inputField.attributedPlaceholder = attributedPlaceHolder
         self.title.text = "    " + title        
         self.picker = UIDatePicker()
 		self.picker.datePickerMode = self.decidePickerType(for: title)
-        self.picker.minimumDate = Date()
         self.picker.backgroundColor = .black
         self.picker.tintColor = .white
         self.picker.setValue(UIColor.white, forKeyPath: "textColor")
@@ -78,6 +82,7 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
 	func decidePickerType(for title: String) -> UIDatePicker.Mode {
 		
 		if title == "Date" {
+			self.picker.minimumDate = Date()
 			return UIDatePicker.Mode.date
 			
 		} else if title == "Time" {
@@ -101,7 +106,7 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
 			inputField.text = dateFormatter.string(from: picker.date)
             print("Selected value" + selectedDateString)
         
-        } else if picker.datePickerMode == .time {
+		} else if picker.datePickerMode == .time {
             
             let dateFormatter: DateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm"
@@ -117,11 +122,13 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
 		if textField == inputField {
 			let dateFormatter: DateFormatter = DateFormatter()
 			if picker.datePickerMode == .date {
+				calculateMaxDateAndTime(title: "Date")
 				dateFormatter.dateFormat = "dd/MM/yyyy"
 				picker.date = Date()
 				selectedDate = Date()
 				inputField.text = dateFormatter.string(from: picker.date)
 			} else if picker.datePickerMode == .time {
+				calculateMaxDateAndTime(title: "Time")
 				let theDateAnHourFromNow = NSDate().addingTimeInterval(3600)
 				dateFormatter.dateFormat = "HH:mm"
 				picker.date = theDateAnHourFromNow as Date
@@ -134,5 +141,29 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
 		
 	func textFieldDidEndEditing(_ textField: UITextField) {
         returnValue?(inputField.text ?? "") // Use callback to return data
+		if titleString == "Date" {
+			self.date = picker.date
+		} else {
+			self.time = picker.date
+		}
     }
+	
+	func calculateMaxDateAndTime(title: String) {
+		
+		//let today = Date()
+		
+		if title == "Date" {
+			if self.time != nil && self.time <= Date() {
+				self.picker.maximumDate = Calendar.current.date(byAdding: .day, value: 1, to: Date())
+			} else if self.time != nil && time > Date() {
+				self.picker.maximumDate = Date()
+			} else {
+				self.picker.maximumDate = Date()
+			}
+		} else if title == "Time" {
+			if date != nil && date == Date() {
+				self.picker.maximumDate = Calendar.current.date(byAdding: .hour, value: 2, to: Date())
+			}
+		}
+	}
 }

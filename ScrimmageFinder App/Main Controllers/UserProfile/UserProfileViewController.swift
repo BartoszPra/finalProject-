@@ -52,18 +52,21 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
         if let pickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             profileImageView.contentMode = .scaleAspectFit
             profileImageView.image = pickedImage
-            FIRFirestoreService.shared.uploadProfileImage(image: pickedImage, for: userID) { (success) in
+			
+			FIRFirestoreService.shared.uploadImage(image: pickedImage, uploadType: .userProfile, for: "123", for: userID) { (success) in
                 if success {
                     self.coreDataController.removeProfileImage()
                     self.coreDataController.prepareImageForSaving(image: pickedImage)
+					print("photo uploaded succesfully")
                 }
             }
         } else if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             profileImageView.contentMode = .scaleAspectFit
             profileImageView.image = pickedImage
-            FIRFirestoreService.shared.uploadProfileImage(image: pickedImage, for: userID) { (success) in
+			FIRFirestoreService.shared.uploadImage(image: pickedImage, uploadType: .userProfile, for: "123", for: userID) { (success) in
                 if success {
                     self.coreDataController.prepareImageForSaving(image: pickedImage)
+					print("photo uploaded succesfully")
                 }
             }
         }

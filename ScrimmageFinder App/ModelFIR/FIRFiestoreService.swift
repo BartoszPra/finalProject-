@@ -5,6 +5,11 @@ import FirebaseFirestore
 
 // CRUD operations for forebase
 class FIRFirestoreService {
+	
+	enum UploadType {
+		case userProfile
+		case scrimmageImage
+	}
     
     private init() {}
     static let shared = FIRFirestoreService()
@@ -22,13 +27,15 @@ class FIRFirestoreService {
     }
         
     // create function exluding id it will be added automatically by fireabase
-    func create<T: Encodable>(for encodableObject: T, in collectionReference: FIRCollectionReference) {
-        do {
+    func create<T: Encodable>(for encodableObject: T, in collectionReference: FIRCollectionReference) -> String {
+		
+		do {
             let json = try encodableObject.toJson(excluding: ["id"])
-            reference(to: collectionReference).addDocument(data: json)
-            
+			let ref = reference(to: collectionReference).addDocument(data: json)
+			return ref.documentID
         } catch {
             print(error)
+			return ""
         }
     }
    
@@ -219,6 +226,24 @@ class FIRFirestoreService {
             }
         }
     }
+	
+	func getScrimmageImage(for scrimmageId: String, completion: @escaping (UIImage) -> Void) {
+        
+		var image = UIImage(named: "imageJordan")
+		
+        let imageReference = "ScrimmageImage/" + scrimmageId + ".jpg"
+        let ref = filesReference().reference().child(imageReference)
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        ref.getData(maxSize: 1 * 1024 * 1024) { data, error in
+          if let error = error {
+            print("No uploaded image for this scrimmage" + error.localizedDescription)
+          } else {
+            // Data for "images/island.jpg" is returned
+			image = UIImage(data: data!)
+            completion(image!)
+          }
+        }
+    }
     
     func getProfileImage(for user: String, completion: @escaping (UIImage) -> Void) {
         
@@ -236,16 +261,22 @@ class FIRFirestoreService {
         }
     }
     
-    func uploadProfileImage(image: UIImage, for userId: String, success: @escaping (Bool) -> Void) {
+	func uploadImage(image: UIImage, uploadType: UploadType, for scrimmageId: String, for userId: String, success: @escaping (Bool) -> Void) {
         
         // Create the file metadata
         let metadata = StorageMetadata()
         metadata.contentType = "image/jpg"
-        
         guard let uploadImageData = image.jpegData(compressionQuality: 0.5) else {return}
-
-        // Upload file and metadata to the object 'images/mountains.jpg'
-        let uploadTask = filesReference().reference().child("ProfileImage/" + userId + ".jpg").putData(uploadImageData, metadata: metadata) { (data, error) in
+		var childReference: String!
+        
+		// Upload file and metadata to the object 'images/mountains.jpg'
+		if uploadType == .userProfile {
+			childReference = "ProfileImage/" + userId + ".jpg"
+		} else if uploadType == .scrimmageImage {
+			childReference = "ScrimmageImage/" + scrimmageId + ".jpg"
+		}
+		
+        let uploadTask = filesReference().reference().child(childReference).putData(uploadImageData, metadata: metadata) { (data, error) in
             guard let data = data else {
                 print("there was an error uploading" + error!.localizedDescription)
                 success(false)
@@ -288,6 +319,5 @@ class FIRFirestoreService {
             }
           }
         }
-    }
-    
+    }    
 }

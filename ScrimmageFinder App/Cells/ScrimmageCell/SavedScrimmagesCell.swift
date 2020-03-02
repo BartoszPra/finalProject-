@@ -26,5 +26,13 @@ class SavedScrimmagesCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+	
+	func configureCell(scrimmage: Scrimmage) {
+		
+		cellLBL.text = scrimmage.name
+		addressLbl.text = scrimmage.venueName
+		timeLbl.text = "Price: £\(String(format: "%.2f",scrimmage.price)), Time: " + scrimmage.getTime()
+		statusImage.image = ScrimmageStatus(rawValue: scrimmage.currentStatus)?.statusImage
+		cellImage.loadImageUsingCashe(scrimmageId: scrimmage.id!)
+	}
 }

@@ -39,6 +39,8 @@
 		A51AF9CF23DE53E80042D925 /* CellDefinitionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51AF9CE23DE53E80042D925 /* CellDefinitionHelper.swift */; };
 		A54BC0BE23BE9C380087178B /* AddressCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BC0BC23BE9C380087178B /* AddressCellTableViewCell.swift */; };
 		A54BC0BF23BE9C380087178B /* AddressCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A54BC0BD23BE9C380087178B /* AddressCellTableViewCell.xib */; };
+		A54D94DD240A794700D4DFCF /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D94DC240A794700D4DFCF /* UIImageView+Extensions.swift */; };
+		A54D94DF240B07E200D4DFCF /* SFAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D94DE240B07E200D4DFCF /* SFAddress.swift */; };
 		A5531F8A23B22EEF0054DA0A /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5531F8923B22EEF0054DA0A /* UIButton+Extensions.swift */; };
 		A5531F8E23B2377F0054DA0A /* CreateScrimmageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5531F8C23B2377F0054DA0A /* CreateScrimmageViewController.swift */; };
 		A5531F8F23B2377F0054DA0A /* CreateScrimmageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5531F8D23B2377F0054DA0A /* CreateScrimmageViewController.xib */; };
@@ -173,6 +175,8 @@
 		A51AF9CE23DE53E80042D925 /* CellDefinitionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDefinitionHelper.swift; sourceTree = "<group>"; };
 		A54BC0BC23BE9C380087178B /* AddressCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCellTableViewCell.swift; sourceTree = "<group>"; };
 		A54BC0BD23BE9C380087178B /* AddressCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCellTableViewCell.xib; sourceTree = "<group>"; };
+		A54D94DC240A794700D4DFCF /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		A54D94DE240B07E200D4DFCF /* SFAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFAddress.swift; sourceTree = "<group>"; };
 		A5531F8923B22EEF0054DA0A /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		A5531F8C23B2377F0054DA0A /* CreateScrimmageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateScrimmageViewController.swift; sourceTree = "<group>"; };
 		A5531F8D23B2377F0054DA0A /* CreateScrimmageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateScrimmageViewController.xib; sourceTree = "<group>"; };
@@ -290,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				03F10DF620DD0F7300F8C62B /* Scrimmage.swift */,
+				A54D94DE240B07E200D4DFCF /* SFAddress.swift */,
 				A59034E82391A3A200CB7284 /* FIRStorageReference.swift */,
 				A5E574AD2387076700DD7C27 /* ParticipantsStatus.swift */,
 				A5AEC4722385710F0095796A /* ScrimmageStatus.swift */,
@@ -345,7 +350,7 @@
 				04F4301620F0A93400E5D8ED /* CoreDataModel */,
 				0369DAEC20E121D1006B7507 /* ModelFIR */,
 				04F4301420F0A8E600E5D8ED /* View */,
-				A518D7CD2370DE1E00DBDC1A /* ReusableCells */,
+				A518D7CD2370DE1E00DBDC1A /* Cells */,
 				0369DAEB20E121BF006B7507 /* Main Controllers */,
 				0369DAED20E135D3006B7507 /* Detail Controllers */,
 				04F4301520F0A90400E5D8ED /* helperFiles */,
@@ -446,13 +451,13 @@
 			path = MyScrimmages;
 			sourceTree = "<group>";
 		};
-		A518D7CD2370DE1E00DBDC1A /* ReusableCells */ = {
+		A518D7CD2370DE1E00DBDC1A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				A5531F9023B2467C0054DA0A /* CreateScrmmageCells */,
 				A591A30A236F2F610075F8E4 /* ScrimmageCell */,
 			);
-			path = ReusableCells;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		A51AF9CD23DE53C30042D925 /* Cell Creation Helper */ = {
@@ -622,6 +627,7 @@
 			children = (
 				A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */,
 				A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */,
+				A54D94DC240A794700D4DFCF /* UIImageView+Extensions.swift */,
 				A5531F8923B22EEF0054DA0A /* UIButton+Extensions.swift */,
 				A55AEF8B23C2B61600B07642 /* UISearchBar+Extensions.swift */,
 			);
@@ -1011,6 +1017,7 @@
 				A57BD1262357A33E00A324BC /* SFNames.swift in Sources */,
 				A5531FA323BA31E80054DA0A /* ButtonTableViewCell.swift in Sources */,
 				A5CC95702395EA6C004A0810 /* UIImage+Extensions.swift in Sources */,
+				A54D94DF240B07E200D4DFCF /* SFAddress.swift in Sources */,
 				A59034E92391A3A200CB7284 /* FIRStorageReference.swift in Sources */,
 				C751B37A2259225D0060D1B2 /* MainCoordinator.swift in Sources */,
 				A5E574AE2387076700DD7C27 /* ParticipantsStatus.swift in Sources */,
@@ -1028,6 +1035,7 @@
 				A5AEC4732385710F0095796A /* ScrimmageStatus.swift in Sources */,
 				A5F762C22388AE1B002CD1B3 /* ScrimmageDetailCoordinator.swift in Sources */,
 				0369DAF520E25365006B7507 /* CoreDataController.swift in Sources */,
+				A54D94DD240A794700D4DFCF /* UIImageView+Extensions.swift in Sources */,
 				0369DAEF20E13635006B7507 /* SFdetailViewController.swift in Sources */,
 				A5F762C62388BB0F002CD1B3 /* UsersListViewController.swift in Sources */,
 				04C8F37A20FF2A2F00AF48E4 /* RegisterViewController.swift in Sources */,

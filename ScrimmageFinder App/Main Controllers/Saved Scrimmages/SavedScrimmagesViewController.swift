@@ -54,11 +54,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
         if !self.savedScrimmages.isEmpty {
             updateUI()
             let scrimmage = savedScrimmages[indexPath.row]
-            cell.cellLBL.text = scrimmage.name
-            cell.addressLbl.text = "" //scrimmage.venueName
-            cell.timeLbl.text = scrimmage.date + "  Players: " + String(scrimmage.participants.count)
-            cell.cellImage.image = UIImage.init(named: "imageJordan")
-			cell.statusImage.image = ScrimmageStatus(rawValue: scrimmage.currentStatus)?.statusImage
+			cell.configureCell(scrimmage: scrimmage)
             return cell
         } else {
             updateUI()
