@@ -108,7 +108,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             isSearching = true
             
             //upprecasing searchbar input
-            let firstTwo = searchBar.text?.prefix(3).uppercased()
+            //let firstTwo = searchBar.text?.prefix(3).uppercased()
             
             //checking is first two characters from post code are match with scrimmages post code
             //filteredScrimmages = scrimmages.filter {$0.postCode.hasPrefix(String(firstTwo!))}

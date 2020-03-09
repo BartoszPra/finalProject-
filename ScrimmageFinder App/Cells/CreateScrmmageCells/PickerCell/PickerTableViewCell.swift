@@ -83,7 +83,7 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
 		
 		if title == "Date" {
 			self.picker.minimumDate = Date()
-			return UIDatePicker.Mode.date
+			return UIDatePicker.Mode.dateAndTime
 			
 		} else if title == "Time" {
 			return UIDatePicker.Mode.time
@@ -97,10 +97,10 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
     
     @objc func datePickerValueChanged(_ picker: UIDatePicker) {
         
-        if picker.datePickerMode == .date {
+        if picker.datePickerMode == .dateAndTime {
             
             let dateFormatter: DateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd/MM/yyyy"
+			dateFormatter.dateFormat = "E, dd/MM/yyyy HH:mm"
             selectedDate = picker.date
             selectedDateString = dateFormatter.string(from: picker.date)
 			inputField.text = dateFormatter.string(from: picker.date)

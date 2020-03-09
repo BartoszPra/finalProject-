@@ -4,13 +4,12 @@ import FirebaseFirestore
 import CoreData
 import MapKit
 
-
 class CustomPin: NSObject, MKAnnotation {
 	var coordinate: CLLocationCoordinate2D
 	var title: String?
 	var subtitle: String?
 	
-	init(pinTitle:String, pinSubtitle:String, location: CLLocationCoordinate2D) {
+	init(pinTitle: String, pinSubtitle: String, location: CLLocationCoordinate2D) {
 		self.title = pinTitle
 		self.subtitle = pinSubtitle
 		self.coordinate = location
@@ -28,11 +27,12 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
     private var isParticipating: Bool!
     private var participantStatus: ParticipantsStatus!
     
-    @IBOutlet weak var mapView: MKMapView!
+	@IBOutlet weak var venueNameLabel: UILabel!
+	@IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var organizerNameLabel: UILabel!
+	@IBOutlet weak var addressLbl: UILabel!
+	@IBOutlet weak var organizerNameLabel: UILabel!
     @IBOutlet weak var startTimeLabel: UILabel!
     @IBOutlet weak var contactNumberLabel: UILabel!
     @IBOutlet weak var numberOfParticipantsLabel: UILabel!
@@ -43,7 +43,8 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var participateButton: UIButton!
     @IBOutlet weak var userStatusLabel: UILabel!
-    
+	@IBOutlet weak var userStatusNameLabel: UILabel!
+	
     init(nibName nibNameOrNil: String, bundle nibBundleOrNil: Bundle?, scrimmage: Scrimmage, isSaveUsed: Bool) {
         super.init(nibName: nibNameOrNil as String, bundle: nibBundleOrNil)
         self.isSaveUsed = isSaveUsed
@@ -96,12 +97,13 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
             
             FIRFirestoreService.shared.addToParticipantsTable(for: currentScrimmageId, with: self.userID, status: 1) { (succesful) in
                 if succesful {
+					self.reloadScrimmage()
                     let alert = UIAlertController(title: "Added.",
                                                   message: "You are participating in this scrimmage.",
                                                   preferredStyle: UIAlertController.Style.alert)
                     //add button to allert
                     let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
-                        self.reloadScrimmage()
+						//self.reloadScrimmage()
                     }
                     alert.addAction(action)
                     self.present(alert, animated: true, completion: nil)
@@ -118,14 +120,14 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
             }
         } else {
                         
-            FIRFirestoreService.shared.removeFromParticipantsTable(for: currentScrimmageId, with: self.userID, status: .confirmed) { (success) in
+			FIRFirestoreService.shared.removeFromParticipantsTable(for: currentScrimmageId, with: self.userID, status: .confirmed) { (success) in
                 if success {
+					self.reloadScrimmage()
                     let alert = UIAlertController(title: "Removed",
                                                   message: "You are removed from participants.",
                                                   preferredStyle: UIAlertController.Style.alert)
                     //add button to allert
                     let action = UIAlertAction.init(title: "OK", style: .default) { (_) in
-                        self.reloadScrimmage()
                     }
                     alert.addAction(action)
                     self.present(alert, animated: true, completion: nil)
@@ -178,53 +180,19 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
         return .topAttached
     }
     
-    //function that adds to CoreData -- not used
-//    func saveScrimmageToLocalSaved() {
-//        if coreDataController.entityExists(scrimmage: scrimmagePassedOver!) {
-//            // Crete new Scrimmage object
-//            let newScrimmage = ScrimmageSaved(context: self.coreDataController.mainContext)
-//            //  Add parts of the scrimmage
-//            newScrimmage.name = scrimmagePassedOver?.name
-//            newScrimmage.venueName = scrimmagePassedOver?.venueName
-//            newScrimmage.managersName = scrimmagePassedOver?.managerName
-//            newScrimmage.managersNumber = scrimmagePassedOver?.managerNumber
-//            newScrimmage.postCode = scrimmagePassedOver?.postCode
-//            newScrimmage.time = (scrimmagePassedOver!.time)
-//            newScrimmage.price = (scrimmagePassedOver!.price)
-//            newScrimmage.date = (scrimmagePassedOver!.date)
-//            newScrimmage.participants = Int16((scrimmagePassedOver!.participants))
-//            //SAVE THE CONTEXT and check if it already exist
-//            //saving context
-//            coreDataController.saveContext()
-//            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-//            //add allert
-//            let alert = UIAlertController(title: "Saved!", message: "You have saved your Scrimmage.", preferredStyle: UIAlertController.Style.alert)
-//            //add an action (button)
-//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//        } else {
-//            //add allert
-//            let alert = UIAlertController(title: "Sorry.",
-//                                          message: "You have saved this Scrimmage before.",
-//                                          preferredStyle: UIAlertController.Style.alert)
-//            //add button to allert
-//            alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-//            self.present(alert, animated: true, completion: nil)
-//        }
-//    }
-    
     func setupUI() {
         //assigning data to labels
-        nameLabel.text = "Name: " + scrimmagePassedOver.name
-        addressLabel.text = "Addersss: " + scrimmagePassedOver.address
-		startTimeLabel.text = "Start Time: " + scrimmagePassedOver.getTime()
-        organizerNameLabel.text = "Organizer: " + scrimmagePassedOver.managerName
-        contactNumberLabel.text = "Contact Number: " + scrimmagePassedOver.managerNumber
-        priceLabel.text = "Price: £" + String(format: "%.2f", scrimmagePassedOver.price)
-        dateLabel.text = "Date: " + scrimmagePassedOver.getDate()
-        numberOfParticipantsLabel.text = "People attending: " + String(describing: scrimmagePassedOver.participants.count)
-		self.typeLabel.text = "Scrimmage type: " + ScrimmageType(rawValue: scrimmagePassedOver.currentType)!.description
-		self.statusLabel.text = "Scrimmage status: " + ScrimmageStatus(rawValue: scrimmagePassedOver.currentStatus)!.description
+        nameLabel.text = "    " + scrimmagePassedOver.name
+		venueNameLabel.text = "    " + scrimmagePassedOver.venueName
+		addressLbl.text = "    " + scrimmagePassedOver.address
+		startTimeLabel.text = "    " + scrimmagePassedOver.getTime()
+        organizerNameLabel.text = "    " + scrimmagePassedOver.managerName
+        contactNumberLabel.text = "    " + scrimmagePassedOver.managerNumber
+        priceLabel.text = "    " + String(format: "%.2f", scrimmagePassedOver.price)
+        dateLabel.text = "    " + scrimmagePassedOver.getDate()
+        numberOfParticipantsLabel.text = "    " + String(describing: scrimmagePassedOver.participants.count)
+		self.typeLabel.text = "    " + ScrimmageType(rawValue: scrimmagePassedOver.currentType)!.description
+		self.statusLabel.text = "    " + ScrimmageStatus(rawValue: scrimmagePassedOver.currentStatus)!.description
         
         if isUserAlreadyParticipating() {
             self.participateButton.setTitle("Unparticipate", for: .normal)
@@ -238,18 +206,24 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
             saveButton.isHidden = true
         }
         
-        if isUserAlreadyParticipating() {
-            self.userStatusLabel.isHidden = false
-            if self.participantStatus == .confirmed {
-                self.userStatusLabel.textColor = .green
-            } else {
-                self.userStatusLabel.textColor = .red
-            }
-            self.userStatusLabel.text = "Me: " + self.participantStatus.description
-        } else {
-            self.userStatusLabel.isHidden = true
-        }
-        
+		if isUserAlreadyParticipating() {
+			DispatchQueue.main.async {
+				self.userStatusLabel.isHidden = false
+				self.userStatusNameLabel.isHidden = false
+				if self.participantStatus == .confirmed {
+					self.userStatusLabel.textColor = .green
+				} else {
+					self.userStatusLabel.textColor = .red
+				}
+				self.userStatusNameLabel.text = "You:"
+				self.userStatusLabel.text = "    " + self.participantStatus.description
+			}
+		} else {
+			DispatchQueue.main.async {
+				self.userStatusLabel.isHidden = true
+				self.userStatusNameLabel.isHidden = true
+			}
+		}
     }
     
     @IBAction func viewParticipatingUsersButtonClicked(_ sender: Any) {

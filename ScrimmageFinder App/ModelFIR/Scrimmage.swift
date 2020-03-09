@@ -26,7 +26,7 @@ struct Scrimmage: Codable, Identifiable {
 	var notes: String
 	
 	//new scrimmaage struct init
-	init (name: String, venueName: String, address:String, dateTime: Date, managerName: String, managerNumber: String, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [[String: ParticipantsStatus]], geopoint: GeoPoint, notes: String) {
+	init (name: String, venueName: String, address: String, dateTime: Date, managerName: String, managerNumber: String, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [[String: ParticipantsStatus]], geopoint: GeoPoint, notes: String) {
         self.name = name
 		self.venueName = venueName
 		self.address = address

@@ -10,7 +10,7 @@ import Foundation
 
 struct SFAddress: Codable {
 	
-	var venueName:String
+	var venueName: String
     var line1: String?
     var line2: String
     var postCode: String

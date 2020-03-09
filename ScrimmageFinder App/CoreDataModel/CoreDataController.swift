@@ -67,7 +67,7 @@ class CoreDataController {
     func prepareImageForSaving(image: UIImage) {
         
         // use date as unique id
-        let date : Double = NSDate().timeIntervalSince1970
+        let date: Double = NSDate().timeIntervalSince1970
         // create NSData from UIImage
         guard let imageData = image.jpegData(compressionQuality: 1) else {
             // handle failed conversion

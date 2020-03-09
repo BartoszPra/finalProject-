@@ -17,4 +17,11 @@ enum ParticipantsStatus: Int, Codable, CustomStringConvertible {
         case .unconfirmed: return "unconfirmed"
         }
     }
+	
+	var value: Int {
+	switch self {
+	case .confirmed: return 1
+	case .unconfirmed: return 2
+	}
+}
 }

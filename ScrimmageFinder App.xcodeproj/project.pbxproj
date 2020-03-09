@@ -35,6 +35,14 @@
 		A5002FCD23E438A600CB8F63 /* TextViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5002FCB23E438A600CB8F63 /* TextViewCellTableViewCell.xib */; };
 		A50F4248228472CC007841A2 /* MyScrimmagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50F4246228472CC007841A2 /* MyScrimmagesViewController.xib */; };
 		A50F424C2284785E007841A2 /* MyScrimmagesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F424B2284785E007841A2 /* MyScrimmagesCoordinator.swift */; };
+		A50F7B3624158B7800AA9083 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F7B3424158B7800AA9083 /* ChatViewController.swift */; };
+		A50F7B3724158B7800AA9083 /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50F7B3524158B7800AA9083 /* ChatViewController.xib */; };
+		A50F7B3A24158C0300AA9083 /* ChatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F7B3824158C0300AA9083 /* ChatsTableViewController.swift */; };
+		A50F7B3B24158C0300AA9083 /* ChatsTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50F7B3924158C0300AA9083 /* ChatsTableViewController.xib */; };
+		A50F7B3E24158CE400AA9083 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F7B3D24158CE400AA9083 /* Chat.swift */; };
+		A50F7B4024158D1800AA9083 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F7B3F24158D1800AA9083 /* Message.swift */; };
+		A50F7B442415B9D900AA9083 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F7B422415B9D900AA9083 /* ChatTableViewCell.swift */; };
+		A50F7B452415B9D900AA9083 /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50F7B432415B9D900AA9083 /* ChatTableViewCell.xib */; };
 		A518D7CB2370D7F400DBDC1A /* SavedScrimmagesCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = A591A30F236F30010075F8E4 /* SavedScrimmagesCell.xib */; };
 		A51AF9CF23DE53E80042D925 /* CellDefinitionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51AF9CE23DE53E80042D925 /* CellDefinitionHelper.swift */; };
 		A54BC0BE23BE9C380087178B /* AddressCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BC0BC23BE9C380087178B /* AddressCellTableViewCell.swift */; };
@@ -87,7 +95,6 @@
 		C751B37A2259225D0060D1B2 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751B3792259225D0060D1B2 /* MainCoordinator.swift */; };
 		C751B37C225922710060D1B2 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751B37B225922710060D1B2 /* Storyboarded.swift */; };
 		C751B37E225922970060D1B2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751B37D225922970060D1B2 /* Coordinator.swift */; };
-		C7B8EEF2227E63FF00AB253F /* AddScrimmageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B8EEF1227E63FF00AB253F /* AddScrimmageViewController.swift */; };
 		C7BFC24F2282084F00EE6EB4 /* ScrimmagesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BFC24E2282084F00EE6EB4 /* ScrimmagesCoordinator.swift */; };
 		C7BFC251228209A000EE6EB4 /* CoordinatedNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BFC250228209A000EE6EB4 /* CoordinatedNavigationController.swift */; };
 		C7BFC25322820AB000EE6EB4 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BFC25222820AB000EE6EB4 /* TabBarController.swift */; };
@@ -172,6 +179,14 @@
 		A50F4245228472CC007841A2 /* MyScrimmagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrimmagesViewController.swift; sourceTree = "<group>"; };
 		A50F4246228472CC007841A2 /* MyScrimmagesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyScrimmagesViewController.xib; sourceTree = "<group>"; };
 		A50F424B2284785E007841A2 /* MyScrimmagesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrimmagesCoordinator.swift; sourceTree = "<group>"; };
+		A50F7B3424158B7800AA9083 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		A50F7B3524158B7800AA9083 /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		A50F7B3824158C0300AA9083 /* ChatsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewController.swift; sourceTree = "<group>"; };
+		A50F7B3924158C0300AA9083 /* ChatsTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatsTableViewController.xib; sourceTree = "<group>"; };
+		A50F7B3D24158CE400AA9083 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		A50F7B3F24158D1800AA9083 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		A50F7B422415B9D900AA9083 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
+		A50F7B432415B9D900AA9083 /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
 		A51AF9CE23DE53E80042D925 /* CellDefinitionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDefinitionHelper.swift; sourceTree = "<group>"; };
 		A54BC0BC23BE9C380087178B /* AddressCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCellTableViewCell.swift; sourceTree = "<group>"; };
 		A54BC0BD23BE9C380087178B /* AddressCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -229,7 +244,6 @@
 		C751B3792259225D0060D1B2 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		C751B37B225922710060D1B2 /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		C751B37D225922970060D1B2 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
-		C7B8EEF1227E63FF00AB253F /* AddScrimmageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddScrimmageViewController.swift; sourceTree = "<group>"; };
 		C7BFC24E2282084F00EE6EB4 /* ScrimmagesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmagesCoordinator.swift; sourceTree = "<group>"; };
 		C7BFC250228209A000EE6EB4 /* CoordinatedNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatedNavigationController.swift; sourceTree = "<group>"; };
 		C7BFC25222820AB000EE6EB4 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -348,11 +362,13 @@
 				A57BD1242357A30E00A324BC /* Constants */,
 				C751B3782259218E0060D1B2 /* Coordinators */,
 				04F4301620F0A93400E5D8ED /* CoreDataModel */,
+				A50F7B3C24158CB900AA9083 /* Chat Model */,
 				0369DAEC20E121D1006B7507 /* ModelFIR */,
 				04F4301420F0A8E600E5D8ED /* View */,
 				A518D7CD2370DE1E00DBDC1A /* Cells */,
 				0369DAEB20E121BF006B7507 /* Main Controllers */,
 				0369DAED20E135D3006B7507 /* Detail Controllers */,
+				A50F7B2F241589E200AA9083 /* Chat View Controllers */,
 				04F4301520F0A90400E5D8ED /* helperFiles */,
 				A57BD1272357A3A300A324BC /* Other */,
 				034D429620E7F0EC00D59F8C /* Assets.xcassets */,
@@ -451,6 +467,52 @@
 			path = MyScrimmages;
 			sourceTree = "<group>";
 		};
+		A50F7B2F241589E200AA9083 /* Chat View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A50F7B412415B9AD00AA9083 /* Chat Cell */,
+				A50F7B3124158A2800AA9083 /* ChatsViewController */,
+				A50F7B3024158A1300AA9083 /* Chat View Controllet */,
+			);
+			path = "Chat View Controllers";
+			sourceTree = "<group>";
+		};
+		A50F7B3024158A1300AA9083 /* Chat View Controllet */ = {
+			isa = PBXGroup;
+			children = (
+				A50F7B3424158B7800AA9083 /* ChatViewController.swift */,
+				A50F7B3524158B7800AA9083 /* ChatViewController.xib */,
+			);
+			path = "Chat View Controllet";
+			sourceTree = "<group>";
+		};
+		A50F7B3124158A2800AA9083 /* ChatsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				A50F7B3824158C0300AA9083 /* ChatsTableViewController.swift */,
+				A50F7B3924158C0300AA9083 /* ChatsTableViewController.xib */,
+			);
+			path = ChatsViewController;
+			sourceTree = "<group>";
+		};
+		A50F7B3C24158CB900AA9083 /* Chat Model */ = {
+			isa = PBXGroup;
+			children = (
+				A50F7B3D24158CE400AA9083 /* Chat.swift */,
+				A50F7B3F24158D1800AA9083 /* Message.swift */,
+			);
+			path = "Chat Model";
+			sourceTree = "<group>";
+		};
+		A50F7B412415B9AD00AA9083 /* Chat Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A50F7B422415B9D900AA9083 /* ChatTableViewCell.swift */,
+				A50F7B432415B9D900AA9083 /* ChatTableViewCell.xib */,
+			);
+			path = "Chat Cell";
+			sourceTree = "<group>";
+		};
 		A518D7CD2370DE1E00DBDC1A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -480,7 +542,6 @@
 		A5531F8B23B2372E0054DA0A /* Add Scrimmage ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C7B8EEF1227E63FF00AB253F /* AddScrimmageViewController.swift */,
 				A5531F8C23B2377F0054DA0A /* CreateScrimmageViewController.swift */,
 				A5531F8D23B2377F0054DA0A /* CreateScrimmageViewController.xib */,
 			);
@@ -852,7 +913,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A591A306236E57A60075F8E4 /* RegisterViewController.xib in Resources */,
+				A50F7B452415B9D900AA9083 /* ChatTableViewCell.xib in Resources */,
 				A5531F9423B246E10054DA0A /* TextViewTableViewCell.xib in Resources */,
+				A50F7B3B24158C0300AA9083 /* ChatsTableViewController.xib in Resources */,
 				A5F762C72388BB0F002CD1B3 /* UsersListViewController.xib in Resources */,
 				03F10DD320DC55C300F8C62B /* LaunchScreen.storyboard in Resources */,
 				A50F4248228472CC007841A2 /* MyScrimmagesViewController.xib in Resources */,
@@ -867,6 +930,7 @@
 				A5F762CF23899EBA002CD1B3 /* SFUserTableViewCell.xib in Resources */,
 				03F10DCB20DC55BF00F8C62B /* Main.storyboard in Resources */,
 				A5531FA423BA31E80054DA0A /* ButtonTableViewCell.xib in Resources */,
+				A50F7B3724158B7800AA9083 /* ChatViewController.xib in Resources */,
 				A591A316236F57CB0075F8E4 /* SavedScrimmagesViewController.xib in Resources */,
 				A5531F8F23B2377F0054DA0A /* CreateScrimmageViewController.xib in Resources */,
 				A5531FA923BB5CAF0054DA0A /* CustomPickerCellTableViewCell.xib in Resources */,
@@ -1016,6 +1080,7 @@
 				A5D7433F22F7A2C20047E9E0 /* MyScrimmagesViewController.swift in Sources */,
 				A57BD1262357A33E00A324BC /* SFNames.swift in Sources */,
 				A5531FA323BA31E80054DA0A /* ButtonTableViewCell.swift in Sources */,
+				A50F7B442415B9D900AA9083 /* ChatTableViewCell.swift in Sources */,
 				A5CC95702395EA6C004A0810 /* UIImage+Extensions.swift in Sources */,
 				A54D94DF240B07E200D4DFCF /* SFAddress.swift in Sources */,
 				A59034E92391A3A200CB7284 /* FIRStorageReference.swift in Sources */,
@@ -1049,6 +1114,7 @@
 				A51AF9CF23DE53E80042D925 /* CellDefinitionHelper.swift in Sources */,
 				A5F762CE23899EBA002CD1B3 /* SFUserTableViewCell.swift in Sources */,
 				A57BD1232357A09F00A324BC /* SFTheme.swift in Sources */,
+				A50F7B3A24158C0300AA9083 /* ChatsTableViewController.swift in Sources */,
 				03F10DC620DC55BF00F8C62B /* AppDelegate.swift in Sources */,
 				A54BC0BE23BE9C380087178B /* AddressCellTableViewCell.swift in Sources */,
 				A5531F8E23B2377F0054DA0A /* CreateScrimmageViewController.swift in Sources */,
@@ -1061,12 +1127,14 @@
 				04C8F37E20FFFDA400AF48E4 /* AlertController.swift in Sources */,
 				03F10DF720DD0F7400F8C62B /* Scrimmage.swift in Sources */,
 				03F10DCE20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld in Sources */,
+				A50F7B3624158B7800AA9083 /* ChatViewController.swift in Sources */,
 				A5F762CA2388BB7E002CD1B3 /* User.swift in Sources */,
-				C7B8EEF2227E63FF00AB253F /* AddScrimmageViewController.swift in Sources */,
 				A5531F8A23B22EEF0054DA0A /* UIButton+Extensions.swift in Sources */,
 				A591A312236F30010075F8E4 /* SavedScrimmagesCell.swift in Sources */,
 				03C6E1EE20DD59C3001DFD01 /* EncodableExtensions.swift in Sources */,
 				A5531F9323B246E10054DA0A /* TextViewTableViewCell.swift in Sources */,
+				A50F7B3E24158CE400AA9083 /* Chat.swift in Sources */,
+				A50F7B4024158D1800AA9083 /* Message.swift in Sources */,
 				A5ED86E123E0FADE00753B6F /* MainCreateScrimmageCellTableViewCell.swift in Sources */,
 				A5531F9E23BA05E10054DA0A /* LogoTableViewCell.swift in Sources */,
 			);

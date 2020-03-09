@@ -82,24 +82,7 @@ class FIRFirestoreService {
             } catch {
                 print(error)
             }
-        }
-        
-    }
-    
-    func deleteFromSavedBy(for scrimmageID: String, with userId: String) -> Bool {
-        
-        var boolToReturn = false
-        let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
-        currentScrimmage.updateData(["savedById": FieldValue.arrayRemove([userId])]) { (error) in
-            if let err = error {
-                print(err.localizedDescription)
-                boolToReturn = false
-            } else {
-                print("scrimmage unsaved")
-                boolToReturn = true
-            }
-        }
-        return boolToReturn
+        }        
     }
     
     func readWhereArray<T: Decodable>(from collectionReference: FIRCollectionReference, whereArray: String, contains: String, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
@@ -120,7 +103,7 @@ class FIRFirestoreService {
                     print(error)
                 }
             } else {
-                print(error?.localizedDescription)
+				print(error?.localizedDescription as Any)
             }
         }
     }
@@ -177,6 +160,23 @@ class FIRFirestoreService {
         }
         
     }
+	
+	func removeFromParticipantsTable(for scrimmageID: String, with userId: String, status: ParticipantsStatus, completion: @escaping (Bool) -> Void) {
+        var isSuccesful = false
+        let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
+
+		currentScrimmage.updateData(["participants": FieldValue.arrayRemove([[userId: status.value]])]) { (error) in
+            if let err = error {
+                print(err.localizedDescription)
+                isSuccesful = false
+                completion(isSuccesful)
+            } else {
+                print("succesfully removed from participants")
+                isSuccesful = true
+                completion(isSuccesful)
+            }
+        }
+    }
     
     func addToParticipantsTable(for scrimmageID: String, with userId: String, status: Int, completion: @escaping (Bool) -> Void) {
         var isSuccesful = false
@@ -193,22 +193,21 @@ class FIRFirestoreService {
         }
         }
     }
-    
-    func removeFromParticipantsTable(for scrimmageID: String, with userId: String, status: ParticipantsStatus, completion: @escaping (Bool) -> Void) {
-        var isSuccesful = false
-        let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
+	
+	func deleteFromSavedBy(for scrimmageID: String, with userId: String) -> Bool {
         
-        currentScrimmage.updateData(["participants": FieldValue.arrayRemove([[userId: status]])]) { (error) in
+        var boolToReturn = false
+        let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
+        currentScrimmage.updateData(["savedById": FieldValue.arrayRemove([userId])]) { (error) in
             if let err = error {
                 print(err.localizedDescription)
-                isSuccesful = false
-                completion(isSuccesful)
+                boolToReturn = false
             } else {
-                print("succesfully removed from participants")
-                isSuccesful = true
-                completion(isSuccesful)
+                print("scrimmage unsaved")
+                boolToReturn = true
             }
         }
+        return boolToReturn
     }
     
     func updateSavedTable(for scrimmageID: String, with userId: String, completion: @escaping (Bool) -> Void) {
@@ -220,7 +219,7 @@ class FIRFirestoreService {
                 isSuccesful = false
                 completion(isSuccesful)
             } else {
-                print("succesfully removed from participants")
+                print("succesfully added to saved")
                 isSuccesful = true
                 completion(isSuccesful)
             }

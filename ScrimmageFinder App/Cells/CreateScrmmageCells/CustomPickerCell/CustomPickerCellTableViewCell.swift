@@ -32,8 +32,7 @@ class CustomPickerCellTableViewCell: MainCreateScrimmageCellTableViewCell, UIPic
         super.awakeFromNib()
     }
         
-    override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target:
-		UIViewController?, action: Selector?, type: CellType?) {
+    override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
 		self.setupCellUI()
         self.inputTextField.delegate = self
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])

@@ -98,8 +98,8 @@
             timestampString = "0"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "delete(_:in:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -118,57 +118,6 @@
             startingLineNumber = "105"
             endingLineNumber = "105"
             landmarkName = "deleteFromSavedList(for:at:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5414654F-CAB5-4B55-A623-CC0206204BDD"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/ModelFIR/FIRFiestoreService.swift"
-            timestampString = "0"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
-            landmarkName = "readWhere(from:whereFld:equalsTo:returning:completion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7610E0FA-1646-47C8-BF6F-45545762DCC7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/ModelFIR/FIRFiestoreService.swift"
-            timestampString = "0"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "FIRFirestoreService"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "04B81FAE-4243-442E-9C51-99C7EB0F5584"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/ModelFIR/FIRFiestoreService.swift"
-            timestampString = "0"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "deleteFromSavedBy(for:with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -252,23 +201,6 @@
             startingLineNumber = "64"
             endingLineNumber = "64"
             landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EF3E9612-31DC-406D-B165-53F6FFD4D599"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Detail Controllers/UsersListController/UsersListViewController.swift"
-            timestampString = "0"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -383,8 +315,8 @@
             filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
             landmarkName = "uploadScrimmagePhoto()"
             landmarkType = "7">
             <Locations>
@@ -399,8 +331,8 @@
                   urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/Main%20Controllers/Add%20Scrimmage%20ViewController/CreateScrimmageViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "203"
-                  endingLineNumber = "203"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
                   offsetFromSymbolStart = "44">
                </Location>
                <Location
@@ -414,43 +346,11 @@
                   urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/Main%20Controllers/Add%20Scrimmage%20ViewController/CreateScrimmageViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "204"
-                  endingLineNumber = "204"
+                  startingLineNumber = "187"
+                  endingLineNumber = "187"
                   offsetFromSymbolStart = "44">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "88348AAD-3D05-4CCA-8E5B-09BF9F0B1ED0"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
-            landmarkName = "createNewScrimmage()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0098116F-81F9-4D4E-9D35-39712FB35857"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
-            landmarkName = "viewController(_:didAutocompleteWith:)"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -463,8 +363,8 @@
             filePath = "ScrimmageFinder App/Cells/CreateScrmmageCells/PickerCell/PickerTableViewCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "calculateMaxDateAndTime(title:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -472,32 +372,128 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "EC97E6AA-BEE3-4A9A-B38B-A403AB8DAD56"
+            uuid = "5C08BC65-76B1-439C-9A63-32CE94DBB684"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
+            filePath = "ScrimmageFinder App/ModelFIR/FIRFiestoreService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
+            landmarkName = "updateSavedTable(for:with:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5A3FB153-5444-43DE-920D-947A6B2CF9E0"
+            uuid = "285357A8-DBC8-42F4-B46F-CBBDC65984DD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScrimmageFinder App/Detail Controllers/Detail/SFdetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
+            landmarkName = "checkIfScrimmageSaved(scrimmage:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "59E077EA-8C85-4873-96B3-0774C09E8A00"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "createNewScrimmage()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "59E077EA-8C85-4873-96B3-0774C09E8A00 - d4aebab8203e967c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ScrimmageFinder_App.CreateScrimmageViewController.createNewScrimmage() -&gt; ()"
+                  moduleName = "ScrimmageFinder App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/Main%20Controllers/Add%20Scrimmage%20ViewController/CreateScrimmageViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "1225">
+               </Location>
+               <Location
+                  uuid = "59E077EA-8C85-4873-96B3-0774C09E8A00 - d4aebab8203e967c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ScrimmageFinder_App.CreateScrimmageViewController.createNewScrimmage() -&gt; ()"
+                  moduleName = "ScrimmageFinder App"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/Main%20Controllers/Add%20Scrimmage%20ViewController/CreateScrimmageViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "6002">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A73D9535-AD17-4529-9C86-B14B0956447F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "submitStringmmage()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2612733D-7AD0-49F5-A045-6591C83F54F6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "submitStringmmage()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "583C9FAC-5481-4AF1-9C21-E08C5DE46908"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScrimmageFinder App/Main Controllers/Add Scrimmage ViewController/CreateScrimmageViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "createNewScrimmage()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -16,7 +16,8 @@ struct CellDefinition {
     var type: UITableViewCell
 }
 
-class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateScrimmageViewController: UIViewController, UITableViewDataSource,
+UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         
     @IBOutlet weak var tableView: UITableView!
     var imagePicker = UIImagePickerController()
@@ -88,24 +89,6 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 		}
 		return cell
     }
-	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		
-		let dateformatter = DateFormatter()
-		
-//		if indexPath.row == 4 { //time
-//			dateformatter.dateFormat = "dd/MM/yyyy"
-//			let date = dateformatter.date(from:(scrimmageValues["Date"] as? String)!)
-//			let cell = tableView.cellForRow(at: indexPath) as? PickerTableViewCell
-//			cell!.date = date
-//		}
-		if indexPath.row == 5 { //date
-			dateformatter.dateFormat = "HH:mm"
-			let time = dateformatter.date(from: (scrimmageValues["Time"] as? String)!)
-			let cell = tableView.cellForRow(at: indexPath) as? PickerTableViewCell
-			cell!.time = time
-		}
-	}
     
     func setupCells() {
         let nib = UINib(nibName: "TextViewTableViewCell", bundle: nil)
@@ -131,8 +114,8 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
     @objc func submitStringmmage() {
 		
 		if self.checkIfAllDatailsFilled() {
+			//fix so its on succe
 			createNewScrimmage()
-			uploadScrimmagePhoto()
 			AlertController.showAllert(self, title: "Congratulations", message: "Your Scrimmage has been added")
 		} else {
 			AlertController.showAllert(self, title: "Missing Information", message: "Please fill the marked fields")
@@ -213,10 +196,10 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 		// composing a scrimmage
 		
 		let dateformat = DateFormatter()
-		dateformat.dateFormat =  "dd/MM/yyyy HH:mm"
+		dateformat.dateFormat =  "E, dd/MM/yyyy HH:mm"
 		 let date: String = (scrimmageValues["Date"] as? String)!
-		 let time: String = (scrimmageValues["Time"] as? String)!
-		guard let dateObj = dateformat.date(from: date + " " + time) else {return}
+		 //let time: String = (scrimmageValues["Time"] as? String)!
+		guard let dateObj = dateformat.date(from: date) else {return}
 		
 		let scrimmage = Scrimmage(name: (scrimmageValues["Name"] as? String)!,
 								  venueName: venueName,
@@ -233,14 +216,16 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 								  notes: (scrimmageValues["Notes"] as? String)!)
 		// creating a scrimmage
 		newSid = FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
-		print(newSid)
+		print(newSid + "Im here with id")
+		uploadScrimmagePhoto()
 	}
 	
 	func createCells() {
 
 		let pictureCell = CellDefinitionHelper(cellTitle: "Picture",
 											   object: LogoTableViewCell(), identifier: "logoCell",
-											   keboardType: nil, target: self, action: #selector(imageTapped(tapGestureRecognizer:)), placeHolder: "selectPicture", color: nil, type: nil, height: 58)
+											   keboardType: nil, target: self, action: #selector(imageTapped(tapGestureRecognizer:)),
+											   placeHolder: "selectPicture", color: nil, type: nil, height: 58)
 		let nameCell = CellDefinitionHelper(cellTitle: "Name",
 											object: TextViewTableViewCell(), identifier: "textFieldCell",
 											keboardType: .default, target: nil, action: nil,
@@ -252,14 +237,17 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 											type: nil, height: 58)
 		let priceCell = CellDefinitionHelper(cellTitle: "Price",
 											 object: CustomPickerCellTableViewCell(),
-											 identifier: "customPickerCell", keboardType: nil, target: self, action: #selector(imageTapped(tapGestureRecognizer:)), placeHolder: "select Price", color: nil, type: .price, height: 58)
+											 identifier: "customPickerCell", keboardType: nil, target: self,
+											 action: #selector(imageTapped(tapGestureRecognizer:)),
+											 placeHolder: "select Price", color: nil, type: .price, height: 58)
 		let organizerName = CellDefinitionHelper(cellTitle: "Organizer Name",
 												 object: TextViewTableViewCell(), identifier: "textFieldCell",
-												 keboardType: .default, target: nil, action: nil, placeHolder: "Specify organizers name", color: nil, type: nil, height: 58)
+												 keboardType: .default, target: nil, action: nil,
+												 placeHolder: "Specify organizers name", color: nil, type: nil, height: 58)
 		let dateCell = CellDefinitionHelper(cellTitle: "Date",
 											object: PickerTableViewCell(),
-											identifier: "pickerCell", keboardType: nil,
-											target: nil, action: nil, placeHolder: "Date", color: nil, type: nil, height: 58)
+											identifier: "pickerCell", keboardType: nil, target: nil, action: nil,
+											placeHolder: "Date", color: nil, type: nil, height: 58)
 		let contactNumberCell = CellDefinitionHelper(cellTitle: "Contact Number",
 													 object: TextViewTableViewCell(), identifier: "textFieldCell", keboardType: .phonePad, target: nil,
 													 action: nil, placeHolder: "Specify contact number", color: nil, type: nil, height: 58)
@@ -297,7 +285,11 @@ class CreateScrimmageViewController: UIViewController, UITableViewDataSource, UI
 											 target: self,
 											 action: #selector(submitStringmmage), placeHolder: "Please issert mesage to players", color: nil, type: nil, height: 75)
 		
-		cellArray = [pictureCell, nameCell, organizerName, contactNumberCell, timeCell, dateCell, addressCell, priceCell, typeCell, statusCell, occuranceCell, notesCell, inviteButtonCell, submitButtonCell]
+		cellArray = [pictureCell, nameCell, organizerName,
+					 contactNumberCell, dateCell,
+					 addressCell, priceCell, typeCell,
+					 statusCell, occuranceCell, notesCell,
+					 inviteButtonCell, submitButtonCell]
 				
 	}
         
@@ -307,7 +299,7 @@ extension CreateScrimmageViewController: GMSAutocompleteViewControllerDelegate {
     
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         dismiss(animated: true, completion: nil)
-        let index = IndexPath(row: 6, section: 0)
+        let index = IndexPath(row: 5, section: 0)
         guard let cell = tableView.cellForRow(at: index) as? AddressCellTableViewCell else { return }
         
         cell.addressTextField.text = (place.name ?? "") + ",\n " + (place.formattedAddress ?? "")
@@ -334,8 +326,12 @@ extension CreateScrimmageViewController: GMSAutocompleteViewControllerDelegate {
       autocompleteController.delegate = self
 
       // Specify the place data types to return.
-      let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
-		UInt(GMSPlaceField.formattedAddress.rawValue) | UInt(GMSPlaceField.coordinate.rawValue) | UInt(GMSPlaceField.placeID.rawValue) | UInt(GMSPlaceField.addressComponents.rawValue))!
+      let fields: GMSPlaceField = GMSPlaceField(rawValue:
+		UInt(GMSPlaceField.name.rawValue) |
+		UInt(GMSPlaceField.formattedAddress.rawValue) |
+		UInt(GMSPlaceField.coordinate.rawValue) |
+		UInt(GMSPlaceField.placeID.rawValue) |
+		UInt(GMSPlaceField.addressComponents.rawValue))!
       autocompleteController.placeFields = fields
 
       // Specify a filter.

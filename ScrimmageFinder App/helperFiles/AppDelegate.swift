@@ -28,9 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
         
-        INPreferences.requestSiriAuthorization({status in
-            print(String(reflecting: status))
-        })
+        //INPreferences.requestSiriAuthorization({status in
+        //    print(String(reflecting: status))
+        //})
         
         return true
     }
