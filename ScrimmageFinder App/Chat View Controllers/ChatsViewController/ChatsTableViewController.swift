@@ -9,12 +9,17 @@
 import UIKit
 
 class ChatsTableViewController: UITableViewController {
-        
+	
+	var coordinator: ChatCoordinator?
 	var chats = [Chat]()
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		self.navigationController?.title = "Chats"
+		let nib = UINib(nibName: "ChatTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "chetsCell")
+		tableView.delegate = self
+		tableView.dataSource = self
+		self.title = "Chats"
 		createChats()
     }
 
@@ -22,21 +27,20 @@ class ChatsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
 		return chats.count
     }
-
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "chetsCell", for: indexPath) as? ChatTableViewCell else {return ChatTableViewCell()}
 		
 		cell.name.text = "Irati Masa"
 		//cell?.imageView?.image =
-		cell.subName.text = ""
+		cell.subName.text = "how are you??"
 
         return cell
     }
@@ -49,8 +53,12 @@ class ChatsTableViewController: UITableViewController {
 		chats = [chat1, chat2, chat3]
 		
 	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let id = chats[indexPath.row].id
+		coordinator?.goToChat(with: id, from: self)
+	}
     
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

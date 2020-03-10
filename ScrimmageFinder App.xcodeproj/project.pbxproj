@@ -43,6 +43,7 @@
 		A50F7B4024158D1800AA9083 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F7B3F24158D1800AA9083 /* Message.swift */; };
 		A50F7B442415B9D900AA9083 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F7B422415B9D900AA9083 /* ChatTableViewCell.swift */; };
 		A50F7B452415B9D900AA9083 /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50F7B432415B9D900AA9083 /* ChatTableViewCell.xib */; };
+		A50F7B4724170AA700AA9083 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F7B4624170AA700AA9083 /* ChatCoordinator.swift */; };
 		A518D7CB2370D7F400DBDC1A /* SavedScrimmagesCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = A591A30F236F30010075F8E4 /* SavedScrimmagesCell.xib */; };
 		A51AF9CF23DE53E80042D925 /* CellDefinitionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51AF9CE23DE53E80042D925 /* CellDefinitionHelper.swift */; };
 		A54BC0BE23BE9C380087178B /* AddressCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BC0BC23BE9C380087178B /* AddressCellTableViewCell.swift */; };
@@ -187,6 +188,7 @@
 		A50F7B3F24158D1800AA9083 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		A50F7B422415B9D900AA9083 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		A50F7B432415B9D900AA9083 /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
+		A50F7B4624170AA700AA9083 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
 		A51AF9CE23DE53E80042D925 /* CellDefinitionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDefinitionHelper.swift; sourceTree = "<group>"; };
 		A54BC0BC23BE9C380087178B /* AddressCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCellTableViewCell.swift; sourceTree = "<group>"; };
 		A54BC0BD23BE9C380087178B /* AddressCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCellTableViewCell.xib; sourceTree = "<group>"; };
@@ -754,6 +756,7 @@
 				A50F424B2284785E007841A2 /* MyScrimmagesCoordinator.swift */,
 				A5F762C12388AE1B002CD1B3 /* ScrimmageDetailCoordinator.swift */,
 				A5F762DB238AE1A9002CD1B3 /* UserProfileCoordinator.swift */,
+				A50F7B4624170AA700AA9083 /* ChatCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1106,6 +1109,7 @@
 				04C8F37A20FF2A2F00AF48E4 /* RegisterViewController.swift in Sources */,
 				A5531FA823BB5CAF0054DA0A /* CustomPickerCellTableViewCell.swift in Sources */,
 				A55AEF8C23C2B61600B07642 /* UISearchBar+Extensions.swift in Sources */,
+				A50F7B4724170AA700AA9083 /* ChatCoordinator.swift in Sources */,
 				03C6E1E820DD357D001DFD01 /* FIRFiestoreService.swift in Sources */,
 				A5531F9923B572670054DA0A /* PickerTableViewCell.swift in Sources */,
 				0369DAEA20E121B1006B7507 /* SavedScrimmagesViewController.swift in Sources */,

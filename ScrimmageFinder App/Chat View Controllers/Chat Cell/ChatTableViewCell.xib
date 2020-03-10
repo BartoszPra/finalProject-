@@ -9,34 +9,34 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="chetsCell" rowHeight="53" id="KGk-i7-Jjw" customClass="ChatTableViewCell" customModule="ScrimmageFinder_App" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="chetsCell" rowHeight="49" id="KGk-i7-Jjw" customClass="ChatTableViewCell" customModule="ScrimmageFinder_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="53"/>
+                <rect key="frame" x="0.0" y="0.0" width="293" height="49"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="cbF-gU-9ds">
-                        <rect key="frame" x="5" y="5" width="310" height="45"/>
+                        <rect key="frame" x="5" y="5" width="283" height="45"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="basketBallLogo" translatesAutoresizingMaskIntoConstraints="NO" id="gTr-Wk-8JG">
-                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="PxR-Ry-6rn"/>
-                                    <constraint firstAttribute="height" constant="40" id="RoV-Zd-DjJ"/>
+                                    <constraint firstAttribute="width" constant="35" id="PxR-Ry-6rn"/>
+                                    <constraint firstAttribute="height" constant="35" id="RoV-Zd-DjJ"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="tb3-Jf-KA7">
-                                <rect key="frame" x="50" y="0.0" width="260" height="40"/>
+                                <rect key="frame" x="45" y="0.0" width="238" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Irati Masa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ifK-O6-T2E">
-                                        <rect key="frame" x="0.0" y="0.0" width="74.5" height="25.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="74.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi how are you? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egn-OV-fGB">
-                                        <rect key="frame" x="0.0" y="25.5" width="93.5" height="14.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Hi how are you? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egn-OV-fGB">
+                                        <rect key="frame" x="0.0" y="20.5" width="93.5" height="14.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -61,7 +61,7 @@
                 <outlet property="name" destination="ifK-O6-T2E" id="I1Q-Y4-O73"/>
                 <outlet property="subName" destination="egn-OV-fGB" id="PcD-xx-taM"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="104.79910714285714"/>
+            <point key="canvasLocation" x="137.68115942028987" y="103.45982142857143"/>
         </tableViewCell>
     </objects>
     <resources>
