@@ -4,4 +4,5 @@ import Foundation
 enum FIRCollectionReference: String {
     case scrimmages
     case users
+	case chats
 }

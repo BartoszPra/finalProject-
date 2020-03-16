@@ -25,8 +25,6 @@
 		03F10DDE20DC55C300F8C62B /* ScrimmageFinderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DDD20DC55C300F8C62B /* ScrimmageFinderAppTests.swift */; };
 		03F10DE920DC55C300F8C62B /* ScrimmageFinderAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DE820DC55C300F8C62B /* ScrimmageFinderAppUITests.swift */; };
 		03F10DF720DD0F7400F8C62B /* Scrimmage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DF620DD0F7300F8C62B /* Scrimmage.swift */; };
-		0491940120EB6C060063671E /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0491940020EB6C060063671E /* IntentHandler.swift */; };
-		0491940520EB6C060063671E /* SiriScrimmageWorkouts.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 049193FE20EB6C060063671E /* SiriScrimmageWorkouts.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		04C8F37820FF2A0E00AF48E4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F37720FF2A0E00AF48E4 /* LoginViewController.swift */; };
 		04C8F37A20FF2A2F00AF48E4 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F37920FF2A2E00AF48E4 /* RegisterViewController.swift */; };
 		04C8F37E20FFFDA400AF48E4 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8F37D20FFFDA400AF48E4 /* AlertController.swift */; };
@@ -46,6 +44,13 @@
 		A50F7B4724170AA700AA9083 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F7B4624170AA700AA9083 /* ChatCoordinator.swift */; };
 		A518D7CB2370D7F400DBDC1A /* SavedScrimmagesCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = A591A30F236F30010075F8E4 /* SavedScrimmagesCell.xib */; };
 		A51AF9CF23DE53E80042D925 /* CellDefinitionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51AF9CE23DE53E80042D925 /* CellDefinitionHelper.swift */; };
+		A52D2CB9241D0E8500605231 /* DatabaseRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D2CB8241D0E8500605231 /* DatabaseRepresentation.swift */; };
+		A52D2CBE241E561A00605231 /* UIColor+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D2CBA241E561A00605231 /* UIColor+Additions.swift */; };
+		A52D2CBF241E561A00605231 /* UICollectionView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D2CBB241E561A00605231 /* UICollectionView+Additions.swift */; };
+		A52D2CC0241E561A00605231 /* UIView+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D2CBC241E561A00605231 /* UIView+Additions.swift */; };
+		A52D2CC1241E561A00605231 /* UIImage+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D2CBD241E561A00605231 /* UIImage+Additions.swift */; };
+		A52D2CC3241E598500605231 /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D2CC2241E598500605231 /* Sender.swift */; };
+		A52D2CC5241E5E5D00605231 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D2CC4241E5E5D00605231 /* CurrentUser.swift */; };
 		A54BC0BE23BE9C380087178B /* AddressCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54BC0BC23BE9C380087178B /* AddressCellTableViewCell.swift */; };
 		A54BC0BF23BE9C380087178B /* AddressCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A54BC0BD23BE9C380087178B /* AddressCellTableViewCell.xib */; };
 		A54D94DD240A794700D4DFCF /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54D94DC240A794700D4DFCF /* UIImageView+Extensions.swift */; };
@@ -117,13 +122,6 @@
 			remoteGlobalIDString = 03F10DC120DC55BF00F8C62B;
 			remoteInfo = "ScrimmageFinder App";
 		};
-		0491940320EB6C060063671E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 03F10DBA20DC55BE00F8C62B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 049193FD20EB6C060063671E;
-			remoteInfo = SiriScrimmageWorkouts;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -133,7 +131,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0491940520EB6C060063671E /* SiriScrimmageWorkouts.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +163,6 @@
 		03F10DEA20DC55C300F8C62B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03F10DF620DD0F7300F8C62B /* Scrimmage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scrimmage.swift; sourceTree = "<group>"; };
 		049193C620EA56800063671E /* ScrimmageFinder App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ScrimmageFinder App.entitlements"; sourceTree = "<group>"; };
-		049193FE20EB6C060063671E /* SiriScrimmageWorkouts.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SiriScrimmageWorkouts.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0491940020EB6C060063671E /* IntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentHandler.swift; sourceTree = "<group>"; };
 		0491940220EB6C060063671E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04C8F37720FF2A0E00AF48E4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +186,13 @@
 		A50F7B432415B9D900AA9083 /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
 		A50F7B4624170AA700AA9083 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
 		A51AF9CE23DE53E80042D925 /* CellDefinitionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDefinitionHelper.swift; sourceTree = "<group>"; };
+		A52D2CB8241D0E8500605231 /* DatabaseRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseRepresentation.swift; sourceTree = "<group>"; };
+		A52D2CBA241E561A00605231 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
+		A52D2CBB241E561A00605231 /* UICollectionView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Additions.swift"; sourceTree = "<group>"; };
+		A52D2CBC241E561A00605231 /* UIView+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Additions.swift"; sourceTree = "<group>"; };
+		A52D2CBD241E561A00605231 /* UIImage+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Additions.swift"; sourceTree = "<group>"; };
+		A52D2CC2241E598500605231 /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		A52D2CC4241E5E5D00605231 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		A54BC0BC23BE9C380087178B /* AddressCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCellTableViewCell.swift; sourceTree = "<group>"; };
 		A54BC0BD23BE9C380087178B /* AddressCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCellTableViewCell.xib; sourceTree = "<group>"; };
 		A54D94DC240A794700D4DFCF /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
@@ -281,13 +284,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		049193FB20EB6C060063671E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -320,6 +316,7 @@
 				03C6E1EB20DD5557001DFD01 /* FIRCollectionReference.swift */,
 				A5AEC475238612E00095796A /* ScrimmageType.swift */,
 				A5F762C92388BB7E002CD1B3 /* User.swift */,
+				A52D2CC4241E5E5D00605231 /* CurrentUser.swift */,
 				A59A0CA2240498D400C4C71A /* CodableGeoPoint.swift */,
 			);
 			path = ModelFIR;
@@ -353,7 +350,6 @@
 				03F10DC220DC55BF00F8C62B /* ScrimmageFinder App.app */,
 				03F10DD920DC55C300F8C62B /* ScrimmageFinder AppTests.xctest */,
 				03F10DE420DC55C300F8C62B /* ScrimmageFinder AppUITests.xctest */,
-				049193FE20EB6C060063671E /* SiriScrimmageWorkouts.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -502,6 +498,8 @@
 			children = (
 				A50F7B3D24158CE400AA9083 /* Chat.swift */,
 				A50F7B3F24158D1800AA9083 /* Message.swift */,
+				A52D2CB8241D0E8500605231 /* DatabaseRepresentation.swift */,
+				A52D2CC2241E598500605231 /* Sender.swift */,
 			);
 			path = "Chat Model";
 			sourceTree = "<group>";
@@ -688,6 +686,10 @@
 		A5D2FA44237F50F200FAAC8A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A52D2CBB241E561A00605231 /* UICollectionView+Additions.swift */,
+				A52D2CBA241E561A00605231 /* UIColor+Additions.swift */,
+				A52D2CBD241E561A00605231 /* UIImage+Additions.swift */,
+				A52D2CBC241E561A00605231 /* UIView+Additions.swift */,
 				A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */,
 				A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */,
 				A54D94DC240A794700D4DFCF /* UIImageView+Extensions.swift */,
@@ -789,7 +791,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				0491940420EB6C060063671E /* PBXTargetDependency */,
 			);
 			name = "ScrimmageFinder App";
 			productName = "ScrimmageFinder App";
@@ -834,23 +835,6 @@
 			productReference = 03F10DE420DC55C300F8C62B /* ScrimmageFinder AppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		049193FD20EB6C060063671E /* SiriScrimmageWorkouts */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0491940620EB6C060063671E /* Build configuration list for PBXNativeTarget "SiriScrimmageWorkouts" */;
-			buildPhases = (
-				049193FA20EB6C060063671E /* Sources */,
-				049193FB20EB6C060063671E /* Frameworks */,
-				049193FC20EB6C060063671E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SiriScrimmageWorkouts;
-			productName = SiriScrimmageWorkouts;
-			productReference = 049193FE20EB6C060063671E /* SiriScrimmageWorkouts.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -883,10 +867,6 @@
 						LastSwiftMigration = 1000;
 						TestTargetID = 03F10DC120DC55BF00F8C62B;
 					};
-					049193FD20EB6C060063671E = {
-						CreatedOnToolsVersion = 9.4;
-						LastSwiftMigration = 1000;
-					};
 				};
 			};
 			buildConfigurationList = 03F10DBD20DC55BE00F8C62B /* Build configuration list for PBXProject "ScrimmageFinder App" */;
@@ -905,7 +885,6 @@
 				03F10DC120DC55BF00F8C62B /* ScrimmageFinder App */,
 				03F10DD820DC55C300F8C62B /* ScrimmageFinder AppTests */,
 				03F10DE320DC55C300F8C62B /* ScrimmageFinder AppUITests */,
-				049193FD20EB6C060063671E /* SiriScrimmageWorkouts */,
 			);
 		};
 /* End PBXProject section */
@@ -950,13 +929,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		03F10DE220DC55C300F8C62B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		049193FC20EB6C060063671E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1100,12 +1072,16 @@
 				A59A0CA3240498D400C4C71A /* CodableGeoPoint.swift in Sources */,
 				C751B37C225922710060D1B2 /* Storyboarded.swift in Sources */,
 				C751B37E225922970060D1B2 /* Coordinator.swift in Sources */,
+				A52D2CBF241E561A00605231 /* UICollectionView+Additions.swift in Sources */,
 				A5AEC4732385710F0095796A /* ScrimmageStatus.swift in Sources */,
 				A5F762C22388AE1B002CD1B3 /* ScrimmageDetailCoordinator.swift in Sources */,
 				0369DAF520E25365006B7507 /* CoreDataController.swift in Sources */,
+				A52D2CC5241E5E5D00605231 /* CurrentUser.swift in Sources */,
 				A54D94DD240A794700D4DFCF /* UIImageView+Extensions.swift in Sources */,
+				A52D2CBE241E561A00605231 /* UIColor+Additions.swift in Sources */,
 				0369DAEF20E13635006B7507 /* SFdetailViewController.swift in Sources */,
 				A5F762C62388BB0F002CD1B3 /* UsersListViewController.swift in Sources */,
+				A52D2CC1241E561A00605231 /* UIImage+Additions.swift in Sources */,
 				04C8F37A20FF2A2F00AF48E4 /* RegisterViewController.swift in Sources */,
 				A5531FA823BB5CAF0054DA0A /* CustomPickerCellTableViewCell.swift in Sources */,
 				A55AEF8C23C2B61600B07642 /* UISearchBar+Extensions.swift in Sources */,
@@ -1114,6 +1090,7 @@
 				A5531F9923B572670054DA0A /* PickerTableViewCell.swift in Sources */,
 				0369DAEA20E121B1006B7507 /* SavedScrimmagesViewController.swift in Sources */,
 				A5F762D7238AD365002CD1B3 /* UserProfileViewController.swift in Sources */,
+				A52D2CC3241E598500605231 /* Sender.swift in Sources */,
 				03C6E1F020DD63E0001DFD01 /* SnapshotExtensions.swift in Sources */,
 				A51AF9CF23DE53E80042D925 /* CellDefinitionHelper.swift in Sources */,
 				A5F762CE23899EBA002CD1B3 /* SFUserTableViewCell.swift in Sources */,
@@ -1125,11 +1102,13 @@
 				A5F762DC238AE1A9002CD1B3 /* UserProfileCoordinator.swift in Sources */,
 				C7BFC25322820AB000EE6EB4 /* TabBarController.swift in Sources */,
 				C7BFC24F2282084F00EE6EB4 /* ScrimmagesCoordinator.swift in Sources */,
+				A52D2CC0241E561A00605231 /* UIView+Additions.swift in Sources */,
 				C7BFC251228209A000EE6EB4 /* CoordinatedNavigationController.swift in Sources */,
 				03D14CF220E0EBA300D76E38 /* ScrimmagesViewController.swift in Sources */,
 				A50F424C2284785E007841A2 /* MyScrimmagesCoordinator.swift in Sources */,
 				04C8F37E20FFFDA400AF48E4 /* AlertController.swift in Sources */,
 				03F10DF720DD0F7400F8C62B /* Scrimmage.swift in Sources */,
+				A52D2CB9241D0E8500605231 /* DatabaseRepresentation.swift in Sources */,
 				03F10DCE20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld in Sources */,
 				A50F7B3624158B7800AA9083 /* ChatViewController.swift in Sources */,
 				A5F762CA2388BB7E002CD1B3 /* User.swift in Sources */,
@@ -1160,14 +1139,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		049193FA20EB6C060063671E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0491940120EB6C060063671E /* IntentHandler.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1180,11 +1151,6 @@
 			isa = PBXTargetDependency;
 			target = 03F10DC120DC55BF00F8C62B /* ScrimmageFinder App */;
 			targetProxy = 03F10DE520DC55C300F8C62B /* PBXContainerItemProxy */;
-		};
-		0491940420EB6C060063671E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 049193FD20EB6C060063671E /* SiriScrimmageWorkouts */;
-			targetProxy = 0491940320EB6C060063671E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1453,46 +1419,6 @@
 			};
 			name = Release;
 		};
-		0491940720EB6C060063671E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WHW5C4JA8E;
-				INFOPLIST_FILE = SiriScrimmageWorkouts/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Tae.ScrimmageFinder.SiriScrimmageWorkouts;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		0491940820EB6C060063671E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WHW5C4JA8E;
-				INFOPLIST_FILE = SiriScrimmageWorkouts/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Tae.ScrimmageFinder.SiriScrimmageWorkouts;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1528,15 +1454,6 @@
 			buildConfigurations = (
 				03F10DF420DC55C300F8C62B /* Debug */,
 				03F10DF520DC55C300F8C62B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0491940620EB6C060063671E /* Build configuration list for PBXNativeTarget "SiriScrimmageWorkouts" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0491940720EB6C060063671E /* Debug */,
-				0491940820EB6C060063671E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

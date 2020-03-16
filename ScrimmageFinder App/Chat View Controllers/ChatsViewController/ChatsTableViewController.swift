@@ -7,11 +7,26 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseFirestore
 
 class ChatsTableViewController: UITableViewController {
 	
 	var coordinator: ChatCoordinator?
 	var chats = [Chat]()
+	var currentUserString = Auth.auth().currentUser?.displayName
+	private var currentChannelAlertController: UIAlertController?
+	private let db = Firestore.firestore()
+	private var channelReference: CollectionReference {
+		return db.collection("chats")
+	}
+	private var channelListener: ListenerRegistration?
+	
+	deinit {
+	  channelListener?.remove()
+	}
+	
+	//private var currentUser: User!
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +35,20 @@ class ChatsTableViewController: UITableViewController {
 		tableView.delegate = self
 		tableView.dataSource = self
 		self.title = "Chats"
-		createChats()
+		
+		let afterWhere = channelReference.whereField("users", arrayContains: Auth.auth().currentUser!.uid)
+		
+		channelListener = afterWhere.addSnapshotListener { querySnapshot, error in
+		  guard let snapshot = querySnapshot else {
+			print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
+			return
+		  }
+		  
+		  snapshot.documentChanges.forEach { change in
+			self.handleDocumentChange(change)
+		  }
+		}
     }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -37,26 +63,17 @@ class ChatsTableViewController: UITableViewController {
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "chetsCell", for: indexPath) as? ChatTableViewCell else {return ChatTableViewCell()}
-		
-		cell.name.text = "Irati Masa"
-		//cell?.imageView?.image =
-		cell.subName.text = "how are you??"
-
+		let currentChat = chats[indexPath.row]
+		cell.name.text = currentChat.returnChatsName(with: currentUserString!)
         return cell
     }
 	
-	func createChats() {
-		let chat1 = Chat(id: "1", name: "Irati")
-		let chat2 = Chat(id: "2", name: "Pete")
-		let chat3 = Chat(id: "3", name: "Mark")
-		
-		chats = [chat1, chat2, chat3]
-		
-	}
-	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let id = chats[indexPath.row].id
-		coordinator?.goToChat(with: id, from: self)
+		let user = User(id: Auth.auth().currentUser!.uid, userName: (Auth.auth().currentUser?.displayName)!, userEmail: (Auth.auth().currentUser?.email)!)
+		let chat = chats[indexPath.row]
+		let vc = ChatViewController(user: user, channel: chat)
+		navigationController?.pushViewController(vc, animated: true)
+		//coordinator?.goToChat(with: id!, from: self)
 	}
     
     /*
@@ -78,4 +95,70 @@ class ChatsTableViewController: UITableViewController {
         }    
     }
     */
+	//TODO
+//	private func createChannel() {
+//		guard let ac = currentChannelAlertController else {
+//		  return
+//		}
+//
+//		guard let channelName = ac.textFields?.first?.text else {
+//		  return
+//		}
+//
+//		let channel = Chat(name: channelName)
+//		channelReference.addDocument(data: channel.representation) { error in
+//		  if let e = error {
+//			print("Error saving channel: \(e.localizedDescription)")
+//		  }
+//		}
+//	  }
+	  
+	  private func addChannelToTable(_ chat: Chat) {
+		guard !chats.contains(chat) else {
+		  return
+		}
+		
+		chats.append(chat)
+		chats.sort()
+		
+		guard let index = chats.index(of: chat) else {
+		  return
+		}
+		tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+	  }
+	  
+	  private func updateChannelInTable(_ chat: Chat) {
+		guard let index = chats.index(of: chat) else {
+		  return
+		}
+		
+		chats[index] = chat
+		tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+	  }
+	  
+	  private func removeChannelFromTable(_ chat: Chat) {
+		guard let index = chats.index(of: chat) else {
+		  return
+		}
+		
+		chats.remove(at: index)
+		tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+	  }
+	  
+	  private func handleDocumentChange(_ change: DocumentChange) {
+		guard let channel = Chat(document: change.document) else {
+		  return
+		}
+		
+		switch change.type {
+		case .added:
+		  addChannelToTable(channel)
+		  
+		case .modified:
+		  updateChannelInTable(channel)
+		  
+		case .removed:
+		  removeChannelFromTable(channel)
+		}
+	  }
 }

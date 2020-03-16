@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Thumbnail {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Thumbnail> {

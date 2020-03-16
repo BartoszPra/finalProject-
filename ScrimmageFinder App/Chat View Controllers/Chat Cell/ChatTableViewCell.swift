@@ -13,8 +13,7 @@ class ChatTableViewCell: UITableViewCell {
 	@IBOutlet weak var chatImage: UIImageView!
 	@IBOutlet weak var name: UILabel!
 	@IBOutlet weak var subName: UILabel!
-	
-	
+		
 	override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

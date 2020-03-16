@@ -230,11 +230,11 @@ UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 											object: TextViewTableViewCell(), identifier: "textFieldCell",
 											keboardType: .default, target: nil, action: nil,
 											placeHolder: "Name", color: nil, type: nil, height: 58)
-		let timeCell = CellDefinitionHelper(cellTitle: "Time",
-											object: PickerTableViewCell(),
-											identifier: "pickerCell", keboardType: nil,
-											target: nil, action: nil, placeHolder: "Time", color: nil,
-											type: nil, height: 58)
+//		let timeCell = CellDefinitionHelper(cellTitle: "Time",
+//											object: PickerTableViewCell(),
+//											identifier: "pickerCell", keboardType: nil,
+//											target: nil, action: nil, placeHolder: "Time", color: nil,
+//											type: nil, height: 58)
 		let priceCell = CellDefinitionHelper(cellTitle: "Price",
 											 object: CustomPickerCellTableViewCell(),
 											 identifier: "customPickerCell", keboardType: nil, target: self,
@@ -305,7 +305,7 @@ extension CreateScrimmageViewController: GMSAutocompleteViewControllerDelegate {
         cell.addressTextField.text = (place.name ?? "") + ",\n " + (place.formattedAddress ?? "")
 		self.address = place.formattedAddress
 		self.venueName = place.name
-		let components = place.addressComponents //for future if needed all the components of the address
+		_ = place.addressComponents //for future if needed all the components of the address
 		self.geolocation = GeoPoint(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         cell.addressTextField.textColor = .white
         tableView.reloadData()

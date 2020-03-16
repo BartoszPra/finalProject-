@@ -7,13 +7,15 @@
 //
 
 import Foundation
+import Firebase
 
-struct User: Codable, Identifiable {
+class User: Codable, Identifiable {
     var id: String?
     var userName: String
     var userEmail: String
     
-    init(userName: String, userEmail: String) {
+	init(id:String, userName: String, userEmail: String) {
+		self.id = id
         self.userName = userName
         self.userEmail = userEmail
     }    

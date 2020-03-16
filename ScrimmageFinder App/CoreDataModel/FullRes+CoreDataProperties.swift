@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension FullRes {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<FullRes> {
