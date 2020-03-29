@@ -16,10 +16,13 @@ struct Chat {
 	var messages = [Message]()
 	var users = [String]()
 	var isGroup: Bool
+	var image: UIImage!
+	let currentUserId = Auth.auth().currentUser!.uid
 	
-	init(name: String, isGroup: Bool) {
+	init(name: String, users: [String], isGroup: Bool) {
 		self.name = name
 		self.isGroup = isGroup
+		self.users = users
 	}
 	
 	init?(document: QueryDocumentSnapshot) {
@@ -51,20 +54,32 @@ struct Chat {
 			return self.name
 		}
 	}
+	
+	func returnChatsImage(with userId: String) -> UIImage {
+		if !isGroup {
+			let filtered = users.filter { (user) -> Bool in
+				user != currentUserId
+			}
+			let image = UIImageView().returnImageUsingCashe(userId: filtered.first!)
+			return image
+		} else {
+			return UIImage(named: "basketBallLogo")!
+		}
+	}
 }
 
 extension Chat: DatabaseRepresentation {
   
   var representation: [String: Any] {
-    var rep = ["name": name]
+	var rep = ["name": name,
+			   "isGroup": isGroup,
+			   "users": users] as [String : Any]
     
     if let id = id {
       rep["id"] = id
     }
-    
     return rep
-  }
-  
+  }  
 }
 
 extension Chat: Comparable {

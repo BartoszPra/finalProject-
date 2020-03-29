@@ -19,7 +19,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Saved Scrimmages"
+        self.title = "Saved"
         UserDefaults.standard.register(defaults: [String: Any]())
         //fetchScrimmages()
         self.savedTableView.delegate = self

@@ -24,7 +24,7 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.backgroundColor = UIColor.black
-        self.title = "My Scrimmages"
+        self.title = "Created"
         let nib = UINib(nibName: "SavedScrimmagesCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "SavedScrimmagesCell")
     }

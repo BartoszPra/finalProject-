@@ -10,6 +10,21 @@ import Firebase
 import MessageKit
 import FirebaseFirestore
 
+private struct ImageMediaItem: MediaItem {
+
+    var url: URL?
+    var image: UIImage?
+    var placeholderImage: UIImage
+    var size: CGSize
+
+    init(image: UIImage) {
+        self.image = image
+        self.size = CGSize(width: 240, height: 240)
+        self.placeholderImage = UIImage()
+    }
+
+}
+
 struct Message: MessageType {
 	
 	var sender: SenderType
@@ -20,7 +35,12 @@ struct Message: MessageType {
 	var image: UIImage? = nil
 
 	var kind: MessageKind {
-		return .text(content)
+		if let image = image {
+			let image = ImageMediaItem(image: image)
+			return .photo(image)
+		} else {
+			return .text(content)
+		}
 	}
 
 	var messageId: String {
@@ -32,6 +52,14 @@ struct Message: MessageType {
 		self.content = content
 		sentDate = Date()
 		id = nil
+	}
+	
+	init(user: User, image: UIImage) {
+	  sender = Sender(senderId: user.id!, displayName: user.userName)
+	  self.image = image
+	  content = ""
+	  sentDate = Date()
+	  id = nil
 	}
 
 	init?(document: QueryDocumentSnapshot) {

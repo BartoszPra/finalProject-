@@ -14,9 +14,14 @@ class User: Codable, Identifiable {
     var userName: String
     var userEmail: String
     
-	init(id:String, userName: String, userEmail: String) {
+	init(id: String, userName: String, userEmail: String) {
 		self.id = id
         self.userName = userName
         self.userEmail = userEmail
-    }    
+    }
+}
+extension User: Equatable {
+	static func == (lhs: User, rhs: User) -> Bool {
+		return lhs.id == rhs.id
+	}
 }

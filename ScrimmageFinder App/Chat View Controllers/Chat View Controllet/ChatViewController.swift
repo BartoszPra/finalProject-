@@ -21,8 +21,11 @@ final class ChatViewController: MessagesViewController {
 	private let storage = Storage.storage().reference()	
 	private var messages: [Message] = []
 	private var messageListener: ListenerRegistration?
+	var currentUserString = Auth.auth().currentUser?.displayName
 	let user: User
 	private let channel: Chat
+	var theTitle = ""
+	var chatImage = UIImage(named: "logoNoBackgroundBrighter")
 	
 	deinit {
 		messageListener?.remove()
@@ -32,8 +35,7 @@ final class ChatViewController: MessagesViewController {
 		self.user = user
 		self.channel = channel
 		super.init(nibName: nil, bundle: nil)
-		
-		title = channel.name
+		title = channel.returnChatsName(with: currentUserString!)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -43,13 +45,22 @@ final class ChatViewController: MessagesViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		createNavtitle()
+		
+		if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
+			layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
+			layout.textMessageSizeCalculator.incomingAvatarSize = .zero
+			layout.photoMessageSizeCalculator.incomingAvatarSize = .zero
+			layout.photoMessageSizeCalculator.outgoingAvatarSize = .zero
+			
+		}
+		
 		guard let id = channel.id else {
 			navigationController?.popViewController(animated: true)
 			return
 		}
 		
-		reference = db.collection(["chats", id, "messages"].joined(separator: "/"))
-		
+		reference = db.collection(["chats", id, "messages"].joined(separator: "/"))		
 		messageListener = reference?.addSnapshotListener { querySnapshot, error in
 			guard let snapshot = querySnapshot else {
 				print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
@@ -65,26 +76,67 @@ final class ChatViewController: MessagesViewController {
 		
 		maintainPositionOnKeyboardFrameChanged = true
 		messageInputBar.inputTextView.tintColor = UIColor.black
-		messageInputBar.sendButton.setTitleColor(UIColor.black, for: .normal)
+		messageInputBar.inputTextView.textColor = .white
+		messageInputBar.sendButton.setTitleColor(UIColor.white, for: .normal)
+		messageInputBar.inputTextView.keyboardAppearance = .dark
 		
 		messageInputBar.delegate = self
 		messagesCollectionView.messagesDataSource = self
 		messagesCollectionView.messagesLayoutDelegate = self
 		messagesCollectionView.messagesDisplayDelegate = self
+		messagesCollectionView.backgroundColor = .black
+		messageInputBar.backgroundView.backgroundColor = .black
 		
-		//let cameraItem = InputBarButtonItem(type: .system) // 1
-		//cameraItem.tintColor = .primary
-		//cameraItem.image = #imageLiteral(resourceName: "camera")
-		//cameraItem.addTarget(
-		//      self,
-		//      action: #selector(cameraButtonPressed), // 2
-		//      for: .primaryActionTriggered
-		//    )
-		//    cameraItem.setSize(CGSize(width: 60, height: 30), animated: false)
+		let cameraItem = InputBarButtonItem(type: .system) // 1
+		cameraItem.tintColor = .primary
+		cameraItem.image = #imageLiteral(resourceName: "camera")
+		cameraItem.addTarget(
+		      self,
+		      action: #selector(cameraButtonPressed), // 2
+		      for: .primaryActionTriggered
+		    )
+		    cameraItem.setSize(CGSize(width: 60, height: 30), animated: false)
 		
 		messageInputBar.leftStackView.alignment = .center
 		messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
-		//messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false) // 3
+		messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false) // 3
+		//self.messagesCollectionView.scrollToBottom()
+		self.messagesCollectionView.scrollToLastItem()
+	}
+
+	func createNavtitle() {
+		let navView = UIView()
+
+		// Create the label
+		let label = UILabel()
+		label.text = theTitle
+		label.sizeToFit()
+		label.center = navView.center
+		label.textColor = .white
+		label.textAlignment = NSTextAlignment.center
+
+		// Create the image view
+		let image = UIImageView()
+		image.image = chatImage
+		// To maintain the image's aspect ratio:
+		let imageAspect = image.image!.size.width/image.image!.size.height
+		// Setting the image frame so that it's immediately before the text:
+		image.frame = CGRect(x: label.frame.origin.x-label.frame.size.height*imageAspect, y: label.frame.origin.y, width: label.frame.size.height*imageAspect, height: label.frame.size.height)
+		image.contentMode = UIView.ContentMode.scaleAspectFit
+
+		// Add both the label and image view to the navView
+		navView.addSubview(label)
+		navView.addSubview(image)
+
+		// Set the navigation bar's navigation item's titleView to the navView
+		self.navigationItem.titleView = navView
+
+		// Set the navView's frame to fit within the titleView
+		navView.sizeToFit()
+	}
+	
+	func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+		avatarView.isHidden = true
 	}
 	
 	// MARK: - Actions
@@ -110,30 +162,53 @@ final class ChatViewController: MessagesViewController {
 				print("Error sending message: \(e.localizedDescription)")
 				return
 			}
-			
 			self.messagesCollectionView.scrollToBottom()
 		}
 	}
 	
 	private func insertNewMessage(_ message: Message) {
-		guard !messages.contains(message) else {
-			return
+	  guard !messages.contains(message) else {
+		return
+	  }
+
+	  messages.append(message)
+	  messages.sort()
+
+	  let isLatestMessage = messages.index(of: message) == (messages.count - 1)
+	  let shouldScrollToBottom = messagesCollectionView.isAtBottom && isLatestMessage
+
+	  messagesCollectionView.reloadData()
+
+	  if shouldScrollToBottom {
+		DispatchQueue.main.async {
+			//self.messagesCollectionView.scrollToBottom(animated: true)
+			self.messagesCollectionView.scrollToLastItem()
 		}
-		
-		messages.append(message)
-		messages.sort()
-		
-		let isLatestMessage = messages.index(of: message) == (messages.count - 1)
-		let shouldScrollToBottom = messagesCollectionView.isAtBottom && isLatestMessage
-		
-		messagesCollectionView.reloadData()
-		
-		if shouldScrollToBottom {
-			DispatchQueue.main.async {
-				self.messagesCollectionView.scrollToBottom(animated: true)
-			}
-		}
+	  }
 	}
+	
+//	func insertNewMessage(_ message: Message) {
+//        messages.append(message)
+//
+//        // Reload last section to update header/footer labels and insert a new one
+//        messagesCollectionView.performBatchUpdates({
+//            messagesCollectionView.insertSections([messages.count - 1])
+//            if messages.count >= 2 {
+//                messagesCollectionView.reloadSections([messages.count - 2])
+//            }
+//        }, completion: { [weak self] _ in
+//            if self?.isLastSectionVisible() == true {
+//                self?.messagesCollectionView.scrollToBottom(animated: true)
+//            }
+//        })
+//    }
+	
+	func isLastSectionVisible() -> Bool {
+        
+        guard !messages.isEmpty else { return false }        
+        let lastIndexPath = IndexPath(item: 0, section: messages.count - 1)
+        return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
+    }
 	
 	private func handleDocumentChange(_ change: DocumentChange) {
 		guard var message = Message(document: change.document) else {
@@ -164,45 +239,56 @@ final class ChatViewController: MessagesViewController {
 	}
 	
 	private func uploadImage(_ image: UIImage, to channel: Chat, completion: @escaping (URL?) -> Void) {
-//		guard let channelID = channel.id else {
-//			completion(nil)
-//			return
-//		}
-//
-//		guard let scaledImage = image.scaledToSafeUploadSize, let data = scaledImage.jpegData(compressionQuality: 0.4) else {
-//			completion(nil)
-//			return
-//		}
-//
-//		let metadata = StorageMetadata()
-//		metadata.contentType = "image/jpeg"
-//
-//		let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
-//		storage.child(channelID).child(imageName).putData(data, metadata: metadata) { meta, error in
-//			completion(meta?.downloadURL())
-//		}
+		guard let channelID = channel.id else {
+			completion(nil)
+			return
+		}
+
+		guard let scaledImage = image.scaledToSafeUploadSize, let data = scaledImage.jpegData(compressionQuality: 0.4) else {
+			completion(nil)
+			return
+		}
+
+		let metadata = StorageMetadata()
+		metadata.contentType = "image/jpeg"
+
+		let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
+		
+		let storageRef = storage.child(channelID).child(imageName)
+		storageRef.putData(data, metadata: metadata) { metaData, error in
+			if error == nil, metaData != nil {
+				
+				storageRef.downloadURL { url, error in
+					completion(url)
+					// success!
+				}
+			} else {
+				// failed
+				completion(nil)
+			}
+		}
 	}
 	
-	//  private func sendPhoto(_ image: UIImage) {
-	//    isSendingPhoto = true
-	//
-	//    uploadImage(image, to: channel) { [weak self] url in
-	//      guard let `self` = self else {
-	//        return
-	//      }
-	//      self.isSendingPhoto = false
-	//
-	//      guard let url = url else {
-	//        return
-	//      }
-	//
-	//      var message = Message(user: self.user, image: image)
-	//      message.downloadURL = url
-	//
-	//      self.save(message)
-	//      self.messagesCollectionView.scrollToBottom()
-	//    }
-	//  }
+	  private func sendPhoto(_ image: UIImage) {
+	    isSendingPhoto = true
+	
+	    uploadImage(image, to: channel) { [weak self] url in
+	      guard let `self` = self else {
+	        return
+	      }
+	      self.isSendingPhoto = false
+	
+	      guard let url = url else {
+	        return
+	      }
+	
+	      var message = Message(user: self.user, image: image)
+	      message.downloadURL = url
+	
+	      self.save(message)
+	      self.messagesCollectionView.scrollToBottom()
+	    }
+	  }
 	
 	private func downloadImage(at url: URL, completion: @escaping (UIImage?) -> Void) {
 		let ref = Storage.storage().reference(forURL: url.absoluteString)
@@ -229,23 +315,18 @@ extension ChatViewController: MessagesDisplayDelegate {
 	}
 	
 	func shouldDisplayHeader(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> Bool {
-		return false
+		return true
 	}
 	
 	func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
 		let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
 		return .bubbleTail(corner, .curved)
 	}
-	
 }
 
 // MARK: - MessagesLayoutDelegate
 
 extension ChatViewController: MessagesLayoutDelegate {
-	
-	func avatarSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {
-		return .zero
-	}
 	
 	func footerViewSize(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGSize {
 		return CGSize(width: 0, height: 8)
@@ -278,7 +359,11 @@ extension ChatViewController: MessagesDataSource {
 		return messages[indexPath.section]
 	}
 	
-	func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+	func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
+		return 10.0
+	}
+	
+	func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
 		let name = message.sender.displayName
 		return NSAttributedString(
 			string: name,
@@ -288,7 +373,6 @@ extension ChatViewController: MessagesDataSource {
 			]
 		)
 	}
-	
 }
 
 // MARK: - MessageInputBarDelegate
@@ -317,10 +401,10 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 					return
 				}
 				
-				//self.sendPhoto(image)
+				self.sendPhoto(image)
 			}
 		} else if let image = info[.originalImage] as? UIImage { // 2
-			//sendPhoto(image)
+			sendPhoto(image)
 		}
 	}
 	

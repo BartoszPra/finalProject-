@@ -18,6 +18,13 @@ class TabBarController: UITabBarController, Storyboarded {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-		viewControllers = [scrimmages.navigationController, savedScrimmages.navigationController, myScrimmages.navigationController, userProfile.navigationController, chats.navigationController]        
+		viewControllers = [scrimmages.navigationController, savedScrimmages.navigationController, myScrimmages.navigationController, chats.navigationController, userProfile.navigationController]        
     }
+	
+	override func viewDidLayoutSubviews() {
+		super.viewDidLayoutSubviews()
+
+		self.tabBar.itemPositioning = .fill
+		self.tabBar.itemSpacing = UIScreen.main.bounds.width / 5
+	}
 }

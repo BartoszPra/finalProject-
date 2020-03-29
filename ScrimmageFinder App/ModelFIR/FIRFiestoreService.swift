@@ -66,7 +66,7 @@ class FIRFirestoreService {
     func readWhere<T: Decodable>(from collectionReference: FIRCollectionReference, whereFld: String, equalsTo: Any, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
         
         reference(to: collectionReference).whereField(whereFld, isEqualTo: equalsTo).addSnapshotListener { (snapshot, _) in
-            
+		
             guard let snapshot = snapshot else { return }
             
             do {

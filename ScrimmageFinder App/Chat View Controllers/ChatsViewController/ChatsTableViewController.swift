@@ -10,11 +10,12 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
-class ChatsTableViewController: UITableViewController {
+class ChatsTableViewController: UITableViewController, AddUsersDelegate {
 	
 	var coordinator: ChatCoordinator?
 	var chats = [Chat]()
 	var currentUserString = Auth.auth().currentUser?.displayName
+	var currentUserId = Auth.auth().currentUser?.uid
 	private var currentChannelAlertController: UIAlertController?
 	private let db = Firestore.firestore()
 	private var channelReference: CollectionReference {
@@ -26,15 +27,14 @@ class ChatsTableViewController: UITableViewController {
 	  channelListener?.remove()
 	}
 	
-	//private var currentUser: User!
-	
 	override func viewDidLoad() {
         super.viewDidLoad()
 		let nib = UINib(nibName: "ChatTableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "chetsCell")
+        tableView.register(nib, forCellReuseIdentifier: "chetsCell")		
 		tableView.delegate = self
 		tableView.dataSource = self
 		self.title = "Chats"
+		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(addTapped))
 		
 		let afterWhere = channelReference.whereField("users", arrayContains: Auth.auth().currentUser!.uid)
 		
@@ -49,6 +49,27 @@ class ChatsTableViewController: UITableViewController {
 		  }
 		}
     }
+	
+	@objc func addTapped() {		 
+		let vc = ChooseUsersViewController(nibName: "ChooseUsersViewController", bundle: nil)
+		vc.delegate = self
+		navigationController?.pushViewController(vc, animated: true)
+	}
+	
+	func passUsers(users: [User], title: String) {
+		var userss = [String]()
+		var titlee = title
+		let isGrouped = users.count > 1 ? true : false
+		if !isGrouped {
+			titlee = currentUserString! + ", " + users.first!.userName
+		}		
+		userss.append(currentUserId!)
+		for user in users {
+			userss.append(user.id!)
+		}
+		self.createChannel(chatName: titlee, users: userss, isGrouped: isGrouped)
+	}
+	
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -63,87 +84,65 @@ class ChatsTableViewController: UITableViewController {
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "chetsCell", for: indexPath) as? ChatTableViewCell else {return ChatTableViewCell()}
+		cell.configureWithCheckBox(isEnabled: false)
 		let currentChat = chats[indexPath.row]
 		cell.name.text = currentChat.returnChatsName(with: currentUserString!)
+		cell.chatImage.image = currentChat.returnChatsImage(with: currentUserId!)
         return cell
     }
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let user = User(id: Auth.auth().currentUser!.uid, userName: (Auth.auth().currentUser?.displayName)!, userEmail: (Auth.auth().currentUser?.email)!)
-		let chat = chats[indexPath.row]
-		let vc = ChatViewController(user: user, channel: chat)
+		let currentChat = chats[indexPath.row]
+		let vc = ChatViewController(user: user, channel: currentChat)
+		vc.theTitle = currentChat.returnChatsName(with: currentUserString!)
 		navigationController?.pushViewController(vc, animated: true)
 		//coordinator?.goToChat(with: id!, from: self)
 	}
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-	//TODO
-//	private func createChannel() {
-//		guard let ac = currentChannelAlertController else {
-//		  return
-//		}
-//
-//		guard let channelName = ac.textFields?.first?.text else {
-//		  return
-//		}
-//
-//		let channel = Chat(name: channelName)
-//		channelReference.addDocument(data: channel.representation) { error in
-//		  if let e = error {
-//			print("Error saving channel: \(e.localizedDescription)")
-//		  }
-//		}
-//	  }
+	
+	private func createChannel(chatName: String, users: [String], isGrouped: Bool) {
+		
+		let channel = Chat(name: chatName, users: users, isGroup: isGrouped)
+		channelReference.addDocument(data: channel.representation) { error in
+			if let e = error {
+				print("Error saving channel: \(e.localizedDescription)")
+			} else {
+				self.tableView.reloadData()
+			}
+		}
+	}
 	  
-	  private func addChannelToTable(_ chat: Chat) {
+	private func addChannelToTable(_ chat: Chat) {
 		guard !chats.contains(chat) else {
-		  return
+			return
 		}
 		
 		chats.append(chat)
 		chats.sort()
 		
 		guard let index = chats.index(of: chat) else {
-		  return
+			return
 		}
 		tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-	  }
+	}
 	  
-	  private func updateChannelInTable(_ chat: Chat) {
+	private func updateChannelInTable(_ chat: Chat) {
 		guard let index = chats.index(of: chat) else {
-		  return
+			return
 		}
 		
 		chats[index] = chat
 		tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-	  }
-	  
-	  private func removeChannelFromTable(_ chat: Chat) {
+	}
+	
+	private func removeChannelFromTable(_ chat: Chat) {
 		guard let index = chats.index(of: chat) else {
-		  return
+			return
 		}
 		
 		chats.remove(at: index)
 		tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
-	  }
+	}
 	  
 	  private func handleDocumentChange(_ change: DocumentChange) {
 		guard let channel = Chat(document: change.document) else {
@@ -161,4 +160,8 @@ class ChatsTableViewController: UITableViewController {
 		  removeChannelFromTable(channel)
 		}
 	  }
+	
+	func checkIfChatExist() {
+		
+	}
 }

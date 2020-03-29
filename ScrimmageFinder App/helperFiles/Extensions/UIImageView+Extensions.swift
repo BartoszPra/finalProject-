@@ -25,4 +25,32 @@ extension UIImageView {
 			self.image = image
 		}
 	}
+	
+	func returnImageUsingCashe(userId: String) -> UIImage {
+		
+		var returnImage = UIImage(named: "bballLogo")!
+		
+		if let caschedImage = imageCashe.object(forKey: userId as NSString) {
+			return caschedImage
+		}
+		
+		FIRFirestoreService.shared.getProfileImage(for: userId) { (image) in
+			imageCashe.setObject(image, forKey: userId as NSString)
+			returnImage = image
+		}
+		return returnImage
+	}
+	
+	func loadUserImageUsingCashe(userId: String) {
+		
+		if let caschedImage = imageCashe.object(forKey: userId as NSString) {
+			self.image = caschedImage
+			return
+		}
+		
+		FIRFirestoreService.shared.getProfileImage(for: userId) { (image) in
+			imageCashe.setObject(image, forKey: userId as NSString)
+			self.image = image
+		}
+	}
 }

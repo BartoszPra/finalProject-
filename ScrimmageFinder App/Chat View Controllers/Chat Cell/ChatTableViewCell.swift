@@ -13,16 +13,22 @@ class ChatTableViewCell: UITableViewCell {
 	@IBOutlet weak var chatImage: UIImageView!
 	@IBOutlet weak var name: UILabel!
 	@IBOutlet weak var subName: UILabel!
-		
+	@IBOutlet weak var checkImage: UIImageView!
+	
 	override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-    
+	
+	func configureWithCheckBox(isEnabled: Bool) {
+		if isEnabled {
+			checkImage.layer.masksToBounds = true
+			checkImage.layer.borderWidth = 1.0
+			checkImage.layer.borderColor = UIColor.white.cgColor
+			checkImage.layer.cornerRadius = checkImage.bounds.width / 2
+		}
+	}
 }

@@ -10,9 +10,9 @@ import UIKit
 import Firebase
 
 class UserProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-    var coordinator: UserProfileCoordinator!
+	@IBOutlet weak var displayNameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
+	var coordinator: UserProfileCoordinator!
     var imagePicker = UIImagePickerController()
     var profileImage: UIImage!
     var userID: String!
@@ -27,6 +27,7 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
         profileImageView.isUserInteractionEnabled = true
         imagePicker.delegate = self
         profileImageView.addGestureRecognizer(tapGestureRecognizer)
+		displayNameLabel.text = Auth.auth().currentUser?.displayName
     }
     
     override func viewDidAppear(_ animated: Bool) {

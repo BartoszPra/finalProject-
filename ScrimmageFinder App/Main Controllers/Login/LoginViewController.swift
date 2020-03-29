@@ -96,10 +96,13 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         } else {
         Auth.auth().signIn(withEmail: email, password: password) { user, error in
             if (error == nil) && (user != nil) {
+				FIRFirestoreService.shared.getProfileImage(for: String(describing: user!.user.uid)) { (image) in
+                    self.coreDataController.prepareImageForSaving(image: image)
+                }
                self.coordinator?.startTabBarCoordinator(viewController: self)
             } else {
-                AlertController.showAllert(self, title: "Oops", message: String(describing: error?.localizedDescription))
-                print("Error logging in: \(String(describing: error?.localizedDescription))")
+				AlertController.showAllert(self, title: "Oops", message: String(describing: error!.localizedDescription))
+                print("Error logging in: \(String(describing: error!.localizedDescription))")
             }
         }
         }

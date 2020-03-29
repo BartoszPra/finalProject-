@@ -18,7 +18,7 @@ class MyScrimmagesCoordinator: Coordinator {
         self.navigationController = navigationController
         navigationController.coordinator = self
         let viewController = MyScrimmagesViewController(nibName: "MyScrimmagesViewController", bundle: nil) as MyScrimmagesViewController
-        viewController.tabBarItem = UITabBarItem(title: "  MyScrimmages", image: UIImage(named: "tabBarImage"), tag: 0)
+        viewController.tabBarItem = UITabBarItem(title: "Created", image: UIImage(named: "createdHIcon"), tag: 0)
         viewController.coordinator = self
         navigationController.viewControllers = [viewController]
     }

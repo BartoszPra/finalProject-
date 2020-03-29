@@ -68,6 +68,7 @@ class UsersListViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.userStatusLabel.textColor = .red
         }
         cell.userStatusLabel.text = statusForId?.values.first?.description
+		cell.userImage.loadUserImageUsingCashe(userId: userId)
         return cell
     }
 }

@@ -18,7 +18,7 @@ class UserProfileCoordinator: Coordinator {
         self.navigationController = navigationController
         navigationController.coordinator = self
         let viewController = UserProfileViewController(nibName: "UserProfileViewController", bundle: nil)
-        viewController.tabBarItem = UITabBarItem(title: " User Profile ", image: UIImage(named: "tabBarImage"), tag: 0)
+        viewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "userIcon"), tag: 0)
         viewController.coordinator = self
         navigationController.viewControllers = [viewController]
     }

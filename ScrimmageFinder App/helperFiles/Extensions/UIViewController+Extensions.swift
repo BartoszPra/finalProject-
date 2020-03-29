@@ -44,4 +44,19 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+	
+	func setImageAndTextTitle(_ title: String, andImage image: UIImage) {
+		let titleLbl = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+		titleLbl.text = title
+		titleLbl.textColor = UIColor.white
+		titleLbl.font = UIFont.systemFont(ofSize: 20.0, weight: .regular)
+		let imageView = UIImageView(image: image)
+		imageView.frame = CGRect(x: 0, y: 0, width: 50, height: 30)
+		let titleView = UIStackView(arrangedSubviews: [imageView, titleLbl])
+		///titleView.frame  = CGRect(x: 50, y: 50, width: 200, height: 50)
+		
+		titleView.axis = .horizontal
+		titleView.spacing = 5.0
+		navigationItem.titleView = titleView
+	}
 }
