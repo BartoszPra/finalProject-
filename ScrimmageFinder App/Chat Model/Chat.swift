@@ -55,15 +55,21 @@ struct Chat {
 		}
 	}
 	
-	func returnChatsImage(with userId: String) -> UIImage {
+	func returnChatsImage(with userId: String, completion: @escaping (UIImage?) -> Void) {
 		if !isGroup {
 			let filtered = users.filter { (user) -> Bool in
 				user != currentUserId
 			}
-			let image = UIImageView().returnImageUsingCashe(userId: filtered.first!)
-			return image
+			UIImageView().returnImageUsingCashe(userId: filtered.first!) { (img) in
+				completion(img)
+				//return img
+			}
+//			let image = UIImageView().returnImageUsingCashe(userId: filtered.first!)
+//			return image
+
 		} else {
-			return UIImage(named: "basketBallLogo")!
+			completion(UIImage(named: "basketBallLogo")!)
+			//return UIImage(named: "basketBallLogo")!
 		}
 	}
 }

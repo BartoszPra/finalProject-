@@ -87,7 +87,10 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
 		cell.configureWithCheckBox(isEnabled: false)
 		let currentChat = chats[indexPath.row]
 		cell.name.text = currentChat.returnChatsName(with: currentUserString!)
-		cell.chatImage.image = currentChat.returnChatsImage(with: currentUserId!)
+		//cell.chatImage.image = currentChat.returnChatsImage(with: currentUserId!)
+		currentChat.returnChatsImage(with: currentUserId!) { (img) in
+			cell.chatImage.image = img
+		}
         return cell
     }
 	
