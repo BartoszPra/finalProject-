@@ -32,6 +32,7 @@ class MainCoordinator: Coordinator {
     
     func startTabBarCoordinator(viewController: UIViewController) {
         let tabViewController = TabBarController.instantiate()
+		tabViewController.modalPresentationStyle = .fullScreen
         viewController.present(tabViewController, animated: false, completion: nil)
     }
 }
