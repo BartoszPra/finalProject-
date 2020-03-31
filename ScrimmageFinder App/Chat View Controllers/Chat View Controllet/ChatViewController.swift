@@ -23,9 +23,10 @@ final class ChatViewController: MessagesViewController {
 	private var messageListener: ListenerRegistration?
 	var currentUserString = Auth.auth().currentUser?.displayName
 	let user: User
-	private let channel: Chat
 	var theTitle = ""
+	private let channel: Chat
 	var chatImage = UIImage(named: "logoNoBackgroundBrighter")
+	let refreshControl = UIRefreshControl()
 	
 	deinit {
 		messageListener?.remove()
@@ -100,8 +101,7 @@ final class ChatViewController: MessagesViewController {
 		messageInputBar.leftStackView.alignment = .center
 		messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
 		messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false) // 3
-		//self.messagesCollectionView.scrollToBottom()
-		self.messagesCollectionView.scrollToLastItem()
+		self.messagesCollectionView.scrollToBottom()
 	}
 
 	func createNavtitle() {
@@ -109,7 +109,7 @@ final class ChatViewController: MessagesViewController {
 
 		// Create the label
 		let label = UILabel()
-		label.text = theTitle
+		label.text = ""
 		label.sizeToFit()
 		label.center = navView.center
 		label.textColor = .white
@@ -167,41 +167,24 @@ final class ChatViewController: MessagesViewController {
 	}
 	
 	private func insertNewMessage(_ message: Message) {
-	  guard !messages.contains(message) else {
-		return
-	  }
-
-	  messages.append(message)
-	  messages.sort()
-
-	  let isLatestMessage = messages.index(of: message) == (messages.count - 1)
-	  let shouldScrollToBottom = messagesCollectionView.isAtBottom && isLatestMessage
-
-	  messagesCollectionView.reloadData()
-
-	  if shouldScrollToBottom {
-		DispatchQueue.main.async {
-			//self.messagesCollectionView.scrollToBottom(animated: true)
-			self.messagesCollectionView.scrollToLastItem()
+		guard !messages.contains(message) else {
+			return
 		}
-	  }
+		
+		messages.append(message)
+		messages.sort()
+		
+		let isLatestMessage = messages.index(of: message) == (messages.count - 1)
+		let shouldScrollToBottom = messagesCollectionView.isAtBottom && isLatestMessage
+		
+		messagesCollectionView.reloadData()
+		
+		if !self.isLastSectionVisible() {
+			DispatchQueue.main.async {
+				self.messagesCollectionView.scrollToBottom(animated: true)
+			}
+		}
 	}
-	
-//	func insertNewMessage(_ message: Message) {
-//        messages.append(message)
-//
-//        // Reload last section to update header/footer labels and insert a new one
-//        messagesCollectionView.performBatchUpdates({
-//            messagesCollectionView.insertSections([messages.count - 1])
-//            if messages.count >= 2 {
-//                messagesCollectionView.reloadSections([messages.count - 2])
-//            }
-//        }, completion: { [weak self] _ in
-//            if self?.isLastSectionVisible() == true {
-//                self?.messagesCollectionView.scrollToBottom(animated: true)
-//            }
-//        })
-//    }
 	
 	func isLastSectionVisible() -> Bool {
         
@@ -286,7 +269,8 @@ final class ChatViewController: MessagesViewController {
 	      message.downloadURL = url
 	
 	      self.save(message)
-	      self.messagesCollectionView.scrollToBottom()
+	      //self.messagesCollectionView.scrollToBottom()
+			self.messagesCollectionView.scrollToBottom(animated: true)
 	    }
 	  }
 	
