@@ -9,7 +9,6 @@
 import Foundation
 import Firebase
 
-
 struct ScrimmageViewModel {
 	
 	var id: String?
@@ -28,7 +27,12 @@ struct ScrimmageViewModel {
 	var geopoint: GeoPoint
 	var notes: String
 	
-	init(scrimmage:Scrimmage) {
+	var isParticipating: Bool!
+	var participantStatus: ParticipantsStatus?
+	var userID: String!
+	
+	init(scrimmage: Scrimmage) {
+		
 		self.id = scrimmage.id
 		self.name = scrimmage.name
 		self.venueName = scrimmage.venueName
@@ -44,6 +48,26 @@ struct ScrimmageViewModel {
 		self.dateTime = scrimmage.dateTime
 		self.geopoint = scrimmage.geopoint
 		self.notes = scrimmage.notes
+		self.userID = Auth.auth().currentUser?.uid
+				
+		if !scrimmage.participants.isEmpty {
+            if let participant = scrimmage.participants.first(where: { $0.keys.contains(self.userID)}) {
+				self.participantStatus = participant.values.first
+				self.isParticipating = true
+            } else {
+				self.participantStatus = nil
+				self.isParticipating = false
+            }
+		} else {
+			self.isParticipating = false
+		}
 	}
 	
+	var isUserCreator: Bool {
+		if self.createdById == Auth.auth().currentUser?.uid {
+			return true
+		} else {
+			return false
+		}
+	}
 }
