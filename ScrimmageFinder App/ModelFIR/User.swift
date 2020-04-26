@@ -8,8 +8,12 @@
 
 import Foundation
 import Firebase
+import MessageKit
 
-class User: Codable, Identifiable {
+class User: Codable, Identifiable, SenderType {
+	
+	var senderId: String
+	var displayName: String	
     var id: String?
     var userName: String
     var userEmail: String
@@ -18,8 +22,11 @@ class User: Codable, Identifiable {
 		self.id = id
         self.userName = userName
         self.userEmail = userEmail
+		self.senderId = id
+		self.displayName = userName
     }
 }
+
 extension User: Equatable {
 	static func == (lhs: User, rhs: User) -> Bool {
 		return lhs.id == rhs.id

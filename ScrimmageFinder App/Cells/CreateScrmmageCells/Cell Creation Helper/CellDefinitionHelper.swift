@@ -24,3 +24,15 @@ struct CellDefinitionHelper {
 	var value: Any?
 	
 }
+
+struct DetailCellDefinition {
+	
+	var title: String
+	var awatar: UIImage
+	var content: String
+	var backgroundColor: UIColor
+	var type: DetailCellType
+	var action: Selector?
+	var identifier: String
+	
+}

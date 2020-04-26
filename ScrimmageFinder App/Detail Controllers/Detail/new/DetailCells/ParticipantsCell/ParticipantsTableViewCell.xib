@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="participantsCell" rowHeight="62" id="KGk-i7-Jjw" customClass="ParticipantsTableViewCell" customModule="ScrimmageFinder_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="363" height="63"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="363" height="63"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7GP-OK-QW5">
+                        <rect key="frame" x="5" y="5" width="353" height="53"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="N5k-Wo-Tf1">
+                                <rect key="frame" x="5" y="9" width="35" height="35"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="6wX-6n-B5o"/>
+                                    <constraint firstAttribute="height" constant="35" id="hfs-Np-2U6"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnI-ei-nd3">
+                                <rect key="frame" x="50" y="17.5" width="25.5" height="18"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.94867593049999999" green="0.94938176870000002" blue="0.95220011469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bND-aI-znd">
+                                <rect key="frame" x="162.5" y="-12" width="28" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" white="0.83304794520000003" alpha="0.33906785099999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VMV-WA-w2t">
+                                <rect key="frame" x="313" y="9" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="GbV-42-1Gw"/>
+                                    <constraint firstAttribute="height" constant="35" id="WHc-K7-9BD"/>
+                                </constraints>
+                                <state key="normal" image="listIcon"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirmed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tc7-h4-WVh">
+                                <rect key="frame" x="217" y="16" width="81" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.30196078431372547" green="0.79607843137254897" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="LnI-ei-nd3" firstAttribute="centerY" secondItem="7GP-OK-QW5" secondAttribute="centerY" id="2hq-av-iKh"/>
+                            <constraint firstItem="N5k-Wo-Tf1" firstAttribute="centerY" secondItem="7GP-OK-QW5" secondAttribute="centerY" id="70P-Ro-2je"/>
+                            <constraint firstItem="tc7-h4-WVh" firstAttribute="centerY" secondItem="7GP-OK-QW5" secondAttribute="centerY" id="7aS-3b-ets"/>
+                            <constraint firstItem="VMV-WA-w2t" firstAttribute="centerY" secondItem="7GP-OK-QW5" secondAttribute="centerY" id="Mg2-xr-whP"/>
+                            <constraint firstItem="VMV-WA-w2t" firstAttribute="leading" secondItem="tc7-h4-WVh" secondAttribute="trailing" constant="15" id="Mkp-jI-HI7"/>
+                            <constraint firstItem="LnI-ei-nd3" firstAttribute="leading" secondItem="N5k-Wo-Tf1" secondAttribute="trailing" constant="10" id="RJs-NA-ipt"/>
+                            <constraint firstItem="bND-aI-znd" firstAttribute="centerX" secondItem="7GP-OK-QW5" secondAttribute="centerX" id="TA6-Rq-NRg"/>
+                            <constraint firstItem="bND-aI-znd" firstAttribute="top" secondItem="7GP-OK-QW5" secondAttribute="top" constant="-12" id="THB-mL-vDa"/>
+                            <constraint firstItem="N5k-Wo-Tf1" firstAttribute="leading" secondItem="7GP-OK-QW5" secondAttribute="leading" constant="5" id="akb-Bi-jds"/>
+                            <constraint firstAttribute="trailing" secondItem="VMV-WA-w2t" secondAttribute="trailing" constant="5" id="dfg-KR-bsn"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
+                                <integer key="value" value="10"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="7GP-OK-QW5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="77K-FK-73h"/>
+                    <constraint firstAttribute="bottom" secondItem="7GP-OK-QW5" secondAttribute="bottom" constant="5" id="ZyH-jy-4gp"/>
+                    <constraint firstAttribute="trailing" secondItem="7GP-OK-QW5" secondAttribute="trailing" constant="5" id="pjM-CV-QI8"/>
+                    <constraint firstItem="7GP-OK-QW5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="vrh-OC-5sw"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="contentLabel" destination="LnI-ei-nd3" id="uzE-d1-Gdd"/>
+                <outlet property="iconImageView" destination="N5k-Wo-Tf1" id="5QF-fe-hEV"/>
+                <outlet property="seeeParticipantsButton" destination="VMV-WA-w2t" id="1j3-ak-fRh"/>
+                <outlet property="statusLabel" destination="tc7-h4-WVh" id="nDD-BR-AXO"/>
+                <outlet property="titleLabel" destination="bND-aI-znd" id="W3u-uz-gwI"/>
+            </connections>
+            <point key="canvasLocation" x="168.84057971014494" y="120.20089285714285"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="listIcon" width="64" height="64"/>
+        <image name="nameIcon" width="96" height="96"/>
+    </resources>
+</document>

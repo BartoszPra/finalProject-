@@ -14,12 +14,13 @@ class ScrimmagesDetailCoordinator: Coordinator {
     var navigationController: CoordinatedNavigationController
     var children = [Coordinator]()
     
-    init(navigationController: CoordinatedNavigationController = CoordinatedNavigationController(), scrimmage: Scrimmage, isSavedUsed: Bool) {
+	init(navigationController: CoordinatedNavigationController = CoordinatedNavigationController(), scrimmage: Scrimmage, isSavedUsed: Bool, image:UIImage) {
         self.navigationController = navigationController
         navigationController.coordinator = self
-        let viewController = SFdetailViewController(nibName: "SFdetailViewController", bundle: nil, scrimmage: scrimmage, isSaveUsed: isSavedUsed)
+        let viewController = SFDetailsViewController(nibName: "SFDetailsViewController", bundle: nil, scrimmage: scrimmage, isSaveUsed: isSavedUsed)
         viewController.coordinator = self
         viewController.title = "Details"
+		viewController.scrimmageImage = image
         navigationController.pushViewController(viewController, animated: true)
     }
         

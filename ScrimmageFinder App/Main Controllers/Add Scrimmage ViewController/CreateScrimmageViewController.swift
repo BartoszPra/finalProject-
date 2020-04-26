@@ -230,11 +230,6 @@ UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 											object: TextViewTableViewCell(), identifier: "textFieldCell",
 											keboardType: .default, target: nil, action: nil,
 											placeHolder: "Name", color: nil, type: nil, height: 58)
-//		let timeCell = CellDefinitionHelper(cellTitle: "Time",
-//											object: PickerTableViewCell(),
-//											identifier: "pickerCell", keboardType: nil,
-//											target: nil, action: nil, placeHolder: "Time", color: nil,
-//											type: nil, height: 58)
 		let priceCell = CellDefinitionHelper(cellTitle: "Price",
 											 object: CustomPickerCellTableViewCell(),
 											 identifier: "customPickerCell", keboardType: nil, target: self,
@@ -283,7 +278,7 @@ UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 											 identifier: "textViewCell",
 											 keboardType: nil,
 											 target: self,
-											 action: #selector(submitStringmmage), placeHolder: "Please issert mesage to players", color: nil, type: nil, height: 75)
+											 action:nil, placeHolder: "Please issert mesage to players", color: nil, type: nil, height: 75)
 		
 		cellArray = [pictureCell, nameCell, organizerName,
 					 contactNumberCell, dateCell,

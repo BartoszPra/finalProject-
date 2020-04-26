@@ -23,10 +23,11 @@ final class ChatViewController: MessagesViewController {
 	private var messageListener: ListenerRegistration?
 	var currentUserString = Auth.auth().currentUser?.displayName
 	let user: User
-	var theTitle = ""
+	var theTitle: String!
 	private let channel: Chat
-	var chatImage = UIImage(named: "logoNoBackgroundBrighter")
 	let refreshControl = UIRefreshControl()
+	var isGrouped: Bool!
+	var chatImage: UIImage!
 	
 	deinit {
 		messageListener?.remove()
@@ -36,7 +37,9 @@ final class ChatViewController: MessagesViewController {
 		self.user = user
 		self.channel = channel
 		super.init(nibName: nil, bundle: nil)
-		title = channel.returnChatsName(with: currentUserString!)
+		self.theTitle = channel.returnChatsName(with: currentUserString!)
+		self.chatImage = channel.image
+		self.isGrouped = channel.isGroup
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -46,13 +49,16 @@ final class ChatViewController: MessagesViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		createNavtitle()
+		navTitleWithImageAndText(titleText: self.theTitle, imagee: chatImage)
 		
 		if let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout {
 			layout.textMessageSizeCalculator.outgoingAvatarSize = .zero
 			layout.textMessageSizeCalculator.incomingAvatarSize = .zero
 			layout.photoMessageSizeCalculator.incomingAvatarSize = .zero
 			layout.photoMessageSizeCalculator.outgoingAvatarSize = .zero
+			
+			layout.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment(textAlignment: .right, textInsets: UIEdgeInsets(top: 0, left: 0, bottom: 5, right: 8)))
+			layout.setMessageIncomingMessageTopLabelAlignment(LabelAlignment(textAlignment: .left, textInsets: UIEdgeInsets(top: 0, left: 18, bottom: 5, right: 0)))
 			
 		}
 		
@@ -103,36 +109,50 @@ final class ChatViewController: MessagesViewController {
 		messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false) // 3
 		self.messagesCollectionView.scrollToBottom()
 	}
+	
+	func navTitleWithImageAndText(titleText: String, imagee: UIImage) {
 
-	func createNavtitle() {
-		let navView = UIView()
+		// Creates a new UIView
+		let titleView = UIView()
 
-		// Create the label
+		// Creates a new text label
 		let label = UILabel()
-		label.text = ""
-		label.sizeToFit()
-		label.center = navView.center
+		label.text = titleText
 		label.textColor = .white
+		label.sizeToFit()
+		label.center = titleView.center
 		label.textAlignment = NSTextAlignment.center
 
-		// Create the image view
+		// Creates the image view
 		let image = UIImageView()
-		image.image = chatImage
-		// To maintain the image's aspect ratio:
-		let imageAspect = image.image!.size.width/image.image!.size.height
-		// Setting the image frame so that it's immediately before the text:
-		image.frame = CGRect(x: label.frame.origin.x-label.frame.size.height*imageAspect, y: label.frame.origin.y, width: label.frame.size.height*imageAspect, height: label.frame.size.height)
+		image.image = imagee
+
+		// Maintains the image's aspect ratio:
+		let imageAspect = image.image!.size.width / image.image!.size.height
+
+		// Sets the image frame so that it's immediately before the text:
+		let imageX = label.frame.origin.x - label.frame.size.height * imageAspect
+		let imageY = label.frame.origin.y - 7
+
+		let imageWidth = label.frame.size.height + 14
+		let imageHeight = label.frame.size.height + 14
+
+		image.frame = CGRect(x: imageX - 17, y: imageY, width: imageWidth, height: imageHeight)
+		
+		image.layer.cornerRadius = image.frame.width/2
+		image.layer.masksToBounds = true
+
 		image.contentMode = UIView.ContentMode.scaleAspectFit
 
-		// Add both the label and image view to the navView
-		navView.addSubview(label)
-		navView.addSubview(image)
+		// Adds both the label and image view to the titleView
+		titleView.addSubview(label)
+		titleView.addSubview(image)
 
-		// Set the navigation bar's navigation item's titleView to the navView
-		self.navigationItem.titleView = navView
+		// Sets the titleView frame to fit within the UINavigation Title
+		titleView.sizeToFit()
+		self.navigationItem.titleView = titleView
+		//return titleView
 
-		// Set the navView's frame to fit within the titleView
-		navView.sizeToFit()
 	}
 	
 	func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
@@ -252,27 +272,26 @@ final class ChatViewController: MessagesViewController {
 		}
 	}
 	
-	  private func sendPhoto(_ image: UIImage) {
-	    isSendingPhoto = true
-	
-	    uploadImage(image, to: channel) { [weak self] url in
-	      guard let `self` = self else {
-	        return
-	      }
-	      self.isSendingPhoto = false
-	
-	      guard let url = url else {
-	        return
-	      }
-	
-	      var message = Message(user: self.user, image: image)
-	      message.downloadURL = url
-	
-	      self.save(message)
-	      //self.messagesCollectionView.scrollToBottom()
+	private func sendPhoto(_ image: UIImage) {
+		isSendingPhoto = true
+		
+		uploadImage(image, to: channel) { [weak self] url in
+			guard let `self` = self else {
+				return
+			}
+			self.isSendingPhoto = false
+			
+			guard let url = url else {
+				return
+			}
+			
+			var message = Message(user: self.user, image: image)
+			message.downloadURL = url
+			
+			self.save(message)
 			self.messagesCollectionView.scrollToBottom(animated: true)
-	    }
-	  }
+		}
+	}
 	
 	private func downloadImage(at url: URL, completion: @escaping (UIImage?) -> Void) {
 		let ref = Storage.storage().reference(forURL: url.absoluteString)
@@ -296,6 +315,10 @@ extension ChatViewController: MessagesDisplayDelegate {
 	
 	func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
 		return isFromCurrentSender(message: message) ? .primary : .incomingMessage
+	}
+	
+	func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+		return .black
 	}
 	
 	func shouldDisplayHeader(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> Bool {
@@ -344,18 +367,20 @@ extension ChatViewController: MessagesDataSource {
 	}
 	
 	func messageTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-		return 10.0
+		if isGrouped {
+			return 15.0
+		} else {
+			return 0
+		}
 	}
 	
 	func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-		let name = message.sender.displayName
-		return NSAttributedString(
-			string: name,
-			attributes: [
-				.font: UIFont.preferredFont(forTextStyle: .caption1),
-				.foregroundColor: UIColor(white: 0.3, alpha: 1)
-			]
-		)
+
+		if !isPreviousMessageSameSender(at: indexPath) {
+            let name = message.sender.displayName
+            return NSAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: .caption1)])
+        }
+        return nil
 	}
 }
 
@@ -395,4 +420,9 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 	func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		picker.dismiss(animated: true, completion: nil)
 	}
+	
+	func isPreviousMessageSameSender(at indexPath: IndexPath) -> Bool {
+		   guard indexPath.section - 1 >= 0 else { return false }
+		   return messages[indexPath.section].user == messages[indexPath.section - 1].user
+	   }
 }

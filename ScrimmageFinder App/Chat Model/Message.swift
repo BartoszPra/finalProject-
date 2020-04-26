@@ -27,12 +27,16 @@ private struct ImageMediaItem: MediaItem {
 
 struct Message: MessageType {
 	
-	var sender: SenderType
+	var sender: SenderType {
+        return user
+    }
 	let id: String?
 	let content: String
 	let sentDate: Date
 	var downloadURL: URL?
 	var image: UIImage? = nil
+	
+	var user: User
 
 	var kind: MessageKind {
 		if let image = image {
@@ -48,18 +52,20 @@ struct Message: MessageType {
 	}
 
 	init(user: User, content: String) {
-		sender = Sender(senderId: user.id!, displayName: user.userName)
+		//sender = Sender(senderId: user.id!, displayName: user.userName)
+		self.user = user
 		self.content = content
 		sentDate = Date()
 		id = nil
 	}
 	
 	init(user: User, image: UIImage) {
-	  sender = Sender(senderId: user.id!, displayName: user.userName)
-	  self.image = image
-	  content = ""
-	  sentDate = Date()
-	  id = nil
+		//sender = Sender(senderId: user.id!, displayName: user.userName)
+		self.user = user
+		self.image = image
+		content = ""
+		sentDate = Date()
+		id = nil
 	}
 
 	init?(document: QueryDocumentSnapshot) {
@@ -78,7 +84,7 @@ struct Message: MessageType {
 		id = document.documentID
 
 		self.sentDate = sentDate.dateValue()
-		sender = Sender(senderId: senderID, displayName: senderName)
+		self.user = User(id: senderID, userName: senderName, userEmail: "")//Sender(senderId: senderID, displayName: senderName)
 
 		if let content = data["content"] as? String {
 			self.content = content

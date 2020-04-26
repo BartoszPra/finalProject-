@@ -17,12 +17,14 @@ struct Chat {
 	var users = [String]()
 	var isGroup: Bool
 	var image: UIImage!
+	var imageUrl: String!
 	let currentUserId = Auth.auth().currentUser!.uid
 	
-	init(name: String, users: [String], isGroup: Bool) {
+	init(name: String, users: [String], isGroup: Bool, url: String) {
 		self.name = name
 		self.isGroup = isGroup
 		self.users = users
+		self.imageUrl = url
 	}
 	
 	init?(document: QueryDocumentSnapshot) {
@@ -40,10 +42,15 @@ struct Chat {
 			return nil
 		}
 		
+		guard let imageUrl = data["imageUrl"] as? String else {
+			return nil
+		}
+		
 		id = document.documentID
 		self.name = name
 		self.users = users
 		self.isGroup = isGroup
+		self.imageUrl = imageUrl
 	}
 	
 	func returnChatsName(with userName: String) -> String {
@@ -55,32 +62,40 @@ struct Chat {
 		}
 	}
 	
-	func returnChatsImage(with userId: String, completion: @escaping (UIImage?) -> Void) {
+	func returnChatName(with userId: String) -> String {
+		if !self.isGroup {
+			 let userId = self.users.first { (id) -> Bool in
+				id != userId
+			}
+			return userId!
+		} else {
+			return self.name
+		}
+	}
+	
+	mutating func returnChatsImage(with userId: String, completion: @escaping (UIImage?) -> Void) {
 		if !isGroup {
 			let filtered = users.filter { (user) -> Bool in
 				user != currentUserId
 			}
 			UIImageView().returnImageUsingCashe(userId: filtered.first!) { (img) in
 				completion(img)
-				//return img
 			}
-//			let image = UIImageView().returnImageUsingCashe(userId: filtered.first!)
-//			return image
-
 		} else {
-			completion(UIImage(named: "basketBallLogo")!)
-			//return UIImage(named: "basketBallLogo")!
+			UIImageView().loadImageUsingCashe(urlString: imageUrl) { (img) in
+				completion(img)
+			}
 		}
 	}
 }
-
 extension Chat: DatabaseRepresentation {
   
   var representation: [String: Any] {
 	var rep = ["name": name,
 			   "isGroup": isGroup,
-			   "users": users] as [String : Any]
-    
+			   "users": users,
+			   "imageUrl": imageUrl] as [String: Any]
+	
     if let id = id {
       rep["id"] = id
     }

@@ -188,6 +188,7 @@
                                 <items>
                                     <tabBarItem systemItem="favorites" id="doO-fH-nkk"/>
                                 </items>
+                                <color key="tintColor" red="0.52357393500000005" green="0.15914174910000001" blue="0.0077536054890000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </tabBar>
                             <stackView opaque="NO" contentMode="top" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Q4N-Ns-i8Z">
                                 <rect key="frame" x="-9.6666666666666572" y="110" width="394.33333333333326" height="314"/>

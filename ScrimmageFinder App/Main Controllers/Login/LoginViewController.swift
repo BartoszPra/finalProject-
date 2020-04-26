@@ -99,6 +99,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
 				FIRFirestoreService.shared.getProfileImage(for: String(describing: user!.user.uid)) { (image) in
                     self.coreDataController.prepareImageForSaving(image: image)
                 }
+				print(user?.user.displayName)
                self.coordinator?.startTabBarCoordinator(viewController: self)
             } else {
 				AlertController.showAllert(self, title: "Oops", message: String(describing: error!.localizedDescription))
@@ -110,7 +111,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
     
     func setupUI() {
         self.title = "Login"
-    }
+	}
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {

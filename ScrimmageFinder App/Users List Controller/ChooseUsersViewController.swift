@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import Firebase
 
 enum UsersListPurpose {
@@ -15,10 +16,10 @@ enum UsersListPurpose {
 }
 
 protocol AddUsersDelegate: class {
-	func passUsers(users: [User], title: String)
+	func passUsers(users: [User], title: String, image: UIImage, isGrouped: Bool)
 }
 
-class ChooseUsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ChooseUsersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var groupNameTextField: UITextField!
@@ -30,6 +31,7 @@ class ChooseUsersViewController: UIViewController, UITableViewDelegate, UITableV
 	var createButton: UIBarButtonItem!
 	var users = [User]()
 	var currentUserId: String!
+	var imagePicker = UIImagePickerController()
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,8 +48,33 @@ class ChooseUsersViewController: UIViewController, UITableViewDelegate, UITableV
 		getUsers()
 		self.groupNameTextField.attributedPlaceholder = NSAttributedString(string: "Insert chat name", attributes: [.foregroundColor: UIColor.darkGray])
 		self.groupNameTextField.textColor = .white
-		
+		logoImageView.layer.cornerRadius = logoImageView.bounds.width / 2
+		let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ChooseUsersViewController.tapGesture))
+		logoImageView.addGestureRecognizer(tapGesture)
+		logoImageView.isUserInteractionEnabled = true
     }
+		
+	@objc func tapGesture() {
+		print("photo tapped")
+		if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum) {
+            print("Button capture")
+
+            imagePicker.delegate = self
+            imagePicker.sourceType = .savedPhotosAlbum
+            imagePicker.allowsEditing = false
+
+            present(imagePicker, animated: true, completion: nil)
+        }
+	}
+	
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+		picker.dismiss(animated: true, completion: nil)
+		guard let image = info[.originalImage] as? UIImage else {
+			fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+		}
+		self.logoImageView.image = image
+		self.logoImageView.contentMode = .scaleAspectFill
+	}
 	
 	func getUsers() {
 		FIRFirestoreService.shared.readAll(from: .users, returning: User.self) { (users) in
@@ -73,9 +100,12 @@ class ChooseUsersViewController: UIViewController, UITableViewDelegate, UITableV
 			AlertController.showAllert(self, title: "Oops", message: "Please insert chat name")
 		} else if usersAdded.count > 1 && !self.groupNameTextField.text!.isEmpty {
 			chatTitle = groupNameTextField.text!
+			self.delegate?.passUsers(users: self.usersAdded, title: self.chatTitle, image: logoImageView.image!, isGrouped: true)
+			self.navigationController?.popViewController(animated: true)
+		} else {
+			self.delegate?.passUsers(users: self.usersAdded, title: self.chatTitle, image: logoImageView.image!, isGrouped: false)
+			self.navigationController?.popViewController(animated: true)
 		}
-		self.delegate?.passUsers(users: self.usersAdded, title: self.chatTitle)
-		self.navigationController?.popViewController(animated: true)
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -99,7 +129,8 @@ class ChooseUsersViewController: UIViewController, UITableViewDelegate, UITableV
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		manageGroupView()
 		let cell = self.tableView.cellForRow(at: indexPath) as? ChatTableViewCell
-		cell?.checkImage.backgroundColor = .blue
+		cell?.checkImage.backgroundColor = UIColor(hex: "#007aff")
+		cell?.checkImage.image = UIImage(named: "tickWhite")
 		let user = users[indexPath.row]
 		usersAdded.append(user)
 		self.createButton.isEnabled = isCreateEnabled()
@@ -108,6 +139,7 @@ class ChooseUsersViewController: UIViewController, UITableViewDelegate, UITableV
 	func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
 		let user = users[indexPath.row]
 		let cell = self.tableView.cellForRow(at: indexPath) as? ChatTableViewCell
+		cell?.checkImage.image = nil
 		cell?.checkImage.backgroundColor = .clear
 		if let index = usersAdded.index(of: user) {
 			usersAdded.remove(at: index)

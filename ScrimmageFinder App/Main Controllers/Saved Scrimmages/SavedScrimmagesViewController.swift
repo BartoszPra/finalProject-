@@ -64,10 +64,9 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //segue trigger
         let scrimmage = savedScrimmages[indexPath.row]
-        //self.coordinator?.goToDetail(with: topic)
-        self.coordinator?.goToNewDetail(with: scrimmage, from: self)
+		let cell = tableView.cellForRow(at: indexPath) as? SavedScrimmagesCell
+		self.coordinator?.goToNewDetail(with: scrimmage, from: self, image: cell!.cellImage.image!)
         
     }
     

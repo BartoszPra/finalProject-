@@ -237,7 +237,7 @@ class SFdetailViewController: UIViewController, Storyboarded, MKMapViewDelegate 
                 self.isParticipating = true
                 return true
             } else {
-                self.participantStatus = .none
+				self.participantStatus = .none
                 self.isParticipating = false
                 return false
             }

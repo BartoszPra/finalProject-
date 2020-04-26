@@ -12,6 +12,10 @@ import UIKit
 var vSpinner: UIView?
 
 extension UIViewController {
+	
+	open override func awakeFromNib() {
+		navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+	}
     
     func showSpinner(onView: UIView) {
         let spinnerView = UIView.init(frame: onView.bounds)

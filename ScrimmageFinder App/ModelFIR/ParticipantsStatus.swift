@@ -7,21 +7,29 @@
 //
 
 import Foundation
+import UIKit
 
 enum ParticipantsStatus: Int, Codable, CustomStringConvertible {
-    case confirmed = 1, unconfirmed
-        
-    var description: String {
-        switch self {
-        case .confirmed: return "confirmed"
-        case .unconfirmed: return "unconfirmed"
-        }
-    }
+	case confirmed = 1, unconfirmed
+	
+	var description: String {
+		switch self {
+		case .confirmed: return "confirmed"
+		case .unconfirmed: return "unconfirmed"
+		}
+	}
 	
 	var value: Int {
-	switch self {
-	case .confirmed: return 1
-	case .unconfirmed: return 2
+		switch self {
+		case .confirmed: return 1
+		case .unconfirmed: return 2
+		}
 	}
-}
+	
+	var color: UIColor {
+		switch self {
+		case .confirmed: return UIColor.init(hex: "4DCB60") ?? .yellow
+		case .unconfirmed: return .red
+		}
+	}
 }

@@ -42,6 +42,9 @@
 		A50F7B442415B9D900AA9083 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F7B422415B9D900AA9083 /* ChatTableViewCell.swift */; };
 		A50F7B452415B9D900AA9083 /* ChatTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50F7B432415B9D900AA9083 /* ChatTableViewCell.xib */; };
 		A50F7B4724170AA700AA9083 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F7B4624170AA700AA9083 /* ChatCoordinator.swift */; };
+		A5121D7E2447B41F0057E605 /* MainDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5121D7D2447B41F0057E605 /* MainDetailTableViewCell.swift */; };
+		A5121D832447BBC00057E605 /* DetailButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5121D812447BBC00057E605 /* DetailButtonTableViewCell.swift */; };
+		A5121D842447BBC00057E605 /* DetailButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5121D822447BBC00057E605 /* DetailButtonTableViewCell.xib */; };
 		A518D7CB2370D7F400DBDC1A /* SavedScrimmagesCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = A591A30F236F30010075F8E4 /* SavedScrimmagesCell.xib */; };
 		A51AF9CF23DE53E80042D925 /* CellDefinitionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51AF9CE23DE53E80042D925 /* CellDefinitionHelper.swift */; };
 		A52D2CB9241D0E8500605231 /* DatabaseRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D2CB8241D0E8500605231 /* DatabaseRepresentation.swift */; };
@@ -70,6 +73,9 @@
 		A5531FA423BA31E80054DA0A /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5531FA223BA31E80054DA0A /* ButtonTableViewCell.xib */; };
 		A5531FA823BB5CAF0054DA0A /* CustomPickerCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5531FA623BB5CAF0054DA0A /* CustomPickerCellTableViewCell.swift */; };
 		A5531FA923BB5CAF0054DA0A /* CustomPickerCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5531FA723BB5CAF0054DA0A /* CustomPickerCellTableViewCell.xib */; };
+		A5584FF4245369DF00AEBB92 /* AddressTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5584FF2245369DE00AEBB92 /* AddressTableViewCell.xib */; };
+		A5584FF5245369DF00AEBB92 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5584FF3245369DF00AEBB92 /* AddressTableViewCell.swift */; };
+		A5584FFA24558CDC00AEBB92 /* ScrimmageVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5584FF924558CDC00AEBB92 /* ScrimmageVIewModel.swift */; };
 		A55AEF8C23C2B61600B07642 /* UISearchBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55AEF8B23C2B61600B07642 /* UISearchBar+Extensions.swift */; };
 		A57BD1232357A09F00A324BC /* SFTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD1222357A09F00A324BC /* SFTheme.swift */; };
 		A57BD1262357A33E00A324BC /* SFNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD1252357A33E00A324BC /* SFNames.swift */; };
@@ -87,6 +93,8 @@
 		A5CC95702395EA6C004A0810 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */; };
 		A5D2FA46237F512400FAAC8A /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */; };
 		A5D7433F22F7A2C20047E9E0 /* MyScrimmagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F4245228472CC007841A2 /* MyScrimmagesViewController.swift */; };
+		A5DDEC792449165F0051FE66 /* ParticipantsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DDEC772449165F0051FE66 /* ParticipantsTableViewCell.swift */; };
+		A5DDEC7A2449165F0051FE66 /* ParticipantsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DDEC782449165F0051FE66 /* ParticipantsTableViewCell.xib */; };
 		A5E574AE2387076700DD7C27 /* ParticipantsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E574AD2387076700DD7C27 /* ParticipantsStatus.swift */; };
 		A5ED86E123E0FADE00753B6F /* MainCreateScrimmageCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED86E023E0FADE00753B6F /* MainCreateScrimmageCellTableViewCell.swift */; };
 		A5F762C22388AE1B002CD1B3 /* ScrimmageDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F762C12388AE1B002CD1B3 /* ScrimmageDetailCoordinator.swift */; };
@@ -99,6 +107,10 @@
 		A5F762D8238AD365002CD1B3 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5F762D6238AD365002CD1B3 /* UserProfileViewController.xib */; };
 		A5F762DA238ADD84002CD1B3 /* ViewsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F762D9238ADD84002CD1B3 /* ViewsHelpers.swift */; };
 		A5F762DC238AE1A9002CD1B3 /* UserProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F762DB238AE1A9002CD1B3 /* UserProfileCoordinator.swift */; };
+		A5FD555C2442795500B9E2F2 /* SFDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FD555A2442795500B9E2F2 /* SFDetailsViewController.swift */; };
+		A5FD555D2442795500B9E2F2 /* SFDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5FD555B2442795500B9E2F2 /* SFDetailsViewController.xib */; };
+		A5FD556124427A1A00B9E2F2 /* DetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FD555F24427A1A00B9E2F2 /* DetailTableViewCell.swift */; };
+		A5FD556224427A1A00B9E2F2 /* DetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5FD556024427A1A00B9E2F2 /* DetailTableViewCell.xib */; };
 		C53B747BEB4E8E432E213461 /* Pods_ScrimmageFinder_AppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF1BFFC0D3C64B94DB6675A /* Pods_ScrimmageFinder_AppTests.framework */; };
 		C751B37A2259225D0060D1B2 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751B3792259225D0060D1B2 /* MainCoordinator.swift */; };
 		C751B37C225922710060D1B2 /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C751B37B225922710060D1B2 /* Storyboarded.swift */; };
@@ -187,6 +199,9 @@
 		A50F7B422415B9D900AA9083 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		A50F7B432415B9D900AA9083 /* ChatTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatTableViewCell.xib; sourceTree = "<group>"; };
 		A50F7B4624170AA700AA9083 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
+		A5121D7D2447B41F0057E605 /* MainDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailTableViewCell.swift; sourceTree = "<group>"; };
+		A5121D812447BBC00057E605 /* DetailButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailButtonTableViewCell.swift; sourceTree = "<group>"; };
+		A5121D822447BBC00057E605 /* DetailButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailButtonTableViewCell.xib; sourceTree = "<group>"; };
 		A51AF9CE23DE53E80042D925 /* CellDefinitionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDefinitionHelper.swift; sourceTree = "<group>"; };
 		A52D2CB8241D0E8500605231 /* DatabaseRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseRepresentation.swift; sourceTree = "<group>"; };
 		A52D2CBA241E561A00605231 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
@@ -214,6 +229,9 @@
 		A5531FA223BA31E80054DA0A /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
 		A5531FA623BB5CAF0054DA0A /* CustomPickerCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerCellTableViewCell.swift; sourceTree = "<group>"; };
 		A5531FA723BB5CAF0054DA0A /* CustomPickerCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomPickerCellTableViewCell.xib; sourceTree = "<group>"; };
+		A5584FF2245369DE00AEBB92 /* AddressTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressTableViewCell.xib; sourceTree = "<group>"; };
+		A5584FF3245369DF00AEBB92 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
+		A5584FF924558CDC00AEBB92 /* ScrimmageVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageVIewModel.swift; sourceTree = "<group>"; };
 		A55AEF8B23C2B61600B07642 /* UISearchBar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extensions.swift"; sourceTree = "<group>"; };
 		A57BD1222357A09F00A324BC /* SFTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFTheme.swift; sourceTree = "<group>"; };
 		A57BD1252357A33E00A324BC /* SFNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNames.swift; sourceTree = "<group>"; };
@@ -235,6 +253,8 @@
 		A5AEC475238612E00095796A /* ScrimmageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageType.swift; sourceTree = "<group>"; };
 		A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		A5DDEC772449165F0051FE66 /* ParticipantsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsTableViewCell.swift; sourceTree = "<group>"; };
+		A5DDEC782449165F0051FE66 /* ParticipantsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantsTableViewCell.xib; sourceTree = "<group>"; };
 		A5E574AD2387076700DD7C27 /* ParticipantsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsStatus.swift; sourceTree = "<group>"; };
 		A5ED86E023E0FADE00753B6F /* MainCreateScrimmageCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCreateScrimmageCellTableViewCell.swift; sourceTree = "<group>"; };
 		A5F762C12388AE1B002CD1B3 /* ScrimmageDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageDetailCoordinator.swift; sourceTree = "<group>"; };
@@ -247,6 +267,10 @@
 		A5F762D6238AD365002CD1B3 /* UserProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserProfileViewController.xib; sourceTree = "<group>"; };
 		A5F762D9238ADD84002CD1B3 /* ViewsHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsHelpers.swift; sourceTree = "<group>"; };
 		A5F762DB238AE1A9002CD1B3 /* UserProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCoordinator.swift; sourceTree = "<group>"; };
+		A5FD555A2442795500B9E2F2 /* SFDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFDetailsViewController.swift; sourceTree = "<group>"; };
+		A5FD555B2442795500B9E2F2 /* SFDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SFDetailsViewController.xib; sourceTree = "<group>"; };
+		A5FD555F24427A1A00B9E2F2 /* DetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewCell.swift; sourceTree = "<group>"; };
+		A5FD556024427A1A00B9E2F2 /* DetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailTableViewCell.xib; sourceTree = "<group>"; };
 		BD1AF697CE9CBB669D028A8B /* Pods-ScrimmageFinder App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScrimmageFinder App.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ScrimmageFinder App/Pods-ScrimmageFinder App.debug.xcconfig"; sourceTree = "<group>"; };
 		C70F3FE3222F60F400703859 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70F3FE5222F614100703859 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -361,6 +385,7 @@
 		03F10DC420DC55BF00F8C62B /* ScrimmageFinder App */ = {
 			isa = PBXGroup;
 			children = (
+				A5584FF824558C9D00AEBB92 /* ViewModel */,
 				A57BD1242357A30E00A324BC /* Constants */,
 				C751B3782259218E0060D1B2 /* Coordinators */,
 				04F4301620F0A93400E5D8ED /* CoreDataModel */,
@@ -473,7 +498,6 @@
 		A50F7B2F241589E200AA9083 /* Chat View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A50F7B412415B9AD00AA9083 /* Chat Cell */,
 				A50F7B3124158A2800AA9083 /* ChatsViewController */,
 				A50F7B3024158A1300AA9083 /* Chat View Controllet */,
 			);
@@ -492,6 +516,7 @@
 		A50F7B3124158A2800AA9083 /* ChatsViewController */ = {
 			isa = PBXGroup;
 			children = (
+				A50F7B412415B9AD00AA9083 /* Chat Cell */,
 				A50F7B3824158C0300AA9083 /* ChatsTableViewController.swift */,
 				A50F7B3924158C0300AA9083 /* ChatsTableViewController.xib */,
 			);
@@ -516,6 +541,32 @@
 				A50F7B432415B9D900AA9083 /* ChatTableViewCell.xib */,
 			);
 			path = "Chat Cell";
+			sourceTree = "<group>";
+		};
+		A5121D7C2447B3D70057E605 /* MainDetailCell */ = {
+			isa = PBXGroup;
+			children = (
+				A5121D7D2447B41F0057E605 /* MainDetailTableViewCell.swift */,
+			);
+			path = MainDetailCell;
+			sourceTree = "<group>";
+		};
+		A5121D7F2447BB280057E605 /* DatailCell */ = {
+			isa = PBXGroup;
+			children = (
+				A5FD555F24427A1A00B9E2F2 /* DetailTableViewCell.swift */,
+				A5FD556024427A1A00B9E2F2 /* DetailTableViewCell.xib */,
+			);
+			path = DatailCell;
+			sourceTree = "<group>";
+		};
+		A5121D802447BB930057E605 /* ButtonCell */ = {
+			isa = PBXGroup;
+			children = (
+				A5121D812447BBC00057E605 /* DetailButtonTableViewCell.swift */,
+				A5121D822447BBC00057E605 /* DetailButtonTableViewCell.xib */,
+			);
+			path = ButtonCell;
 			sourceTree = "<group>";
 		};
 		A518D7CD2370DE1E00DBDC1A /* Cells */ = {
@@ -623,6 +674,23 @@
 			path = CustomPickerCell;
 			sourceTree = "<group>";
 		};
+		A5584FF12453698500AEBB92 /* AddressCell */ = {
+			isa = PBXGroup;
+			children = (
+				A5584FF3245369DF00AEBB92 /* AddressTableViewCell.swift */,
+				A5584FF2245369DE00AEBB92 /* AddressTableViewCell.xib */,
+			);
+			path = AddressCell;
+			sourceTree = "<group>";
+		};
+		A5584FF824558C9D00AEBB92 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				A5584FF924558CDC00AEBB92 /* ScrimmageVIewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		A57BD1242357A30E00A324BC /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -666,6 +734,7 @@
 			children = (
 				0369DAEE20E13635006B7507 /* SFdetailViewController.swift */,
 				A57BD12B2357AE4C00A324BC /* SFdetailViewController.xib */,
+				A5FD55592442764F00B9E2F2 /* new */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -713,6 +782,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		A5DDEC76244916360051FE66 /* ParticipantsCell */ = {
+			isa = PBXGroup;
+			children = (
+				A5DDEC772449165F0051FE66 /* ParticipantsTableViewCell.swift */,
+				A5DDEC782449165F0051FE66 /* ParticipantsTableViewCell.xib */,
+			);
+			path = ParticipantsCell;
+			sourceTree = "<group>";
+		};
 		A5ED86DF23E0FA8E00753B6F /* MainCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -747,6 +825,28 @@
 				A5F762D6238AD365002CD1B3 /* UserProfileViewController.xib */,
 			);
 			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		A5FD55592442764F00B9E2F2 /* new */ = {
+			isa = PBXGroup;
+			children = (
+				A5FD555E244279F100B9E2F2 /* DetailCells */,
+				A5FD555A2442795500B9E2F2 /* SFDetailsViewController.swift */,
+				A5FD555B2442795500B9E2F2 /* SFDetailsViewController.xib */,
+			);
+			path = new;
+			sourceTree = "<group>";
+		};
+		A5FD555E244279F100B9E2F2 /* DetailCells */ = {
+			isa = PBXGroup;
+			children = (
+				A5DDEC76244916360051FE66 /* ParticipantsCell */,
+				A5121D802447BB930057E605 /* ButtonCell */,
+				A5121D7F2447BB280057E605 /* DatailCell */,
+				A5584FF12453698500AEBB92 /* AddressCell */,
+				A5121D7C2447B3D70057E605 /* MainDetailCell */,
+			);
+			path = DetailCells;
 			sourceTree = "<group>";
 		};
 		B8C987C956CAA1F8FF1199E7 /* Pods */ = {
@@ -915,19 +1015,24 @@
 				A5F762C72388BB0F002CD1B3 /* UsersListViewController.xib in Resources */,
 				03F10DD320DC55C300F8C62B /* LaunchScreen.storyboard in Resources */,
 				A50F4248228472CC007841A2 /* MyScrimmagesViewController.xib in Resources */,
+				A5DDEC7A2449165F0051FE66 /* ParticipantsTableViewCell.xib in Resources */,
 				A5002FCD23E438A600CB8F63 /* TextViewCellTableViewCell.xib in Resources */,
+				A5121D842447BBC00057E605 /* DetailButtonTableViewCell.xib in Resources */,
 				034D429120E4E8FD00D59F8C /* Settings.bundle in Resources */,
 				A57BD1302365FDBD00A324BC /* LoginViewController.xib in Resources */,
 				A5F762D8238AD365002CD1B3 /* UserProfileViewController.xib in Resources */,
 				A5531F9F23BA05E10054DA0A /* LogoTableViewCell.xib in Resources */,
 				034D429320E54FCA00D59F8C /* GoogleService-Info.plist in Resources */,
 				A54BC0BF23BE9C380087178B /* AddressCellTableViewCell.xib in Resources */,
+				A5584FF4245369DF00AEBB92 /* AddressTableViewCell.xib in Resources */,
 				A52D2CCA242191D500605231 /* ChooseUsersViewController.xib in Resources */,
 				A5531F9A23B572670054DA0A /* PickerTableViewCell.xib in Resources */,
 				A5F762CF23899EBA002CD1B3 /* SFUserTableViewCell.xib in Resources */,
 				03F10DCB20DC55BF00F8C62B /* Main.storyboard in Resources */,
 				A5531FA423BA31E80054DA0A /* ButtonTableViewCell.xib in Resources */,
+				A5FD556224427A1A00B9E2F2 /* DetailTableViewCell.xib in Resources */,
 				A50F7B3724158B7800AA9083 /* ChatViewController.xib in Resources */,
+				A5FD555D2442795500B9E2F2 /* SFDetailsViewController.xib in Resources */,
 				A591A316236F57CB0075F8E4 /* SavedScrimmagesViewController.xib in Resources */,
 				A5531F8F23B2377F0054DA0A /* CreateScrimmageViewController.xib in Resources */,
 				A5531FA923BB5CAF0054DA0A /* CustomPickerCellTableViewCell.xib in Resources */,
@@ -1075,15 +1180,20 @@
 				A54D94DF240B07E200D4DFCF /* SFAddress.swift in Sources */,
 				A59034E92391A3A200CB7284 /* FIRStorageReference.swift in Sources */,
 				C751B37A2259225D0060D1B2 /* MainCoordinator.swift in Sources */,
+				A5584FFA24558CDC00AEBB92 /* ScrimmageVIewModel.swift in Sources */,
 				A5E574AE2387076700DD7C27 /* ParticipantsStatus.swift in Sources */,
+				A5584FF5245369DF00AEBB92 /* AddressTableViewCell.swift in Sources */,
 				A5D2FA46237F512400FAAC8A /* UIViewController+Extensions.swift in Sources */,
 				A5AEC476238612E00095796A /* ScrimmageType.swift in Sources */,
 				A57BD12E2357EEE400A324BC /* SFAppearance.swift in Sources */,
 				A5002FCC23E438A600CB8F63 /* TextViewCellTableViewCell.swift in Sources */,
 				A59068642282CA1800186C0D /* SavedScrimmagesCoordiantor.swift in Sources */,
 				04C8F37820FF2A0E00AF48E4 /* LoginViewController.swift in Sources */,
+				A5121D7E2447B41F0057E605 /* MainDetailTableViewCell.swift in Sources */,
 				03C6E1EC20DD5557001DFD01 /* FIRCollectionReference.swift in Sources */,
+				A5121D832447BBC00057E605 /* DetailButtonTableViewCell.swift in Sources */,
 				A5F762DA238ADD84002CD1B3 /* ViewsHelpers.swift in Sources */,
+				A5FD556124427A1A00B9E2F2 /* DetailTableViewCell.swift in Sources */,
 				A59A0CA3240498D400C4C71A /* CodableGeoPoint.swift in Sources */,
 				C751B37C225922710060D1B2 /* Storyboarded.swift in Sources */,
 				C751B37E225922970060D1B2 /* Coordinator.swift in Sources */,
@@ -1102,12 +1212,14 @@
 				A5531FA823BB5CAF0054DA0A /* CustomPickerCellTableViewCell.swift in Sources */,
 				A55AEF8C23C2B61600B07642 /* UISearchBar+Extensions.swift in Sources */,
 				A50F7B4724170AA700AA9083 /* ChatCoordinator.swift in Sources */,
+				A5FD555C2442795500B9E2F2 /* SFDetailsViewController.swift in Sources */,
 				03C6E1E820DD357D001DFD01 /* FIRFiestoreService.swift in Sources */,
 				A5531F9923B572670054DA0A /* PickerTableViewCell.swift in Sources */,
 				0369DAEA20E121B1006B7507 /* SavedScrimmagesViewController.swift in Sources */,
 				A5F762D7238AD365002CD1B3 /* UserProfileViewController.swift in Sources */,
 				A52D2CC3241E598500605231 /* Sender.swift in Sources */,
 				03C6E1F020DD63E0001DFD01 /* SnapshotExtensions.swift in Sources */,
+				A5DDEC792449165F0051FE66 /* ParticipantsTableViewCell.swift in Sources */,
 				A51AF9CF23DE53E80042D925 /* CellDefinitionHelper.swift in Sources */,
 				A5F762CE23899EBA002CD1B3 /* SFUserTableViewCell.swift in Sources */,
 				A57BD1232357A09F00A324BC /* SFTheme.swift in Sources */,

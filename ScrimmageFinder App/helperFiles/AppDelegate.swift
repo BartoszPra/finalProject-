@@ -27,18 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         FirebaseApp.configure()
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         GIDSignIn.sharedInstance()?.delegate = self
-        
-        //INPreferences.requestSiriAuthorization({status in
-        //    print(String(reflecting: status))
-        //})
-        
         return true
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         
         if let error = error {
-            print("Error \(error.localizedDescription )")
+            print("Error \(error.localizedDescription)")
             return
         }
         

@@ -65,7 +65,6 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "SCcell", for: indexPath)
 		
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "SavedScrimmagesCell",
 		for: indexPath) as? SavedScrimmagesCell else { return SavedScrimmagesCell() }
@@ -89,7 +88,8 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         } else {
              scrimmage = scrimmages[indexPath.row]
         }
-        coordinator?.goToNewDetail(with: scrimmage, from: self)        
+		let cell = tableView.cellForRow(at: indexPath) as? SavedScrimmagesCell
+		coordinator?.goToNewDetail(with: scrimmage, from: self, image: cell?.cellImage.image ?? UIImage())
     }
     /**
      Below function is checking user taped sth in search bar.It first check for spaces and empty search bar and if so the bool is searching is set to false. Else the bool is true and function filters the array of all scrimmages

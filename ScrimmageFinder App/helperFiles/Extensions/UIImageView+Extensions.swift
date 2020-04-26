@@ -15,6 +15,8 @@ extension UIImageView {
 	
 	func loadImageUsingCashe(scrimmageId: String) {
 		
+		self.image = nil
+		
 		if let caschedImage = imageCashe.object(forKey: scrimmageId as NSString) {
 			self.image = caschedImage
 			return
@@ -26,7 +28,30 @@ extension UIImageView {
 		}
 	}
 	
+	func loadImageUsingCashe(urlString: String, completion: @escaping (UIImage) -> Void) {
+		
+		self.image = nil
+		
+		if let caschedImage = imageCashe.object(forKey: urlString as NSString) {
+			completion(caschedImage)
+		}
+		
+		guard let url = URL(string: urlString) else {return}
+		DispatchQueue.global().async {
+			if let data = try? Data(contentsOf: url) {
+				if let image = UIImage(data: data) {
+					DispatchQueue.main.async {
+						imageCashe.setObject(image, forKey: urlString as NSString)
+						completion(image)
+					}
+				}
+			}
+		}
+	}
+	
 	func returnImageUsingCashe(userId: String, completion: @escaping (UIImage) -> Void) {
+		
+		self.image = nil
 		
 		if let caschedImage = imageCashe.object(forKey: userId as NSString) {
 			completion(caschedImage)
@@ -39,6 +64,8 @@ extension UIImageView {
 	}
 	
 	func loadUserImageUsingCashe(userId: String) {
+		
+		self.image = nil
 		
 		if let caschedImage = imageCashe.object(forKey: userId as NSString) {
 			self.image = caschedImage

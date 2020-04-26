@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum ScrimmageType: Int, Codable, CustomStringConvertible {
     case open = 1, close
@@ -17,4 +18,11 @@ enum ScrimmageType: Int, Codable, CustomStringConvertible {
         case .close: return "private"
         }
     }
+		
+	var icon: UIImage {
+		switch self {
+		case .open: return UIImage(named: "publicIcon")!
+		case .close: return UIImage(named: "privateIcon")!
+		}
+	}
 }

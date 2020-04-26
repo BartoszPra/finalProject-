@@ -259,6 +259,33 @@ class FIRFirestoreService {
           }
         }
     }
+	
+	func uploadImage(_ image: UIImage, folderName: String, completion: @escaping (URL?) -> Void) {
+
+		guard let scaledImage = image.scaledToSafeUploadSize, let data = scaledImage.jpegData(compressionQuality: 0.4) else {
+			completion(nil)
+			return
+		}
+
+		let metadata = StorageMetadata()
+		metadata.contentType = "image/jpeg"
+
+		let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
+		
+		let storageRef = filesReference().reference().child(folderName).child(imageName)
+		storageRef.putData(data, metadata: metadata) { metaData, error in
+			if error == nil, metaData != nil {
+				
+				storageRef.downloadURL { url, error in
+					completion(url)
+					// success!
+				}
+			} else {
+				// failed
+				completion(nil)
+			}
+		}
+	}
     
 	func uploadImage(image: UIImage, uploadType: UploadType, for scrimmageId: String, for userId: String, success: @escaping (Bool) -> Void) {
         

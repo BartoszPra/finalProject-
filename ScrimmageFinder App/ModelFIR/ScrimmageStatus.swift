@@ -18,6 +18,13 @@ enum ScrimmageStatus: Int, Codable, CustomStringConvertible {
         case .off: return UIImage.init(named: "statusOFF")!
         }
     }
+	
+	var icon: UIImage {
+		switch self {
+		case .on: return UIImage(named: "onIcon")!
+		case .off: return UIImage(named: "offIcon")!
+		}
+	}
     
     var description: String {
         switch self {

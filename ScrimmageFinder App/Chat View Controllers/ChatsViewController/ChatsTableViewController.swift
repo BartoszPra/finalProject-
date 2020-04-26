@@ -29,6 +29,7 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
+		navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 		let nib = UINib(nibName: "ChatTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "chetsCell")		
 		tableView.delegate = self
@@ -56,10 +57,9 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
 		navigationController?.pushViewController(vc, animated: true)
 	}
 	
-	func passUsers(users: [User], title: String) {
+	func passUsers(users: [User], title: String, image: UIImage, isGrouped: Bool) {
 		var userss = [String]()
 		var titlee = title
-		let isGrouped = users.count > 1 ? true : false
 		if !isGrouped {
 			titlee = currentUserString! + ", " + users.first!.userName
 		}		
@@ -67,7 +67,13 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
 		for user in users {
 			userss.append(user.id!)
 		}
-		self.createChannel(chatName: titlee, users: userss, isGrouped: isGrouped)
+		if isGrouped {
+			FIRFirestoreService.shared.uploadImage(image, folderName: "ChatsAvatars") { (url) in
+				self.createChannel(chatName: titlee, users: userss, isGrouped: isGrouped, chatImageUrl: url?.absoluteString ?? "")
+			}
+		} else {
+			self.createChannel(chatName: titlee, users: userss, isGrouped: isGrouped, chatImageUrl: "")
+		}
 	}
 	
     // MARK: - Table view data source
@@ -85,10 +91,10 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "chetsCell", for: indexPath) as? ChatTableViewCell else {return ChatTableViewCell()}
 		cell.configureWithCheckBox(isEnabled: false)
-		let currentChat = chats[indexPath.row]
+		var currentChat = chats[indexPath.row]
 		cell.name.text = currentChat.returnChatsName(with: currentUserString!)
-		//cell.chatImage.image = currentChat.returnChatsImage(with: currentUserId!)
 		currentChat.returnChatsImage(with: currentUserId!) { (img) in
+			self.chats[indexPath.row].image = img
 			cell.chatImage.image = img
 		}
         return cell
@@ -96,16 +102,16 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let user = User(id: Auth.auth().currentUser!.uid, userName: (Auth.auth().currentUser?.displayName)!, userEmail: (Auth.auth().currentUser?.email)!)
+		let cell = tableView.cellForRow(at: indexPath) as? ChatTableViewCell
 		let currentChat = chats[indexPath.row]
 		let vc = ChatViewController(user: user, channel: currentChat)
-		vc.theTitle = currentChat.returnChatsName(with: currentUserString!)
+		vc.chatImage = cell?.chatImage.image
 		navigationController?.pushViewController(vc, animated: true)
-		//coordinator?.goToChat(with: id!, from: self)
 	}
 	
-	private func createChannel(chatName: String, users: [String], isGrouped: Bool) {
+	private func createChannel(chatName: String, users: [String], isGrouped: Bool, chatImageUrl: String) {
 		
-		let channel = Chat(name: chatName, users: users, isGroup: isGrouped)
+		let channel = Chat(name: chatName, users: users, isGroup: isGrouped, url: chatImageUrl)
 		channelReference.addDocument(data: channel.representation) { error in
 			if let e = error {
 				print("Error saving channel: \(e.localizedDescription)")
