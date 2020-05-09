@@ -12,7 +12,7 @@ import UIKit
 struct CellDefinitionHelper {
 	
 	var cellTitle: String
-	var object: UITableViewCell
+	//var object: UITableViewCell
 	var identifier: String
 	var keboardType: UIKeyboardType?
 	var target: UIViewController?
@@ -34,5 +34,6 @@ struct DetailCellDefinition {
 	var type: DetailCellType
 	var action: Selector?
 	var identifier: String
+	var target: UIViewController?
 	
 }

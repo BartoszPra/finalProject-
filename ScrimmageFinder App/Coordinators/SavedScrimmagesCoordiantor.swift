@@ -23,7 +23,7 @@ class SavedScrimmagesCoordinator: Coordinator {
         navigationController.viewControllers = [viewController]
     }
     
-	func goToNewDetail(with scrimmage: Scrimmage, from controller: UIViewController, image: UIImage) {
+	func goToNewDetail(with scrimmage: ScrimmageViewModel, from controller: UIViewController, image: UIImage) {
 		ScrimmagesDetailCoordinator(navigationController: navigationController, scrimmage: scrimmage, isSavedUsed: true, image: image)
     }
     

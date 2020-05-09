@@ -15,11 +15,11 @@ import GoogleSignIn
 
 class UsersListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var participantsIds = [[String: ParticipantsStatus]]()
+    var participantsIds = [String: ParticipantsStatus]()
     var participants = [User]()
     @IBOutlet weak var tableView: UITableView!
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, participants: [[String: ParticipantsStatus]]) {
+    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, participants: [String: ParticipantsStatus]) {
         self.participantsIds = participants
         super.init(nibName: nil, bundle: nil)
     }    
@@ -38,9 +38,9 @@ class UsersListViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func loadParticipants() {
-        for idDict in participantsIds {
-            guard let parId = idDict.keys.first else {return}
-            FIRFirestoreService.shared.readOne(from: .users, with: parId, returning: User.self) { (user) in
+		for id in participantsIds.keys {
+            //guard let parId = idDict.keys.first else {return}
+            FIRFirestoreService.shared.readOne(from: .users, with: id, returning: User.self) { (user) in
                 self.participants.append(user)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -58,16 +58,19 @@ class UsersListViewController: UIViewController, UITableViewDelegate, UITableVie
                                                        for: indexPath) as? SFUserTableViewCell else { return SFUserTableViewCell() }
         let user: User = self.participants[indexPath.row]
         guard let userId = user.id else {return UITableViewCell()}
-        let statusForId = participantsIds.first { (idDict) -> Bool in
-            idDict.keys.first == userId
-        }
+//        let statusForId = participantsIds.first { (idDict) -> Bool in
+//            idDict.keys.first == userId
+//        }
+		
+		let statusForId: ParticipantsStatus = participantsIds[userId]!
+		
         cell.userNameLabel.text = user.userName
-        if statusForId?.values.first == .confirmed {
+        if statusForId == .confirmed {
             cell.userStatusLabel.textColor = .green
         } else {
             cell.userStatusLabel.textColor = .red
         }
-        cell.userStatusLabel.text = statusForId?.values.first?.description
+        cell.userStatusLabel.text = statusForId.description
 		cell.userImage.loadUserImageUsingCashe(userId: userId)
         return cell
     }

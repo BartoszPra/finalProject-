@@ -11,7 +11,6 @@
 		034D429320E54FCA00D59F8C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 034D429220E54FCA00D59F8C /* GoogleService-Info.plist */; };
 		034D429720E7F0EC00D59F8C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034D429620E7F0EC00D59F8C /* Assets.xcassets */; };
 		0369DAEA20E121B1006B7507 /* SavedScrimmagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAE920E121B1006B7507 /* SavedScrimmagesViewController.swift */; };
-		0369DAEF20E13635006B7507 /* SFdetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAEE20E13635006B7507 /* SFdetailViewController.swift */; };
 		0369DAF520E25365006B7507 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0369DAF420E25365006B7507 /* CoreDataController.swift */; };
 		03C6E1E820DD357D001DFD01 /* FIRFiestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C6E1E720DD357D001DFD01 /* FIRFiestoreService.swift */; };
 		03C6E1EC20DD5557001DFD01 /* FIRCollectionReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C6E1EB20DD5557001DFD01 /* FIRCollectionReference.swift */; };
@@ -31,6 +30,11 @@
 		662BB2BE39AEF80F674AC8B2 /* Pods_ScrimmageFinder_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06025A504561BDBE1220B5F6 /* Pods_ScrimmageFinder_App.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A5002FCC23E438A600CB8F63 /* TextViewCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5002FCA23E438A600CB8F63 /* TextViewCellTableViewCell.swift */; };
 		A5002FCD23E438A600CB8F63 /* TextViewCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5002FCB23E438A600CB8F63 /* TextViewCellTableViewCell.xib */; };
+		A50211D52458EAD0000BB18C /* ScrimmagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50211D32458EAD0000BB18C /* ScrimmagesListViewController.swift */; };
+		A50211D62458EAD0000BB18C /* ScrimmagesListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50211D42458EAD0000BB18C /* ScrimmagesListViewController.xib */; };
+		A50211DA245968DE000BB18C /* ScrimmagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50211D8245968DE000BB18C /* ScrimmagesCell.swift */; };
+		A50211DB245968DE000BB18C /* ScrimmagesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50211D9245968DE000BB18C /* ScrimmagesCell.xib */; };
+		A5021203245A3581000BB18C /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5021202245A3581000BB18C /* MasterViewController.swift */; };
 		A50F4248228472CC007841A2 /* MyScrimmagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50F4246228472CC007841A2 /* MyScrimmagesViewController.xib */; };
 		A50F424C2284785E007841A2 /* MyScrimmagesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F424B2284785E007841A2 /* MyScrimmagesCoordinator.swift */; };
 		A50F7B3624158B7800AA9083 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F7B3424158B7800AA9083 /* ChatViewController.swift */; };
@@ -79,7 +83,6 @@
 		A55AEF8C23C2B61600B07642 /* UISearchBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55AEF8B23C2B61600B07642 /* UISearchBar+Extensions.swift */; };
 		A57BD1232357A09F00A324BC /* SFTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD1222357A09F00A324BC /* SFTheme.swift */; };
 		A57BD1262357A33E00A324BC /* SFNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD1252357A33E00A324BC /* SFNames.swift */; };
-		A57BD12C2357AE4C00A324BC /* SFdetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A57BD12B2357AE4C00A324BC /* SFdetailViewController.xib */; };
 		A57BD12E2357EEE400A324BC /* SFAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD12D2357EEE400A324BC /* SFAppearance.swift */; };
 		A57BD1302365FDBD00A324BC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A57BD12F2365FDBD00A324BC /* LoginViewController.xib */; };
 		A59034E92391A3A200CB7284 /* FIRStorageReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59034E82391A3A200CB7284 /* FIRStorageReference.swift */; };
@@ -156,7 +159,6 @@
 		034D429220E54FCA00D59F8C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "ScrimmageFinder App/Other/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		034D429620E7F0EC00D59F8C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0369DAE920E121B1006B7507 /* SavedScrimmagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedScrimmagesViewController.swift; sourceTree = "<group>"; };
-		0369DAEE20E13635006B7507 /* SFdetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SFdetailViewController.swift; sourceTree = "<group>"; };
 		0369DAF420E25365006B7507 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		03C6E1E720DD357D001DFD01 /* FIRFiestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRFiestoreService.swift; sourceTree = "<group>"; };
 		03C6E1EB20DD5557001DFD01 /* FIRCollectionReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRCollectionReference.swift; sourceTree = "<group>"; };
@@ -187,6 +189,11 @@
 		5C50FD11D4357864F28C6CD8 /* Pods_ScrimmageFinder_AppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScrimmageFinder_AppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5002FCA23E438A600CB8F63 /* TextViewCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewCellTableViewCell.swift; sourceTree = "<group>"; };
 		A5002FCB23E438A600CB8F63 /* TextViewCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextViewCellTableViewCell.xib; sourceTree = "<group>"; };
+		A50211D32458EAD0000BB18C /* ScrimmagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmagesListViewController.swift; sourceTree = "<group>"; };
+		A50211D42458EAD0000BB18C /* ScrimmagesListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrimmagesListViewController.xib; sourceTree = "<group>"; };
+		A50211D8245968DE000BB18C /* ScrimmagesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrimmagesCell.swift; sourceTree = "<group>"; };
+		A50211D9245968DE000BB18C /* ScrimmagesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrimmagesCell.xib; sourceTree = "<group>"; };
+		A5021202245A3581000BB18C /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		A50F4245228472CC007841A2 /* MyScrimmagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrimmagesViewController.swift; sourceTree = "<group>"; };
 		A50F4246228472CC007841A2 /* MyScrimmagesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyScrimmagesViewController.xib; sourceTree = "<group>"; };
 		A50F424B2284785E007841A2 /* MyScrimmagesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrimmagesCoordinator.swift; sourceTree = "<group>"; };
@@ -235,7 +242,6 @@
 		A55AEF8B23C2B61600B07642 /* UISearchBar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extensions.swift"; sourceTree = "<group>"; };
 		A57BD1222357A09F00A324BC /* SFTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFTheme.swift; sourceTree = "<group>"; };
 		A57BD1252357A33E00A324BC /* SFNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNames.swift; sourceTree = "<group>"; };
-		A57BD12B2357AE4C00A324BC /* SFdetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SFdetailViewController.xib; sourceTree = "<group>"; };
 		A57BD12D2357EEE400A324BC /* SFAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFAppearance.swift; sourceTree = "<group>"; };
 		A57BD12F2365FDBD00A324BC /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		A59034E82391A3A200CB7284 /* FIRStorageReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRStorageReference.swift; sourceTree = "<group>"; };
@@ -325,6 +331,7 @@
 				A591A307236F285D0075F8E4 /* Saved Scrimmages */,
 				A57BD1282357A64D00A324BC /* MainTabBar */,
 				03D14CF120E0EBA300D76E38 /* ScrimmagesViewController.swift */,
+				A50211D024577941000BB18C /* Scrimmages VIew Controller */,
 				A5531F8B23B2372E0054DA0A /* Add Scrimmage ViewController */,
 			);
 			path = "Main Controllers";
@@ -486,6 +493,25 @@
 			path = "TextView Cell";
 			sourceTree = "<group>";
 		};
+		A50211D024577941000BB18C /* Scrimmages VIew Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A5021202245A3581000BB18C /* MasterViewController.swift */,
+				A50211D32458EAD0000BB18C /* ScrimmagesListViewController.swift */,
+				A50211D42458EAD0000BB18C /* ScrimmagesListViewController.xib */,
+			);
+			path = "Scrimmages VIew Controller";
+			sourceTree = "<group>";
+		};
+		A50211D724596883000BB18C /* NewScrimmageCell */ = {
+			isa = PBXGroup;
+			children = (
+				A50211D8245968DE000BB18C /* ScrimmagesCell.swift */,
+				A50211D9245968DE000BB18C /* ScrimmagesCell.xib */,
+			);
+			path = NewScrimmageCell;
+			sourceTree = "<group>";
+		};
 		A50F4244228472A0007841A2 /* MyScrimmages */ = {
 			isa = PBXGroup;
 			children = (
@@ -572,6 +598,7 @@
 		A518D7CD2370DE1E00DBDC1A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				A50211D724596883000BB18C /* NewScrimmageCell */,
 				A5531F9023B2467C0054DA0A /* CreateScrmmageCells */,
 				A591A30A236F2F610075F8E4 /* ScrimmageCell */,
 			);
@@ -732,9 +759,9 @@
 		A57BD12A2357ADB300A324BC /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				0369DAEE20E13635006B7507 /* SFdetailViewController.swift */,
-				A57BD12B2357AE4C00A324BC /* SFdetailViewController.xib */,
-				A5FD55592442764F00B9E2F2 /* new */,
+				A5FD555E244279F100B9E2F2 /* DetailCells */,
+				A5FD555A2442795500B9E2F2 /* SFDetailsViewController.swift */,
+				A5FD555B2442795500B9E2F2 /* SFDetailsViewController.xib */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -825,16 +852,6 @@
 				A5F762D6238AD365002CD1B3 /* UserProfileViewController.xib */,
 			);
 			path = UserProfile;
-			sourceTree = "<group>";
-		};
-		A5FD55592442764F00B9E2F2 /* new */ = {
-			isa = PBXGroup;
-			children = (
-				A5FD555E244279F100B9E2F2 /* DetailCells */,
-				A5FD555A2442795500B9E2F2 /* SFDetailsViewController.swift */,
-				A5FD555B2442795500B9E2F2 /* SFDetailsViewController.xib */,
-			);
-			path = new;
 			sourceTree = "<group>";
 		};
 		A5FD555E244279F100B9E2F2 /* DetailCells */ = {
@@ -1019,6 +1036,7 @@
 				A5002FCD23E438A600CB8F63 /* TextViewCellTableViewCell.xib in Resources */,
 				A5121D842447BBC00057E605 /* DetailButtonTableViewCell.xib in Resources */,
 				034D429120E4E8FD00D59F8C /* Settings.bundle in Resources */,
+				A50211D62458EAD0000BB18C /* ScrimmagesListViewController.xib in Resources */,
 				A57BD1302365FDBD00A324BC /* LoginViewController.xib in Resources */,
 				A5F762D8238AD365002CD1B3 /* UserProfileViewController.xib in Resources */,
 				A5531F9F23BA05E10054DA0A /* LogoTableViewCell.xib in Resources */,
@@ -1036,8 +1054,8 @@
 				A591A316236F57CB0075F8E4 /* SavedScrimmagesViewController.xib in Resources */,
 				A5531F8F23B2377F0054DA0A /* CreateScrimmageViewController.xib in Resources */,
 				A5531FA923BB5CAF0054DA0A /* CustomPickerCellTableViewCell.xib in Resources */,
-				A57BD12C2357AE4C00A324BC /* SFdetailViewController.xib in Resources */,
 				034D429720E7F0EC00D59F8C /* Assets.xcassets in Resources */,
+				A50211DB245968DE000BB18C /* ScrimmagesCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1205,7 +1223,6 @@
 				A52D2CC9242191D500605231 /* ChooseUsersViewController.swift in Sources */,
 				A54D94DD240A794700D4DFCF /* UIImageView+Extensions.swift in Sources */,
 				A52D2CBE241E561A00605231 /* UIColor+Additions.swift in Sources */,
-				0369DAEF20E13635006B7507 /* SFdetailViewController.swift in Sources */,
 				A5F762C62388BB0F002CD1B3 /* UsersListViewController.swift in Sources */,
 				A52D2CC1241E561A00605231 /* UIImage+Additions.swift in Sources */,
 				04C8F37A20FF2A2F00AF48E4 /* RegisterViewController.swift in Sources */,
@@ -1237,14 +1254,17 @@
 				04C8F37E20FFFDA400AF48E4 /* AlertController.swift in Sources */,
 				03F10DF720DD0F7400F8C62B /* Scrimmage.swift in Sources */,
 				A52D2CB9241D0E8500605231 /* DatabaseRepresentation.swift in Sources */,
+				A50211D52458EAD0000BB18C /* ScrimmagesListViewController.swift in Sources */,
 				03F10DCE20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld in Sources */,
 				A50F7B3624158B7800AA9083 /* ChatViewController.swift in Sources */,
 				A5F762CA2388BB7E002CD1B3 /* User.swift in Sources */,
+				A50211DA245968DE000BB18C /* ScrimmagesCell.swift in Sources */,
 				A5531F8A23B22EEF0054DA0A /* UIButton+Extensions.swift in Sources */,
 				A591A312236F30010075F8E4 /* SavedScrimmagesCell.swift in Sources */,
 				03C6E1EE20DD59C3001DFD01 /* EncodableExtensions.swift in Sources */,
 				A5531F9323B246E10054DA0A /* TextViewTableViewCell.swift in Sources */,
 				A50F7B3E24158CE400AA9083 /* Chat.swift in Sources */,
+				A5021203245A3581000BB18C /* MasterViewController.swift in Sources */,
 				A50F7B4024158D1800AA9083 /* Message.swift in Sources */,
 				A5ED86E123E0FADE00753B6F /* MainCreateScrimmageCellTableViewCell.swift in Sources */,
 				A5531F9E23BA05E10054DA0A /* LogoTableViewCell.swift in Sources */,

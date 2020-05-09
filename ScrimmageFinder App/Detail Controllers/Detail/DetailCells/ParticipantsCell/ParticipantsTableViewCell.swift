@@ -16,30 +16,18 @@ class ParticipantsTableViewCell: MainDetailTableViewCell {
 	@IBOutlet weak var seeeParticipantsButton: UIButton!
 	@IBOutlet weak var statusLabel: UILabel!
 	
-	override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-	
-	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, isCurrentUserParticipating: Bool, participantsStatus: ParticipantsStatus?) {
+	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel) {
 		self.seeeParticipantsButton.tag = 1
 		self.titleLabel.text = title
 		self.contentLabel.text = contentText
 		self.iconImageView.image = icon
 		self.seeeParticipantsButton.addTarget(target, action: action!, for: .touchUpInside)
-		if participantsStatus != nil {
+		if viewModel.participantStatus != nil {
 			self.statusLabel.isHidden = false
-			self.statusLabel.textColor = participantsStatus?.color
-			self.statusLabel.text = participantsStatus?.description			
+			self.statusLabel.textColor = viewModel.participantStatus?.color
+			self.statusLabel.text = viewModel.participantStatus?.description
 		} else {
 			self.statusLabel.isHidden = true
 		}
-		
 	}
 }

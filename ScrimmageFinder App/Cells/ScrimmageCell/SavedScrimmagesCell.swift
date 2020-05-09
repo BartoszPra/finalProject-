@@ -15,24 +15,15 @@ class SavedScrimmagesCell: UITableViewCell {
     @IBOutlet weak var timeLbl: UILabel!
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var statusImage: UIImageView!    
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
 	
-	func configureCell(scrimmage: Scrimmage) {
+	func configureCell(scrimmage: ScrimmageViewModel) {
 		
 		cellLBL.text = scrimmage.name
 		addressLbl.text = scrimmage.venueName
-		timeLbl.text = "Price: £\(String(format: "%.2f", scrimmage.price)), Time: " + scrimmage.getTime()
+		timeLbl.text = "Price: £\(String(format: "%.2f", scrimmage.price)), Time: " + scrimmage.timeString
 		statusImage.image = ScrimmageStatus(rawValue: scrimmage.currentStatus)?.statusImage
-		cellImage.loadImageUsingCashe(scrimmageId: scrimmage.id!)
+		scrimmage.getImage { (image) in
+			self.cellImage.image = image
+		}
 	}
 }

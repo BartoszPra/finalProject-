@@ -15,7 +15,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     let coreDataController = CoreDataController.shared
     //array for coredata scrimmages
     var coreScrimmages = [ScrimmageSaved]()
-    var savedScrimmages = [Scrimmage]()
+    var savedScrimmages = [ScrimmageViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +91,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
                                                   whereArray: "savedById",
                                                   contains: userID,
                                                   returning: Scrimmage.self) { (scrimmages) in
-                                                    self.savedScrimmages = scrimmages
+													self.savedScrimmages = scrimmages.map({return ScrimmageViewModel(scrimmage: $0)})
                                                     self.savedTableView.reloadData()
         }
     }

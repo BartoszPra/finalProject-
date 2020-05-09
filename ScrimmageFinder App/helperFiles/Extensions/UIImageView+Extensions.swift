@@ -14,14 +14,11 @@ let imageCashe = NSCache<NSString, UIImage>()
 extension UIImageView {
 	
 	func loadImageUsingCashe(scrimmageId: String) {
-		
 		self.image = nil
-		
 		if let caschedImage = imageCashe.object(forKey: scrimmageId as NSString) {
 			self.image = caschedImage
 			return
 		}
-		
 		FIRFirestoreService.shared.getScrimmageImage(for: scrimmageId) { (image) in
 			imageCashe.setObject(image, forKey: scrimmageId as NSString)
 			self.image = image

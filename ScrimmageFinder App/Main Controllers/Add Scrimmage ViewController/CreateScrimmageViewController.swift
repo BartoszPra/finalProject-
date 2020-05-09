@@ -38,6 +38,10 @@ UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 	var date: String!
 	var notes: String!
 	var newSid: String!
+	private let db = Firestore.firestore()
+	private var channelReference: CollectionReference {
+		return db.collection("chats")
+	}
 	
 	var scrimmageValues = [String: Any]()
 		
@@ -82,7 +86,8 @@ UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 						   placeHolder: cellArray[indexPath.row].placeHolder,
 						   keyboardType: cellArray[indexPath.row].keboardType,
 						   target: self,
-						   action: cellArray[indexPath.row].action, type: cellArray[indexPath.row].type)
+						   action: cellArray[indexPath.row].action,
+						   type: cellArray[indexPath.row].type)
 		
 		cell.returnValue = { value in
 			self.scrimmageValues.updateValue(value, forKey: self.cellArray[indexPath.row].cellTitle)
@@ -109,14 +114,20 @@ UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     
     @objc func invitePlayers() {
         print("Players Invited")
+		AlertController.showAllert(self, title: "invited", message: "!!!!!!!!!!!!!!!!")
     }
     
     @objc func submitStringmmage() {
 		
 		if self.checkIfAllDatailsFilled() {
 			//fix so its on succe
-			createNewScrimmage()
-			AlertController.showAllert(self, title: "Congratulations", message: "Your Scrimmage has been added")
+			addScrimmage { (succ) in
+				if succ {
+					AlertController.showAllert(self, title: "Congratulations", message: "Your Scrimmage has been added")
+				} else {
+					AlertController.showAllert(self, title: "Problem", message: "There was a problem adding Scrimmage")
+				}
+			}
 		} else {
 			AlertController.showAllert(self, title: "Missing Information", message: "Please fill the marked fields")
 		}
@@ -182,7 +193,6 @@ UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
     }
 	
 	func uploadScrimmagePhoto() {
-		
 		FIRFirestoreService.shared.uploadImage(image: self.image, uploadType: .scrimmageImage, for: newSid, for: "123") { (success) in
 			if success {
 				print("Scrimmage photo updated")
@@ -191,10 +201,35 @@ UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 			}
 		}
 	}
-    
-	func createNewScrimmage() {
+	
+	func addScrimmage(completion: @escaping (Bool) -> Void) {
+		FIRFirestoreService.shared.uploadImage(self.image, folderName: "ScrimmageAndChat") { (url) in
+			self.createChannel(chatName: (self.scrimmageValues["Name"] as? String)!, users: [""], chatImageUrl: url!.absoluteString) { (chatId) in
+				self.createNewScrimmage(chatId: chatId!, imageUrl: url!.absoluteString) { (succ) in
+					if succ {
+						completion(true)
+					} else {
+						completion(false)
+					}
+				}
+			}
+		}
+	}
+	
+	func createChannel(chatName: String, users: [String], chatImageUrl: String, completion: @escaping (String?) -> Void) {
+		let channel = Chat(name: chatName, users: users, isGroup: true, url: chatImageUrl)
+		var ref: DocumentReference? = nil
+		ref = channelReference.addDocument(data: channel.representation) { (error) in
+			if let e = error {
+				print("Error saving channel: \(e.localizedDescription)")
+			} else {
+				completion(ref?.documentID)
+			}
+		}
+	}
+	
+	func createNewScrimmage(chatId: String, imageUrl: String, completion: @escaping (Bool) -> Void) {
 		// composing a scrimmage
-		
 		let dateformat = DateFormatter()
 		dateformat.dateFormat =  "E, dd/MM/yyyy HH:mm"
 		 let date: String = (scrimmageValues["Date"] as? String)!
@@ -211,74 +246,76 @@ UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDele
 								  createdById: Auth.auth().currentUser!.uid,
 								  currentStatus: (scrimmageValues["Status"] as? Int)!,
 								  currentType: (scrimmageValues["Type"] as? Int)!,
-								  participants: [[String: ParticipantsStatus]](),
+								  participants: [String: ParticipantsStatus](),
 								  geopoint: geolocation,
-								  notes: (scrimmageValues["Notes"] as? String)!)
+								  notes: (scrimmageValues["Notes"] as? String)!,
+								  chatId: chatId,
+								  imageUrl: imageUrl)
 		// creating a scrimmage
-		newSid = FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages)
+		newSid = FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages, completion: { (success) in
+			if success {
+				completion(true)
+			} else {
+				completion(false)
+			}
+		})
 		print(newSid + "Im here with id")
-		uploadScrimmagePhoto()
+		//uploadScrimmagePhoto()
 	}
 	
 	func createCells() {
 
 		let pictureCell = CellDefinitionHelper(cellTitle: "Picture",
-											   object: LogoTableViewCell(), identifier: "logoCell",
+											   identifier: "logoCell",
 											   keboardType: nil, target: self, action: #selector(imageTapped(tapGestureRecognizer:)),
 											   placeHolder: "selectPicture", color: nil, type: nil, height: 58)
 		let nameCell = CellDefinitionHelper(cellTitle: "Name",
-											object: TextViewTableViewCell(), identifier: "textFieldCell",
+											identifier: "textFieldCell",
 											keboardType: .default, target: nil, action: nil,
 											placeHolder: "Name", color: nil, type: nil, height: 58)
 		let priceCell = CellDefinitionHelper(cellTitle: "Price",
-											 object: CustomPickerCellTableViewCell(),
 											 identifier: "customPickerCell", keboardType: nil, target: self,
 											 action: #selector(imageTapped(tapGestureRecognizer:)),
 											 placeHolder: "select Price", color: nil, type: .price, height: 58)
 		let organizerName = CellDefinitionHelper(cellTitle: "Organizer Name",
-												 object: TextViewTableViewCell(), identifier: "textFieldCell",
+												identifier: "textFieldCell",
 												 keboardType: .default, target: nil, action: nil,
 												 placeHolder: "Specify organizers name", color: nil, type: nil, height: 58)
 		let dateCell = CellDefinitionHelper(cellTitle: "Date",
-											object: PickerTableViewCell(),
 											identifier: "pickerCell", keboardType: nil, target: nil, action: nil,
 											placeHolder: "Date", color: nil, type: nil, height: 58)
 		let contactNumberCell = CellDefinitionHelper(cellTitle: "Contact Number",
-													 object: TextViewTableViewCell(), identifier: "textFieldCell", keboardType: .phonePad, target: nil,
+													 identifier: "textFieldCell", keboardType: .phonePad, target: nil,
 													 action: nil, placeHolder: "Specify contact number", color: nil, type: nil, height: 58)
 		let addressCell = CellDefinitionHelper(cellTitle: "Address",
-											   object: AddressCellTableViewCell(),
 											   identifier: "addressCell", keboardType: nil, target: self,
 											   action: #selector(autocompleteClicked), placeHolder: "select address", color: nil, type: nil, height: 58)
 		let typeCell = CellDefinitionHelper(cellTitle: "Type",
-											object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil,
+											identifier: "customPickerCell", keboardType: nil,
 											target: self, action: nil,
 											placeHolder: "select type", color: nil,
 											type: .type, height: 58)
 		let statusCell = CellDefinitionHelper(cellTitle: "Status",
-											  object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil,
+											  identifier: "customPickerCell", keboardType: nil,
 											  target: self, action: nil,
 											  placeHolder: "select status", color: nil,
 											  type: .status, height: 58)
 		let occuranceCell = CellDefinitionHelper(cellTitle: "Occurance",
-												 object: CustomPickerCellTableViewCell(), identifier: "customPickerCell", keboardType: nil,
+												 identifier: "customPickerCell", keboardType: nil,
 												 target: self, action: nil,
 												 placeHolder: "select status", color: nil, type: .occurance, height: 58)
 		let inviteButtonCell = CellDefinitionHelper(cellTitle: "Invite Players",
-													object: ButtonTableViewCell(),
 													identifier: "buttonCell",
 													keboardType: nil, target: self, action: #selector(invitePlayers), placeHolder: "",
 													color: nil, type: nil, height: 58)
 		let submitButtonCell = CellDefinitionHelper(cellTitle: "Add Scrimmage",
-													object: ButtonTableViewCell(),
 													identifier: "buttonCell",
 													keboardType: nil, target: self, action: #selector(submitStringmmage), placeHolder: "", color: nil, type: nil, height: 58)
 		let notesCell = CellDefinitionHelper(cellTitle: "Notes",
-											 object: TextViewTableViewCell(),
 											 identifier: "textViewCell",
 											 keboardType: nil,
 											 target: self,
-											 action:nil, placeHolder: "Please issert mesage to players", color: nil, type: nil, height: 75)
+											 action: nil, placeHolder: "Please issert mesage to players", color: nil, type: nil, height: 75)
 		
 		cellArray = [pictureCell, nameCell, organizerName,
 					 contactNumberCell, dateCell,

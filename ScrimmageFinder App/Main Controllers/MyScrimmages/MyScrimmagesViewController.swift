@@ -15,7 +15,7 @@ import GoogleSignIn
 class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var coordinator: MyScrimmagesCoordinator?
-    var scrimmages = [Scrimmage]()
+    var scrimmagesView = [ScrimmageViewModel]()
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyListLabel: UILabel!
     
@@ -35,21 +35,21 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
                                              whereFld: "createdById",
                                              equalsTo: userID,
                                              returning: Scrimmage.self) { (scrimmages) in
-                                             self.scrimmages = scrimmages
+												self.scrimmagesView = scrimmages.map({return ScrimmageViewModel(scrimmage: $0)})
                                              self.tableView.reloadData()
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.scrimmages.count
+        return self.scrimmagesView.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SavedScrimmagesCell",
                                                        for: indexPath) as? SavedScrimmagesCell else { return SavedScrimmagesCell() }
-        if !self.scrimmages.isEmpty {
+        if !self.scrimmagesView.isEmpty {
             self.emptyListLabel.isHidden = true
-            let scrimmage = scrimmages[indexPath.row]
+            let scrimmage = scrimmagesView[indexPath.row]
 			cell.configureCell(scrimmage: scrimmage)
             return cell
         } else {
@@ -60,7 +60,7 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let scrimmage = self.scrimmages[indexPath.row]
+        let scrimmage = self.scrimmagesView[indexPath.row]
 		let cell = tableView.cellForRow(at: indexPath) as? SavedScrimmagesCell
 		self.coordinator?.goToDetail(with: scrimmage, from: self, image: cell!.cellImage.image!)
     }

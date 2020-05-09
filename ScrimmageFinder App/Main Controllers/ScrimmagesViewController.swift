@@ -13,7 +13,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     // vaariable of the silent scrollly controll
     var silentScrolly: SilentScrolly?
     // array of Scrimmages from firebase
-    var scrimmages = [Scrimmage]()
+    var scrimmages = [ScrimmageViewModel]()
     //array of filltered scrimmages by searchBar
     var filteredScrimmages = [Scrimmage]()
     //bool for searchBar
@@ -39,7 +39,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
        
         // reading from database
         FIRFirestoreService.shared.readAll(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
-            self.scrimmages = scrimmages
+			self.scrimmages = scrimmages.map({return ScrimmageViewModel(scrimmage: $0)})
             //self.deleteIfOld() // function to delete outdated scrimmages
             self.scrimmagesTableView.reloadData()
     }
@@ -80,16 +80,16 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var scrimmage: Scrimmage
+        var scrimmage: ScrimmageViewModel
         
         if isSearching {
-             scrimmage = filteredScrimmages[indexPath.row]
+             //scrimmage = filteredScrimmages[indexPath.row]
             
         } else {
              scrimmage = scrimmages[indexPath.row]
         }
 		let cell = tableView.cellForRow(at: indexPath) as? SavedScrimmagesCell
-		coordinator?.goToNewDetail(with: scrimmage, from: self, image: cell?.cellImage.image ?? UIImage())
+		//coordinator?.goToNewDetail(with: scrimmage, from: self, image: cell?.cellImage.image ?? UIImage())
     }
     /**
      Below function is checking user taped sth in search bar.It first check for spaces and empty search bar and if so the bool is searching is set to false. Else the bool is true and function filters the array of all scrimmages
@@ -120,7 +120,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
      func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         let scrimmage = scrimmages[indexPath.row]
-        FIRFirestoreService.shared.delete(scrimmage, in: .scrimmages)
+        //FIRFirestoreService.shared.delete(scrimmage, in: .scrimmages)
     }
     /**
      deleteOFOld checks if the date of the all scrimmages is older that today and if so delete is as those scrimmages already outdated. 
@@ -138,7 +138,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             let sCdate = dateFormatter.date(from: "\(String(describing: scr.dateTime))")
             
             if sCdate! < current {
-                FIRFirestoreService.shared.delete(scr, in: .scrimmages)
+                //FIRFirestoreService.shared.delete(scr, in: .scrimmages)
                 
             }
         }
@@ -181,45 +181,6 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
         self.dismiss(animated: true, completion: nil)
         
     }
-    
-    /// functions for silentScrolly controll.------------
-//    override func viewDidLayoutSubviews() {
-//        super.viewDidLayoutSubviews()
-//        silentDidLayoutSubviews()
-//    }
-//    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        configureSilentScrolly(scrimmagesTableView, followBottomView: tabBarController?.tabBar)
-//    }
-//    
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        silentWillDisappear()
-//    }
-//    
-//    override func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(animated)
-//        silentDidDisappear()
-//    }
-//    
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.viewWillTransition(to: size, with: coordinator)
-//        silentWillTranstion()
-//    }
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        silentDidScroll()
-//    }
-//    
-//    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-//        silentDidZoom() // Optional
-//    }
-//    
-//    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
-//        showNavigationBar() // Optional
-//        return true
-//    }
-    
 }
 // tableview drag delegate protocol functions 
 extension ScrimmagesViewController: UITableViewDragDelegate {

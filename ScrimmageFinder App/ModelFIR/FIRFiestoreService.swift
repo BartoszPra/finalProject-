@@ -27,11 +27,17 @@ class FIRFirestoreService {
     }
         
     // create function exluding id it will be added automatically by fireabase
-    func create<T: Encodable>(for encodableObject: T, in collectionReference: FIRCollectionReference) -> String {
-		
+	func create<T: Encodable>(for encodableObject: T, in collectionReference: FIRCollectionReference, completion: @escaping (Bool) -> Void) -> String {
 		do {
             let json = try encodableObject.toJson(excluding: ["id"])
-			let ref = reference(to: collectionReference).addDocument(data: json)
+			let ref = reference(to: collectionReference).addDocument(data: json) { (error) in
+				if let e = error {
+					print("Error saving channel: \(e.localizedDescription)")
+					completion(false)
+				} else {
+					completion(true)
+				}
+			}
 			return ref.documentID
         } catch {
             print(error)
@@ -43,24 +49,18 @@ class FIRFirestoreService {
     func readAll<T: Decodable>(from collectionReference: FIRCollectionReference, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
         
         reference(to: collectionReference).addSnapshotListener { (snapshot, _) in
-            
             guard let snapshot = snapshot else { return }
-            
             do {
-                
                 var objects = [T]()
                 for document in snapshot.documents {
                     let object = try document.decode(as: objectType.self)
                     objects.append(object)
                 }
-                
                 completion(objects)
-                
             } catch {
                 print(error)
             }
         }
-        
     }
     
     func readWhere<T: Decodable>(from collectionReference: FIRCollectionReference, whereFld: String, equalsTo: Any, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
@@ -145,60 +145,66 @@ class FIRFirestoreService {
     }
     
     func readOne<T: Decodable>(from collectionReference: FIRCollectionReference, with id: String, returning objectType: T.Type, completion: @escaping (T) -> Void) {
-        
         reference(to: collectionReference).document(id).addSnapshotListener { (snapshot, _) in
-            
             guard let snapshot = snapshot else { return }
-            
             do {
                 let object = try snapshot.decode(as: objectType.self)
-                completion(object)
-                
+                completion(object)                
             } catch {
                 print(error)
             }
         }
-        
     }
 	
-	func removeFromParticipantsTable(for scrimmageID: String, with userId: String, status: ParticipantsStatus, completion: @escaping (Bool) -> Void) {
-        var isSuccesful = false
-        let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
-
-		currentScrimmage.updateData(["participants": FieldValue.arrayRemove([[userId: status.value]])]) { (error) in
+	func removeFromParticipantsTable(for scrimmageID: String, with userId: String, status: ParticipantsStatus, participants: [String: ParticipantsStatus], completion: @escaping (Bool) -> Void) {
+        
+		let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
+		var participantWOme = participants
+		participantWOme.removeValue(forKey: userId)
+		
+		currentScrimmage.updateData(["participants": participantWOme]) { (error) in
             if let err = error {
                 print(err.localizedDescription)
-                isSuccesful = false
-                completion(isSuccesful)
+                completion(false)
             } else {
                 print("succesfully removed from participants")
-                isSuccesful = true
-                completion(isSuccesful)
+                completion(true)
             }
         }
     }
+	
+	func updateParticipantsTable(for scrimmageID: String, for userId: String, with status: Int, completion: @escaping (Bool) -> Void) {
+		let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
+		
+		currentScrimmage.updateData(["participants": [userId: status]]) { (error) in
+			if let err = error {
+				print(err.localizedDescription)
+				completion (false)
+			} else {
+				print("succesfully added to participants")
+				completion (true)
+			}
+		}
+	}
     
-    func addToParticipantsTable(for scrimmageID: String, with userId: String, status: Int, completion: @escaping (Bool) -> Void) {
-        var isSuccesful = false
-        let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
-        currentScrimmage.updateData(["participants": FieldValue.arrayUnion([[userId: status]])]) { (error) in
-        if let err = error {
-            print(err.localizedDescription)
-            isSuccesful = false
-            completion (isSuccesful)
-        } else {
-            print("succesfully added to participants")
-            isSuccesful = true
-            completion (isSuccesful)
-        }
-        }
-    }
+	func addToParticipantsTable(for scrimmageID: String, with userId: String, status: Int, completion: @escaping (Bool) -> Void) {
+		let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
+		currentScrimmage.updateData(["participants": [userId : status]]) { (error) in
+			if let err = error {
+				print(err.localizedDescription)
+				completion (false)
+			} else {
+				print("succesfully updated participants")
+				completion (true)
+			}
+		}
+	}
 	
 	func deleteFromSavedBy(for scrimmageID: String, with userId: String) -> Bool {
-        
         var boolToReturn = false
         let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
-        currentScrimmage.updateData(["savedById": FieldValue.arrayRemove([userId])]) { (error) in
+		
+		currentScrimmage.updateData(["savedById": FieldValue.arrayRemove([userId])]) { (error) in
             if let err = error {
                 print(err.localizedDescription)
                 boolToReturn = false

@@ -9,8 +9,8 @@
 import UIKit
 
 class MainDetailTableViewCell: UITableViewCell {
-
+	
 	var returnValue: ((_ value: Any) -> Void)?
-		
-	func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, isCurrentUserParticipating: Bool, participantsStatus: ParticipantsStatus?) {}
+	
+	func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel) {}	
 }

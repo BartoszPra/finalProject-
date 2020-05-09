@@ -19,14 +19,16 @@ struct Scrimmage: Codable, Identifiable {
     var savedById: [String]
     var currentStatus: Int
     var currentType: Int
-    var participants: [[String: ParticipantsStatus]]
+    var participants: [String: ParticipantsStatus]
 	var address: String
 	var dateTime: Date
 	var geopoint: GeoPoint
 	var notes: String
+	var chatId: String
+	var imageUrl: String
 	
 	//new scrimmaage struct init
-	init (name: String, venueName: String, address: String, dateTime: Date, managerName: String, managerNumber: String, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [[String: ParticipantsStatus]], geopoint: GeoPoint, notes: String) {
+	init (name: String, venueName: String, address: String, dateTime: Date, managerName: String, managerNumber: String, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [String: ParticipantsStatus], geopoint: GeoPoint, notes: String, chatId: String, imageUrl: String) {
         self.name = name
 		self.venueName = venueName
 		self.address = address
@@ -41,6 +43,8 @@ struct Scrimmage: Codable, Identifiable {
         self.participants = participants
 		self.geopoint = geopoint
 		self.notes = notes
+		self.chatId = chatId
+		self.imageUrl = imageUrl
     }
 	
 	func getTime() -> String {
@@ -55,5 +59,11 @@ struct Scrimmage: Codable, Identifiable {
 		dateFormatter.dateFormat = "dd.MM.yyyy"
 		let mydt = dateFormatter.string(from: dateTime).capitalized
 		return "\(mydt)"
+	}
+	
+	func image(completion: @escaping (UIImage?) -> Void) {
+		UIImageView().loadImageUsingCashe(urlString: imageUrl) { (img) in
+			completion(img)
+		}
 	}
 }

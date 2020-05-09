@@ -27,6 +27,32 @@ struct Chat {
 		self.imageUrl = url
 	}
 	
+	init?(documentt: DocumentSnapshot) {
+		guard let data = documentt.data() else {return nil}
+		
+		guard let name = data["name"] as? String else {
+			return nil
+		}
+		
+		guard let isGroup = data["isGroup"] as? Bool else {
+			return nil
+		}
+		
+		guard let users = data["users"] as? [String] else {
+			return nil
+		}
+		
+		guard let imageUrl = data["imageUrl"] as? String else {
+			return nil
+		}
+		
+		id = documentt.documentID
+		self.name = name
+		self.users = users
+		self.isGroup = isGroup
+		self.imageUrl = imageUrl
+	}
+	
 	init?(document: QueryDocumentSnapshot) {
 		let data = document.data()
 		

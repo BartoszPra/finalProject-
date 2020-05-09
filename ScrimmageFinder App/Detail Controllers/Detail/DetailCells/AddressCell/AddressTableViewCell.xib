@@ -9,18 +9,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailCell" rowHeight="186" id="KGk-i7-Jjw" customClass="AddressTableViewCell" customModule="ScrimmageFinder_App" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="186"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AddressCell" rowHeight="292" id="KGk-i7-Jjw" customClass="AddressTableViewCell" customModule="ScrimmageFinder_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="292"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="186"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="292"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PK9-05-8E7">
-                        <rect key="frame" x="5" y="5" width="310" height="176"/>
+                        <rect key="frame" x="5" y="5" width="310" height="282"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nameIcon" translatesAutoresizingMaskIntoConstraints="NO" id="a4l-SO-oeC">
-                                <rect key="frame" x="5" y="5" width="35" height="35"/>
+                                <rect key="frame" x="5" y="6.5" width="35" height="35"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -28,8 +28,8 @@
                                     <constraint firstAttribute="height" constant="35" id="iQF-Mc-Gtf"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Aweosome Scrimmage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAc-wt-pQd">
-                                <rect key="frame" x="50" y="5" width="250" height="32"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Aweosome Scrimmage" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAc-wt-pQd">
+                                <rect key="frame" x="50" y="15" width="250" height="18"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.94867593049999999" green="0.94938176870000002" blue="0.95220011469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -42,22 +42,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ei7-r2-Rgk">
-                                <rect key="frame" x="5" y="45" width="300" height="126"/>
+                                <rect key="frame" x="10" y="48" width="290" height="224"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="JAc-wt-pQd" secondAttribute="trailing" constant="10" id="4je-L5-LS4"/>
-                            <constraint firstAttribute="bottom" secondItem="ei7-r2-Rgk" secondAttribute="bottom" constant="5" id="6zJ-uN-fr6"/>
-                            <constraint firstAttribute="trailing" secondItem="ei7-r2-Rgk" secondAttribute="trailing" constant="5" id="AEa-cL-Qs8"/>
-                            <constraint firstItem="ei7-r2-Rgk" firstAttribute="leading" secondItem="PK9-05-8E7" secondAttribute="leading" constant="5" id="Aci-rV-wR2"/>
-                            <constraint firstItem="ei7-r2-Rgk" firstAttribute="top" secondItem="a4l-SO-oeC" secondAttribute="bottom" constant="5" id="Jz9-Ql-r79"/>
+                            <constraint firstAttribute="bottom" secondItem="ei7-r2-Rgk" secondAttribute="bottom" constant="10" id="6zJ-uN-fr6"/>
+                            <constraint firstAttribute="trailing" secondItem="ei7-r2-Rgk" secondAttribute="trailing" constant="10" id="AEa-cL-Qs8"/>
+                            <constraint firstItem="ei7-r2-Rgk" firstAttribute="leading" secondItem="PK9-05-8E7" secondAttribute="leading" constant="10" id="Aci-rV-wR2"/>
+                            <constraint firstItem="ei7-r2-Rgk" firstAttribute="top" secondItem="JAc-wt-pQd" secondAttribute="bottom" constant="15" id="VbI-Ud-Fdl"/>
                             <constraint firstItem="a4l-SO-oeC" firstAttribute="leading" secondItem="PK9-05-8E7" secondAttribute="leading" constant="5" id="eVn-5q-AtJ"/>
                             <constraint firstItem="JAc-wt-pQd" firstAttribute="leading" secondItem="a4l-SO-oeC" secondAttribute="trailing" constant="10" id="g08-wY-vzh"/>
+                            <constraint firstItem="a4l-SO-oeC" firstAttribute="centerY" secondItem="JAc-wt-pQd" secondAttribute="centerY" id="h61-Q2-3Mo"/>
                             <constraint firstItem="tbx-OI-mDh" firstAttribute="top" secondItem="PK9-05-8E7" secondAttribute="top" id="hAL-rV-dVn"/>
                             <constraint firstItem="tbx-OI-mDh" firstAttribute="centerX" secondItem="PK9-05-8E7" secondAttribute="centerX" id="hOM-jh-hjU"/>
-                            <constraint firstItem="JAc-wt-pQd" firstAttribute="top" secondItem="PK9-05-8E7" secondAttribute="top" constant="5" id="hyn-tU-UsV"/>
-                            <constraint firstItem="a4l-SO-oeC" firstAttribute="top" secondItem="PK9-05-8E7" secondAttribute="top" constant="5" id="p8G-BX-mQy"/>
+                            <constraint firstItem="JAc-wt-pQd" firstAttribute="top" secondItem="tbx-OI-mDh" secondAttribute="top" constant="15" id="hyn-tU-UsV"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.CornerRadius">
@@ -79,9 +79,10 @@
             <connections>
                 <outlet property="contentLabel" destination="JAc-wt-pQd" id="Z11-MC-QJF"/>
                 <outlet property="iconImageView" destination="a4l-SO-oeC" id="KdP-ez-PHw"/>
+                <outlet property="mapView" destination="ei7-r2-Rgk" id="P6F-sA-zyx"/>
                 <outlet property="titleLabel" destination="tbx-OI-mDh" id="VF9-to-hU8"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="168.08035714285714"/>
+            <point key="canvasLocation" x="137.68115942028987" y="192.1875"/>
         </tableViewCell>
     </objects>
     <resources>

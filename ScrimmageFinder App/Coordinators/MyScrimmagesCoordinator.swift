@@ -26,7 +26,7 @@ class MyScrimmagesCoordinator: Coordinator {
     func start() {
     }
     
-	func goToDetail(with scrimmage: Scrimmage, from controller: UIViewController, image: UIImage) {
+	func goToDetail(with scrimmage: ScrimmageViewModel, from controller: UIViewController, image: UIImage) {
 		ScrimmagesDetailCoordinator(navigationController: navigationController, scrimmage: scrimmage, isSavedUsed: true, image: image)
     }
 }

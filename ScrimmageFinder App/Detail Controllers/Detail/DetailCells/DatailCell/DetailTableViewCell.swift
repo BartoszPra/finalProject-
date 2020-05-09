@@ -30,14 +30,18 @@ class DetailTableViewCell: MainDetailTableViewCell {
         // Configure the view for the selected state
     }
 	
-	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, isCurrentUserParticipating: Bool, participantsStatus: ParticipantsStatus?) {
-		
+	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel) {
+	
 		self.titleLabel.text = title
 		self.contentLabel.text = contentText
-		self.iconImageView.image = icon
 		if title == "Name" {
+			viewModel.getImage { (image) in
+				self.iconImageView.image = image
+			}
 			self.iconImageView.layer.cornerRadius = iconImageView.bounds.width/2
 			self.iconImageView.layer.masksToBounds = true
+		} else {
+			self.iconImageView.image = icon
 		}
 	}    
 }

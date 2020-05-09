@@ -44,7 +44,6 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
 			print("Error listening for channel updates: \(error?.localizedDescription ?? "No error")")
 			return
 		  }
-		  
 		  snapshot.documentChanges.forEach { change in
 			self.handleDocumentChange(change)
 		  }
@@ -169,8 +168,4 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
 		  removeChannelFromTable(channel)
 		}
 	  }
-	
-	func checkIfChatExist() {
-		
-	}
 }

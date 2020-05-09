@@ -14,10 +14,10 @@ class ScrimmagesDetailCoordinator: Coordinator {
     var navigationController: CoordinatedNavigationController
     var children = [Coordinator]()
     
-	init(navigationController: CoordinatedNavigationController = CoordinatedNavigationController(), scrimmage: Scrimmage, isSavedUsed: Bool, image:UIImage) {
+	init(navigationController: CoordinatedNavigationController = CoordinatedNavigationController(), scrimmage: ScrimmageViewModel, isSavedUsed: Bool, image:UIImage) {
         self.navigationController = navigationController
         navigationController.coordinator = self
-        let viewController = SFDetailsViewController(nibName: "SFDetailsViewController", bundle: nil, scrimmage: scrimmage, isSaveUsed: isSavedUsed)
+        let viewController = SFDetailsViewController(nibName: "SFDetailsViewController", bundle: nil, scrimmage: scrimmage, isSavedUsed: isSavedUsed)
         viewController.coordinator = self
         viewController.title = "Details"
 		viewController.scrimmageImage = image
@@ -28,9 +28,15 @@ class ScrimmagesDetailCoordinator: Coordinator {
         
     }
     
-    func goToViewUsers(with participants: [[String: ParticipantsStatus]], from controller: UIViewController) {
+    func goToViewUsers(with participants: [String: ParticipantsStatus], from controller: UIViewController) {
         let viewController = UsersListViewController.init(nibName: "UsersListViewController", bundle: nil, participants: participants)
         controller.navigationController!.pushViewController(viewController, animated: true)
     }
+	
+	func goToChat(with user: User, chanel: Chat, from controller: UIViewController) {
+		let viewController = ChatViewController(user: user, channel: chanel)
+		viewController.chatImage = UIImage(named: "basketBallLogo")
+        controller.navigationController!.pushViewController(viewController, animated: true)
+	}
     
 }
