@@ -22,8 +22,8 @@ class ScrimmagesCell: BaseCell<ScrimmageViewModel> {
 			addressLbl.text = item.venueName
 			timeLbl.text = "Price: £\(String(format: "%.2f", item.price)), Time: " + item.timeString
 			statusImage.image = ScrimmageStatus(rawValue: item.currentStatus)?.statusImage
-			item.getImage { (image) in
-				self.cellImage.image = image
+			item.getImage { [weak self] (image) in
+				self?.cellImage.image = image
 			}
 		}
 	}

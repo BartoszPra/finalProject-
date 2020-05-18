@@ -10,6 +10,8 @@ class FIRFirestoreService {
 		case userProfile
 		case scrimmageImage
 	}
+	
+	var listener: ListenerRegistration?
     
     private init() {}
     static let shared = FIRFirestoreService()
@@ -25,6 +27,10 @@ class FIRFirestoreService {
     private func filesReference() -> Storage {
         return Storage.storage()
     }
+	
+	func removeListener() {
+		listener?.remove()
+	}
         
     // create function exluding id it will be added automatically by fireabase
 	func create<T: Encodable>(for encodableObject: T, in collectionReference: FIRCollectionReference, completion: @escaping (Bool) -> Void) -> String {
@@ -48,7 +54,7 @@ class FIRFirestoreService {
     // read function exluding id it will be added automatically by fireabase to pull data from firebase
     func readAll<T: Decodable>(from collectionReference: FIRCollectionReference, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
         
-        reference(to: collectionReference).addSnapshotListener { (snapshot, _) in
+        listener = reference(to: collectionReference).addSnapshotListener { (snapshot, _) in
             guard let snapshot = snapshot else { return }
             do {
                 var objects = [T]()
@@ -65,7 +71,7 @@ class FIRFirestoreService {
     
     func readWhere<T: Decodable>(from collectionReference: FIRCollectionReference, whereFld: String, equalsTo: Any, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
         
-        reference(to: collectionReference).whereField(whereFld, isEqualTo: equalsTo).addSnapshotListener { (snapshot, _) in
+        listener = reference(to: collectionReference).whereField(whereFld, isEqualTo: equalsTo).addSnapshotListener { (snapshot, _) in
 		
             guard let snapshot = snapshot else { return }
             
@@ -87,7 +93,7 @@ class FIRFirestoreService {
     
     func readWhereArray<T: Decodable>(from collectionReference: FIRCollectionReference, whereArray: String, contains: String, returning objectType: T.Type, completion: @escaping ([T]) -> Void) {
         
-        reference(to: collectionReference).whereField(whereArray, arrayContains: contains).addSnapshotListener { (snapshot, error) in
+        listener = reference(to: collectionReference).whereField(whereArray, arrayContains: contains).addSnapshotListener { (snapshot, error) in
             if error == nil {
                 guard let snapshot = snapshot else { return }
                 do {
@@ -145,7 +151,7 @@ class FIRFirestoreService {
     }
     
     func readOne<T: Decodable>(from collectionReference: FIRCollectionReference, with id: String, returning objectType: T.Type, completion: @escaping (T) -> Void) {
-        reference(to: collectionReference).document(id).addSnapshotListener { (snapshot, _) in
+        listener = reference(to: collectionReference).document(id).addSnapshotListener { (snapshot, _) in
             guard let snapshot = snapshot else { return }
             do {
                 let object = try snapshot.decode(as: objectType.self)

@@ -21,14 +21,16 @@ class CustomPin: NSObject, MKAnnotation {
 	}
 }
 
+protocol MapCellDelegate: class {
+	func mapPressed()
+}
+
 class AddressTableViewCell: MainDetailTableViewCell {
 
 	@IBOutlet weak var iconImageView: UIImageView!
 	@IBOutlet weak var contentLabel: UILabel!
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var mapView: MKMapView!
-	
-	var targett: UIViewController!
 	
 	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel) {
 		
@@ -39,7 +41,6 @@ class AddressTableViewCell: MainDetailTableViewCell {
 			self.iconImageView.layer.cornerRadius = iconImageView.bounds.width/2
 			self.iconImageView.layer.masksToBounds = true
 		}
-		targett = target
 		
 		let location = CLLocationCoordinate2D(latitude: viewModel.geopoint.latitude, longitude: viewModel.geopoint.longitude)
 		let region = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
@@ -47,14 +48,13 @@ class AddressTableViewCell: MainDetailTableViewCell {
 		
 		let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(mapTapped(_:)))
 		gestureRecognizer.delegate = self
-				
+
 		let pin = CustomPin(pinTitle: viewModel.name, pinSubtitle: viewModel.timeString, location: location)
 		self.mapView.addAnnotation(pin)
 		mapView.addGestureRecognizer(gestureRecognizer)
 	}
 	
 	@objc func mapTapped(_ gestureRecognizer: UILongPressGestureRecognizer) {
-		let vc = targett as? SFDetailsViewController
-		vc!.mapTapped()
+		self.mapDelegate?.mapPressed()
 	}
 }

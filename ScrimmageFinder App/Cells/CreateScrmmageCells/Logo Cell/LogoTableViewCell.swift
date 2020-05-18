@@ -28,6 +28,10 @@ class LogoTableViewCell: MainCreateScrimmageCellTableViewCell, UIImagePickerCont
         
     }
 	
+	override func clearCell() {
+		self.logoImage.image =  UIImage(named: "grayBballLogo")
+	}
+	
 	override func hasValidData() -> Bool {
 		
 		if logoImage.image != nil {

@@ -31,6 +31,10 @@ class AddressCellTableViewCell: MainCreateScrimmageCellTableViewCell {
 		}
 	}
 	
+	override func clearCell() {
+		self.addressTextField.text = addressPlaceHolder
+	}
+	
 	func setupCellUI() {
 		if !isDataValid {
 			self.addressTextField.layer.borderColor = UIColor.red.cgColor

@@ -42,13 +42,17 @@ class TextViewTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDe
 		}
 	}
 	
+	override func clearCell() {
+		self.inputTextField.text = ""
+	}
+	
 	func setupCellUI() {
 		
 		if !isDataValid {
 			inputTextField.layer.borderColor = UIColor.red.cgColor
 			inputTextField.layer.borderWidth = 1.0
 		} else {
-			inputTextField.layer.borderColor = UIColor.white.cgColor
+			inputTextField.layer.borderColor = UIColor.lightGray.cgColor
 			inputTextField.layer.borderWidth = 1.0
 		}
 	}

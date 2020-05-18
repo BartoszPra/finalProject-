@@ -29,10 +29,6 @@ final class ChatViewController: MessagesViewController {
 	var isGrouped: Bool!
 	var chatImage: UIImage!
 	
-	deinit {
-		messageListener?.remove()
-	}
-	
 	init(user: User, channel: Chat) {
 		self.user = user
 		self.channel = channel
@@ -108,6 +104,11 @@ final class ChatViewController: MessagesViewController {
 		messageInputBar.setLeftStackViewWidthConstant(to: 50, animated: false)
 		messageInputBar.setStackViewItems([cameraItem], forStack: .left, animated: false) // 3
 		self.messagesCollectionView.scrollToBottom()
+	}
+	
+	deinit {
+		messageListener?.remove()
+		print("Detail is deinint !!! The detail!!!!!!!!")
 	}
 	
 	func navTitleWithImageAndText(titleText: String, imagee: UIImage) {

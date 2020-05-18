@@ -34,7 +34,7 @@ class ScrimmagesCoordinator: Coordinator {
     }
         
     func goToAddScrimmage() {
-        let viewController = CreateScrimmageViewController.init(nibName: "CreateScrimmageViewController", bundle: nil)
+		let viewController = NewScrimmageTableViewController(isEdit: false)
         navigationController.pushViewController(viewController, animated: true)
     }
     

@@ -28,10 +28,10 @@
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eZz-Rn-de7" userLabel="LogoView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="232"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="266.5"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="blackbackgrLogo" translatesAutoresizingMaskIntoConstraints="NO" id="kPH-Il-QKs" customClass="bl">
-                            <rect key="frame" x="147.5" y="76" width="80" height="80"/>
+                            <rect key="frame" x="147.5" y="93" width="80" height="80"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="9wm-Vq-VPk"/>
@@ -46,7 +46,7 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="brF-aP-cQ8" userLabel="SFLogin">
-                    <rect key="frame" x="15" y="232" width="345" height="220"/>
+                    <rect key="frame" x="15" y="266.5" width="345" height="220"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ZfA-oy-Iqw" userLabel="loginPasswordStack">
                             <rect key="frame" x="0.0" y="0.0" width="345" height="100"/>
@@ -132,7 +132,7 @@
                     </subviews>
                 </stackView>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="D7z-0w-RBB" userLabel="alter Login">
-                    <rect key="frame" x="15" y="482" width="345" height="135"/>
+                    <rect key="frame" x="15" y="516.5" width="345" height="100.5"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="separator-onBlack" translatesAutoresizingMaskIntoConstraints="NO" id="tFl-PE-bam">
                             <rect key="frame" x="0.0" y="0.0" width="345" height="20"/>
@@ -142,15 +142,12 @@
                             </constraints>
                         </imageView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="A9X-OF-87j" userLabel="fcbGoogleButtonsStack">
-                            <rect key="frame" x="0.0" y="35" width="345" height="100"/>
+                            <rect key="frame" x="0.0" y="35" width="345" height="65.5"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btm-WF-TfO" userLabel="Facebook Login Sign In Button" customClass="FBSDKLoginButton">
-                                    <rect key="frame" x="0.0" y="0.0" width="345" height="40"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="345" height="5.5"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="r2E-6a-ugJ"/>
-                                    </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -159,7 +156,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EHB-ee-OYO" userLabel="Google Sign In Button" customClass="GIDSignInButton">
-                                    <rect key="frame" x="0.0" y="60" width="345" height="40"/>
+                                    <rect key="frame" x="0.0" y="25.5" width="345" height="40"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="yo6-qS-be1"/>

@@ -14,5 +14,7 @@ class MainCreateScrimmageCellTableViewCell: UITableViewCell {
 	
 	func hasValidData() -> Bool {return false}
 	
+	func clearCell() {}
+	
 	func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {}
 }

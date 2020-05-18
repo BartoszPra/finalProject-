@@ -23,9 +23,12 @@ class TextViewCellTableViewCell: MainCreateScrimmageCellTableViewCell, UITextVie
 		notesTextView.text = placeHolder
 		notesTextView.textColor = UIColor.lightGray
 		notesTextView.textAlignment = .center
-		notesTextView.becomeFirstResponder()
 		notesTextView.selectedTextRange = notesTextView.textRange(from: notesTextView.beginningOfDocument, to: notesTextView.beginningOfDocument)		
 		notesTextView.delegate = self
+	}
+	
+	override func clearCell() {
+		self.notesTextView.text = ""
 	}
 	
 	override func hasValidData() -> Bool {

@@ -17,6 +17,8 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 	
 	var coordinator: ScrimmagesCoordinator?
 	
+	var service = FIRFirestoreService.shared
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		tableView = newTable
@@ -27,10 +29,15 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 		navigationController?.navigationBar.shadowImage = UIImage()
 		
 		ViewHelpers.setLogoAsNavigationTitle(imageName: "logoNoBackgroundBrighter", on: self)
-		FIRFirestoreService.shared.readAll(from: .scrimmages, returning: Scrimmage.self) { (scrimmages) in
-			self.items = scrimmages.map({return ScrimmageViewModel(scrimmage: $0)})
-			self.tableView.reloadData()
+		service.readAll(from: .scrimmages, returning: Scrimmage.self) {[weak self] (scrimmages) in
+			self?.items = scrimmages.map({return ScrimmageViewModel(scrimmage: $0)})
+			self?.tableView.reloadData()
 		}
+	}
+	
+	deinit {
+		service.removeListener()
+		print("MainVC was deinit")
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -44,7 +51,6 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
     }
 	
 	@objc func logOutClicked() {
-        
         CoreDataController.shared.removeProfileImage()
         do {
             try Auth.auth().signOut()

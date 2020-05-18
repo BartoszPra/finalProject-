@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 
 enum ParticipantsStatus: Int, Codable, CustomStringConvertible {
-	case confirmed = 1, unconfirmed
+	case confirmed = 1, unconfirmed, invited
 	
 	var description: String {
 		switch self {
 		case .confirmed: return "confirmed"
 		case .unconfirmed: return "unconfirmed"
+		case .invited: return "invited"
 		}
 	}
 	
@@ -23,6 +24,7 @@ enum ParticipantsStatus: Int, Codable, CustomStringConvertible {
 		switch self {
 		case .confirmed: return 1
 		case .unconfirmed: return 2
+		case .invited: return 3
 		}
 	}
 	
@@ -30,6 +32,7 @@ enum ParticipantsStatus: Int, Codable, CustomStringConvertible {
 		switch self {
 		case .confirmed: return UIColor.init(hex: "4DCB60") ?? .yellow
 		case .unconfirmed: return .red
+		case .invited: return .green
 		}
 	}
 }

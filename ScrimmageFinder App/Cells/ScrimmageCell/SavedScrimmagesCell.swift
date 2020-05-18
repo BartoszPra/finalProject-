@@ -22,8 +22,8 @@ class SavedScrimmagesCell: UITableViewCell {
 		addressLbl.text = scrimmage.venueName
 		timeLbl.text = "Price: £\(String(format: "%.2f", scrimmage.price)), Time: " + scrimmage.timeString
 		statusImage.image = ScrimmageStatus(rawValue: scrimmage.currentStatus)?.statusImage
-		scrimmage.getImage { (image) in
-			self.cellImage.image = image
+		scrimmage.getImage { [weak self] (image) in
+			self?.cellImage.image = image
 		}
 	}
 }

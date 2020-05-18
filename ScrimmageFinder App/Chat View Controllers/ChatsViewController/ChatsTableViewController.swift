@@ -51,7 +51,7 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
     }
 	
 	@objc func addTapped() {		 
-		let vc = ChooseUsersViewController(nibName: "ChooseUsersViewController", bundle: nil)
+		let vc = ChooseUsersViewController(nibName: "ChooseUsersViewController", bundle: nil, usage: .chat)
 		vc.delegate = self
 		navigationController?.pushViewController(vc, animated: true)
 	}
@@ -67,8 +67,8 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
 			userss.append(user.id!)
 		}
 		if isGrouped {
-			FIRFirestoreService.shared.uploadImage(image, folderName: "ChatsAvatars") { (url) in
-				self.createChannel(chatName: titlee, users: userss, isGrouped: isGrouped, chatImageUrl: url?.absoluteString ?? "")
+			FIRFirestoreService.shared.uploadImage(image, folderName: "ChatsAvatars") { [weak self] (url) in
+				self?.createChannel(chatName: titlee, users: userss, isGrouped: isGrouped, chatImageUrl: url?.absoluteString ?? "")
 			}
 		} else {
 			self.createChannel(chatName: titlee, users: userss, isGrouped: isGrouped, chatImageUrl: "")

@@ -68,7 +68,6 @@ struct ScrimmageViewModel {
 	
 	var numberOfUsersParticipating: Int {
 		let usersGoing = self.participants.filter { $0.value == .confirmed }
-		print(usersGoing.count)
 		return usersGoing.count
 	}
 	

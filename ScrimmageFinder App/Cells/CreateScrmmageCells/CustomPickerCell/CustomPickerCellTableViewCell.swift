@@ -74,6 +74,10 @@ class CustomPickerCellTableViewCell: MainCreateScrimmageCellTableViewCell, UIPic
 		}
 	}
 	
+	override func clearCell() {
+		self.inputTextField.text = ""
+	}
+	
 	func setupCellUI() {
 		if !isDataValid {
 			self.inputTextField.layer.borderColor = UIColor.red.cgColor

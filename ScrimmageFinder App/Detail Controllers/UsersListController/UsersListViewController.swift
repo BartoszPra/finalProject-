@@ -58,9 +58,6 @@ class UsersListViewController: UIViewController, UITableViewDelegate, UITableVie
                                                        for: indexPath) as? SFUserTableViewCell else { return SFUserTableViewCell() }
         let user: User = self.participants[indexPath.row]
         guard let userId = user.id else {return UITableViewCell()}
-//        let statusForId = participantsIds.first { (idDict) -> Bool in
-//            idDict.keys.first == userId
-//        }
 		
 		let statusForId: ParticipantsStatus = participantsIds[userId]!
 		
@@ -74,4 +71,8 @@ class UsersListViewController: UIViewController, UITableViewDelegate, UITableVie
 		cell.userImage.loadUserImageUsingCashe(userId: userId)
         return cell
     }
+	
+	deinit {
+		print("UsersVC Deininted")
+	}
 }

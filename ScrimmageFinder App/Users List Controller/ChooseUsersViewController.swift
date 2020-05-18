@@ -12,7 +12,7 @@ import Firebase
 
 enum UsersListPurpose {
 	case chat
-	case scrimmage
+	case scrimmageInvite
 }
 
 protocol AddUsersDelegate: class {
@@ -32,15 +32,35 @@ class ChooseUsersViewController: UIViewController, UITableViewDelegate, UITableV
 	var users = [User]()
 	var currentUserId: String!
 	var imagePicker = UIImagePickerController()
+	var purpose: UsersListPurpose!
+	var buttonTitle: String!
+	
+	init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, usage: UsersListPurpose) {
+		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("init(coder:) has not been implemented")
+	}
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		self.title = "Add participants"
+		if purpose == .chat {
+			self.title = "Add participants"
+		} else {
+			self.title = "Invite users"
+		}
 		currentUserId = Auth.auth().currentUser!.uid
 		self.chatNameAndIconView.isHidden = true
 		let nib = UINib(nibName: "ChatTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "chetsCell")
-		createButton = UIBarButtonItem(title: "Create", style: .done, target: self, action: #selector(createTapped))
+		if purpose == .chat {
+			buttonTitle = "Create"
+		} else {
+			buttonTitle = "Invite"
+		}
+		createButton = UIBarButtonItem(title: buttonTitle, style: .done, target: self, action: #selector(createTapped))
 		navigationItem.rightBarButtonItem = createButton
 		createButton.isEnabled = false
 		self.tableView.delegate = self
@@ -95,8 +115,7 @@ class ChooseUsersViewController: UIViewController, UITableViewDelegate, UITableV
 	}
 	
 	@objc func createTapped() {
-		print("chat creaed")
-		if usersAdded.count > 1 && self.groupNameTextField.text!.isEmpty {
+		if usersAdded.count > 1 && self.groupNameTextField.text!.isEmpty && purpose == .chat {
 			AlertController.showAllert(self, title: "Oops", message: "Please insert chat name")
 		} else if usersAdded.count > 1 && !self.groupNameTextField.text!.isEmpty {
 			chatTitle = groupNameTextField.text!
@@ -149,16 +168,20 @@ class ChooseUsersViewController: UIViewController, UITableViewDelegate, UITableV
 	}
 	
 	func manageGroupView() {
-		if let selectedRows  = self.tableView.indexPathsForSelectedRows {
-			if selectedRows.count > 1 {
-				UIView.animate(withDuration: 0.3) {
-					self.chatNameAndIconView.isHidden = false
-				}
-			} else {
-				UIView.animate(withDuration: 0.3) {
-					self.chatNameAndIconView.isHidden = true
+		if purpose == .chat {
+			if let selectedRows  = self.tableView.indexPathsForSelectedRows {
+				if selectedRows.count > 1 {
+					UIView.animate(withDuration: 0.3) {
+						self.chatNameAndIconView.isHidden = false
+					}
+				} else {
+					UIView.animate(withDuration: 0.3) {
+						self.chatNameAndIconView.isHidden = true
+					}
 				}
 			}
+		} else {
+			self.chatNameAndIconView.isHidden = true
 		}
 	}
 }

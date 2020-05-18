@@ -28,6 +28,11 @@ class DetailButtonTableViewCell: MainDetailTableViewCell {
 				self.button.alpha = 1
 				self.button.backgroundColor = .systemBlue
 				self.button.isEnabled = true
+			} else if viewModel.isParticipating && viewModel.participantStatus == .invited {
+				self.button.setTitle("Respond", for: .normal)
+				self.button.alpha = 1
+				self.button.backgroundColor = .systemGreen
+				self.button.isEnabled = true
 			} else if !viewModel.isParticipating {
 				self.button.setTitle("Join group", for: .normal)
 				self.button.alpha = 1

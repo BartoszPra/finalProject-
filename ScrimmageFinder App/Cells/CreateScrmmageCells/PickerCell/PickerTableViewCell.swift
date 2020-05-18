@@ -26,6 +26,10 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
        
     }
 	
+	override func clearCell() {
+		self.inputField.text = ""
+	}
+	
 	override func hasValidData() -> Bool {
 		if inputField.text!.isEmpty {
 			isDataValid = false
