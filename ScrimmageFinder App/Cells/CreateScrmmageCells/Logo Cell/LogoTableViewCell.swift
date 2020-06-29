@@ -16,15 +16,23 @@ class LogoTableViewCell: MainCreateScrimmageCellTableViewCell, UIImagePickerCont
     var imagePicker = UIImagePickerController()
     var scrimmageLogo: UIImage!
 	var isDataValid = true
+	var needToGetPhoto = true
         
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-	override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
+	override func configureCell(with title: String, editableData: Any?, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?, isEdit: Bool) {
         scrimmageLogo = logoImage.image
         let gestureRecognizer = UITapGestureRecognizer(target: target, action: action)
         photoView.addGestureRecognizer(gestureRecognizer)
+		
+		if isEdit, needToGetPhoto, let data = editableData as? ScrimmageViewModel {
+			data.getImage { (img) in
+				self.logoImage.image = img
+				self.needToGetPhoto = false
+			}
+		}
         
     }
 	

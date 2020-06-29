@@ -16,5 +16,5 @@ class MainCreateScrimmageCellTableViewCell: UITableViewCell {
 	
 	func clearCell() {}
 	
-	func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {}
+	func configureCell(with title: String, editableData: Any?, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?, isEdit: Bool) {}
 }

@@ -16,12 +16,17 @@ class TextViewCellTableViewCell: MainCreateScrimmageCellTableViewCell, UITextVie
 	var placeHolder: String!
 	var isDataValid = true
 	
-	override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
+	override func configureCell(with title: String, editableData: Any?, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?, isEdit: Bool) {
 		self.setupCellUI()
 		self.placeHolder = placeHolder
 		self.label.text = "    " + title
-		notesTextView.text = placeHolder
-		notesTextView.textColor = UIColor.lightGray
+		if isEdit, let data = editableData {
+			notesTextView.text = editableData as? String
+			notesTextView.textColor = .white
+		} else {
+			notesTextView.text = placeHolder
+			notesTextView.textColor = .lightGray
+		}
 		notesTextView.textAlignment = .center
 		notesTextView.selectedTextRange = notesTextView.textRange(from: notesTextView.beginningOfDocument, to: notesTextView.beginningOfDocument)		
 		notesTextView.delegate = self

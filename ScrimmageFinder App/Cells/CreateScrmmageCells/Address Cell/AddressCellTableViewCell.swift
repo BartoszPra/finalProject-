@@ -13,11 +13,17 @@ class AddressCellTableViewCell: MainCreateScrimmageCellTableViewCell {
     @IBOutlet weak var addressTextField: UILabel!
 	var isDataValid = true
 	let addressPlaceHolder = "Please add address"
+	var isEdit: Bool!
     
-    override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
+	override func configureCell(with title: String, editableData: Any?, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?, isEdit: Bool) {
+		self.isEdit = isEdit
 		self.setupCellUI()
-        let gesture = UITapGestureRecognizer(target: target, action: action)
-        self.addressTextField.addGestureRecognizer(gesture)        
+		let gesture = UITapGestureRecognizer(target: target, action: action)
+        self.addressTextField.addGestureRecognizer(gesture)
+		if isEdit, let data = editableData {
+			addressTextField.text = data as? String
+			addressTextField.textColor = .white
+		}
     }
 	
 	override func hasValidData() -> Bool {

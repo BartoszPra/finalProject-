@@ -276,6 +276,12 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 		alert.addAction(UIAlertAction(title: "Share with ...", style: .default, handler: { [weak self] (_) in
 			self?.shareButtonPressed()
 		}))
+		if viewModel.createdById == self.userID {
+			alert.addAction(UIAlertAction(title: "Edit", style: .default, handler: { [weak self] (_) in
+				guard let weakSelf = self else {return}
+				weakSelf.coordinator?.goToEdit(with: weakSelf.viewModel, from: weakSelf)
+			}))
+		}
 		if viewModel.isParticipating {
 			alert.addAction(UIAlertAction(title: "Leave Scrimmage", style: .destructive, handler: { [weak self] (_) in
 				self?.leaveTheGroup()

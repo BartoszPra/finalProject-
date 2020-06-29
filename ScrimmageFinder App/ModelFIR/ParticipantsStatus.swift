@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-enum ParticipantsStatus: Int, Codable, CustomStringConvertible {
+@objc enum ParticipantsStatus: Int, Codable, CustomStringConvertible {
 	case confirmed = 1, unconfirmed, invited
 	
 	var description: String {

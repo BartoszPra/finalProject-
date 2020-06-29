@@ -7,28 +7,29 @@ protocol  Identifiable {
 }
 
 //scrimmgage struct with properties
-struct Scrimmage: Codable, Identifiable {
+class Scrimmage: NSObject, Codable, Identifiable {
     
-    var id: String? = nil
-    var name: String
-	var venueName: String
-    var managerName: String
-    var managerNumber: String
-    var price: Double
-    var createdById: String
-    var savedById: [String]
-    var currentStatus: Int
-    var currentType: Int
-    var participants: [String: ParticipantsStatus]
-	var address: String
-	var dateTime: Date
-	var geopoint: GeoPoint
-	var notes: String
-	var chatId: String
-	var imageUrl: String
-	
+    @objc var id: String? = nil
+    @objc var name: String
+	@objc var venueName: String
+    @objc var managerName: String
+    @objc var managerNumber: String
+    @objc var price: Double
+    @objc var createdById: String
+    @objc var savedById: [String]
+    @objc var currentStatus: Int
+    @objc var currentType: Int
+	var participants: [String: ParticipantsStatus]
+	@objc var address: String
+	@objc var dateTime: Date
+	@objc var geopoint: GeoPoint
+	@objc var notes: String
+	@objc var chatId: String
+	@objc var imageUrl: String
+	@objc var occurance: Int
+		
 	//new scrimmaage struct init
-	init (name: String, venueName: String, address: String, dateTime: Date, managerName: String, managerNumber: String, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [String: ParticipantsStatus], geopoint: GeoPoint, notes: String, chatId: String, imageUrl: String) {
+	init (name: String, venueName: String, address: String, dateTime: Date, managerName: String, managerNumber: String, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [String: ParticipantsStatus], geopoint: GeoPoint, notes: String, chatId: String, imageUrl: String, occurance: Int) {
         self.name = name
 		self.venueName = venueName
 		self.address = address
@@ -45,8 +46,31 @@ struct Scrimmage: Codable, Identifiable {
 		self.notes = notes
 		self.chatId = chatId
 		self.imageUrl = imageUrl
+		self.occurance = occurance
     }
 	
+	init(id: String, name: String, venueName: String, address: String, dateTime: Date, managerName: String, managerNumber: String, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [String: ParticipantsStatus], geopoint: GeoPoint, notes: String, chatId: String, imageUrl: String, occurance: Int) {
+		
+		self.id = id
+		self.name = name
+		self.venueName = venueName
+		self.address = address
+		self.dateTime = dateTime
+        self.managerName = managerName
+        self.managerNumber = managerNumber
+        self.price = price
+        self.createdById = Auth.auth().currentUser!.uid
+        self.savedById = [String]()
+        self.currentStatus = currentStatus
+        self.currentType = currentType
+        self.participants = participants
+		self.geopoint = geopoint
+		self.notes = notes
+		self.chatId = chatId
+		self.imageUrl = imageUrl
+		self.occurance = occurance
+	}
+		
 	func getTime() -> String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "HH:mm"

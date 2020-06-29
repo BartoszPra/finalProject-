@@ -126,23 +126,23 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
      deleteOFOld checks if the date of the all scrimmages is older that today and if so delete is as those scrimmages already outdated. 
      */
     
-    func deleteIfOld() {
-        
-        let current = Date()
-        
-        for scr in scrimmages {
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd.MM.yyyy"
-            
-            let sCdate = dateFormatter.date(from: "\(String(describing: scr.dateTime))")
-            
-            if sCdate! < current {
-                //FIRFirestoreService.shared.delete(scr, in: .scrimmages)
-                
-            }
-        }
-    }
+//    func deleteIfOld() {
+//        
+//        let current = Date()
+//        
+//        for scr in scrimmages {
+//            
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "dd.MM.yyyy"
+//            
+//            let sCdate = dateFormatter.date(from: "\(String(describing: scr.dateTime))")
+//            
+//            if sCdate! < current {
+//                //FIRFirestoreService.shared.delete(scr, in: .scrimmages)
+//                
+//            }
+//        }
+//    }
    // drag and drop gesture recognizer working on IPad only
     func dragItems(for indexPath: IndexPath) -> [UIDragItem] {
         let scr = scrimmages[ indexPath.row]

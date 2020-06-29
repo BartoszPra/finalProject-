@@ -40,11 +40,10 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
 		}
 	}
         
-	override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
+	override func configureCell(with title: String, editableData: Any?, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?, isEdit: Bool) {
 		self.setupCellUI()
 		self.inputField.delegate = self
 		self.titleString = title
-		//calculateMaxDateAndTime(title: title)
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         self.inputField.attributedPlaceholder = attributedPlaceHolder
         self.title.text = "    " + title        
@@ -70,6 +69,10 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
         
         inputField.inputView = picker
         inputField.inputAccessoryView = toolBar
+		
+		if isEdit, let data = editableData {
+			self.inputField.text = editableData as? String
+		}
     }
 	
 	func setupCellUI() {

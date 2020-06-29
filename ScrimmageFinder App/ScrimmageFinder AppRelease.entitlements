@@ -4,7 +4,7 @@
 <dict>
 	<key>keychain-access-groups</key>
 	<array>
-		<string>$(AppIdentifierPrefix)com.Tae.ScrimmageFinder</string>
+		<string>$(AppIdentifierPrefix)com.bp.ScrimmageFinder</string>
 	</array>
 </dict>
 </plist>

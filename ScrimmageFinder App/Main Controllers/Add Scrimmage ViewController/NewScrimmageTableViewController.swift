@@ -16,9 +16,11 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 	private var cellArray: [CellDefinitionHelper]!
 	private var isEdit: Bool!
 	private let db = Firestore.firestore()
+	var service = FIRFirestoreService.shared
 	private var channelReference: CollectionReference {
 		return db.collection("chats")
 	}
+	
 	//scrimmage variables
 	var name: String!
 	var contactName: String!
@@ -36,10 +38,15 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 	var newSid: String!
 	var invitedUsers = [String: ParticipantsStatus]()
 	var scrimmageValues = [String: Any]()
+	var toEditScrimmage: ScrimmageViewModel?
+	var editedValues =  [String: Any]()
 	
-	init(isEdit: Bool) {
+	init(isEdit: Bool, scrimmageId: String?) {
 		super.init(style: .plain)
 		self.isEdit = isEdit
+		if isEdit, let id = scrimmageId {
+			self.observeScrimmage(withScrId: id)
+		}
 	}
 	
 	required init?(coder: NSCoder) {
@@ -52,6 +59,7 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		self.setupEditButton()
 		createCells()
 		imagePicker.delegate = self
 		self.title = "New Scrimmage"
@@ -83,14 +91,22 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 													   for: indexPath) as? MainCreateScrimmageCellTableViewCell else {return MainCreateScrimmageCellTableViewCell()}
 		
 		cell.configureCell(with: cellArray[indexPath.row].cellTitle,
+						   editableData: cellArray[indexPath.row].editableData ?? "",
 						   placeHolder: cellArray[indexPath.row].placeHolder,
 						   keyboardType: cellArray[indexPath.row].keboardType,
-						   target: self,
+						   target: cellArray[indexPath.row].target,
 						   action: cellArray[indexPath.row].action,
-						   type: cellArray[indexPath.row].type)
+						   type: cellArray[indexPath.row].type,
+						   isEdit: isEdit)
 		
-		cell.returnValue = { value in
-			self.scrimmageValues.updateValue(value, forKey: self.cellArray[indexPath.row].cellTitle)
+			cell.returnValue = {[weak self] value in
+			guard let weakSelf = self else {return}
+			
+			if weakSelf.isEdit {
+				weakSelf.editedValues.updateValue(value, forKey: weakSelf.cellArray[indexPath.row].varName)
+			} else {
+				weakSelf.scrimmageValues.updateValue(value, forKey: weakSelf.cellArray[indexPath.row].cellTitle)
+			}
 		}
 		return cell
 	}
@@ -119,19 +135,37 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 	}
 	
 	@objc func submitStringmmage() {
-		
-		if self.checkIfAllDatailsFilled() {
-			//fix so its on succe
-			addScrimmage { (succ) in
-				if succ {
-					self.clearCells()
-					AlertController.showAllert(self, title: "Congratulations", message: "Your Scrimmage has been added")					
+		if isEdit {
+			if self.checkIfAllDatailsFilled() {
+				//update scrimmage
+				if editedValues.isEmpty {
+					AlertController.showAllert(self, title: "No updated information", message: "Please edit ")
 				} else {
-					AlertController.showAllert(self, title: "Problem", message: "There was a problem adding Scrimmage")
+					self.editScrimmage(scrimmageVM: toEditScrimmage!, dict: editedValues) { (succ) in
+						if succ {
+							AlertController.showAllert(self, title: "Congratulations", message: "Your Scrimmage has been updated")
+						} else {
+							AlertController.showAllert(self, title: "Sorry", message: "There was a problem updating you scrimmage")
+						}
+					}
 				}
+			} else {
+				AlertController.showAllert(self, title: "Missing Information", message: "Please fill the marked fields")
 			}
 		} else {
-			AlertController.showAllert(self, title: "Missing Information", message: "Please fill the marked fields")
+			if self.checkIfAllDatailsFilled() {
+				//fix so its on succe
+				addScrimmage { (succ) in
+					if succ {
+						self.clearCells()
+						AlertController.showAllert(self, title: "Congratulations", message: "Your Scrimmage has been added")
+					} else {
+						AlertController.showAllert(self, title: "Problem", message: "There was a problem adding Scrimmage")
+					}
+				}
+			} else {
+				AlertController.showAllert(self, title: "Missing Information", message: "Please fill the marked fields")
+			}
 		}
 	}
 	
@@ -154,6 +188,10 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 		imagePicker.sourceType = .photoLibrary
 		self.navigationController?.present(imagePicker, animated: true, completion: nil)
 		
+	}
+	
+	func checkIfEdited() -> Bool {
+		return false
 	}
 	
 	func checkIfAllDatailsFilled() -> Bool {
@@ -179,25 +217,21 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 			let cell = tableView.cellForRow(at: index) as? LogoTableViewCell
 			cell!.logoImage.image = pickedImage
 			self.image = pickedImage
+			if isEdit {
+				self.editedValues.updateValue(pickedImage, forKey: "newLogo")
+			}
 			tableView.reloadData()
 		} else if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
 			let index = IndexPath(row: 0, section: 0)
 			let cell = tableView.cellForRow(at: index) as? LogoTableViewCell
 			cell!.logoImage.image = pickedImage
 			self.image = pickedImage
+			if isEdit {
+				self.editedValues.updateValue(pickedImage, forKey: "newLogo")
+			}
 			tableView.reloadData()
 		}
 		dismiss(animated: true, completion: nil)
-	}
-	
-	func uploadScrimmagePhoto() {
-		FIRFirestoreService.shared.uploadImage(image: self.image, uploadType: .scrimmageImage, for: newSid, for: "123") { (success) in
-			if success {
-				print("Scrimmage photo updated")
-			} else {
-				print("There was error uploading photos")
-			}
-		}
 	}
 	
 	func addScrimmage(completion: @escaping (Bool) -> Void) {
@@ -226,12 +260,84 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 		}
 	}
 	
+	func observeScrimmage(withScrId: String) {
+		//guard let scrimmageId = viewModel.id else {return}
+		service.readOne(from: .scrimmages, with: withScrId, returning: Scrimmage.self) {[weak self] (scrimmage) in
+            self?.toEditScrimmage = ScrimmageViewModel(scrimmage: scrimmage)
+			self?.createCells()
+			self?.tableView.reloadData()
+        }
+    }
+	
+	func editScrimmage(scrimmageVM: ScrimmageViewModel, dict: [String: Any], completion: @escaping (Bool) -> Void) {
+		
+		let scrimmageToUpdate = scrimmageVM.createScrimmage()
+		
+		if let photo = dict["newLogo"] as? UIImage {
+			editPhoto(photo: photo, url: toEditScrimmage!.imageUrl) { (url) in
+				scrimmageToUpdate.imageUrl = url!.description
+				FIRFirestoreService.shared.updateScrimmageImageURL(for: scrimmageToUpdate.id!, url: url!.description) { (succ) in
+					if succ {
+						print("updated")
+						self.uploadScrimmage(scrimmageToUpdate: scrimmageToUpdate, dict: dict) { (succ) in
+							if succ {
+								completion(true)
+							} else {
+								completion(true)
+							}
+						}
+					} else {
+						print("noooo")
+						completion(false)
+					}
+				}
+			}
+		} else {
+			uploadScrimmage(scrimmageToUpdate: scrimmageToUpdate, dict: dict) { (succ) in
+				if succ {
+					completion(true)
+				} else {
+					completion(false)
+				}
+			}
+		}
+	}
+	
+	func uploadScrimmage(scrimmageToUpdate: Scrimmage, dict: [String: Any], completion: @escaping (Bool) -> Void) {
+		
+		let arr = dict.keys.filter {!$0.contains("newLogo") }
+		if !arr.isEmpty {
+			for (key, value) in dict {
+				scrimmageToUpdate.setValue(value, forKey: key)
+			}
+			FIRFirestoreService.shared.update(for: scrimmageToUpdate, in: .scrimmages) { (success) in
+				if success {
+					completion(true)
+				} else {
+					completion(false)
+				}
+			}
+		} else {
+			completion(false)
+		}
+	}
+	
+	func editPhoto(photo: UIImage, url: String, completion: @escaping (URL?) -> Void) {
+		
+		FIRFirestoreService.shared.replaceImage(newImage: self.image, url: url) { (url) in
+			if let url = url {
+				completion(url)
+			} else {
+				completion(nil)
+			}
+		}
+	}
+	
 	func createNewScrimmage(chatId: String, imageUrl: String, completion: @escaping (Bool) -> Void) {
 		// composing a scrimmage
 		let dateformat = DateFormatter()
 		dateformat.dateFormat =  "E, dd/MM/yyyy HH:mm"
 		let date: String = (scrimmageValues["Date"] as? String)!
-		//let time: String = (scrimmageValues["Time"] as? String)!
 		guard let dateObj = dateformat.date(from: date) else {return}
 		
 		let scrimmage = Scrimmage(name: (scrimmageValues["Name"] as? String)!,
@@ -248,7 +354,8 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 								  geopoint: geolocation,
 								  notes: (scrimmageValues["Notes"] as? String)!,
 								  chatId: chatId,
-								  imageUrl: imageUrl)
+								  imageUrl: imageUrl,
+								  occurance: 1)
 		// creating a scrimmage
 		newSid = FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages, completion: { (success) in
 			if success {
@@ -263,63 +370,85 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 	func createCells() {
 		
 		let pictureCell = CellDefinitionHelper(cellTitle: "Picture",
+											   editableData: toEditScrimmage,
 											   identifier: "logoCell",
 											   keboardType: nil, target: self, action: #selector(imageTapped(tapGestureRecognizer:)),
-											   placeHolder: "selectPicture", color: nil, type: nil, height: 58)
+											   placeHolder: "selectPicture", color: nil, type: nil, height: 58, varName: "imageUrl")
 		let nameCell = CellDefinitionHelper(cellTitle: "Name",
+											editableData: toEditScrimmage?.name,
 											identifier: "textFieldCell",
 											keboardType: .default, target: nil, action: nil,
-											placeHolder: "Name", color: nil, type: nil, height: 58)
+											placeHolder: "Name", color: nil, type: nil, height: 58, varName:"name")
 		let priceCell = CellDefinitionHelper(cellTitle: "Price",
+											 editableData: String(format: "%.2f", toEditScrimmage?.price ?? 0.0),
 											 identifier: "customPickerCell", keboardType: nil, target: self,
 											 action: #selector(imageTapped(tapGestureRecognizer:)),
-											 placeHolder: "select Price", color: nil, type: .price, height: 58)
+											 placeHolder: "select Price", color: nil, type: .price, height: 58, varName: "price")
 		let organizerName = CellDefinitionHelper(cellTitle: "Organizer Name",
+												 editableData: toEditScrimmage?.managerName,
 												 identifier: "textFieldCell",
 												 keboardType: .default, target: nil, action: nil,
-												 placeHolder: "Specify organizers name", color: nil, type: nil, height: 58)
+												 placeHolder: "Specify organizers name", color: nil, type: nil, height: 58, varName: "managerName")
 		let dateCell = CellDefinitionHelper(cellTitle: "Date",
+											editableData: toEditScrimmage?.dateString,
 											identifier: "pickerCell", keboardType: nil, target: nil, action: nil,
-											placeHolder: "Date", color: nil, type: nil, height: 58)
+											placeHolder: "Date", color: nil, type: nil, height: 58, varName:"dateTime")
 		let contactNumberCell = CellDefinitionHelper(cellTitle: "Contact Number",
+													 editableData: toEditScrimmage?.managerNumber,
 													 identifier: "textFieldCell", keboardType: .phonePad, target: nil,
-													 action: nil, placeHolder: "Specify contact number", color: nil, type: nil, height: 58)
+													 action: nil, placeHolder: "Specify contact number", color: nil, type: nil, height: 58, varName: "managerNumber")
 		let addressCell = CellDefinitionHelper(cellTitle: "Address",
+											   editableData: toEditScrimmage?.address,
 											   identifier: "addressCell", keboardType: nil, target: self,
-											   action: #selector(autocompleteClicked), placeHolder: "select address", color: nil, type: nil, height: 58)
+											   action: #selector(autocompleteClicked), placeHolder: "select address", color: nil, type: nil, height: 58, varName: "address")
 		let typeCell = CellDefinitionHelper(cellTitle: "Type",
+											editableData: ScrimmageType(rawValue: toEditScrimmage?.currentType ?? 0)?.description,
 											identifier: "customPickerCell", keboardType: nil,
-											target: self, action: nil,
+											target: nil, action: nil,
 											placeHolder: "select type", color: nil,
-											type: .type, height: 58)
+											type: .type, height: 58, varName: "currentType")
 		let statusCell = CellDefinitionHelper(cellTitle: "Status",
+											  editableData: ScrimmageStatus(rawValue: toEditScrimmage?.currentStatus ?? 0)?.description,
 											  identifier: "customPickerCell", keboardType: nil,
-											  target: self, action: nil,
+											  target: nil, action: nil,
 											  placeHolder: "select status", color: nil,
-											  type: .status, height: 58)
+											  type: .status, height: 58, varName: "currentStatus")
 		let occuranceCell = CellDefinitionHelper(cellTitle: "Occurance",
+												 editableData: ScrimmageOccurance(rawValue: toEditScrimmage?.occurance ?? 0)?.description,
 												 identifier: "customPickerCell", keboardType: nil,
-												 target: self, action: nil,
-												 placeHolder: "select status", color: nil, type: .occurance, height: 58)
+												 target: nil, action: nil,
+												 placeHolder: "select status", color: nil, type: .occurance, height: 58, varName: "occurance")
 		let inviteButtonCell = CellDefinitionHelper(cellTitle: "Invite Players",
+													editableData: "",
 													identifier: "buttonCell",
-													keboardType: nil, target: self, action: #selector(invitePlayers), placeHolder: "",
-													color: nil, type: nil, height: 58)
+													keboardType: nil, target: nil, action: #selector(invitePlayers), placeHolder: "n/a",
+													color: nil, type: nil, height: 58, varName: "")
 		let submitButtonCell = CellDefinitionHelper(cellTitle: "Add Scrimmage",
+													editableData: "",
 													identifier: "buttonCell",
-													keboardType: nil, target: self, action: #selector(submitStringmmage), placeHolder: "", color: nil, type: nil, height: 58)
+													keboardType: nil, target: nil, action: #selector(submitStringmmage), placeHolder: "", color: nil, type: nil, height: 58, varName: "n/a")
 		let notesCell = CellDefinitionHelper(cellTitle: "Notes",
+											 editableData: toEditScrimmage?.notes,
 											 identifier: "textViewCell",
 											 keboardType: nil,
-											 target: self,
-											 action: nil, placeHolder: "Please issert mesage to players", color: nil, type: nil, height: 75)
-		
-		cellArray = [pictureCell, nameCell, organizerName,
-					 contactNumberCell, dateCell,
-					 addressCell, priceCell, typeCell,
-					 statusCell, occuranceCell, notesCell,
-					 inviteButtonCell, submitButtonCell]
-		
+											 target: nil,
+											 action: nil, placeHolder: "Please issert mesage to players", color: nil, type: nil, height: 75, varName: "notes")
+
+		cellArray = [
+			pictureCell,
+			nameCell,
+			organizerName,
+			contactNumberCell,
+			dateCell,
+			addressCell,
+			priceCell,
+			typeCell,
+			statusCell,
+			occuranceCell,
+			notesCell,
+			inviteButtonCell,
+			submitButtonCell
+		]
 	}
 	
 	func passUsers(users: [User], title: String, image: UIImage, isGrouped: Bool) {
@@ -373,5 +502,16 @@ extension NewScrimmageTableViewController: GMSAutocompleteViewControllerDelegate
 		autocompleteController.autocompleteFilter = filter
 		// Display the autocomplete view controller.
 		present(autocompleteController, animated: true, completion: nil)
+	}
+	
+	@objc func dismissSelf() {
+		self.dismiss(animated: true, completion: nil)
+	}
+	
+	func setupEditButton() {
+		if isEdit == true {
+			let leftMenuItem = UIBarButtonItem(title: "Dismiss", style: .done, target: self, action: #selector(dismissSelf))
+			self.navigationItem.leftBarButtonItem = leftMenuItem
+		}
 	}
 }

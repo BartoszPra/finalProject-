@@ -32,7 +32,7 @@ class CustomPickerCellTableViewCell: MainCreateScrimmageCellTableViewCell, UIPic
         super.awakeFromNib()
     }
         
-    override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
+	override func configureCell(with title: String, editableData: Any?, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?, isEdit: Bool) {
 		self.setupCellUI()
         self.inputTextField.delegate = self
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
@@ -61,7 +61,12 @@ class CustomPickerCellTableViewCell: MainCreateScrimmageCellTableViewCell, UIPic
 
         self.inputTextField.inputView = picker
         self.inputTextField.inputAccessoryView = toolBar
-    }
+		
+		// setup if edited
+		if isEdit, let data = editableData {
+			self.inputTextField.text = data as? String
+		}
+	}
 	
 	override func hasValidData() -> Bool {
 		

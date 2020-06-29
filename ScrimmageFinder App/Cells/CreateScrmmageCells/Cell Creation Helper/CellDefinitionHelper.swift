@@ -12,7 +12,7 @@ import UIKit
 struct CellDefinitionHelper {
 	
 	var cellTitle: String
-	//var object: UITableViewCell
+	var editableData: Any?
 	var identifier: String
 	var keboardType: UIKeyboardType?
 	var target: UIViewController?
@@ -22,6 +22,7 @@ struct CellDefinitionHelper {
 	var type: CellType?
 	var height: CGFloat
 	var value: Any?
+	var varName: String
 	
 }
 

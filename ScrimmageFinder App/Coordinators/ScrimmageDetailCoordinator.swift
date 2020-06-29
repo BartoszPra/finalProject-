@@ -38,5 +38,11 @@ class ScrimmagesDetailCoordinator: Coordinator {
 		viewController.chatImage = UIImage(named: "basketBallLogo")
         controller.navigationController!.pushViewController(viewController, animated: true)
 	}
+	
+	func goToEdit(with viewModel: ScrimmageViewModel, from controller: UIViewController) {
+		let viewController = NewScrimmageTableViewController(isEdit: true, scrimmageId: viewModel.id)
+		let navController = UINavigationController(rootViewController: viewController)
+		controller.present(navController, animated: true, completion: nil)
+	}
     
 }

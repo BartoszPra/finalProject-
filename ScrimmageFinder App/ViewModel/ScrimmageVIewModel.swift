@@ -9,7 +9,7 @@
 import Foundation
 import Firebase
 
-struct ScrimmageViewModel {
+ class ScrimmageViewModel: NSObject {
 	
 	var id: String?
     var name: String
@@ -27,10 +27,9 @@ struct ScrimmageViewModel {
 	var geopoint: GeoPoint
 	var notes: String
 	var chatId: String
-	var isParticipating: Bool!
-	var participantStatus: ParticipantsStatus?
 	var userID: String!
 	var imageUrl: String!
+	var occurance: Int
 		
 	init(scrimmage: Scrimmage) {		
 		self.id = scrimmage.id
@@ -51,21 +50,57 @@ struct ScrimmageViewModel {
 		self.userID = Auth.auth().currentUser?.uid
 		self.chatId = scrimmage.chatId
 		self.imageUrl = scrimmage.imageUrl
+		self.occurance = scrimmage.occurance
 				
-		if !scrimmage.participants.isEmpty {
-		
-			if let participant = scrimmage.participants.first(where: { $0.key == self.userID}) {
-				self.participantStatus = participant.value
-				self.isParticipating = true
-            } else {
-				self.participantStatus = nil
-				self.isParticipating = false
-            }
-		} else {
-			self.isParticipating = false
-		}
 	}
 	
+	func createScrimmage() -> Scrimmage {
+		
+		let scrimmage = Scrimmage(id: self.id!,
+								  name: self.name,
+								  venueName: self.venueName,
+								  address: self.address,
+								  dateTime: self.dateTime,
+								  managerName: self.managerName,
+								  managerNumber: self.managerNumber,
+								  price: self.price,
+								  createdById: self.createdById,
+								  currentStatus: self.currentStatus,
+								  currentType: self.currentType,
+								  participants: self.participants,
+								  geopoint: self.geopoint,
+								  notes: self.notes,
+								  chatId: self.chatId,
+								  imageUrl: self.imageUrl,
+								  occurance: self.occurance)
+		
+		return scrimmage
+	}
+	
+	lazy var participantStatus: ParticipantsStatus? = {
+		if participants.isEmpty {
+			if let participant = participants.first(where: { $0.key == userID }) {
+				return participant.value
+            } else {
+				return nil
+            }
+		} else {
+			return nil
+		}
+	}()
+		
+	lazy var isParticipating: Bool = {
+		if participants.isEmpty {
+			if let _ = participants.first(where: { $0.key == userID }) {
+				return true
+            } else {
+				return false
+            }
+		} else {
+			return false
+		}
+	}()
+		
 	var numberOfUsersParticipating: Int {
 		let usersGoing = self.participants.filter { $0.value == .confirmed }
 		return usersGoing.count
@@ -103,7 +138,7 @@ struct ScrimmageViewModel {
         }
         return false
 	}
-	
+		
 	func getImage(completion: @escaping (UIImage?) -> Void) {
 		UIImageView().loadImageUsingCashe(urlString: imageUrl) { (img) in
 			completion(img)

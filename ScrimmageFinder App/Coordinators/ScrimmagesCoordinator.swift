@@ -33,8 +33,8 @@ class ScrimmagesCoordinator: Coordinator {
         ScrimmagesDetailCoordinator(navigationController: navigationController, scrimmage: scrimmage, isSavedUsed: true, image: image)
     }
         
-    func goToAddScrimmage() {
-		let viewController = NewScrimmageTableViewController(isEdit: false)
+	func goToAddScrimmage() {
+		let viewController = NewScrimmageTableViewController(isEdit: false, scrimmageId: nil)
         navigationController.pushViewController(viewController, animated: true)
     }
     

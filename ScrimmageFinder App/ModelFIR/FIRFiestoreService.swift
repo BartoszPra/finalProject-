@@ -114,16 +114,24 @@ class FIRFirestoreService {
         }
     }
    
-   // update function inclding id  to update record in firebase - not using it yet maybe in future
-    func update<T: Encodable & Identifiable>(for encodableObject: T, in collectionReference: FIRCollectionReference) {
+   // update function inclding id to update record in firebase - not using it yet maybe in future
+	func update<T: Encodable & Identifiable>(for encodableObject: T, in collectionReference: FIRCollectionReference, completion: @escaping (Bool) -> Void) {
         
         do {
             let json = try encodableObject.toJson(excluding: ["id"])
             guard let oId = encodableObject.id else { throw MyError.encodingError }
             reference(to: collectionReference).document(oId).setData(json)
+			reference(to: collectionReference).document(oId).setData(json) { (err) in
+				if err != nil {
+					completion(false)
+				} else {
+					completion(true)
+				}
+			}
             
         } catch {
-            print(error)
+			print(error)
+			completion(false)
         }
     }
     // delete function inclding id to delete records in firebase -  using it only when testing to easy delete dummy data
@@ -178,6 +186,20 @@ class FIRFirestoreService {
             }
         }
     }
+	
+	func updateScrimmageImageURL(for scrimmageID: String, url: String, completion: @escaping (Bool) -> Void) {
+		let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
+		
+		currentScrimmage.updateData(["imageUrl": url]) { (error) in
+			if let err = error {
+				print(err.localizedDescription)
+				completion (false)
+			} else {
+				print("succesfully added new url")
+				completion (true)
+			}
+		}
+	}
 	
 	func updateParticipantsTable(for scrimmageID: String, for userId: String, with status: Int, completion: @escaping (Bool) -> Void) {
 		let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
@@ -272,6 +294,44 @@ class FIRFirestoreService {
         }
     }
 	
+	func deleteImage(_ url: String, completion: @escaping (Bool) -> Void) {
+		
+		let storageRef = filesReference().reference(forURL: url)
+		storageRef.delete { (err) in
+			if let error = err {
+				print(error.localizedDescription)
+				completion(false)
+			} else {
+				completion(true)
+			}
+		}
+	}
+	
+	func replaceImage(newImage: UIImage, url: String, completion: @escaping(URL?) -> Void){
+		
+		guard let scaledImage = newImage.scaledToSafeUploadSize, let data = scaledImage.jpegData(compressionQuality: 0.4) else {
+			completion(nil)
+			return
+		}
+		
+		let metadata = StorageMetadata()
+		metadata.contentType = "image/jpeg"
+		
+		let storageRef = filesReference().reference(forURL: url)
+		
+		storageRef.putData(data, metadata: metadata) { metaData, error in
+			if error == nil, metaData != nil {
+				storageRef.downloadURL { (url, err) in
+					completion(url)
+				}
+			} else {
+				// failed
+				completion(nil)
+			}
+		}
+		
+	}
+	
 	func uploadImage(_ image: UIImage, folderName: String, completion: @escaping (URL?) -> Void) {
 
 		guard let scaledImage = image.scaledToSafeUploadSize, let data = scaledImage.jpegData(compressionQuality: 0.4) else {
@@ -285,9 +345,9 @@ class FIRFirestoreService {
 		let imageName = [UUID().uuidString, String(Date().timeIntervalSince1970)].joined()
 		
 		let storageRef = filesReference().reference().child(folderName).child(imageName)
+		
 		storageRef.putData(data, metadata: metadata) { metaData, error in
 			if error == nil, metaData != nil {
-				
 				storageRef.downloadURL { url, error in
 					completion(url)
 					// success!

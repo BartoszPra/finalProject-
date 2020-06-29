@@ -18,13 +18,16 @@ class TextViewTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDe
         super.awakeFromNib()
     }
 	
-	override func configureCell(with title: String, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?) {
+	override func configureCell(with title: String, editableData: Any?, placeHolder: String, keyboardType: UIKeyboardType?, target: UIViewController?, action: Selector?, type: CellType?, isEdit: Bool) {
 		self.setupCellUI()
 		self.inputTextField.delegate = self
         let attributedPlaceHolder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         titleLabel.text = "    " + title
         inputTextField.attributedPlaceholder = attributedPlaceHolder
         inputTextField.keyboardType = keyboardType!
+		if isEdit, let data = editableData {
+			self.inputTextField.text = editableData as? String
+		}
     }
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
