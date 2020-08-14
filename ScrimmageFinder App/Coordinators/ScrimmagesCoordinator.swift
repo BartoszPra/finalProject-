@@ -32,11 +32,14 @@ class ScrimmagesCoordinator: Coordinator {
 	func goToNewDetail(with scrimmage: ScrimmageViewModel, from controller: UIViewController, image: UIImage) {
         ScrimmagesDetailCoordinator(navigationController: navigationController, scrimmage: scrimmage, isSavedUsed: true, image: image)
     }
-        
-	func goToAddScrimmage() {
-		let viewController = NewScrimmageTableViewController(isEdit: false, scrimmageId: nil)
-        navigationController.pushViewController(viewController, animated: true)
-    }
+	
+	func goToLocationChange() {
+		print("Will change location soon")
+		
+		let viewController = LocationViewController.init(nibName: "LocationViewController", bundle: nil)
+        navigationController.present(viewController, animated: true, completion: nil)
+		
+	}
     
     func start() {
     }

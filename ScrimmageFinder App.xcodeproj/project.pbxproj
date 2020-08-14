@@ -84,12 +84,18 @@
 		A57BD1262357A33E00A324BC /* SFNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD1252357A33E00A324BC /* SFNames.swift */; };
 		A57BD12E2357EEE400A324BC /* SFAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD12D2357EEE400A324BC /* SFAppearance.swift */; };
 		A57BD1302365FDBD00A324BC /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A57BD12F2365FDBD00A324BC /* LoginViewController.xib */; };
+		A5814FAA24AD4129008DABFE /* AddScrimmageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5814FA924AD4129008DABFE /* AddScrimmageCoordinator.swift */; };
+		A5814FC324AE88CF008DABFE /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5814FC124AE88CF008DABFE /* LocationViewController.swift */; };
+		A5814FC424AE88CF008DABFE /* LocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5814FC224AE88CF008DABFE /* LocationViewController.xib */; };
+		A58786CF24C0BBA5000C6E96 /* SliderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58786CD24C0BBA5000C6E96 /* SliderTableViewCell.swift */; };
+		A58786D024C0BBA5000C6E96 /* SliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A58786CE24C0BBA5000C6E96 /* SliderTableViewCell.xib */; };
 		A59034E92391A3A200CB7284 /* FIRStorageReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59034E82391A3A200CB7284 /* FIRStorageReference.swift */; };
 		A59068642282CA1800186C0D /* SavedScrimmagesCoordiantor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59068632282CA1800186C0D /* SavedScrimmagesCoordiantor.swift */; };
 		A591A306236E57A60075F8E4 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A591A305236E57A60075F8E4 /* RegisterViewController.xib */; };
 		A591A312236F30010075F8E4 /* SavedScrimmagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A591A310236F30010075F8E4 /* SavedScrimmagesCell.swift */; };
 		A591A316236F57CB0075F8E4 /* SavedScrimmagesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A591A315236F57CB0075F8E4 /* SavedScrimmagesViewController.xib */; };
 		A59A0CA3240498D400C4C71A /* CodableGeoPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59A0CA2240498D400C4C71A /* CodableGeoPoint.swift */; };
+		A5A0A89924DE0E9400B0C83D /* SFLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0A89824DE0E9400B0C83D /* SFLocationManager.swift */; };
 		A5AEC4732385710F0095796A /* ScrimmageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AEC4722385710F0095796A /* ScrimmageStatus.swift */; };
 		A5AEC476238612E00095796A /* ScrimmageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AEC475238612E00095796A /* ScrimmageType.swift */; };
 		A5BECA1724AA5B110032D2C1 /* Pods_ScrimmageFinder_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06025A504561BDBE1220B5F6 /* Pods_ScrimmageFinder_App.framework */; };
@@ -244,6 +250,11 @@
 		A57BD1252357A33E00A324BC /* SFNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNames.swift; sourceTree = "<group>"; };
 		A57BD12D2357EEE400A324BC /* SFAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFAppearance.swift; sourceTree = "<group>"; };
 		A57BD12F2365FDBD00A324BC /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		A5814FA924AD4129008DABFE /* AddScrimmageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddScrimmageCoordinator.swift; sourceTree = "<group>"; };
+		A5814FC124AE88CF008DABFE /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		A5814FC224AE88CF008DABFE /* LocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationViewController.xib; sourceTree = "<group>"; };
+		A58786CD24C0BBA5000C6E96 /* SliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
+		A58786CE24C0BBA5000C6E96 /* SliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableViewCell.xib; sourceTree = "<group>"; };
 		A59034E82391A3A200CB7284 /* FIRStorageReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRStorageReference.swift; sourceTree = "<group>"; };
 		A59034EA2395DBC200CB7284 /* FullRes+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FullRes+CoreDataClass.swift"; path = "/Users/bartoszprazmo/Desktop/SF/ScrimmageFinder App/CoreDataModel/FullRes+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		A59034F62395DC0400CB7284 /* Thumbnail+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Thumbnail+CoreDataClass.swift"; path = "/Users/bartoszprazmo/Desktop/SF/ScrimmageFinder App/CoreDataModel/Thumbnail+CoreDataClass.swift"; sourceTree = "<absolute>"; };
@@ -255,6 +266,7 @@
 		A591A310236F30010075F8E4 /* SavedScrimmagesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedScrimmagesCell.swift; sourceTree = "<group>"; };
 		A591A315236F57CB0075F8E4 /* SavedScrimmagesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SavedScrimmagesViewController.xib; sourceTree = "<group>"; };
 		A59A0CA2240498D400C4C71A /* CodableGeoPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableGeoPoint.swift; sourceTree = "<group>"; };
+		A5A0A89824DE0E9400B0C83D /* SFLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFLocationManager.swift; sourceTree = "<group>"; };
 		A5AEC4722385710F0095796A /* ScrimmageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageStatus.swift; sourceTree = "<group>"; };
 		A5AEC475238612E00095796A /* ScrimmageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageType.swift; sourceTree = "<group>"; };
 		A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
@@ -324,6 +336,7 @@
 		0369DAEB20E121BF006B7507 /* Main Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A5814FC024AE8894008DABFE /* Location View Controller */,
 				A5F762D2238AD280002CD1B3 /* UserProfile */,
 				A57BD1292357A67600A324BC /* Login */,
 				A591A300236E55030075F8E4 /* Register_SignUp */,
@@ -354,6 +367,7 @@
 				A5F762C92388BB7E002CD1B3 /* User.swift */,
 				A52D2CC4241E5E5D00605231 /* CurrentUser.swift */,
 				A59A0CA2240498D400C4C71A /* CodableGeoPoint.swift */,
+				A5A0A89824DE0E9400B0C83D /* SFLocationManager.swift */,
 			);
 			path = ModelFIR;
 			sourceTree = "<group>";
@@ -766,6 +780,25 @@
 			path = Detail;
 			sourceTree = "<group>";
 		};
+		A5814FC024AE8894008DABFE /* Location View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A58786C824BA1752000C6E96 /* Location screen cellls */,
+				A5814FC124AE88CF008DABFE /* LocationViewController.swift */,
+				A5814FC224AE88CF008DABFE /* LocationViewController.xib */,
+			);
+			path = "Location View Controller";
+			sourceTree = "<group>";
+		};
+		A58786C824BA1752000C6E96 /* Location screen cellls */ = {
+			isa = PBXGroup;
+			children = (
+				A58786CD24C0BBA5000C6E96 /* SliderTableViewCell.swift */,
+				A58786CE24C0BBA5000C6E96 /* SliderTableViewCell.xib */,
+			);
+			path = "Location screen cellls";
+			sourceTree = "<group>";
+		};
 		A591A300236E55030075F8E4 /* Register_SignUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -890,6 +923,7 @@
 				A5F762C12388AE1B002CD1B3 /* ScrimmageDetailCoordinator.swift */,
 				A5F762DB238AE1A9002CD1B3 /* UserProfileCoordinator.swift */,
 				A50F7B4624170AA700AA9083 /* ChatCoordinator.swift */,
+				A5814FA924AD4129008DABFE /* AddScrimmageCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -1031,6 +1065,7 @@
 				A50F7B3B24158C0300AA9083 /* ChatsTableViewController.xib in Resources */,
 				A5F762C72388BB0F002CD1B3 /* UsersListViewController.xib in Resources */,
 				03F10DD320DC55C300F8C62B /* LaunchScreen.storyboard in Resources */,
+				A58786D024C0BBA5000C6E96 /* SliderTableViewCell.xib in Resources */,
 				A50F4248228472CC007841A2 /* MyScrimmagesViewController.xib in Resources */,
 				A5DDEC7A2449165F0051FE66 /* ParticipantsTableViewCell.xib in Resources */,
 				A5002FCD23E438A600CB8F63 /* TextViewCellTableViewCell.xib in Resources */,
@@ -1043,6 +1078,7 @@
 				034D429320E54FCA00D59F8C /* GoogleService-Info.plist in Resources */,
 				A54BC0BF23BE9C380087178B /* AddressCellTableViewCell.xib in Resources */,
 				A5584FF4245369DF00AEBB92 /* AddressTableViewCell.xib in Resources */,
+				A5814FC424AE88CF008DABFE /* LocationViewController.xib in Resources */,
 				A52D2CCA242191D500605231 /* ChooseUsersViewController.xib in Resources */,
 				A5531F9A23B572670054DA0A /* PickerTableViewCell.xib in Resources */,
 				A5F762CF23899EBA002CD1B3 /* SFUserTableViewCell.xib in Resources */,
@@ -1204,7 +1240,9 @@
 				A5AEC476238612E00095796A /* ScrimmageType.swift in Sources */,
 				A535FBB7249E33DE0028B733 /* ScrimmageOccurance.swift in Sources */,
 				A57BD12E2357EEE400A324BC /* SFAppearance.swift in Sources */,
+				A5814FAA24AD4129008DABFE /* AddScrimmageCoordinator.swift in Sources */,
 				A5002FCC23E438A600CB8F63 /* TextViewCellTableViewCell.swift in Sources */,
+				A58786CF24C0BBA5000C6E96 /* SliderTableViewCell.swift in Sources */,
 				A59068642282CA1800186C0D /* SavedScrimmagesCoordiantor.swift in Sources */,
 				04C8F37820FF2A0E00AF48E4 /* LoginViewController.swift in Sources */,
 				A5121D7E2447B41F0057E605 /* MainDetailTableViewCell.swift in Sources */,
@@ -1245,6 +1283,7 @@
 				A54BC0BE23BE9C380087178B /* AddressCellTableViewCell.swift in Sources */,
 				A5F762DC238AE1A9002CD1B3 /* UserProfileCoordinator.swift in Sources */,
 				C7BFC25322820AB000EE6EB4 /* TabBarController.swift in Sources */,
+				A5A0A89924DE0E9400B0C83D /* SFLocationManager.swift in Sources */,
 				C7BFC24F2282084F00EE6EB4 /* ScrimmagesCoordinator.swift in Sources */,
 				A52D2CC0241E561A00605231 /* UIView+Additions.swift in Sources */,
 				C7BFC251228209A000EE6EB4 /* CoordinatedNavigationController.swift in Sources */,
@@ -1260,6 +1299,7 @@
 				A50211DA245968DE000BB18C /* ScrimmagesCell.swift in Sources */,
 				A5531F8A23B22EEF0054DA0A /* UIButton+Extensions.swift in Sources */,
 				A591A312236F30010075F8E4 /* SavedScrimmagesCell.swift in Sources */,
+				A5814FC324AE88CF008DABFE /* LocationViewController.swift in Sources */,
 				03C6E1EE20DD59C3001DFD01 /* EncodableExtensions.swift in Sources */,
 				A560B17F246836F0005211E9 /* NewScrimmageTableViewController.swift in Sources */,
 				A5531F9323B246E10054DA0A /* TextViewTableViewCell.swift in Sources */,

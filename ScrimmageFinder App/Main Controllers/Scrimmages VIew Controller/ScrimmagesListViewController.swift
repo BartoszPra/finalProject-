@@ -10,24 +10,32 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 import GoogleSignIn
+import CoreLocation
+import MapKit
 
-class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, ScrimmageViewModel> {
+class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, ScrimmageViewModel>, SFLocationDelegate {
 	
 	@IBOutlet weak var newTable: UITableView!
 	
-	var coordinator: ScrimmagesCoordinator?
+	var locationButton: UIBarButtonItem!
 	
+	var coordinator: ScrimmagesCoordinator?
+	var locationManager: SFLocationManager!
 	var service = FIRFirestoreService.shared
 	
+	//var locationManager: CLLocationManager!
+		
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		tableView = newTable
 		createBarButtons()
+		locationManager = SFLocationManager()
+		locationManager.locDelegate = self
+				
 		self.view.backgroundColor = .black
 		let image = UIImage(named: "black")!.alpha(0.7)
 		navigationController?.navigationBar.setBackgroundImage(image, for: .default)
 		navigationController?.navigationBar.shadowImage = UIImage()
-		
 		ViewHelpers.setLogoAsNavigationTitle(imageName: "logoNoBackgroundBrighter", on: self)
 		service.readAll(from: .scrimmages, returning: Scrimmage.self) {[weak self] (scrimmages) in
 			self?.items = scrimmages.map({return ScrimmageViewModel(scrimmage: $0)})
@@ -46,8 +54,8 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 		coordinator?.goToNewDetail(with: scrimmage, from: self, image: cell?.cellImage.image ?? UIImage())
 	}
 	
-	@objc func goToAddScrimmagesClicked() {
-        self.coordinator?.goToAddScrimmage()
+	@objc func goToLocationChange() {
+        self.coordinator?.goToLocationChange()
     }
 	
 	@objc func logOutClicked() {
@@ -65,13 +73,19 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 	
 	func createBarButtons() {
 		
-		let addButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(goToAddScrimmagesClicked))
-		navigationItem.rightBarButtonItem = addButton
+		locationButton = UIBarButtonItem(image: UIImage(named: "location"), style: .plain, target: self, action: #selector(goToLocationChange))
+		navigationItem.rightBarButtonItem = locationButton
 		
 		let logoutButton = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logOutClicked))
 		navigationItem.leftBarButtonItem = logoutButton
 		
 	}
+	
+	func locationUpdated(city: String) {
+		self.locationButton = UIBarButtonItem(image: UIImage(named: "location")!, title: city, target: self, action: #selector(goToLocationChange))
+		navigationItem.rightBarButtonItem = locationButton
+	}
+	
 }
 
 extension UIImage {
@@ -81,5 +95,23 @@ extension UIImage {
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return newImage!
+    }
+}
+
+extension UIBarButtonItem {
+    convenience init(image: UIImage, title: String, target: Any?, action: Selector?) {
+        let button = UIButton(type: .custom)
+        button.setImage(image, for: .normal)
+        button.setTitle(title, for: .normal)
+		button.titleLabel?.font = button.titleLabel?.font.withSize(12)
+
+        if let target = target, let action = action {
+            button.addTarget(target, action: action, for: .touchUpInside)
+        }
+
+        self.init(customView: button)
+
+		let currHeight = self.customView?.heightAnchor.constraint(equalToConstant: 20)
+		currHeight?.isActive = true
     }
 }

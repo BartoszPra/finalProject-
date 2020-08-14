@@ -74,5 +74,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>SF wants to help you find scrimmages that are araound you.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>SF wants to help you find scrimmages that are araound you.</string>
 </dict>
 </plist>

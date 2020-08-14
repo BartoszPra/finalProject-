@@ -22,6 +22,12 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
         
         super.viewDidLoad()
         self.navigationItem.title = Auth.auth().currentUser?.email
+		
+		self.view.backgroundColor = .black
+		let image = UIImage(named: "black")!.alpha(0.7)
+		navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+		navigationController?.navigationBar.shadowImage = UIImage()
+		
         userID = Auth.auth().currentUser?.uid
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         profileImageView.isUserInteractionEnabled = true

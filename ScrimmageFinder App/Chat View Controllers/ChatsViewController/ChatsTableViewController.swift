@@ -31,6 +31,10 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
         super.viewDidLoad()
 		navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 		let nib = UINib(nibName: "ChatTableViewCell", bundle: nil)
+		self.view.backgroundColor = .black
+		let image = UIImage(named: "black")!.alpha(0.7)
+		navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+		navigationController?.navigationBar.shadowImage = UIImage()
         tableView.register(nib, forCellReuseIdentifier: "chetsCell")		
 		tableView.delegate = self
 		tableView.dataSource = self

@@ -23,8 +23,12 @@ class MyScrimmagesViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.backgroundColor = UIColor.black
+        self.tableView.backgroundColor = UIColor.clear
         self.title = "Created"
+		self.view.backgroundColor = .black
+		let image = UIImage(named: "black")!.alpha(0.7)
+		navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+		navigationController?.navigationBar.shadowImage = UIImage()
         let nib = UINib(nibName: "SavedScrimmagesCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "SavedScrimmagesCell")
     }

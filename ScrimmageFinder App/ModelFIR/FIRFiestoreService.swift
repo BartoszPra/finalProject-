@@ -228,20 +228,19 @@ class FIRFirestoreService {
 		}
 	}
 	
-	func deleteFromSavedBy(for scrimmageID: String, with userId: String) -> Bool {
-        var boolToReturn = false
-        let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
+	func deleteFromSavedBy(for scrimmageID: String, with userId: String, completion: @escaping (Bool) -> Void) {
+        
+		let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
 		
 		currentScrimmage.updateData(["savedById": FieldValue.arrayRemove([userId])]) { (error) in
             if let err = error {
-                print(err.localizedDescription)
-                boolToReturn = false
+				print(err.localizedDescription)
+                completion(false)
             } else {
                 print("scrimmage unsaved")
-                boolToReturn = true
+				completion(true)
             }
         }
-        return boolToReturn
     }
     
     func updateSavedTable(for scrimmageID: String, with userId: String, completion: @escaping (Bool) -> Void) {

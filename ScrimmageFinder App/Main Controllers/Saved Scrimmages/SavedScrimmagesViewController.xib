@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -11,6 +12,7 @@
             <connections>
                 <outlet property="emptyListLabel" destination="B25-My-BED" id="fjN-tD-6Wz"/>
                 <outlet property="savedTableView" destination="F3f-TN-D6Q" id="W8n-vp-isP"/>
+                <outlet property="segmentedControll" destination="RRm-sE-8L1" id="2Hv-fE-Yz9"/>
                 <outlet property="view" destination="iN0-l3-epB" id="cJL-RO-19p"/>
             </connections>
         </placeholder>
@@ -19,10 +21,30 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F3f-TN-D6Q">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <stackView clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QtX-k2-r3N">
+                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <subviews>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="RRm-sE-8L1">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="33"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="32" id="iNm-sK-LYt"/>
+                            </constraints>
+                            <segments>
+                                <segment title="Created"/>
+                                <segment title="Saved"/>
+                            </segments>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="selectedSegmentTintColor" red="0.1996589899" green="0.46538406609999999" blue="0.94514554740000001" alpha="0.46824165239726029" colorSpace="custom" customColorSpace="displayP3"/>
+                        </segmentedControl>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F3f-TN-D6Q">
+                            <rect key="frame" x="0.0" y="37" width="414" height="815"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tableView>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                </tableView>
+                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No saved Scrimmages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B25-My-BED">
                     <rect key="frame" x="100.5" y="435" width="213" height="26.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -30,16 +52,18 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="B25-My-BED" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="1Ey-a6-fnc"/>
-                <constraint firstItem="F3f-TN-D6Q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FKU-sL-VsK"/>
-                <constraint firstItem="F3f-TN-D6Q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Kgc-do-rrz"/>
+                <constraint firstAttribute="trailing" secondItem="QtX-k2-r3N" secondAttribute="trailing" id="NYi-HE-TGD"/>
                 <constraint firstItem="B25-My-BED" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="SR0-YA-qYG"/>
-                <constraint firstAttribute="trailing" secondItem="F3f-TN-D6Q" secondAttribute="trailing" id="aq0-G3-fjf"/>
-                <constraint firstAttribute="bottom" secondItem="F3f-TN-D6Q" secondAttribute="bottom" id="zSW-Tu-miq"/>
+                <constraint firstItem="QtX-k2-r3N" firstAttribute="top" secondItem="vbP-Ie-IRr" secondAttribute="top" id="cCf-lJ-Cit"/>
+                <constraint firstItem="QtX-k2-r3N" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kPN-gn-QfZ"/>
+                <constraint firstAttribute="bottom" secondItem="QtX-k2-r3N" secondAttribute="bottom" id="vy9-mf-nRO"/>
             </constraints>
-            <point key="canvasLocation" x="139" y="115"/>
+            <viewLayoutGuide key="safeArea" id="vbP-Ie-IRr"/>
+            <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
         </view>
     </objects>
 </document>

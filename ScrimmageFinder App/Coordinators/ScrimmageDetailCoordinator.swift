@@ -14,7 +14,7 @@ class ScrimmagesDetailCoordinator: Coordinator {
     var navigationController: CoordinatedNavigationController
     var children = [Coordinator]()
     
-	init(navigationController: CoordinatedNavigationController = CoordinatedNavigationController(), scrimmage: ScrimmageViewModel, isSavedUsed: Bool, image:UIImage) {
+	init(navigationController: CoordinatedNavigationController = CoordinatedNavigationController(), scrimmage: ScrimmageViewModel, isSavedUsed: Bool, image: UIImage) {
         self.navigationController = navigationController
         navigationController.coordinator = self
         let viewController = SFDetailsViewController(nibName: "SFDetailsViewController", bundle: nil, scrimmage: scrimmage, isSavedUsed: isSavedUsed)

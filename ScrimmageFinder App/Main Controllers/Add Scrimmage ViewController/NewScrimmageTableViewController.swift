@@ -12,6 +12,7 @@ import Firebase
 
 class NewScrimmageTableViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AddUsersDelegate {
 	
+	var coordinator: AddScrimmageCoordinator?
 	private var imagePicker = UIImagePickerController()
 	private var cellArray: [CellDefinitionHelper]!
 	private var isEdit: Bool!
@@ -41,6 +42,14 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 	var toEditScrimmage: ScrimmageViewModel?
 	var editedValues =  [String: Any]()
 	
+	init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, isEdit: Bool, scrimmageId: String?) {
+		super.init(style: .plain)
+		self.isEdit = isEdit
+		if isEdit, let id = scrimmageId {
+			self.observeScrimmage(withScrId: id)
+		}
+	}
+	
 	init(isEdit: Bool, scrimmageId: String?) {
 		super.init(style: .plain)
 		self.isEdit = isEdit
@@ -62,7 +71,11 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 		self.setupEditButton()
 		createCells()
 		imagePicker.delegate = self
-		self.title = "New Scrimmage"
+		self.title = "Create"
+		self.view.backgroundColor = .black
+		let image = UIImage(named: "black")!.alpha(0.7)
+		navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+		navigationController?.navigationBar.shadowImage = UIImage()
 		self.setupTableView()
 	}
 	
@@ -305,9 +318,9 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 	
 	func uploadScrimmage(scrimmageToUpdate: Scrimmage, dict: [String: Any], completion: @escaping (Bool) -> Void) {
 		
-		let arr = dict.keys.filter {!$0.contains("newLogo") }
+		let arr = dict.filter {!$0.key.contains("newLogo") }
 		if !arr.isEmpty {
-			for (key, value) in dict {
+			for (key, value) in arr {
 				scrimmageToUpdate.setValue(value, forKey: key)
 			}
 			FIRFirestoreService.shared.update(for: scrimmageToUpdate, in: .scrimmages) { (success) in
@@ -446,9 +459,12 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 			statusCell,
 			occuranceCell,
 			notesCell,
-			inviteButtonCell,
 			submitButtonCell
 		]
+		
+		if !isEdit {
+			cellArray.insert(inviteButtonCell, at: cellArray.count - 1)
+		}
 	}
 	
 	func passUsers(users: [User], title: String, image: UIImage, isGrouped: Bool) {

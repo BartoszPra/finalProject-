@@ -165,7 +165,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     @IBAction func goToAddScrimmagesClicked(_ sender: Any) {
-        self.coordinator?.goToAddScrimmage()        
+        self.coordinator?.goToLocationChange()        
     }
     
     @IBAction func logOutClicked(_ sender: Any) {
