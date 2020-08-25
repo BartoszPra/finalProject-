@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationViewController" customModule="ScrimmageFinder_App" customModuleProvider="target">
             <connections>
+                <outlet property="mapView" destination="bDH-XK-kbo" id="2rY-iN-GnG"/>
                 <outlet property="tableView" destination="Ee0-1c-iMT" id="JM7-v1-14o"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -19,15 +20,30 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLJ-2v-ju7">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <items>
+                        <navigationItem title="Location" id="bVv-je-0jb">
+                            <barButtonItem key="leftBarButtonItem" title="Cancel" id="dyR-qV-b7e">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="cancelPressed:" destination="-1" id="V8i-cb-2zs"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bDH-XK-kbo">
-                    <rect key="frame" x="0.0" y="44" width="414" height="582"/>
+                    <rect key="frame" x="0.0" y="88" width="414" height="538"/>
                 </mapView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ee0-1c-iMT">
                     <rect key="frame" x="0.0" y="626" width="414" height="200"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="Pkn-8f-uNv"/>
                     </constraints>
+                    <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFa-2T-nBh">
                     <rect key="frame" x="40" y="846" width="334" height="30"/>
@@ -36,18 +52,24 @@
                     <state key="normal" title="Apply">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <connections>
+                        <action selector="applypressed:" destination="-1" eventType="touchUpInside" id="lwg-0L-FBW"/>
+                    </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Ee0-1c-iMT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2R9-jC-4D5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KFa-2T-nBh" secondAttribute="trailing" constant="40" id="3fC-Xg-aAW"/>
+                <constraint firstAttribute="trailing" secondItem="BLJ-2v-ju7" secondAttribute="trailing" id="6iJ-2h-fQ0"/>
                 <constraint firstAttribute="bottom" secondItem="KFa-2T-nBh" secondAttribute="bottom" constant="20" id="GWh-Qr-2aO"/>
                 <constraint firstItem="Ee0-1c-iMT" firstAttribute="top" secondItem="bDH-XK-kbo" secondAttribute="bottom" id="Hip-2b-h62"/>
                 <constraint firstItem="KFa-2T-nBh" firstAttribute="top" secondItem="Ee0-1c-iMT" secondAttribute="bottom" constant="20" id="I72-fF-d2k"/>
-                <constraint firstItem="bDH-XK-kbo" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="QS7-YP-Ojv"/>
+                <constraint firstItem="bDH-XK-kbo" firstAttribute="top" secondItem="BLJ-2v-ju7" secondAttribute="bottom" id="Muy-D6-2LK"/>
                 <constraint firstItem="KFa-2T-nBh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="RKf-Z8-SPo"/>
+                <constraint firstItem="BLJ-2v-ju7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="m4C-kj-siu"/>
                 <constraint firstAttribute="trailing" secondItem="bDH-XK-kbo" secondAttribute="trailing" id="rTU-R5-Cls"/>
+                <constraint firstItem="BLJ-2v-ju7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wWz-xX-9Mq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ee0-1c-iMT" secondAttribute="trailing" id="x2y-TW-n9U"/>
                 <constraint firstItem="bDH-XK-kbo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yB6-DO-iOU"/>
             </constraints>

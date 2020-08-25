@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
 class LocationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 		
 	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var mapView: MKMapView!
 	
 	private var selectedIndexPath: IndexPath?
 	private var sugestedRadius = 80
@@ -23,7 +26,22 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		
+		let buttonItem = MKUserTrackingButton(mapView: mapView)
+		buttonItem.tintColor = .white
+		buttonItem.backgroundColor = .lightGray
+		self.mapView.addSubview(buttonItem)
+		buttonItem.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			NSLayoutConstraint(item: buttonItem, attribute: .right, relatedBy: .equal, toItem: mapView, attribute: .right, multiplier: 1.0, constant: -5),
+			NSLayoutConstraint(item: buttonItem, attribute: .top, relatedBy: .equal, toItem: mapView, attribute: .top, multiplier: 1.0, constant: 5)
+		])
+		buttonItem.layer.cornerRadius = 10
+		buttonItem.clipsToBounds = true
     }
+	
+	deinit {
+		print("location controller has been removed")
+	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
@@ -43,6 +61,14 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 		cell.configureCell(isCellSelected: isSelectedCell, radius: sugestedRadius, indexPath: indexPath)
 		return cell
 		
+	}
+	
+	@IBAction func cancelPressed(_ sender: Any) {
+		self.dismiss(animated: true, completion: nil)
+	}
+	
+	@IBAction func applypressed(_ sender: Any) {
+		self.dismiss(animated: true, completion: nil)
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

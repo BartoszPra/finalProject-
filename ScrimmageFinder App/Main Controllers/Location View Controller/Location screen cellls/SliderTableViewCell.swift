@@ -15,6 +15,7 @@ class SliderTableViewCell: UITableViewCell {
 	@IBOutlet weak var slider: UISlider!
 	@IBOutlet weak var suggestedLabel: UILabel!
 	@IBOutlet weak var selectionIndicator: UIImageView!
+	@IBOutlet weak var sliderStack: UIStackView!
 	
 	let step: Float = 10
 	

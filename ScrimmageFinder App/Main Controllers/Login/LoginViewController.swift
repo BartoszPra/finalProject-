@@ -88,11 +88,11 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         guard let password = passTF.text else {return}
         
         if email.trimmingCharacters(in: .whitespaces).isEmpty {
-            AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Email format")
+            AlertController.showAllert(self, title: "Oops", message: "Please insert correct Email format")
         } else if password.trimmingCharacters(in: .whitespaces).isEmpty {
-            AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Password")
+            AlertController.showAllert(self, title: "Oops", message: "Please insert correct Password")
         } else if password.trimmingCharacters(in: .whitespaces).isEmpty {
-            AlertController.showAllert(self, title: "Oops", message: "Plese insert correct Password")
+            AlertController.showAllert(self, title: "Oops", message: "Please insert correct Password")
         } else {
         Auth.auth().signIn(withEmail: email, password: password) { user, error in
             if (error == nil) && (user != nil) {

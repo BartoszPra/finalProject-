@@ -27,18 +27,16 @@ class SFLocationManager: NSObject, CLLocationManagerDelegate {
 		super.init()		
 		// For use in foreground
 		locationManager.delegate = self
-		self.locationManager.requestAlwaysAuthorization()
 		self.locationManager.requestWhenInUseAuthorization()
 		if CLLocationManager.locationServicesEnabled() {
 			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-			locationManager.startUpdatingLocation()
+			locationManager.requestLocation()
 		}
 	}
 		
 	func getCurrentLocation() {
 		if CLLocationManager.locationServicesEnabled() {
-			locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-			locationManager.startUpdatingLocation()
+			locationManager.requestLocation()
 		}
 	}
 	
@@ -48,10 +46,16 @@ class SFLocationManager: NSObject, CLLocationManagerDelegate {
 		self.currentLocation = locValue
 		
 		self.geocode(latitude: self.currentLocation!.latitude, longitude: self.currentLocation!.longitude) { (place) in
-			print(place.locality)
-			self.locDelegate.locationUpdated(city: place.locality!)
+			if let city = place.locality {
+				print(city)
+				self.locDelegate.locationUpdated(city: city)
+			}
 		}
 	}
+	
+	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Failed to find user's location: \(error.localizedDescription)")
+    }
 		
 	func geocode(latitude: CLLocationDegrees, longitude: CLLocationDegrees, completion: @escaping (CLPlacemark) -> Void) {
 	  let location = CLLocation(latitude: latitude, longitude: longitude)
