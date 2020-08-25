@@ -32,16 +32,19 @@ class SliderTableViewCell: UITableViewCell {
 				
 		switch indexPath.row {
 		case 0:
-			slider.isHidden = true
-			suggestedLabel.isHidden = true
+			//slider.isHidden = true
+			//suggestedLabel.isHidden = true
+			sliderStack.isHidden = true
 			titleLabel.text = "Suggested Radius"
 		case 1:
-			slider.isHidden = false
-			suggestedLabel.isHidden = false
+			//slider.isHidden = false
+			//suggestedLabel.isHidden = false
+			sliderStack.isHidden = false
 			titleLabel.text = "Custom Radius"
 		default:
-			slider.isHidden = false
-			suggestedLabel.isHidden = false
+			//slider.isHidden = false
+			//suggestedLabel.isHidden = false
+			sliderStack.isHidden = false
 			titleLabel.text = "Custom Radius"
 		}
     }
