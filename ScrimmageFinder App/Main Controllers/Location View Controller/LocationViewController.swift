@@ -10,33 +10,29 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class LocationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class LocationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate {
 		
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var mapView: MKMapView!
+	var locationManager = CLLocationManager()
 	
 	private var selectedIndexPath: IndexPath?
 	private var sugestedRadius = 80
 	private var customRadius =  80
 	private var city = ""
+	
+	var currLocation: CLLocation!
 			
 	override func viewDidLoad() {
         super.viewDidLoad()
 		self.registerNib()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
-		
-		let buttonItem = MKUserTrackingButton(mapView: mapView)
-		buttonItem.tintColor = .white
-		buttonItem.backgroundColor = .lightGray
-		self.mapView.addSubview(buttonItem)
-		buttonItem.translatesAutoresizingMaskIntoConstraints = false
-		NSLayoutConstraint.activate([
-			NSLayoutConstraint(item: buttonItem, attribute: .right, relatedBy: .equal, toItem: mapView, attribute: .right, multiplier: 1.0, constant: -5),
-			NSLayoutConstraint(item: buttonItem, attribute: .top, relatedBy: .equal, toItem: mapView, attribute: .top, multiplier: 1.0, constant: 5)
-		])
-		buttonItem.layer.cornerRadius = 10
-		buttonItem.clipsToBounds = true
+		self.currLocation = locationManager.location
+		self.mapView.delegate = self
+		locationManager.delegate = self
+		locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+
     }
 	
 	deinit {
@@ -71,6 +67,10 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 		self.dismiss(animated: true, completion: nil)
 	}
 	
+	@IBAction func moveToCurrentLoc(_ sender: Any) {
+		mapView.setCenter(currLocation.coordinate, animated: true)
+	}
+	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		self.selectedIndexPath = indexPath
 		self.tableView.reloadData()
@@ -91,5 +91,21 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 	func registerNib() {
 		let nib = UINib(nibName: "SliderTableViewCell", bundle: nil)
 		tableView.register(nib, forCellReuseIdentifier: "sliderCell")
+	}
+}
+
+extension LocationViewController: MKMapViewDelegate {
+	
+	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+		
+		var circleRenderer = MKCircleRenderer()
+		if let overlay = overlay as? MKCircle {
+			circleRenderer = MKCircleRenderer(circle: overlay)
+			circleRenderer.fillColor = UIColor.blue
+			circleRenderer.strokeColor = .white
+			circleRenderer.alpha = 0.5
+			
+		}
+		return circleRenderer
 	}
 }

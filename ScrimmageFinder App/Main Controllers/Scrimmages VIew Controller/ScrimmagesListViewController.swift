@@ -22,8 +22,6 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 	var coordinator: ScrimmagesCoordinator?
 	var locationManager: SFLocationManager!
 	var service = FIRFirestoreService.shared
-	
-	//var locationManager: CLLocationManager!
 		
 	override func viewDidLoad() {
 		super.viewDidLoad()
