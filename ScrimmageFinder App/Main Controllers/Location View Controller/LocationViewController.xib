@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationViewController" customModule="ScrimmageFinder_App" customModuleProvider="target">
             <connections>
                 <outlet property="mapView" destination="bDH-XK-kbo" id="2rY-iN-GnG"/>
+                <outlet property="regionView" destination="aCg-0i-Gb5" id="xDi-8B-inj"/>
                 <outlet property="tableView" destination="Ee0-1c-iMT" id="JM7-v1-14o"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

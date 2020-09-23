@@ -15,6 +15,7 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var mapView: MKMapView!
 	var locationManager = CLLocationManager()
+	@IBOutlet weak var regionView: UIView!
 	
 	private var selectedIndexPath: IndexPath?
 	private var sugestedRadius = 80
@@ -32,7 +33,6 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 		self.mapView.delegate = self
 		locationManager.delegate = self
 		locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-
     }
 	
 	deinit {
@@ -57,6 +57,15 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 		cell.configureCell(isCellSelected: isSelectedCell, radius: sugestedRadius, indexPath: indexPath)
 		return cell
 		
+	}
+	
+	func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+		let flowHeightConstraint = self.regionView.heightAnchor.constraint(equalToConstant: self.regionView.frame.height - 20)
+		let flowwidthConstraint = self.regionView.widthAnchor.constraint(equalToConstant: self.regionView.frame.width - 20)
+		flowHeightConstraint.isActive = true
+		flowwidthConstraint.isActive = true
+		self.view.layoutIfNeeded()
+
 	}
 	
 	@IBAction func cancelPressed(_ sender: Any) {
