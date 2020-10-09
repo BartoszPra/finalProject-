@@ -165,7 +165,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     @IBAction func goToAddScrimmagesClicked(_ sender: Any) {
-        self.coordinator?.goToLocationChange()        
+        //self.coordinator?.goToLocationChange()        
     }
     
     @IBAction func logOutClicked(_ sender: Any) {
@@ -177,7 +177,7 @@ class ScrimmagesViewController: UIViewController, UITableViewDataSource, UITable
             print(err)
         }
         GIDSignIn.sharedInstance()?.signOut()
-        FBSDKLoginManager().logOut()
+		LoginManager().logOut()
         self.dismiss(animated: true, completion: nil)
         
     }

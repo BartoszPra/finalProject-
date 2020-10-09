@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Google Inc. All rights reserved.
+ * Copyright 2016 Google LLC. All rights reserved.
  *
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
@@ -60,10 +60,6 @@
   // Setup the results view controller.
   _tableDataSource = [[GMSAutocompleteTableDataSource alloc] init];
   _tableDataSource.delegate = self;
-  [_tableDataSource
-      setAutocompleteBoundsUsingNorthEastCorner:self.autocompleteBoundsNorthEastCorner
-                                SouthWestCorner:self.autocompleteBoundsSouthWestCorner];
-  _tableDataSource.autocompleteBoundsMode = self.autocompleteBoundsMode;
   _tableDataSource.autocompleteFilter = self.autocompleteFilter;
   _tableDataSource.placeFields = self.placeFields;
   _tableDataSource.tableCellBackgroundColor = [UIColor whiteColor];

@@ -12,25 +12,26 @@ import FBSDKLoginKit
 import GoogleSignIn
 import Dispatch
 
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignInUIDelegate, Storyboarded, UITextFieldDelegate {
-   
+class LoginViewController: UIViewController, LoginButtonDelegate, Storyboarded, UITextFieldDelegate {
+	
+	
     weak var coordinator: MainCoordinator?
     @IBOutlet var emailTF: UITextField!
     @IBOutlet var passTF: UITextField!
-    @IBOutlet weak var googleSignInButton: GIDSignInButton!
-    let coreDataController = CoreDataController.shared
-    @IBOutlet weak var googleButton: GIDSignInButton!
-    @IBOutlet weak var facebookLoginSignInButton: FBSDKLoginButton!
-
+	let coreDataController = CoreDataController.shared
+	@IBOutlet weak var googleButton: GIDSignInButton!
+	
+	@IBOutlet weak var facebookLoginSignInButton: FBLoginButton!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         self.emailTF.delegate = self
         self.passTF.delegate = self
         self.navigationController?.navigationBar.isHidden = true
         self.setupUI()
-        GIDSignIn.sharedInstance().uiDelegate = self
         facebookLoginSignInButton.delegate = self
-        facebookLoginSignInButton.readPermissions = ["email", "public_profile"]
+		GIDSignIn.sharedInstance()?.presentingViewController = self
+        facebookLoginSignInButton.permissions = ["email", "public_profile"]
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         view.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
@@ -46,7 +47,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         }
     }
         
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+	func loginButton(_ loginButton: FBLoginButton!, didCompleteWith result: LoginManagerLoginResult!, error: Error!) {
         if error != nil {
             print(error)
             return
@@ -54,12 +55,12 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
         self.loginWithFcb()
     }
     
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+	func loginButtonDidLogOut(_ loginButton: FBLoginButton!) {
         print("User did log out of facebook")        
     }
     
     func loginWithFcb() {
-      let accesToken = FBSDKAccessToken.current()
+		let accesToken = AccessToken.current
       guard let stringAccesTok = accesToken?.tokenString else {return}
       let credential = FacebookAuthProvider.credential(withAccessToken: stringAccesTok)
       Auth.auth().signInAndRetrieveData(with: credential, completion: { (user, error) in
@@ -77,7 +78,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, GIDSignIn
             }
         })
     }
-    
+	
     @IBAction func registerClicked(_ sender: Any) {
         coordinator?.goToRegister()
     }

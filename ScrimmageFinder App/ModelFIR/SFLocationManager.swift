@@ -41,11 +41,21 @@ class SFLocationManager: NSObject, CLLocationManagerDelegate {
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-		print("locations = \(locValue.latitude) \(locValue.longitude)")
+		//guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+		//print("locations = \(locValue.latitude) \(locValue.longitude)")
+		let locValue = locations[0].coordinate
 		self.currentLocation = locValue
-		
-		self.geocode(latitude: self.currentLocation!.latitude, longitude: self.currentLocation!.longitude) { (place) in
+		self.geocodeLocation(location: currentLocation!)
+//		self.geocode(latitude: self.currentLocation!.latitude, longitude: self.currentLocation!.longitude) { (place) in
+//			if let city = place.locality {
+//				print(city)
+//				self.locDelegate.locationUpdated(city: city)
+//			}
+//		}
+	}
+	
+	func geocodeLocation(location: CLLocationCoordinate2D) {
+		self.geocode(latitude: location.latitude, longitude: location.longitude) { (place) in
 			if let city = place.locality {
 				print(city)
 				self.locDelegate.locationUpdated(city: city)

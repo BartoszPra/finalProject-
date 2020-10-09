@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Google Inc. All rights reserved.
+ * Copyright 2016 Google LLC. All rights reserved.
  *
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
@@ -35,14 +35,9 @@
   return self;
 }
 
-- (UIViewController *)
-    createViewControllerWithAutocompleteBoundsMode:(GMSAutocompleteBoundsMode)autocompleteBoundsMode
-                 autocompleteBoundsNorthEastCorner:
-                     (CLLocationCoordinate2D)autocompleteBoundsNorthEastCorner
-                 autocompleteBoundsSouthWestCorner:
-                     (CLLocationCoordinate2D)autocompleteBoundsSouthWestCorner
-                                autocompleteFilter:(GMSAutocompleteFilter *)autocompleteFilter
-                                       placeFields:(GMSPlaceField)placeFields {
+- (UIViewController *)createViewControllerWithAutocompleteFilter:
+                          (GMSAutocompleteFilter *)autocompleteFilter
+                                                     placeFields:(GMSPlaceField)placeFields {
   // Construct the demo view controller.
   UIViewController *demoViewController = [[_viewControllerClass alloc] init];
 
@@ -50,9 +45,6 @@
   if ([demoViewController isKindOfClass:[AutocompleteBaseViewController class]]) {
     AutocompleteBaseViewController *controller =
         (AutocompleteBaseViewController *)demoViewController;
-    controller.autocompleteBoundsNorthEastCorner = autocompleteBoundsNorthEastCorner;
-    controller.autocompleteBoundsSouthWestCorner = autocompleteBoundsSouthWestCorner;
-    controller.autocompleteBoundsMode = autocompleteBoundsMode;
     controller.autocompleteFilter = autocompleteFilter;
     controller.placeFields = placeFields;
   }

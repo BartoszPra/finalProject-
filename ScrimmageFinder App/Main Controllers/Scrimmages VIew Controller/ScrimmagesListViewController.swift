@@ -13,7 +13,7 @@ import GoogleSignIn
 import CoreLocation
 import MapKit
 
-class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, ScrimmageViewModel>, SFLocationDelegate {
+class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, ScrimmageViewModel>, SFLocationDelegate, LocationViewDelegate {
 	
 	@IBOutlet weak var newTable: UITableView!
 	
@@ -53,7 +53,7 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 	}
 	
 	@objc func goToLocationChange() {
-        self.coordinator?.goToLocationChange()
+        self.coordinator?.goToLocationChange(delegate: self)
     }
 	
 	@objc func logOutClicked() {
@@ -64,7 +64,7 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
             print(err)
         }
         GIDSignIn.sharedInstance()?.signOut()
-        FBSDKLoginManager().logOut()
+		LoginManager().logOut()
         self.dismiss(animated: true, completion: nil)
         
     }
@@ -82,6 +82,10 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 	func locationUpdated(city: String) {
 		self.locationButton = UIBarButtonItem(image: UIImage(named: "location")!, title: city, target: self, action: #selector(goToLocationChange))
 		navigationItem.rightBarButtonItem = locationButton
+	}
+	
+	func locationHasChanged(location: CLLocationCoordinate2D) {
+		self.locationManager.geocodeLocation(location: location)
 	}
 	
 }

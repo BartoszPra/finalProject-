@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="ScrimmageFinder_App" customModuleProvider="target">
             <connections>
                 <outlet property="emailTF" destination="0ac-sP-wqL" id="1Qj-NM-GUa"/>
-                <outlet property="facebookLoginSignInButton" destination="btm-WF-TfO" id="egI-TU-htQ"/>
-                <outlet property="googleButton" destination="EHB-ee-OYO" id="YNf-3c-jap"/>
-                <outlet property="googleSignInButton" destination="EHB-ee-OYO" id="sly-zg-eJ0"/>
+                <outlet property="facebookLoginSignInButton" destination="btm-WF-TfO" id="Ipg-HJ-P3X"/>
+                <outlet property="googleButton" destination="EHB-ee-OYO" id="SQb-Mh-yCZ"/>
                 <outlet property="passTF" destination="d9M-Ne-79y" id="J8I-QG-PwX"/>
                 <outlet property="view" destination="iN0-l3-epB" id="FaZ-2O-49b"/>
             </connections>
@@ -146,8 +145,8 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btm-WF-TfO" userLabel="Facebook Login Sign In Button" customClass="FBSDKLoginButton">
                                     <rect key="frame" x="0.0" y="0.0" width="345" height="5.5"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -167,11 +166,9 @@
                                             <integer key="value" value="5"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="loginWithGoogle:" destination="-1" eventType="valueChanged" id="JXF-6A-tRA"/>
-                                    </connections>
                                 </view>
                             </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </stackView>
                     </subviews>
                 </stackView>

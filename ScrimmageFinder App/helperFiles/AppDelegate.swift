@@ -7,6 +7,7 @@ import Firebase
 import GooglePlaces
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     
     var window: UIWindow?
@@ -25,39 +26,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
         window?.makeKeyAndVisible()
         
         FirebaseApp.configure()
-        GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        GIDSignIn.sharedInstance()?.delegate = self
+		GIDSignIn.sharedInstance()?.clientID = FirebaseApp.app()?.options.clientID
+		GIDSignIn.sharedInstance()?.delegate = self
+		
         return true
     }
     
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        
-        if let error = error {
+
+		if let error = error {
             print("Error \(error.localizedDescription)")
             return
         }
-        
+
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                        accessToken: authentication.accessToken)
-        
-        Auth.auth().signInAndRetrieveData(with: credential) { (_, error) in
-            if error == nil {
+		Auth.auth().signIn(with: credential) { (_, err) in
+			if err == nil {
                 self.coordinator?.startTabBarCoordinator(viewController: (self.window?.rootViewController)!)
             } else {
-                print(error?.localizedDescription as Any)
+                print(err?.localizedDescription as Any)
                 return
             }
-        }
+		}
     }
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any])
         -> Bool {
+			
+			return (GIDSignIn.sharedInstance()?.handle(url))!
+		//return GIDSignIn.sharedInstance().handle(url)
             
-           return GIDSignIn.sharedInstance().handle(url,
-                                              sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String,
-                                              annotation: [:])
-           // return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

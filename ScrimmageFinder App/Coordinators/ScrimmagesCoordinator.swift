@@ -33,10 +33,11 @@ class ScrimmagesCoordinator: Coordinator {
         ScrimmagesDetailCoordinator(navigationController: navigationController, scrimmage: scrimmage, isSavedUsed: true, image: image)
     }
 	
-	func goToLocationChange() {
+	func goToLocationChange(delegate: LocationViewDelegate) {
 		print("Will change location soon")
 		
 		let viewController = LocationViewController.init(nibName: "LocationViewController", bundle: nil)
+		viewController.delegate = delegate
         navigationController.present(viewController, animated: true, completion: nil)
 		
 	}
