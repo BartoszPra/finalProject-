@@ -263,7 +263,7 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 	
 	func createChannel(chatName: String, users: [String], chatImageUrl: String, completion: @escaping (String?) -> Void) {
 		let channel = Chat(name: chatName, users: users, isGroup: true, url: chatImageUrl)
-		var ref: DocumentReference? = nil
+		var ref: DocumentReference?
 		ref = channelReference.addDocument(data: channel.representation) { (error) in
 			if let e = error {
 				print("Error saving channel: \(e.localizedDescription)")
@@ -391,7 +391,7 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 											editableData: toEditScrimmage?.name,
 											identifier: "textFieldCell",
 											keboardType: .default, target: nil, action: nil,
-											placeHolder: "Name", color: nil, type: nil, height: 58, varName:"name")
+											placeHolder: "Name", color: nil, type: nil, height: 58, varName: "name")
 		let priceCell = CellDefinitionHelper(cellTitle: "Price",
 											 editableData: String(format: "%.2f", toEditScrimmage?.price ?? 0.0),
 											 identifier: "customPickerCell", keboardType: nil, target: self,
@@ -405,7 +405,7 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 		let dateCell = CellDefinitionHelper(cellTitle: "Date",
 											editableData: toEditScrimmage?.dateString,
 											identifier: "pickerCell", keboardType: nil, target: nil, action: nil,
-											placeHolder: "Date", color: nil, type: nil, height: 58, varName:"dateTime")
+											placeHolder: "Date", color: nil, type: nil, height: 58, varName: "dateTime")
 		let contactNumberCell = CellDefinitionHelper(cellTitle: "Contact Number",
 													 editableData: toEditScrimmage?.managerNumber,
 													 identifier: "textFieldCell", keboardType: .phonePad, target: nil,

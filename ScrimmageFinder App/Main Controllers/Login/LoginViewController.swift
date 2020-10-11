@@ -47,7 +47,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, Storyboarded, 
         }
     }
         
-	func loginButton(_ loginButton: FBLoginButton!, didCompleteWith result: LoginManagerLoginResult!, error: Error!) {
+	func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         if error != nil {
             print(error)
             return
@@ -55,7 +55,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, Storyboarded, 
         self.loginWithFcb()
     }
     
-	func loginButtonDidLogOut(_ loginButton: FBLoginButton!) {
+	func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
         print("User did log out of facebook")        
     }
     
@@ -63,8 +63,8 @@ class LoginViewController: UIViewController, LoginButtonDelegate, Storyboarded, 
 		let accesToken = AccessToken.current
       guard let stringAccesTok = accesToken?.tokenString else {return}
       let credential = FacebookAuthProvider.credential(withAccessToken: stringAccesTok)
-      Auth.auth().signInAndRetrieveData(with: credential, completion: { (user, error) in
-            if let error = error {
+		Auth.auth().signIn(with: credential) { (user, error) in
+			if let error = error {
                 print("Error logging in", error)
             } else {
                 print("username\(String(describing: user?.user.displayName))")
@@ -74,9 +74,8 @@ class LoginViewController: UIViewController, LoginButtonDelegate, Storyboarded, 
                 DispatchQueue.main.async {
                     self.coordinator?.startTabBarCoordinator(viewController: self)
                 }
-                
             }
-        })
+		}
     }
 	
     @IBAction func registerClicked(_ sender: Any) {
@@ -100,7 +99,6 @@ class LoginViewController: UIViewController, LoginButtonDelegate, Storyboarded, 
 				FIRFirestoreService.shared.getProfileImage(for: String(describing: user!.user.uid)) { (image) in
                     self.coreDataController.prepareImageForSaving(image: image)
                 }
-				print(user?.user.displayName)
                self.coordinator?.startTabBarCoordinator(viewController: self)
             } else {
 				AlertController.showAllert(self, title: "Oops", message: String(describing: error!.localizedDescription))

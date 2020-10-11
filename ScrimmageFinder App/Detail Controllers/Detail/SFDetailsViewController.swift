@@ -192,11 +192,15 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 		guard let currentScrimmageId = self.viewModel?.id else { return }
 		if viewModel.isParticipating && viewModel.participantStatus == .confirmed {
 			FIRFirestoreService.shared.updateParticipantsTable(for: currentScrimmageId, for: self.userID, with: 2) { (succesful) in
-				AlertController.showAllert(self, title: "You are not going", message: "You are not going to this scrimmage.")
+				if succesful {
+					AlertController.showAllert(self, title: "You are not going", message: "You are not going to this scrimmage.")
+				}
 			}
 		} else if viewModel.isParticipating && viewModel.participantStatus == .unconfirmed {
 			FIRFirestoreService.shared.updateParticipantsTable(for: currentScrimmageId, for: self.userID, with: 1) { (succesful) in
-				AlertController.showAllert(self, title: "You are going", message: "You are going to this scrimmage.")
+				if succesful {
+					AlertController.showAllert(self, title: "You are going", message: "You are going to this scrimmage.")
+				}
 			}
 		} else if viewModel.isParticipating && viewModel.participantStatus == .invited {
 			respondToInvitation()
