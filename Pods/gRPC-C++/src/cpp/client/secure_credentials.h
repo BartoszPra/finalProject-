@@ -22,45 +22,30 @@
 #include <grpc/grpc_security.h>
 
 #include <grpcpp/security/credentials.h>
-#include <grpcpp/security/credentials_impl.h>
-#include <grpcpp/security/tls_credentials_options.h>
 #include <grpcpp/support/config.h>
 
-#include "src/core/lib/security/credentials/credentials.h"
 #include "src/cpp/server/thread_pool_interface.h"
 
-namespace grpc_impl {
-
-class Channel;
+namespace grpc {
 
 class SecureChannelCredentials final : public ChannelCredentials {
  public:
   explicit SecureChannelCredentials(grpc_channel_credentials* c_creds);
-  ~SecureChannelCredentials() {
-    if (c_creds_ != nullptr) c_creds_->Unref();
-  }
+  ~SecureChannelCredentials() { grpc_channel_credentials_release(c_creds_); }
   grpc_channel_credentials* GetRawCreds() { return c_creds_; }
 
-  std::shared_ptr<Channel> CreateChannelImpl(
-      const grpc::string& target, const ChannelArguments& args) override;
-
+  std::shared_ptr<grpc::Channel> CreateChannel(
+      const string& target, const grpc::ChannelArguments& args) override;
   SecureChannelCredentials* AsSecureCredentials() override { return this; }
 
  private:
-  std::shared_ptr<Channel> CreateChannelWithInterceptors(
-      const grpc::string& target, const ChannelArguments& args,
-      std::vector<std::unique_ptr<
-          ::grpc::experimental::ClientInterceptorFactoryInterface>>
-          interceptor_creators) override;
   grpc_channel_credentials* const c_creds_;
 };
 
 class SecureCallCredentials final : public CallCredentials {
  public:
   explicit SecureCallCredentials(grpc_call_credentials* c_creds);
-  ~SecureCallCredentials() {
-    if (c_creds_ != nullptr) c_creds_->Unref();
-  }
+  ~SecureCallCredentials() { grpc_call_credentials_release(c_creds_); }
   grpc_call_credentials* GetRawCreds() { return c_creds_; }
 
   bool ApplyToCall(grpc_call* call) override;
@@ -69,20 +54,6 @@ class SecureCallCredentials final : public CallCredentials {
  private:
   grpc_call_credentials* const c_creds_;
 };
-
-namespace experimental {
-
-// Transforms C++ STS Credentials options to core options. The pointers of the
-// resulting core options point to the memory held by the C++ options so C++
-// options need to be kept alive until after the core credentials creation.
-grpc_sts_credentials_options StsCredentialsCppToCoreOptions(
-    const StsCredentialsOptions& options);
-
-}  // namespace experimental
-
-}  // namespace grpc_impl
-
-namespace grpc {
 
 class MetadataCredentialsPluginWrapper final : private GrpcLibraryCodegen {
  public:

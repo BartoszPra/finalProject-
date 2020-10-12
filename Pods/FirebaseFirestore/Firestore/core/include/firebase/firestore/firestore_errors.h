@@ -23,20 +23,21 @@ namespace firestore {
 /**
  * Error codes used by Cloud Firestore.
  *
- * The codes are in sync across Firestore SDKs on various platforms.
+ * The codes are in sync with the Firestore iOS client SDK header file
+ * FIRFirestoreErrors.h.
  */
-enum Error {
-  /** The operation completed successfully. */
-  // Note: NSError objects will never have a code with this value.
-  kErrorOk = 0,
-
-  kErrorNone = 0,
+enum FirestoreErrorCode {
+  /**
+   * The operation completed successfully. NSError objects will never have a
+   * code with this value.
+   */
+  Ok = 0,
 
   /** The operation was cancelled (typically by the caller). */
-  kErrorCancelled = 1,
+  Cancelled = 1,
 
   /** Unknown error or an error from a different error domain. */
-  kErrorUnknown = 2,
+  Unknown = 2,
 
   /**
    * Client specified an invalid argument. Note that this differs from
@@ -44,7 +45,7 @@ enum Error {
    * problematic regardless of the state of the system (e.g., an invalid field
    * name).
    */
-  kErrorInvalidArgument = 3,
+  InvalidArgument = 3,
 
   /**
    * Deadline expired before operation could complete. For operations that
@@ -53,62 +54,64 @@ enum Error {
    * from a server could have been delayed long enough for the deadline to
    * expire.
    */
-  kErrorDeadlineExceeded = 4,
+  DeadlineExceeded = 4,
 
   /** Some requested document was not found. */
-  kErrorNotFound = 5,
+  NotFound = 5,
 
   /** Some document that we attempted to create already exists. */
-  kErrorAlreadyExists = 6,
+  AlreadyExists = 6,
 
   /** The caller does not have permission to execute the specified operation. */
-  kErrorPermissionDenied = 7,
+  PermissionDenied = 7,
 
   /**
    * Some resource has been exhausted, perhaps a per-user quota, or perhaps the
    * entire file system is out of space.
    */
-  kErrorResourceExhausted = 8,
+  ResourceExhausted = 8,
 
   /**
    * Operation was rejected because the system is not in a state required for
    * the operation's execution.
    */
-  kErrorFailedPrecondition = 9,
+  FailedPrecondition = 9,
 
   /**
    * The operation was aborted, typically due to a concurrency issue like
    * transaction aborts, etc.
    */
-  kErrorAborted = 10,
+  Aborted = 10,
 
   /** Operation was attempted past the valid range. */
-  kErrorOutOfRange = 11,
+  OutOfRange = 11,
 
   /** Operation is not implemented or not supported/enabled. */
-  kErrorUnimplemented = 12,
+  Unimplemented = 12,
 
   /**
    * Internal errors. Means some invariants expected by underlying system has
    * been broken. If you see one of these errors, something is very broken.
    */
-  kErrorInternal = 13,
+  Internal = 13,
 
   /**
    * The service is currently unavailable. This is a most likely a transient
    * condition and may be corrected by retrying with a backoff.
    */
-  kErrorUnavailable = 14,
+  Unavailable = 14,
 
   /** Unrecoverable data loss or corruption. */
-  kErrorDataLoss = 15,
+  DataLoss = 15,
 
-  /**
-   * The request does not have valid authentication credentials for the
-   * operation.
-   */
-  kErrorUnauthenticated = 16
+  /** The request does not have valid authentication credentials for the
+     operation. */
+  Unauthenticated = 16
 };
+
+// TODO(zxu123): decide whether we actually want an Error class or just use
+// enum.
+using Error = FirestoreErrorCode;
 
 }  // namespace firestore
 }  // namespace firebase

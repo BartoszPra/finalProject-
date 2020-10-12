@@ -9,7 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>BoringSSL-GRPC.xcscheme</key>
+		<key>BoringSSL.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -44,12 +44,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FirebaseAuthInterop.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FirebaseCore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FirebaseCoreDiagnostics.xcscheme</key>
+		<key>FirebaseDatabase.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FirebaseFirestore-gRPCCertificates-Firestore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -59,7 +69,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FirebaseInstallations.xcscheme</key>
+		<key>FirebaseInstanceID.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -79,12 +89,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>GoogleAppMeasurement.xcscheme</key>
+		<key>GeoFire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>GoogleDataTransport.xcscheme</key>
+		<key>Geofirestore.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GoogleAppMeasurement.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -134,7 +149,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>PromisesObjC.xcscheme</key>
+		<key>Protobuf.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -145,16 +160,6 @@
 			<false/>
 		</dict>
 		<key>SwiftLint.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>abseil.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>gRPC-C++-gRPCCertificates-Cpp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

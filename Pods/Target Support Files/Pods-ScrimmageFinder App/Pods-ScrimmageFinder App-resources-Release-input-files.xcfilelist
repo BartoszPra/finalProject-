@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-ScrimmageFinder App/Pods-ScrimmageFinder App-resources.sh
+${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle
 ${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle
 ${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle

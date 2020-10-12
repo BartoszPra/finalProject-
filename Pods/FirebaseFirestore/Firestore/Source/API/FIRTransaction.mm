@@ -16,34 +16,21 @@
 
 #import "FIRTransaction.h"
 
-#include <memory>
 #include <utility>
-#include <vector>
 
 #import "Firestore/Source/API/FIRDocumentReference+Internal.h"
 #import "Firestore/Source/API/FIRDocumentSnapshot+Internal.h"
 #import "Firestore/Source/API/FIRFirestore+Internal.h"
 #import "Firestore/Source/API/FIRTransaction+Internal.h"
 #import "Firestore/Source/API/FSTUserDataConverter.h"
+#import "Firestore/Source/Core/FSTTransaction.h"
+#import "Firestore/Source/Model/FSTDocument.h"
+#import "Firestore/Source/Util/FSTUsageValidation.h"
 
-#include "Firestore/core/src/core/transaction.h"
-#include "Firestore/core/src/core/user_data.h"
-#include "Firestore/core/src/model/document.h"
-#include "Firestore/core/src/util/error_apple.h"
-#include "Firestore/core/src/util/exception.h"
-#include "Firestore/core/src/util/hard_assert.h"
-#include "Firestore/core/src/util/status.h"
-#include "Firestore/core/src/util/statusor.h"
+#include "Firestore/core/src/firebase/firestore/util/hard_assert.h"
 
 using firebase::firestore::core::ParsedSetData;
 using firebase::firestore::core::ParsedUpdateData;
-using firebase::firestore::core::Transaction;
-using firebase::firestore::model::Document;
-using firebase::firestore::model::MaybeDocument;
-using firebase::firestore::util::MakeNSError;
-using firebase::firestore::util::Status;
-using firebase::firestore::util::StatusOr;
-using firebase::firestore::util::ThrowInvalidArgument;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -51,30 +38,29 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FIRTransaction ()
 
-- (instancetype)initWithTransaction:(std::shared_ptr<Transaction>)transaction
+- (instancetype)initWithTransaction:(FSTTransaction *)transaction
                           firestore:(FIRFirestore *)firestore NS_DESIGNATED_INITIALIZER;
 
+@property(nonatomic, strong, readonly) FSTTransaction *internalTransaction;
 @property(nonatomic, strong, readonly) FIRFirestore *firestore;
 @end
 
 @implementation FIRTransaction (Internal)
 
-+ (instancetype)transactionWithInternalTransaction:(std::shared_ptr<Transaction>)transaction
-                                         firestore:(FIRFirestore *)firestore {
-  return [[FIRTransaction alloc] initWithTransaction:std::move(transaction) firestore:firestore];
++ (instancetype)transactionWithFSTTransaction:(FSTTransaction *)transaction
+                                    firestore:(FIRFirestore *)firestore {
+  return [[FIRTransaction alloc] initWithTransaction:transaction firestore:firestore];
 }
 
 @end
 
-@implementation FIRTransaction {
-  std::shared_ptr<Transaction> _internalTransaction;
-}
+@implementation FIRTransaction
 
-- (instancetype)initWithTransaction:(std::shared_ptr<Transaction>)transaction
+- (instancetype)initWithTransaction:(FSTTransaction *)transaction
                           firestore:(FIRFirestore *)firestore {
   self = [super init];
   if (self) {
-    _internalTransaction = std::move(transaction);
+    _internalTransaction = transaction;
     _firestore = firestore;
   }
   return self;
@@ -91,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
   [self validateReference:document];
   ParsedSetData parsed = merge ? [self.firestore.dataConverter parsedMergeData:data fieldMask:nil]
                                : [self.firestore.dataConverter parsedSetData:data];
-  _internalTransaction->Set(document.key, std::move(parsed));
+  [self.internalTransaction setData:std::move(parsed) forDocument:document.key];
   return self;
 }
 
@@ -100,7 +86,7 @@ NS_ASSUME_NONNULL_BEGIN
                 mergeFields:(NSArray<id> *)mergeFields {
   [self validateReference:document];
   ParsedSetData parsed = [self.firestore.dataConverter parsedMergeData:data fieldMask:mergeFields];
-  _internalTransaction->Set(document.key, std::move(parsed));
+  [self.internalTransaction setData:std::move(parsed) forDocument:document.key];
   return self;
 }
 
@@ -108,13 +94,13 @@ NS_ASSUME_NONNULL_BEGIN
                    forDocument:(FIRDocumentReference *)document {
   [self validateReference:document];
   ParsedUpdateData parsed = [self.firestore.dataConverter parsedUpdateData:fields];
-  _internalTransaction->Update(document.key, std::move(parsed));
+  [self.internalTransaction updateData:std::move(parsed) forDocument:document.key];
   return self;
 }
 
 - (FIRTransaction *)deleteDocument:(FIRDocumentReference *)document {
   [self validateReference:document];
-  _internalTransaction->Delete(document.key);
+  [self.internalTransaction deleteDocument:document.key];
   return self;
 }
 
@@ -122,38 +108,32 @@ NS_ASSUME_NONNULL_BEGIN
          completion:(void (^)(FIRDocumentSnapshot *_Nullable document,
                               NSError *_Nullable error))completion {
   [self validateReference:document];
-  _internalTransaction->Lookup(
-      {document.key},
-      [self, document, completion](const StatusOr<std::vector<MaybeDocument>> &maybe_documents) {
-        if (!maybe_documents.ok()) {
-          completion(nil, MakeNSError(maybe_documents.status()));
-          return;
-        }
-
-        const auto &documents = maybe_documents.ValueOrDie();
-        HARD_ASSERT(documents.size() == 1, "Mismatch in docs returned from document lookup.");
-        const MaybeDocument &internalDoc = documents.front();
-        if (internalDoc.is_no_document()) {
-          FIRDocumentSnapshot *doc =
-              [[FIRDocumentSnapshot alloc] initWithFirestore:self.firestore.wrapped
-                                                 documentKey:document.key
-                                                    document:absl::nullopt
-                                                   fromCache:false
-                                            hasPendingWrites:false];
-          completion(doc, nil);
-        } else if (internalDoc.is_document()) {
-          FIRDocumentSnapshot *doc =
-              [[FIRDocumentSnapshot alloc] initWithFirestore:self.firestore.wrapped
-                                                 documentKey:internalDoc.key()
-                                                    document:Document(internalDoc)
-                                                   fromCache:false
-                                            hasPendingWrites:false];
-          completion(doc, nil);
-        } else {
-          HARD_FAIL("BatchGetDocumentsRequest returned unexpected document type: %s",
-                    internalDoc.type());
-        }
-      });
+  [self.internalTransaction
+      lookupDocumentsForKeys:{document.key}
+                  completion:^(NSArray<FSTMaybeDocument *> *_Nullable documents,
+                               NSError *_Nullable error) {
+                    if (error) {
+                      completion(nil, error);
+                      return;
+                    }
+                    HARD_ASSERT(documents.count == 1,
+                                "Mismatch in docs returned from document lookup.");
+                    FSTMaybeDocument *internalDoc = documents.firstObject;
+                    if ([internalDoc isKindOfClass:[FSTDocument class]]) {
+                      FIRDocumentSnapshot *doc =
+                          [FIRDocumentSnapshot snapshotWithFirestore:self.firestore
+                                                         documentKey:internalDoc.key
+                                                            document:(FSTDocument *)internalDoc
+                                                           fromCache:NO
+                                                    hasPendingWrites:NO];
+                      completion(doc, nil);
+                    } else if ([internalDoc isKindOfClass:[FSTDeletedDocument class]]) {
+                      completion(nil, nil);
+                    } else {
+                      HARD_FAIL("BatchGetDocumentsRequest returned unexpected document type: %s",
+                                NSStringFromClass([internalDoc class]));
+                    }
+                  }];
 }
 
 - (FIRDocumentSnapshot *_Nullable)getDocument:(FIRDocumentReference *)document
@@ -178,7 +158,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)validateReference:(FIRDocumentReference *)reference {
   if (reference.firestore != self.firestore) {
-    ThrowInvalidArgument("Provided document reference is from a different Firestore instance.");
+    FSTThrowInvalidArgument(@"Provided document reference is from a different Firestore instance.");
   }
 }
 

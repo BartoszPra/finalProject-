@@ -2,13 +2,23 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
+import Geofirestore
+import CoreLocation
 
 // CRUD operations for forebase
 class FIRFirestoreService {
 	
+	var geoFirestore: GeoFirestore!
+	var geoQuery: GFSCircleQuery!
+	
 	enum UploadType {
 		case userProfile
 		case scrimmageImage
+	}
+	
+	enum LocationQueryChangeType {
+		case added
+		case deleted
 	}
 	
 	var listener: ListenerRegistration?
@@ -19,7 +29,7 @@ class FIRFirestoreService {
     func configure() {
         FirebaseApp.configure()
     }
-  //collection reference
+	//collection reference
     private func reference(to collectionReference: FIRCollectionReference) -> CollectionReference {
         return Firestore.firestore().collection(collectionReference.rawValue)
     }
@@ -30,6 +40,33 @@ class FIRFirestoreService {
 	
 	func removeListener() {
 		listener?.remove()
+	}
+	
+	func getScrimmagesFromRegion(center: CLLocation, radius: Double, completion: @escaping (Scrimmage, LocationQueryChangeType) -> Void) {
+		
+		geoFirestore = GeoFirestore(collectionRef: reference(to: .scrimmages))
+		// Query locations at [37.7832889, -122.4056973] with a radius of 600 (0.6) meters
+		geoQuery = geoFirestore.query(withCenter: center, radius: radius)
+		
+		let _ = geoQuery.observe(.documentEntered) { (key, location) in
+			if let key = key, let _ = location {
+				self.readOne(from: .scrimmages, with: key, returning: Scrimmage.self) { (scrimmage) in
+					completion(scrimmage, .added)
+				}
+			}
+		}
+				
+		let _ = geoQuery.observe(.documentExited, with: { (key, location) in
+			if let key = key, let _ = location {
+				self.readOne(from: .scrimmages, with: key, returning: Scrimmage.self) { (scrimmage) in
+					completion(scrimmage, .deleted)
+				}
+			}
+		})
+	}
+	
+	func removeGeoObservers() {
+		geoQuery.removeAllObservers()
 	}
         
     // create function exluding id it will be added automatically by fireabase

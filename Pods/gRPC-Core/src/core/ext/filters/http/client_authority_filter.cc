@@ -40,15 +40,14 @@ namespace {
 
 struct call_data {
   grpc_linked_mdelem authority_storage;
-  grpc_core::CallCombiner* call_combiner;
+  grpc_call_combiner* call_combiner;
 };
 
 struct channel_data {
-  grpc_core::ManagedMemorySlice default_authority;
-  grpc_mdelem default_authority_mdelem;
+  grpc_slice default_authority;
 };
 
-void client_authority_start_transport_stream_op_batch(
+void authority_start_transport_stream_op_batch(
     grpc_call_element* elem, grpc_transport_stream_op_batch* batch) {
   channel_data* chand = static_cast<channel_data*>(elem->channel_data);
   call_data* calld = static_cast<call_data*>(elem->call_data);
@@ -60,7 +59,9 @@ void client_authority_start_transport_stream_op_batch(
       initial_metadata->idx.named.authority == nullptr) {
     grpc_error* error = grpc_metadata_batch_add_head(
         initial_metadata, &calld->authority_storage,
-        GRPC_MDELEM_REF(chand->default_authority_mdelem), GRPC_BATCH_AUTHORITY);
+        grpc_mdelem_from_slices(
+            GRPC_MDSTR_AUTHORITY,
+            grpc_slice_ref_internal(chand->default_authority)));
     if (error != GRPC_ERROR_NONE) {
       grpc_transport_stream_op_batch_finish_with_failure(batch, error,
                                                          calld->call_combiner);
@@ -72,28 +73,28 @@ void client_authority_start_transport_stream_op_batch(
 }
 
 /* Constructor for call_data */
-grpc_error* client_authority_init_call_elem(
-    grpc_call_element* elem, const grpc_call_element_args* args) {
+grpc_error* init_call_elem(grpc_call_element* elem,
+                           const grpc_call_element_args* args) {
   call_data* calld = static_cast<call_data*>(elem->call_data);
   calld->call_combiner = args->call_combiner;
   return GRPC_ERROR_NONE;
 }
 
 /* Destructor for call_data */
-void client_authority_destroy_call_elem(
-    grpc_call_element* /*elem*/, const grpc_call_final_info* /*final_info*/,
-    grpc_closure* /*ignored*/) {}
+void destroy_call_elem(grpc_call_element* elem,
+                       const grpc_call_final_info* final_info,
+                       grpc_closure* ignored) {}
 
 /* Constructor for channel_data */
-grpc_error* client_authority_init_channel_elem(
-    grpc_channel_element* elem, grpc_channel_element_args* args) {
+grpc_error* init_channel_elem(grpc_channel_element* elem,
+                              grpc_channel_element_args* args) {
   channel_data* chand = static_cast<channel_data*>(elem->channel_data);
   const grpc_arg* default_authority_arg =
       grpc_channel_args_find(args->channel_args, GRPC_ARG_DEFAULT_AUTHORITY);
   if (default_authority_arg == nullptr) {
     return GRPC_ERROR_CREATE_FROM_STATIC_STRING(
         "GRPC_ARG_DEFAULT_AUTHORITY channel arg. not found. Note that direct "
-        "channels must explicitly specify a value for this argument.");
+        "channels must explicity specify a value for this argument.");
   }
   const char* default_authority_str =
       grpc_channel_arg_get_string(default_authority_arg);
@@ -102,31 +103,28 @@ grpc_error* client_authority_init_channel_elem(
         "GRPC_ARG_DEFAULT_AUTHORITY channel arg. must be a string");
   }
   chand->default_authority =
-      grpc_core::ManagedMemorySlice(default_authority_str);
-  chand->default_authority_mdelem = grpc_mdelem_create(
-      GRPC_MDSTR_AUTHORITY, chand->default_authority, nullptr);
+      grpc_slice_intern(grpc_slice_from_static_string(default_authority_str));
   GPR_ASSERT(!args->is_last);
   return GRPC_ERROR_NONE;
 }
 
 /* Destructor for channel data */
-void client_authority_destroy_channel_elem(grpc_channel_element* elem) {
+void destroy_channel_elem(grpc_channel_element* elem) {
   channel_data* chand = static_cast<channel_data*>(elem->channel_data);
   grpc_slice_unref_internal(chand->default_authority);
-  GRPC_MDELEM_UNREF(chand->default_authority_mdelem);
 }
 }  // namespace
 
 const grpc_channel_filter grpc_client_authority_filter = {
-    client_authority_start_transport_stream_op_batch,
+    authority_start_transport_stream_op_batch,
     grpc_channel_next_op,
     sizeof(call_data),
-    client_authority_init_call_elem,
+    init_call_elem,
     grpc_call_stack_ignore_set_pollset_or_pollset_set,
-    client_authority_destroy_call_elem,
+    destroy_call_elem,
     sizeof(channel_data),
-    client_authority_init_channel_elem,
-    client_authority_destroy_channel_elem,
+    init_channel_elem,
+    destroy_channel_elem,
     grpc_channel_next_get_info,
     "authority"};
 

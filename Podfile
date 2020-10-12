@@ -20,6 +20,7 @@ target 'ScrimmageFinder App' do
 	pod 'SwiftLint'
 	pod 'GooglePlaces'
 	pod 'MessageKit'
+	pod 'Geofirestore'
 
 	target 'ScrimmageFinder AppTests' do inherit! :search_paths
 	# Pods for testing

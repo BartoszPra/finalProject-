@@ -43,18 +43,20 @@ namespace grpc_core {
 class Chttp2IncomingByteStream;
 }  // namespace grpc_core
 
-struct grpc_chttp2_data_parser {
-  grpc_chttp2_data_parser() = default;
-  ~grpc_chttp2_data_parser();
+typedef struct {
+  grpc_chttp2_stream_state state;
+  uint8_t frame_type;
+  uint32_t frame_size;
+  grpc_error* error;
 
-  grpc_chttp2_stream_state state = GRPC_CHTTP2_DATA_FH_0;
-  uint8_t frame_type = 0;
-  uint32_t frame_size = 0;
-  grpc_error* error = GRPC_ERROR_NONE;
+  bool is_frame_compressed;
+  grpc_core::Chttp2IncomingByteStream* parsing_frame;
+} grpc_chttp2_data_parser;
 
-  bool is_frame_compressed = false;
-  grpc_core::Chttp2IncomingByteStream* parsing_frame = nullptr;
-};
+/* initialize per-stream state for data frame parsing */
+grpc_error* grpc_chttp2_data_parser_init(grpc_chttp2_data_parser* parser);
+
+void grpc_chttp2_data_parser_destroy(grpc_chttp2_data_parser* parser);
 
 /* start processing a new data frame */
 grpc_error* grpc_chttp2_data_parser_begin_frame(grpc_chttp2_data_parser* parser,
@@ -67,7 +69,7 @@ grpc_error* grpc_chttp2_data_parser_begin_frame(grpc_chttp2_data_parser* parser,
 grpc_error* grpc_chttp2_data_parser_parse(void* parser,
                                           grpc_chttp2_transport* t,
                                           grpc_chttp2_stream* s,
-                                          const grpc_slice& slice, int is_last);
+                                          grpc_slice slice, int is_last);
 
 void grpc_chttp2_encode_data(uint32_t id, grpc_slice_buffer* inbuf,
                              uint32_t write_bytes, int is_eof,

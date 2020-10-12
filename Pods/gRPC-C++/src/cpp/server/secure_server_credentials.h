@@ -22,20 +22,12 @@
 #include <memory>
 
 #include <grpcpp/security/server_credentials.h>
-#include <grpcpp/security/tls_credentials_options.h>
 
 #include <grpc/grpc_security.h>
 
 #include "src/cpp/server/thread_pool_interface.h"
 
-namespace grpc_impl {
-
-class SecureServerCredentials;
-}  // namespace grpc_impl
-
 namespace grpc {
-
-typedef ::grpc_impl::SecureServerCredentials SecureServerCredentials;
 
 class AuthMetadataProcessorAyncWrapper final {
  public:
@@ -47,11 +39,7 @@ class AuthMetadataProcessorAyncWrapper final {
 
   AuthMetadataProcessorAyncWrapper(
       const std::shared_ptr<AuthMetadataProcessor>& processor)
-      : processor_(processor) {
-    if (processor && processor->IsBlocking()) {
-      thread_pool_.reset(CreateDefaultThreadPool());
-    }
-  }
+      : thread_pool_(CreateDefaultThreadPool()), processor_(processor) {}
 
  private:
   void InvokeProcessor(grpc_auth_context* context, const grpc_metadata* md,
@@ -60,10 +48,6 @@ class AuthMetadataProcessorAyncWrapper final {
   std::unique_ptr<ThreadPoolInterface> thread_pool_;
   std::shared_ptr<AuthMetadataProcessor> processor_;
 };
-
-}  // namespace grpc
-
-namespace grpc_impl {
 
 class SecureServerCredentials final : public ServerCredentials {
  public:
@@ -76,13 +60,13 @@ class SecureServerCredentials final : public ServerCredentials {
   int AddPortToServer(const grpc::string& addr, grpc_server* server) override;
 
   void SetAuthMetadataProcessor(
-      const std::shared_ptr<grpc::AuthMetadataProcessor>& processor) override;
+      const std::shared_ptr<AuthMetadataProcessor>& processor) override;
 
  private:
   grpc_server_credentials* creds_;
-  std::unique_ptr<grpc::AuthMetadataProcessorAyncWrapper> processor_;
+  std::unique_ptr<AuthMetadataProcessorAyncWrapper> processor_;
 };
 
-}  // namespace grpc_impl
+}  // namespace grpc
 
 #endif  // GRPC_INTERNAL_CPP_SERVER_SECURE_SERVER_CREDENTIALS_H

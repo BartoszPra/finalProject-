@@ -29,23 +29,6 @@
 
 #include <vector>
 
-namespace grpc_impl {
-namespace internal {
-
-template <class RequestType, class ResponseType>
-class CallbackUnaryHandler;
-template <class RequestType, class ResponseType>
-class CallbackServerStreamingHandler;
-template <class ServiceType, class RequestType, class ResponseType>
-class RpcMethodHandler;
-template <class ServiceType, class RequestType, class ResponseType>
-class ServerStreamingHandler;
-template <::grpc::StatusCode code>
-class ErrorMethodHandler;
-
-}  // namespace internal
-}  // namespace grpc_impl
-
 namespace grpc {
 
 class ServerInterface;
@@ -57,11 +40,14 @@ class CallOpSendMessage;
 template <class R>
 class CallOpRecvMessage;
 class CallOpGenericRecvMessage;
-class ExternalConnectionAcceptorImpl;
+class MethodHandler;
+template <class ServiceType, class RequestType, class ResponseType>
+class RpcMethodHandler;
+template <class ServiceType, class RequestType, class ResponseType>
+class ServerStreamingHandler;
 template <class R>
 class DeserializeFuncType;
 class GrpcByteBufferPeer;
-
 }  // namespace internal
 /// A sequence of bytes.
 class ByteBuffer final {
@@ -96,10 +82,8 @@ class ByteBuffer final {
   }
 
   /// Constuct a byte buffer by referencing elements of existing buffer
-  /// \a buf. Wrapper of core function grpc_byte_buffer_copy . This is not
-  /// a deep copy; it is just a referencing. As a result, its performance is
-  /// size-independent.
-  ByteBuffer(const ByteBuffer& buf) : buffer_(nullptr) { operator=(buf); }
+  /// \a buf. Wrapper of core function grpc_byte_buffer_copy
+  ByteBuffer(const ByteBuffer& buf);
 
   ~ByteBuffer() {
     if (buffer_) {
@@ -107,19 +91,7 @@ class ByteBuffer final {
     }
   }
 
-  /// Wrapper of core function grpc_byte_buffer_copy . This is not
-  /// a deep copy; it is just a referencing. As a result, its performance is
-  /// size-independent.
-  ByteBuffer& operator=(const ByteBuffer& buf) {
-    if (this != &buf) {
-      Clear();  // first remove existing data
-    }
-    if (buf.buffer_) {
-      // then copy
-      buffer_ = g_core_codegen_interface->grpc_byte_buffer_copy(buf.buffer_);
-    }
-    return *this;
-  }
+  ByteBuffer& operator=(const ByteBuffer&);
 
   /// Dump (read) the buffer contents into \a slices.
   Status Dump(std::vector<Slice>* slices) const;
@@ -134,9 +106,7 @@ class ByteBuffer final {
 
   /// Make a duplicate copy of the internals of this byte
   /// buffer so that we have our own owned version of it.
-  /// bbuf.Duplicate(); is equivalent to bbuf=bbuf; but is actually readable.
-  /// This is not a deep copy; it is a referencing and its performance
-  /// is size-independent.
+  /// bbuf.Duplicate(); is equivalent to bbuf=bbuf; but is actually readable
   void Duplicate() {
     buffer_ = g_core_codegen_interface->grpc_byte_buffer_copy(buffer_);
   }
@@ -169,22 +139,16 @@ class ByteBuffer final {
   template <class R>
   friend class internal::CallOpRecvMessage;
   friend class internal::CallOpGenericRecvMessage;
+  friend class internal::MethodHandler;
   template <class ServiceType, class RequestType, class ResponseType>
-  friend class ::grpc_impl::internal::RpcMethodHandler;
+  friend class internal::RpcMethodHandler;
   template <class ServiceType, class RequestType, class ResponseType>
-  friend class ::grpc_impl::internal::ServerStreamingHandler;
-  template <class RequestType, class ResponseType>
-  friend class ::grpc_impl::internal::CallbackUnaryHandler;
-  template <class RequestType, class ResponseType>
-  friend class ::grpc_impl::internal::CallbackServerStreamingHandler;
-  template <StatusCode code>
-  friend class ::grpc_impl::internal::ErrorMethodHandler;
+  friend class internal::ServerStreamingHandler;
   template <class R>
   friend class internal::DeserializeFuncType;
   friend class ProtoBufferReader;
   friend class ProtoBufferWriter;
   friend class internal::GrpcByteBufferPeer;
-  friend class internal::ExternalConnectionAcceptorImpl;
 
   grpc_byte_buffer* buffer_;
 
@@ -224,7 +188,7 @@ class SerializationTraits<ByteBuffer, void> {
                           bool* own_buffer) {
     *buffer = source;
     *own_buffer = true;
-    return g_core_codegen_interface->ok();
+    return Status::OK;
   }
 };
 

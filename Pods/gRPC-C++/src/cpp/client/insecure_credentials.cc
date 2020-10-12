@@ -15,6 +15,7 @@
  * limitations under the License.
  *
  */
+
 #include <grpcpp/security/credentials.h>
 
 #include <grpc/grpc.h>
@@ -24,30 +25,18 @@
 #include <grpcpp/support/config.h>
 #include "src/cpp/client/create_channel_internal.h"
 
-namespace grpc_impl {
+namespace grpc {
 
 namespace {
 class InsecureChannelCredentialsImpl final : public ChannelCredentials {
  public:
-  std::shared_ptr<Channel> CreateChannelImpl(
-      const grpc::string& target, const ChannelArguments& args) override {
-    return CreateChannelWithInterceptors(
-        target, args,
-        std::vector<std::unique_ptr<
-            grpc::experimental::ClientInterceptorFactoryInterface>>());
-  }
-
-  std::shared_ptr<Channel> CreateChannelWithInterceptors(
-      const grpc::string& target, const ChannelArguments& args,
-      std::vector<std::unique_ptr<
-          grpc::experimental::ClientInterceptorFactoryInterface>>
-          interceptor_creators) override {
+  std::shared_ptr<grpc::Channel> CreateChannel(
+      const string& target, const grpc::ChannelArguments& args) override {
     grpc_channel_args channel_args;
     args.SetChannelArgs(&channel_args);
-    return ::grpc::CreateChannelInternal(
+    return CreateChannelInternal(
         "",
-        grpc_insecure_channel_create(target.c_str(), &channel_args, nullptr),
-        std::move(interceptor_creators));
+        grpc_insecure_channel_create(target.c_str(), &channel_args, nullptr));
   }
 
   SecureChannelCredentials* AsSecureCredentials() override { return nullptr; }
@@ -59,4 +48,4 @@ std::shared_ptr<ChannelCredentials> InsecureChannelCredentials() {
       new InsecureChannelCredentialsImpl());
 }
 
-}  // namespace grpc_impl
+}  // namespace grpc

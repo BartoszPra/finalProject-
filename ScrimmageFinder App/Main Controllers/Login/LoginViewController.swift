@@ -63,12 +63,12 @@ class LoginViewController: UIViewController, LoginButtonDelegate, Storyboarded, 
 		let accesToken = AccessToken.current
       guard let stringAccesTok = accesToken?.tokenString else {return}
       let credential = FacebookAuthProvider.credential(withAccessToken: stringAccesTok)
-		Auth.auth().signIn(with: credential) { (user, error) in
+		Auth.auth().signInAndRetrieveData(with: credential) { (user, error) in
 			if let error = error {
                 print("Error logging in", error)
             } else {
-                print("username\(String(describing: user?.user.displayName))")
-                FIRFirestoreService.shared.getProfileImage(for: String(describing: user!.user.uid)) { (image) in
+				print("username\(String(describing: user?.user.displayName))")
+				FIRFirestoreService.shared.getProfileImage(for: String(describing: user!.user.uid)) { (image) in
                     self.coreDataController.prepareImageForSaving(image: image)
                 }
                 DispatchQueue.main.async {

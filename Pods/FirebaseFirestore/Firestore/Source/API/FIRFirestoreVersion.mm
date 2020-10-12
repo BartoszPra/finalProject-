@@ -22,4 +22,5 @@ using firebase::firestore::kFirestoreVersionString;
 
 // Because `kFirestoreVersionString` is subject to constant initialization, this
 // is not affected by static initialization order fiasco.
-extern "C" const char *const FIRFirestoreVersionString = kFirestoreVersionString;
+extern "C" const unsigned char *const FIRFirestoreVersionString =
+    (const unsigned char *const)kFirestoreVersionString;
