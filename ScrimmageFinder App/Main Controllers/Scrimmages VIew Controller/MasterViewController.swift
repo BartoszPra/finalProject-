@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import FBSDKLoginKit
+import GoogleSignIn
 
 class MasterViewController<T: BaseCell<U>, U>: UIViewController, UITableViewDataSource, UITableViewDelegate {
 	
@@ -35,6 +38,19 @@ class MasterViewController<T: BaseCell<U>, U>: UIViewController, UITableViewData
 		let nib = UINib(nibName: String(describing: T.self), bundle: nil)
 		tableView.register(nib, forCellReuseIdentifier: String(describing: T.self))
 	}
+	
+	@objc func logOutClicked() {
+        CoreDataController.shared.removeProfileImage()
+        do {
+            try Auth.auth().signOut()
+        } catch let err {
+            print(err)
+        }
+        GIDSignIn.sharedInstance()?.signOut()
+		LoginManager().logOut()
+        self.dismiss(animated: true, completion: nil)
+        
+    }
 }
 
 class BaseCell<U>: UITableViewCell {

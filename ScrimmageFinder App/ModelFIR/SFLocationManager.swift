@@ -10,10 +10,9 @@ import Foundation
 import MapKit
 import CoreLocation
 
-protocol SFLocationDelegate {
+protocol SFLocationDelegate: class {
 	func locationUpdated(city: String)
 }
-
 
 class SFLocationManager: NSObject, CLLocationManagerDelegate {
 	
@@ -21,11 +20,11 @@ class SFLocationManager: NSObject, CLLocationManagerDelegate {
 	weak var delegate: CLLocationManagerDelegate!
 	var currentLocation: CLLocationCoordinate2D?
 	var place: CLPlacemark?
-	var locDelegate: SFLocationDelegate!
+	weak var locDelegate: SFLocationDelegate!
 	
-	override init() {
-		super.init()		
-		// For use in foreground
+	init(delegate: SFLocationDelegate) {
+		super.init()
+		self.locDelegate = delegate
 		locationManager.delegate = self
 		self.locationManager.requestWhenInUseAuthorization()
 		if CLLocationManager.locationServicesEnabled() {
@@ -33,7 +32,7 @@ class SFLocationManager: NSObject, CLLocationManagerDelegate {
 			locationManager.requestLocation()
 		}
 	}
-		
+	
 	func getCurrentLocation() {
 		if CLLocationManager.locationServicesEnabled() {
 			locationManager.requestLocation()
@@ -41,17 +40,9 @@ class SFLocationManager: NSObject, CLLocationManagerDelegate {
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		//guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-		//print("locations = \(locValue.latitude) \(locValue.longitude)")
 		let locValue = locations[0].coordinate
 		self.currentLocation = locValue
 		self.geocodeLocation(location: currentLocation!)
-//		self.geocode(latitude: self.currentLocation!.latitude, longitude: self.currentLocation!.longitude) { (place) in
-//			if let city = place.locality {
-//				print(city)
-//				self.locDelegate.locationUpdated(city: city)
-//			}
-//		}
 	}
 	
 	func geocodeLocation(location: CLLocationCoordinate2D) {

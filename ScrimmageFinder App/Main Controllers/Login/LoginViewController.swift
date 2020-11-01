@@ -13,14 +13,12 @@ import GoogleSignIn
 import Dispatch
 
 class LoginViewController: UIViewController, LoginButtonDelegate, Storyboarded, UITextFieldDelegate {
-	
-	
+		
     weak var coordinator: MainCoordinator?
     @IBOutlet var emailTF: UITextField!
     @IBOutlet var passTF: UITextField!
 	let coreDataController = CoreDataController.shared
-	@IBOutlet weak var googleButton: GIDSignInButton!
-	
+	@IBOutlet weak var googleButton: GIDSignInButton!	
 	@IBOutlet weak var facebookLoginSignInButton: FBLoginButton!
 	
     override func viewDidLoad() {
@@ -49,7 +47,7 @@ class LoginViewController: UIViewController, LoginButtonDelegate, Storyboarded, 
         
 	func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         if error != nil {
-            print(error)
+			print(error.debugDescription)
             return
         }
         self.loginWithFcb()
@@ -59,24 +57,24 @@ class LoginViewController: UIViewController, LoginButtonDelegate, Storyboarded, 
         print("User did log out of facebook")        
     }
     
-    func loginWithFcb() {
+	func loginWithFcb() {
 		let accesToken = AccessToken.current
-      guard let stringAccesTok = accesToken?.tokenString else {return}
-      let credential = FacebookAuthProvider.credential(withAccessToken: stringAccesTok)
+		guard let stringAccesTok = accesToken?.tokenString else {return}
+		let credential = FacebookAuthProvider.credential(withAccessToken: stringAccesTok)
 		Auth.auth().signInAndRetrieveData(with: credential) { (user, error) in
 			if let error = error {
-                print("Error logging in", error)
-            } else {
+				print("Error logging in", error)
+			} else {
 				print("username\(String(describing: user?.user.displayName))")
 				FIRFirestoreService.shared.getProfileImage(for: String(describing: user!.user.uid)) { (image) in
-                    self.coreDataController.prepareImageForSaving(image: image)
-                }
-                DispatchQueue.main.async {
-                    self.coordinator?.startTabBarCoordinator(viewController: self)
-                }
-            }
+					self.coreDataController.prepareImageForSaving(image: image)
+				}
+				DispatchQueue.main.async {
+					self.coordinator?.startTabBarCoordinator(viewController: self)
+				}
+			}
 		}
-    }
+	}
 	
     @IBAction func registerClicked(_ sender: Any) {
         coordinator?.goToRegister()

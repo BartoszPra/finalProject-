@@ -12,32 +12,49 @@ import FBSDKLoginKit
 import GoogleSignIn
 import CoreLocation
 import MapKit
+import FirebaseFirestore
 
 class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, ScrimmageViewModel>, SFLocationDelegate, LocationViewDelegate {
 	
 	@IBOutlet weak var newTable: UITableView!
 	
 	var locationButton: UIBarButtonItem!
-	
 	var coordinator: ScrimmagesCoordinator?
 	var locationManager: SFLocationManager!
 	var service = FIRFirestoreService.shared
+	var isCurrentLocationUseOn = false
 		
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		tableView = newTable
 		createBarButtons()
-		locationManager = SFLocationManager()
-		locationManager.locDelegate = self
-				
-		self.view.backgroundColor = .black
-		let image = UIImage(named: "black")!.alpha(0.7)
-		navigationController?.navigationBar.setBackgroundImage(image, for: .default)
-		navigationController?.navigationBar.shadowImage = UIImage()
-		ViewHelpers.setLogoAsNavigationTitle(imageName: "logoNoBackgroundBrighter", on: self)
-		service.readAll(from: .scrimmages, returning: Scrimmage.self) {[weak self] (scrimmages) in
-			self?.items = scrimmages.map({return ScrimmageViewModel(scrimmage: $0)})
-			self?.tableView.reloadData()
+		locationManager = SFLocationManager(delegate: self)
+		
+	}
+	
+	override func viewDidAppear(_ animated: Bool) {
+		self.getScrimages()
+	}
+	
+	func getScrimages() {
+		
+		if locationManager.currentLocation != nil || checkForSelectedLocationAndRegion() != nil {
+			service.getScrimmagesFromRegion(center: checkForSelectedLocationAndRegion(), radius: checkForRegion()) {[weak self] (scrimage, changeType) in
+				if changeType == .added {
+					let model = ScrimmageViewModel(scrimmage: scrimage)
+					self?.items.append(model)
+				} else {
+					let model = ScrimmageViewModel(scrimmage: scrimage)
+					if let index = self?.items.index(of: model) {
+						self?.items.remove(at: index)
+					}
+				}
+				self?.tableView.reloadData()
+			}
+		} else {
+			AlertController.showOkAllertWothChandler(self, title: "No Location", message: "We could not get your location. Please choose location where you want to see scrimmages.") { (action) in
+				self.coordinator?.goToLocationChange(delegate: self)
+			}
 		}
 	}
 	
@@ -52,21 +69,38 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 		coordinator?.goToNewDetail(with: scrimmage, from: self, image: cell?.cellImage.image ?? UIImage())
 	}
 	
+	func checkForSelectedLocationAndRegion() -> CLLocation {
+		
+		var returnedLocation: CLLocation
+		let defaults = UserDefaults.standard
+		if let savedLat = defaults.object(forKey: "latitude") as? CLLocationDegrees,
+			let savedLon = defaults.object(forKey: "longitude") as? CLLocationDegrees {
+			let location = CLLocationCoordinate2D(latitude: savedLat, longitude: savedLon)
+			self.locationManager.geocodeLocation(location: location)
+			returnedLocation = CLLocation(latitude: savedLat, longitude: savedLon)
+			return returnedLocation
+		} else {
+			isCurrentLocationUseOn = true
+			returnedLocation = CLLocation(latitude: locationManager.currentLocation!.latitude, longitude: locationManager.currentLocation!.longitude)
+			return returnedLocation
+		}
+	}
+	
+	func checkForRegion() -> Double {
+		
+		let sugestedRadius = 80.0
+		var returnedRegion: Double
+		let defaults = UserDefaults.standard
+		if let savedRegion = defaults.object(forKey: "region") as? Double {
+			returnedRegion = savedRegion
+		} else {
+			returnedRegion = sugestedRadius
+		}
+		return returnedRegion
+	}
+		
 	@objc func goToLocationChange() {
         self.coordinator?.goToLocationChange(delegate: self)
-    }
-	
-	@objc func logOutClicked() {
-        CoreDataController.shared.removeProfileImage()
-        do {
-            try Auth.auth().signOut()
-        } catch let err {
-            print(err)
-        }
-        GIDSignIn.sharedInstance()?.signOut()
-		LoginManager().logOut()
-        self.dismiss(animated: true, completion: nil)
-        
     }
 	
 	func createBarButtons() {
@@ -74,46 +108,28 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 		locationButton = UIBarButtonItem(image: UIImage(named: "location"), style: .plain, target: self, action: #selector(goToLocationChange))
 		navigationItem.rightBarButtonItem = locationButton
 		
-		let logoutButton = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logOutClicked))
+		let logoutButton = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(self.logOutClicked))
 		navigationItem.leftBarButtonItem = logoutButton
+		
+		self.view.backgroundColor = .black
+		let image = UIImage(named: "black")!.alpha(0.7)
+		navigationController?.navigationBar.setBackgroundImage(image, for: .default)
+		navigationController?.navigationBar.shadowImage = UIImage()
+		ViewHelpers.setLogoAsNavigationTitle(imageName: "logoNoBackgroundBrighter", on: self)
 		
 	}
 	
-	func locationUpdated(city: String) {
+	func updateLocationButton(city: String) {
 		self.locationButton = UIBarButtonItem(image: UIImage(named: "location")!, title: city, target: self, action: #selector(goToLocationChange))
 		navigationItem.rightBarButtonItem = locationButton
 	}
 	
-	func locationHasChanged(location: CLLocationCoordinate2D) {
-		self.locationManager.geocodeLocation(location: location)
+	func locationUpdated(city: String) {
+		self.updateLocationButton(city: city)
 	}
 	
-}
-
-extension UIImage {
-    func alpha(_ value: CGFloat) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        draw(at: CGPoint.zero, blendMode: .normal, alpha: value)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
-    }
-}
-
-extension UIBarButtonItem {
-    convenience init(image: UIImage, title: String, target: Any?, action: Selector?) {
-        let button = UIButton(type: .custom)
-        button.setImage(image, for: .normal)
-        button.setTitle(title, for: .normal)
-		button.titleLabel?.font = button.titleLabel?.font.withSize(12)
-
-        if let target = target, let action = action {
-            button.addTarget(target, action: action, for: .touchUpInside)
-        }
-
-        self.init(customView: button)
-
-		let currHeight = self.customView?.heightAnchor.constraint(equalToConstant: 20)
-		currHeight?.isActive = true
-    }
+	func locationHasChanged(location: CLLocationCoordinate2D) {
+			self.locationManager.geocodeLocation(location: location)
+			self.getScrimages()
+	}	
 }

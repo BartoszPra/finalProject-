@@ -99,6 +99,7 @@
 		A5AEC4732385710F0095796A /* ScrimmageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AEC4722385710F0095796A /* ScrimmageStatus.swift */; };
 		A5AEC476238612E00095796A /* ScrimmageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AEC475238612E00095796A /* ScrimmageType.swift */; };
 		A5BECA1724AA5B110032D2C1 /* Pods_ScrimmageFinder_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06025A504561BDBE1220B5F6 /* Pods_ScrimmageFinder_App.framework */; };
+		A5BEF59A25376F4D00FE1C96 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BEF59925376F4D00FE1C96 /* UIBarButtonItem+Extensions.swift */; };
 		A5CC95702395EA6C004A0810 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */; };
 		A5D2FA46237F512400FAAC8A /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */; };
 		A5D7433F22F7A2C20047E9E0 /* MyScrimmagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F4245228472CC007841A2 /* MyScrimmagesViewController.swift */; };
@@ -269,6 +270,7 @@
 		A5A0A89824DE0E9400B0C83D /* SFLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFLocationManager.swift; sourceTree = "<group>"; };
 		A5AEC4722385710F0095796A /* ScrimmageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageStatus.swift; sourceTree = "<group>"; };
 		A5AEC475238612E00095796A /* ScrimmageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageType.swift; sourceTree = "<group>"; };
+		A5BEF59925376F4D00FE1C96 /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
 		A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		A5DDEC772449165F0051FE66 /* ParticipantsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsTableViewCell.swift; sourceTree = "<group>"; };
@@ -838,6 +840,7 @@
 				A54D94DC240A794700D4DFCF /* UIImageView+Extensions.swift */,
 				A5531F8923B22EEF0054DA0A /* UIButton+Extensions.swift */,
 				A55AEF8B23C2B61600B07642 /* UISearchBar+Extensions.swift */,
+				A5BEF59925376F4D00FE1C96 /* UIBarButtonItem+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1291,6 +1294,7 @@
 				A50F424C2284785E007841A2 /* MyScrimmagesCoordinator.swift in Sources */,
 				04C8F37E20FFFDA400AF48E4 /* AlertController.swift in Sources */,
 				03F10DF720DD0F7400F8C62B /* Scrimmage.swift in Sources */,
+				A5BEF59A25376F4D00FE1C96 /* UIBarButtonItem+Extensions.swift in Sources */,
 				A52D2CB9241D0E8500605231 /* DatabaseRepresentation.swift in Sources */,
 				A50211D52458EAD0000BB18C /* ScrimmagesListViewController.swift in Sources */,
 				03F10DCE20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld in Sources */,

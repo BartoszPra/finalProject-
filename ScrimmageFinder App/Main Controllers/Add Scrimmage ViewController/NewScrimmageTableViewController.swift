@@ -372,6 +372,7 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 		// creating a scrimmage
 		newSid = FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages, completion: { (success) in
 			if success {
+				self.service.addGeoLocation(location: scrimmage.geopoint, doc: self.newSid)
 				completion(true)
 			} else {
 				completion(false)

@@ -18,34 +18,36 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 		
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var mapView: MKMapView!
-	var locationManager = CLLocationManager()
 	@IBOutlet weak var regionView: UIView!
-	private let sugestedRadius =  80.0
-	
-	private var selectedIndexPath: IndexPath?
-	private var selectedRadius: Double!
-	weak var delegate: LocationViewDelegate?
-	private var city = ""
-	var currLocation: CLLocationCoordinate2D!
-	var selectedLocation: CLLocationCoordinate2D!
 	
 	//circleViewConstraint
 	@IBOutlet weak var width: NSLayoutConstraint!
 	@IBOutlet weak var height: NSLayoutConstraint!
 	
+	private let sugestedRadius =  80.0
+	var locationManager = CLLocationManager()
+	private var selectedIndexPath: IndexPath?
+	private var selectedRadius = 80.0
+	weak var delegate: LocationViewDelegate?
+	private var city = ""
+	var currLocation: CLLocationCoordinate2D!
+	var selectedLocation: CLLocationCoordinate2D!
+		
 	override func viewDidLoad() {
-        super.viewDidLoad()
+        
+		super.viewDidLoad()
 		self.registerNib()
-		self.currLocation = locationManager.location?.coordinate
-		checkForSelectedLocationAndRegion()
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.mapView.delegate = self
 		locationManager.delegate = self
 		locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-		self.mapView.setCenter(self.selectedLocation, animated: false)
 		self.currLocation = locationManager.location?.coordinate
     }
+	
+	override func viewDidAppear(_ animated: Bool) {
+		checkForSelectedLocationAndRegion()
+	}
 	
 	deinit {
 		print("location controller has been removed")
@@ -154,7 +156,9 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 			selectedIndexPath = IndexPath(item: 0, section: 0)
 		}
 		self.resizeRegion(kilometers: selectedRadius)
-		self.mapView.setCenter(self.selectedLocation, animated: false)
+		if let loc = self.selectedLocation {
+			self.mapView.setCenter(loc, animated: false)
+		}
 	}
 	
 	func resizeRegion(kilometers: Double) {

@@ -42,13 +42,21 @@ class FIRFirestoreService {
 		listener?.remove()
 	}
 	
+	func addGeoLocation(location: GeoPoint, doc: String) {
+		//let location = GeoPoint(latitude: 55.8501162, longitude: -4.2462158)
+		geoFirestore = GeoFirestore(collectionRef: reference(to: .scrimmagesLocation))
+		// Query locations at [37.7832889, -122.4056973] with a radius of 600 (0.6) meters
+		geoFirestore.setLocation(geopoint: location, forDocumentWithID: doc)
+		
+	}
+	
 	func getScrimmagesFromRegion(center: CLLocation, radius: Double, completion: @escaping (Scrimmage, LocationQueryChangeType) -> Void) {
 		
-		geoFirestore = GeoFirestore(collectionRef: reference(to: .scrimmages))
+		geoFirestore = GeoFirestore(collectionRef: reference(to: .scrimmagesLocation))
 		// Query locations at [37.7832889, -122.4056973] with a radius of 600 (0.6) meters
-		geoQuery = geoFirestore.query(withCenter: center, radius: radius)
-		
-		let _ = geoQuery.observe(.documentEntered) { (key, location) in
+		//geoQuery = geoFirestore.query(withCenter: center, radius: radius)
+		geoQuery = geoFirestore.query(withCenter: GeoPoint(latitude: center.coordinate.latitude, longitude: center.coordinate.longitude), radius: radius)
+		_ = geoQuery.observe(.documentEntered) { (key, location) in
 			if let key = key, let _ = location {
 				self.readOne(from: .scrimmages, with: key, returning: Scrimmage.self) { (scrimmage) in
 					completion(scrimmage, .added)
@@ -56,7 +64,7 @@ class FIRFirestoreService {
 			}
 		}
 				
-		let _ = geoQuery.observe(.documentExited, with: { (key, location) in
+		_ = geoQuery.observe(.documentExited, with: { (key, location) in
 			if let key = key, let _ = location {
 				self.readOne(from: .scrimmages, with: key, returning: Scrimmage.self) { (scrimmage) in
 					completion(scrimmage, .deleted)

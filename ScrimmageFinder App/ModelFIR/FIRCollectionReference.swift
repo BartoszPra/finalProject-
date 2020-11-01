@@ -5,4 +5,5 @@ enum FIRCollectionReference: String {
     case scrimmages
     case users
 	case chats
+	case scrimmagesLocation
 }
