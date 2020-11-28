@@ -37,12 +37,15 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
         
 		super.viewDidLoad()
 		self.registerNib()
+		
+		locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
+		self.currLocation = locationManager.location?.coordinate
+				
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.mapView.delegate = self
 		locationManager.delegate = self
-		locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
-		self.currLocation = locationManager.location?.coordinate
+		
     }
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -155,10 +158,12 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 			selectedRadius = sugestedRadius
 			selectedIndexPath = IndexPath(item: 0, section: 0)
 		}
-		self.resizeRegion(kilometers: selectedRadius)
+		
 		if let loc = self.selectedLocation {
 			self.mapView.setCenter(loc, animated: false)
 		}
+		self.resizeRegion(kilometers: selectedRadius)
+		self.tableView.reloadData()
 	}
 	
 	func resizeRegion(kilometers: Double) {

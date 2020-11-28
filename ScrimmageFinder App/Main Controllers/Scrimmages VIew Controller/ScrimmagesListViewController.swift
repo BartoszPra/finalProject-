@@ -36,23 +36,11 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 		self.getScrimages()
 	}
 	
-	func getScrimages() {
-		
-		if locationManager.currentLocation != nil || checkForSelectedLocationAndRegion() != nil {
-			service.getScrimmagesFromRegion(center: checkForSelectedLocationAndRegion(), radius: checkForRegion()) {[weak self] (scrimage, changeType) in
-				if changeType == .added {
-					let model = ScrimmageViewModel(scrimmage: scrimage)
-					self?.items.append(model)
-				} else {
-					let model = ScrimmageViewModel(scrimmage: scrimage)
-					if let index = self?.items.index(of: model) {
-						self?.items.remove(at: index)
-					}
-				}
-				self?.tableView.reloadData()
-			}
+	func getScrimages() {		
+		if let check = checkForSelectedLocationAndRegion() {
+			getScrimmagesForLoc(location: check)
 		} else {
-			AlertController.showOkAllertWothChandler(self, title: "No Location", message: "We could not get your location. Please choose location where you want to see scrimmages.") { (action) in
+			AlertController.showOkAllertWothChandler(self, title: "No Location", message: "We could not get your location. Please choose location where you want to see scrimmages.") { (_) in
 				self.coordinator?.goToLocationChange(delegate: self)
 			}
 		}
@@ -68,8 +56,25 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 		let cell = newTable.cellForRow(at: indexPath) as? ScrimmagesCell
 		coordinator?.goToNewDetail(with: scrimmage, from: self, image: cell?.cellImage.image ?? UIImage())
 	}
+
+
+	func getScrimmagesForLoc(location: CLLocation) {
+		service.getScrimmagesFromRegion(center: location, radius: checkForRegion()) {[weak self] (scrimage, changeType) in
+			if changeType == .added {
+				let model = ScrimmageViewModel(scrimmage: scrimage)
+				self?.items.append(model)
+			} else {
+				let model = ScrimmageViewModel(scrimmage: scrimage)
+				if let index = self?.items.index(of: model) {
+					self?.items.remove(at: index)
+				}
+			}
+			self?.tableView.reloadData()
+		}
+	}
+
 	
-	func checkForSelectedLocationAndRegion() -> CLLocation {
+	func checkForSelectedLocationAndRegion() -> CLLocation? {
 		
 		var returnedLocation: CLLocation
 		let defaults = UserDefaults.standard
@@ -81,9 +86,13 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 			return returnedLocation
 		} else {
 			isCurrentLocationUseOn = true
-			returnedLocation = CLLocation(latitude: locationManager.currentLocation!.latitude, longitude: locationManager.currentLocation!.longitude)
-			return returnedLocation
+			if let lat = locationManager.currentLocation?.latitude, let lon = locationManager.currentLocation?.longitude {
+				returnedLocation = CLLocation(latitude: lat, longitude: lon)
+			} else {
+				return nil
+			}
 		}
+		return nil
 	}
 	
 	func checkForRegion() -> Double {
