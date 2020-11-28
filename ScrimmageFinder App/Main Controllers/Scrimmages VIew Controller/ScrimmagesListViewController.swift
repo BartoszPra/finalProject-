@@ -57,8 +57,8 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 		coordinator?.goToNewDetail(with: scrimmage, from: self, image: cell?.cellImage.image ?? UIImage())
 	}
 
-
 	func getScrimmagesForLoc(location: CLLocation) {
+		self.items.removeAll()
 		service.getScrimmagesFromRegion(center: location, radius: checkForRegion()) {[weak self] (scrimage, changeType) in
 			if changeType == .added {
 				let model = ScrimmageViewModel(scrimmage: scrimage)
@@ -72,7 +72,6 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 			self?.tableView.reloadData()
 		}
 	}
-
 	
 	func checkForSelectedLocationAndRegion() -> CLLocation? {
 		
