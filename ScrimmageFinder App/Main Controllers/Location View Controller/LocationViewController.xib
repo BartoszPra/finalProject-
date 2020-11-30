@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,14 +24,42 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <navigationBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLJ-2v-ju7">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <items>
+                        <navigationItem title="Location" id="bVv-je-0jb">
+                            <barButtonItem key="leftBarButtonItem" title="Cancel" id="dyR-qV-b7e">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="cancelPressed:" destination="-1" id="V8i-cb-2zs"/>
+                                </connections>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+                <searchBar contentMode="redraw" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="50" barStyle="black" searchBarStyle="minimal" placeholder="Search for town, city or country" translatesAutoresizingMaskIntoConstraints="NO" id="Nx6-Gr-mLy">
+                    <rect key="frame" x="0.0" y="88" width="414" height="50"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bDH-XK-kbo">
-                    <rect key="frame" x="0.0" y="88" width="414" height="548"/>
+                    <rect key="frame" x="0.0" y="138" width="414" height="498"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.1955265410958904" colorSpace="custom" customColorSpace="sRGB"/>
                 </mapView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLP-vx-G31" userLabel="CurrentLocation">
+                    <rect key="frame" x="383" y="154" width="21" height="22"/>
+                    <state key="normal" image="paperplane.fill" catalog="system">
+                        <color key="titleColor" red="0.52357393500000005" green="0.15914174910000001" blue="0.0077536054890000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="titleShadowColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="moveToCurrentLoc:" destination="-1" eventType="touchUpInside" id="G3L-ot-aD7"/>
+                    </connections>
+                </button>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCg-0i-Gb5" userLabel="regionView">
-                    <rect key="frame" x="157" y="312" width="100" height="100"/>
+                    <rect key="frame" x="157" y="337" width="100" height="100"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="tintColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" systemColor="systemBlueColor"/>
                     <accessibility key="accessibilityConfiguration">
                         <accessibilityTraits key="traits" notEnabled="YES"/>
                     </accessibility>
@@ -53,32 +82,9 @@
                     <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLJ-2v-ju7">
-                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                    <items>
-                        <navigationItem title="Location" id="bVv-je-0jb">
-                            <barButtonItem key="leftBarButtonItem" title="Cancel" id="dyR-qV-b7e">
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="cancelPressed:" destination="-1" id="V8i-cb-2zs"/>
-                                </connections>
-                            </barButtonItem>
-                        </navigationItem>
-                    </items>
-                </navigationBar>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eLP-vx-G31" userLabel="CurrentLocation">
-                    <rect key="frame" x="383.5" y="98" width="20.5" height="22"/>
-                    <state key="normal" image="paperplane.fill" catalog="system">
-                        <color key="titleColor" red="0.52357393500000005" green="0.15914174910000001" blue="0.0077536054890000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <color key="titleShadowColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <connections>
-                        <action selector="moveToCurrentLoc:" destination="-1" eventType="touchUpInside" id="G3L-ot-aD7"/>
-                    </connections>
-                </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6xd-I8-rQf">
-                    <rect key="frame" x="199.5" y="354.5" width="15" height="15"/>
-                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="199.5" y="379.5" width="15" height="15"/>
+                    <color key="backgroundColor" systemColor="systemBlueColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="1hM-Sf-5qB"/>
                         <constraint firstAttribute="width" constant="15" id="7Da-sO-X8l"/>
@@ -108,9 +114,9 @@
                         <constraint firstAttribute="height" constant="60" id="cE0-yZ-5dy"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFa-2T-nBh">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KFa-2T-nBh">
                     <rect key="frame" x="40" y="851" width="334" height="30"/>
-                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" systemColor="systemBlueColor"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Apply">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -120,21 +126,24 @@
                     </connections>
                 </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="dMg-lC-fDL" secondAttribute="trailing" id="1qX-tw-eF7"/>
                 <constraint firstItem="Ee0-1c-iMT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="2R9-jC-4D5"/>
+                <constraint firstAttribute="trailing" secondItem="Nx6-Gr-mLy" secondAttribute="trailing" id="3Kg-LO-kOU"/>
                 <constraint firstItem="tgW-Zq-hp8" firstAttribute="centerX" secondItem="bDH-XK-kbo" secondAttribute="centerX" id="3oi-iA-fsi"/>
                 <constraint firstAttribute="trailing" secondItem="BLJ-2v-ju7" secondAttribute="trailing" id="6iJ-2h-fQ0"/>
                 <constraint firstItem="6xd-I8-rQf" firstAttribute="centerY" secondItem="bDH-XK-kbo" secondAttribute="centerY" id="9zM-qH-nyP"/>
                 <constraint firstItem="KFa-2T-nBh" firstAttribute="centerY" secondItem="dMg-lC-fDL" secondAttribute="centerY" id="AoM-l7-p1L"/>
                 <constraint firstItem="dMg-lC-fDL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CCH-kD-5FB"/>
-                <constraint firstItem="eLP-vx-G31" firstAttribute="top" secondItem="BLJ-2v-ju7" secondAttribute="bottom" constant="10" id="CTN-hG-xsf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eLP-vx-G31" secondAttribute="trailing" constant="10" id="DWw-lh-Y8G"/>
+                <constraint firstItem="eLP-vx-G31" firstAttribute="top" secondItem="bDH-XK-kbo" secondAttribute="top" constant="16" id="Fe0-iO-eKk"/>
                 <constraint firstItem="KFa-2T-nBh" firstAttribute="centerX" secondItem="dMg-lC-fDL" secondAttribute="centerX" id="H4i-88-mZy"/>
                 <constraint firstItem="Ee0-1c-iMT" firstAttribute="top" secondItem="bDH-XK-kbo" secondAttribute="bottom" id="Hip-2b-h62"/>
-                <constraint firstItem="bDH-XK-kbo" firstAttribute="top" secondItem="BLJ-2v-ju7" secondAttribute="bottom" id="Muy-D6-2LK"/>
                 <constraint firstItem="tgW-Zq-hp8" firstAttribute="bottom" secondItem="bDH-XK-kbo" secondAttribute="bottom" constant="-10" id="SLO-qs-zNk"/>
+                <constraint firstItem="Nx6-Gr-mLy" firstAttribute="top" secondItem="BLJ-2v-ju7" secondAttribute="bottom" id="TUb-kR-Tow"/>
+                <constraint firstItem="Nx6-Gr-mLy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VJG-xN-bkH"/>
                 <constraint firstItem="aCg-0i-Gb5" firstAttribute="centerX" secondItem="bDH-XK-kbo" secondAttribute="centerX" id="ZO7-ue-8oh"/>
                 <constraint firstItem="dMg-lC-fDL" firstAttribute="top" secondItem="Ee0-1c-iMT" secondAttribute="bottom" id="Ztj-c1-jVT"/>
                 <constraint firstItem="6xd-I8-rQf" firstAttribute="centerX" secondItem="bDH-XK-kbo" secondAttribute="centerX" id="gOo-2R-ABs"/>
@@ -146,12 +155,15 @@
                 <constraint firstItem="BLJ-2v-ju7" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="wWz-xX-9Mq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ee0-1c-iMT" secondAttribute="trailing" id="x2y-TW-n9U"/>
                 <constraint firstItem="bDH-XK-kbo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yB6-DO-iOU"/>
+                <constraint firstItem="bDH-XK-kbo" firstAttribute="top" secondItem="Nx6-Gr-mLy" secondAttribute="bottom" id="zfe-av-VuJ"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="140.57971014492756" y="93.75"/>
         </view>
     </objects>
     <resources>
-        <image name="paperplane.fill" catalog="system" width="128" height="121"/>
+        <image name="paperplane.fill" catalog="system" width="128" height="118"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

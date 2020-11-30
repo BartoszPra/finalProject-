@@ -38,6 +38,7 @@ class ScrimmagesCoordinator: Coordinator {
 		
 		let viewController = LocationViewController.init(nibName: "LocationViewController", bundle: nil)
 		viewController.delegate = delegate
+		viewController.modalPresentationStyle = .fullScreen 
         navigationController.present(viewController, animated: true, completion: nil)
 		
 	}
