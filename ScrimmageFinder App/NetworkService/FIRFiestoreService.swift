@@ -238,10 +238,10 @@ class FIRFirestoreService {
 		currentScrimmage.updateData(["imageUrl": url]) { (error) in
 			if let err = error {
 				print(err.localizedDescription)
-				completion (false)
+				completion(false)
 			} else {
 				print("succesfully added new url")
-				completion (true)
+				completion(true)
 			}
 		}
 	}
@@ -252,23 +252,23 @@ class FIRFirestoreService {
 		currentScrimmage.updateData(["participants": [userId: status]]) { (error) in
 			if let err = error {
 				print(err.localizedDescription)
-				completion (false)
+				completion(false)
 			} else {
 				print("succesfully added to participants")
-				completion (true)
+				completion(true)
 			}
 		}
 	}
     
 	func addToParticipantsTable(for scrimmageID: String, with userId: String, status: Int, completion: @escaping (Bool) -> Void) {
 		let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
-		currentScrimmage.updateData(["participants": [userId : status]]) { (error) in
+		currentScrimmage.updateData(["participants": [userId: status]]) { (error) in
 			if let err = error {
 				print(err.localizedDescription)
-				completion (false)
+				completion(false)
 			} else {
 				print("succesfully updated participants")
-				completion (true)
+				completion(true)
 			}
 		}
 	}
@@ -351,7 +351,7 @@ class FIRFirestoreService {
 		}
 	}
 	
-	func replaceImage(newImage: UIImage, url: String, completion: @escaping(URL?) -> Void){
+	func replaceImage(newImage: UIImage, url: String, completion: @escaping(URL?) -> Void) {
 		
 		guard let scaledImage = newImage.scaledToSafeUploadSize, let data = scaledImage.jpegData(compressionQuality: 0.4) else {
 			completion(nil)
