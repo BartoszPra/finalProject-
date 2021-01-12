@@ -220,7 +220,7 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 		let alert = UIAlertController(title: "Invitation", message: "Would you like to accept invitation?", preferredStyle: .alert)
         let yesAction  = UIAlertAction(title: "Yes", style: .default) { [weak self] (_) in
 			FIRFirestoreService.shared.updateParticipantsTable(for: currentScrimmageId, for: self!.userID, with: 2) { (succesful) in
-				AlertController.showAllert(self!, title: "You joined", message: "Yes are a pert of the scrimmage.")
+				AlertController.showAllert(self!, title: "You joined", message: "You are a pert of the scrimmage.")
 			}
 		}
 		let noAction  = UIAlertAction(title: "No", style: .destructive) { (_) in

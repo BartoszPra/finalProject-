@@ -57,7 +57,7 @@ class FIRFirestoreService {
 		//geoQuery = geoFirestore.query(withCenter: center, radius: radius)
 		geoQuery = geoFirestore.query(withCenter: GeoPoint(latitude: center.coordinate.latitude, longitude: center.coordinate.longitude), radius: radius)
 		_ = geoQuery.observe(.documentEntered) { (key, location) in
-			if let key = key, let _ = location {
+			if let key = key, location != nil {
 				self.readOne(from: .scrimmages, with: key, returning: Scrimmage.self) { (scrimmage) in
 					completion(scrimmage, .added)
 				}
@@ -65,7 +65,7 @@ class FIRFirestoreService {
 		}
 				
 		_ = geoQuery.observe(.documentExited, with: { (key, location) in
-			if let key = key, let _ = location {
+			if let key = key, location != nil {
 				self.readOne(from: .scrimmages, with: key, returning: Scrimmage.self) { (scrimmage) in
 					completion(scrimmage, .deleted)
 				}
@@ -191,46 +191,44 @@ class FIRFirestoreService {
         }
     }
     
-    func updateChild<T: Identifiable>(_ identifiableObject: T, collection: FIRCollectionReference) {
-        
-        do {
-            guard let oId = identifiableObject.id else { throw MyError.encodingError }
-            reference(to: collection).document(oId).updateData([
-                Auth.auth().currentUser!.uid: Auth.auth().currentUser!.uid])
-        } catch {
-            print(error)
-        }
-        
-    }
-    
-    func readOne<T: Decodable>(from collectionReference: FIRCollectionReference, with id: String, returning objectType: T.Type, completion: @escaping (T) -> Void) {
-        listener = reference(to: collectionReference).document(id).addSnapshotListener { (snapshot, _) in
-            guard let snapshot = snapshot else { return }
-            do {
-                let object = try snapshot.decode(as: objectType.self)
-                completion(object)                
-            } catch {
-                print(error)
-            }
-        }
-    }
+	func updateChild<T: Identifiable>(_ identifiableObject: T, collection: FIRCollectionReference) {
+		do {
+			guard let oId = identifiableObject.id else { throw MyError.encodingError }
+			reference(to: collection).document(oId).updateData([
+																Auth.auth().currentUser!.uid: Auth.auth().currentUser!.uid])
+		} catch {
+			print(error)
+		}
+	}
+	
+	func readOne<T: Decodable>(from collectionReference: FIRCollectionReference, with id: String, returning objectType: T.Type, completion: @escaping (T) -> Void) {
+		listener = reference(to: collectionReference).document(id).addSnapshotListener { (snapshot, _) in
+			guard let snapshot = snapshot else { return }
+			do {
+				let object = try snapshot.decode(as: objectType.self)
+				completion(object)
+			} catch {
+				print(error)
+			}
+		}
+	}
 	
 	func removeFromParticipantsTable(for scrimmageID: String, with userId: String, status: ParticipantsStatus, participants: [String: ParticipantsStatus], completion: @escaping (Bool) -> Void) {
-        
+		
 		let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
 		var participantWOme = participants
 		participantWOme.removeValue(forKey: userId)
 		
 		currentScrimmage.updateData(["participants": participantWOme]) { (error) in
-            if let err = error {
-                print(err.localizedDescription)
-                completion(false)
-            } else {
-                print("succesfully removed from participants")
-                completion(true)
-            }
-        }
-    }
+			if let err = error {
+				print(err.localizedDescription)
+				completion(false)
+			} else {
+				print("succesfully removed from participants")
+				completion(true)
+			}
+		}
+	}
 	
 	func updateScrimmageImageURL(for scrimmageID: String, url: String, completion: @escaping (Bool) -> Void) {
 		let currentScrimmage = reference(to: .scrimmages).document(scrimmageID)
@@ -365,7 +363,7 @@ class FIRFirestoreService {
 		
 		storageRef.putData(data, metadata: metadata) { metaData, error in
 			if error == nil, metaData != nil {
-				storageRef.downloadURL { (url, err) in
+				storageRef.downloadURL { (url, _) in
 					completion(url)
 				}
 			} else {
@@ -392,7 +390,7 @@ class FIRFirestoreService {
 		
 		storageRef.putData(data, metadata: metadata) { metaData, error in
 			if error == nil, metaData != nil {
-				storageRef.downloadURL { url, error in
+				storageRef.downloadURL { url, _ in
 					completion(url)
 					// success!
 				}
@@ -435,7 +433,7 @@ class FIRFirestoreService {
           print(String(percentComplete) + "% upload complete")
         }
 
-        uploadTask.observe(.success) { snapshot in
+        uploadTask.observe(.success) { _ in
           print("Your profile has been uploaded")
             // Upload completed successfully
         }

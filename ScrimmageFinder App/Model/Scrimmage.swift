@@ -9,7 +9,7 @@ protocol  Identifiable {
 //scrimmgage struct with properties
 class Scrimmage: NSObject, Codable, Identifiable {
     
-    @objc var id: String? = nil
+    @objc var id: String?
     @objc var name: String
 	@objc var venueName: String
     @objc var managerName: String

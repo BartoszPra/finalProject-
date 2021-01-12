@@ -70,7 +70,7 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
         inputField.inputView = picker
         inputField.inputAccessoryView = toolBar
 		
-		if isEdit, let _ = editableData {
+		if isEdit, editableData != nil {
 			self.inputField.text = editableData as? String
 		}
     }

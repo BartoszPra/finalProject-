@@ -17,7 +17,7 @@
 		03C6E1EE20DD59C3001DFD01 /* EncodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C6E1ED20DD59C3001DFD01 /* EncodableExtensions.swift */; };
 		03C6E1F020DD63E0001DFD01 /* SnapshotExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C6E1EF20DD63E0001DFD01 /* SnapshotExtensions.swift */; };
 		03F10DC620DC55BF00F8C62B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DC520DC55BF00F8C62B /* AppDelegate.swift */; };
-		03F10DCB20DC55BF00F8C62B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03F10DC920DC55BF00F8C62B /* Main.storyboard */; };
+		03F10DCB20DC55BF00F8C62B /* (null) in Resources */ = {isa = PBXBuildFile; };
 		03F10DCE20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DCC20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodeld */; };
 		03F10DD320DC55C300F8C62B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03F10DD120DC55C300F8C62B /* LaunchScreen.storyboard */; };
 		03F10DDE20DC55C300F8C62B /* ScrimmageFinderAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F10DDD20DC55C300F8C62B /* ScrimmageFinderAppTests.swift */; };
@@ -78,6 +78,8 @@
 		A5584FF5245369DF00AEBB92 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5584FF3245369DF00AEBB92 /* AddressTableViewCell.swift */; };
 		A5584FFA24558CDC00AEBB92 /* ScrimmageVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5584FF924558CDC00AEBB92 /* ScrimmageVIewModel.swift */; };
 		A55AEF8C23C2B61600B07642 /* UISearchBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55AEF8B23C2B61600B07642 /* UISearchBar+Extensions.swift */; };
+		A55EC4DF25A233A900BE6C53 /* LocationResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A55EC4DD25A233A900BE6C53 /* LocationResultCell.swift */; };
+		A55EC4E025A233A900BE6C53 /* LocationResultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A55EC4DE25A233A900BE6C53 /* LocationResultCell.xib */; };
 		A560B17F246836F0005211E9 /* NewScrimmageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A560B17E246836F0005211E9 /* NewScrimmageTableViewController.swift */; };
 		A57BD1232357A09F00A324BC /* SFTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD1222357A09F00A324BC /* SFTheme.swift */; };
 		A57BD1262357A33E00A324BC /* SFNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57BD1252357A33E00A324BC /* SFNames.swift */; };
@@ -97,6 +99,7 @@
 		A5A0A89924DE0E9400B0C83D /* SFLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0A89824DE0E9400B0C83D /* SFLocationManager.swift */; };
 		A5AEC4732385710F0095796A /* ScrimmageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AEC4722385710F0095796A /* ScrimmageStatus.swift */; };
 		A5AEC476238612E00095796A /* ScrimmageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AEC475238612E00095796A /* ScrimmageType.swift */; };
+		A5BB82A725ABD07500E4FC16 /* TabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5BB82A525ABD07500E4FC16 /* TabBarController.xib */; };
 		A5BECA1724AA5B110032D2C1 /* Pods_ScrimmageFinder_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06025A504561BDBE1220B5F6 /* Pods_ScrimmageFinder_App.framework */; };
 		A5BEF59A25376F4D00FE1C96 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BEF59925376F4D00FE1C96 /* UIBarButtonItem+Extensions.swift */; };
 		A5CC95702395EA6C004A0810 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */; };
@@ -172,7 +175,6 @@
 		03C6E1EF20DD63E0001DFD01 /* SnapshotExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotExtensions.swift; sourceTree = "<group>"; };
 		03F10DC220DC55BF00F8C62B /* ScrimmageFinder App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ScrimmageFinder App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03F10DC520DC55BF00F8C62B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		03F10DCA20DC55BF00F8C62B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		03F10DCD20DC55BF00F8C62B /* ScrimmageFinder_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ScrimmageFinder_App.xcdatamodel; sourceTree = "<group>"; };
 		03F10DD220DC55C300F8C62B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03F10DD420DC55C300F8C62B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -244,6 +246,8 @@
 		A5584FF3245369DF00AEBB92 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
 		A5584FF924558CDC00AEBB92 /* ScrimmageVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageVIewModel.swift; sourceTree = "<group>"; };
 		A55AEF8B23C2B61600B07642 /* UISearchBar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extensions.swift"; sourceTree = "<group>"; };
+		A55EC4DD25A233A900BE6C53 /* LocationResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResultCell.swift; sourceTree = "<group>"; };
+		A55EC4DE25A233A900BE6C53 /* LocationResultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocationResultCell.xib; sourceTree = "<group>"; };
 		A560B17E246836F0005211E9 /* NewScrimmageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewScrimmageTableViewController.swift; sourceTree = "<group>"; };
 		A57BD1222357A09F00A324BC /* SFTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFTheme.swift; sourceTree = "<group>"; };
 		A57BD1252357A33E00A324BC /* SFNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFNames.swift; sourceTree = "<group>"; };
@@ -255,7 +259,6 @@
 		A58786CD24C0BBA5000C6E96 /* SliderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderTableViewCell.swift; sourceTree = "<group>"; };
 		A58786CE24C0BBA5000C6E96 /* SliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableViewCell.xib; sourceTree = "<group>"; };
 		A59034E82391A3A200CB7284 /* FIRStorageReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FIRStorageReference.swift; sourceTree = "<group>"; };
-		A59034EA2395DBC200CB7284 /* FullRes+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "FullRes+CoreDataClass.swift"; path = "/Users/bartoszprazmo/Desktop/SF/ScrimmageFinder App/CoreDataModel/FullRes+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		A59034F62395DC0400CB7284 /* Thumbnail+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Thumbnail+CoreDataClass.swift"; path = "/Users/bartoszprazmo/Desktop/SF/ScrimmageFinder App/CoreDataModel/Thumbnail+CoreDataClass.swift"; sourceTree = "<absolute>"; };
 		A59034F82395DC0800CB7284 /* Thumbnail+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Thumbnail+CoreDataProperties.swift"; path = "/Users/bartoszprazmo/Desktop/SF/ScrimmageFinder App/CoreDataModel/Thumbnail+CoreDataProperties.swift"; sourceTree = "<absolute>"; };
 		A59034FA2395DC3100CB7284 /* FullRes+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FullRes+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -268,6 +271,7 @@
 		A5A0A89824DE0E9400B0C83D /* SFLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFLocationManager.swift; sourceTree = "<group>"; };
 		A5AEC4722385710F0095796A /* ScrimmageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageStatus.swift; sourceTree = "<group>"; };
 		A5AEC475238612E00095796A /* ScrimmageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageType.swift; sourceTree = "<group>"; };
+		A5BB82A525ABD07500E4FC16 /* TabBarController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabBarController.xib; sourceTree = "<group>"; };
 		A5BEF59925376F4D00FE1C96 /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
 		A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
@@ -349,26 +353,16 @@
 			path = "Main Controllers";
 			sourceTree = "<group>";
 		};
-		0369DAEC20E121D1006B7507 /* ModelFIR */ = {
+		0369DAEC20E121D1006B7507 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
-				03F10DF620DD0F7300F8C62B /* Scrimmage.swift */,
-				A54D94DE240B07E200D4DFCF /* SFAddress.swift */,
 				A59034E82391A3A200CB7284 /* FIRStorageReference.swift */,
-				A5E574AD2387076700DD7C27 /* ParticipantsStatus.swift */,
-				A5AEC4722385710F0095796A /* ScrimmageStatus.swift */,
 				03C6E1E720DD357D001DFD01 /* FIRFiestoreService.swift */,
 				03C6E1ED20DD59C3001DFD01 /* EncodableExtensions.swift */,
 				03C6E1EF20DD63E0001DFD01 /* SnapshotExtensions.swift */,
 				03C6E1EB20DD5557001DFD01 /* FIRCollectionReference.swift */,
-				A5AEC475238612E00095796A /* ScrimmageType.swift */,
-				A535FBB6249E33DE0028B733 /* ScrimmageOccurance.swift */,
-				A5F762C92388BB7E002CD1B3 /* User.swift */,
-				A52D2CC4241E5E5D00605231 /* CurrentUser.swift */,
-				A59A0CA2240498D400C4C71A /* CodableGeoPoint.swift */,
-				A5A0A89824DE0E9400B0C83D /* SFLocationManager.swift */,
 			);
-			path = ModelFIR;
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 		0369DAED20E135D3006B7507 /* Detail Controllers */ = {
@@ -406,12 +400,13 @@
 		03F10DC420DC55BF00F8C62B /* ScrimmageFinder App */ = {
 			isa = PBXGroup;
 			children = (
+				A5BB81C225A7B29400E4FC16 /* Model */,
 				A5584FF824558C9D00AEBB92 /* ViewModel */,
 				A57BD1242357A30E00A324BC /* Constants */,
 				C751B3782259218E0060D1B2 /* Coordinators */,
 				04F4301620F0A93400E5D8ED /* CoreDataModel */,
 				A50F7B3C24158CB900AA9083 /* Chat Model */,
-				0369DAEC20E121D1006B7507 /* ModelFIR */,
+				0369DAEC20E121D1006B7507 /* NetworkService */,
 				04F4301420F0A8E600E5D8ED /* View */,
 				A518D7CD2370DE1E00DBDC1A /* Cells */,
 				0369DAEB20E121BF006B7507 /* Main Controllers */,
@@ -457,7 +452,6 @@
 			isa = PBXGroup;
 			children = (
 				03F10DD120DC55C300F8C62B /* LaunchScreen.storyboard */,
-				03F10DC920DC55BF00F8C62B /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -480,7 +474,6 @@
 				A59034F62395DC0400CB7284 /* Thumbnail+CoreDataClass.swift */,
 				A59034F82395DC0800CB7284 /* Thumbnail+CoreDataProperties.swift */,
 				A59034FA2395DC3100CB7284 /* FullRes+CoreDataProperties.swift */,
-				A59034EA2395DBC200CB7284 /* FullRes+CoreDataClass.swift */,
 				0369DAF420E25365006B7507 /* CoreDataController.swift */,
 			);
 			path = CoreDataModel;
@@ -756,6 +749,7 @@
 			isa = PBXGroup;
 			children = (
 				C7BFC25222820AB000EE6EB4 /* TabBarController.swift */,
+				A5BB82A525ABD07500E4FC16 /* TabBarController.xib */,
 			);
 			path = MainTabBar;
 			sourceTree = "<group>";
@@ -794,6 +788,8 @@
 			children = (
 				A58786CD24C0BBA5000C6E96 /* SliderTableViewCell.swift */,
 				A58786CE24C0BBA5000C6E96 /* SliderTableViewCell.xib */,
+				A55EC4DD25A233A900BE6C53 /* LocationResultCell.swift */,
+				A55EC4DE25A233A900BE6C53 /* LocationResultCell.xib */,
 			);
 			path = "Location screen cellls";
 			sourceTree = "<group>";
@@ -823,6 +819,23 @@
 				A591A310236F30010075F8E4 /* SavedScrimmagesCell.swift */,
 			);
 			path = ScrimmageCell;
+			sourceTree = "<group>";
+		};
+		A5BB81C225A7B29400E4FC16 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A5A0A89824DE0E9400B0C83D /* SFLocationManager.swift */,
+				A5E574AD2387076700DD7C27 /* ParticipantsStatus.swift */,
+				A54D94DE240B07E200D4DFCF /* SFAddress.swift */,
+				A5AEC4722385710F0095796A /* ScrimmageStatus.swift */,
+				03F10DF620DD0F7300F8C62B /* Scrimmage.swift */,
+				A5AEC475238612E00095796A /* ScrimmageType.swift */,
+				A5F762C92388BB7E002CD1B3 /* User.swift */,
+				A52D2CC4241E5E5D00605231 /* CurrentUser.swift */,
+				A535FBB6249E33DE0028B733 /* ScrimmageOccurance.swift */,
+				A59A0CA2240498D400C4C71A /* CodableGeoPoint.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A5D2FA44237F50F200FAAC8A /* Extensions */ = {
@@ -1059,6 +1072,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5BB82A725ABD07500E4FC16 /* TabBarController.xib in Resources */,
 				A591A306236E57A60075F8E4 /* RegisterViewController.xib in Resources */,
 				A50F7B452415B9D900AA9083 /* ChatTableViewCell.xib in Resources */,
 				A5531F9423B246E10054DA0A /* TextViewTableViewCell.xib in Resources */,
@@ -1075,6 +1089,7 @@
 				A57BD1302365FDBD00A324BC /* LoginViewController.xib in Resources */,
 				A5F762D8238AD365002CD1B3 /* UserProfileViewController.xib in Resources */,
 				A5531F9F23BA05E10054DA0A /* LogoTableViewCell.xib in Resources */,
+				A55EC4E025A233A900BE6C53 /* LocationResultCell.xib in Resources */,
 				034D429320E54FCA00D59F8C /* GoogleService-Info.plist in Resources */,
 				A54BC0BF23BE9C380087178B /* AddressCellTableViewCell.xib in Resources */,
 				A5584FF4245369DF00AEBB92 /* AddressTableViewCell.xib in Resources */,
@@ -1082,7 +1097,7 @@
 				A52D2CCA242191D500605231 /* ChooseUsersViewController.xib in Resources */,
 				A5531F9A23B572670054DA0A /* PickerTableViewCell.xib in Resources */,
 				A5F762CF23899EBA002CD1B3 /* SFUserTableViewCell.xib in Resources */,
-				03F10DCB20DC55BF00F8C62B /* Main.storyboard in Resources */,
+				03F10DCB20DC55BF00F8C62B /* (null) in Resources */,
 				A5531FA423BA31E80054DA0A /* ButtonTableViewCell.xib in Resources */,
 				A5FD556224427A1A00B9E2F2 /* DetailTableViewCell.xib in Resources */,
 				A50F7B3724158B7800AA9083 /* ChatViewController.xib in Resources */,
@@ -1233,6 +1248,7 @@
 				A54D94DF240B07E200D4DFCF /* SFAddress.swift in Sources */,
 				A59034E92391A3A200CB7284 /* FIRStorageReference.swift in Sources */,
 				C751B37A2259225D0060D1B2 /* MainCoordinator.swift in Sources */,
+				A55EC4DF25A233A900BE6C53 /* LocationResultCell.swift in Sources */,
 				A5584FFA24558CDC00AEBB92 /* ScrimmageVIewModel.swift in Sources */,
 				A5E574AE2387076700DD7C27 /* ParticipantsStatus.swift in Sources */,
 				A5584FF5245369DF00AEBB92 /* AddressTableViewCell.swift in Sources */,
@@ -1343,14 +1359,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		03F10DC920DC55BF00F8C62B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				03F10DCA20DC55BF00F8C62B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		03F10DD120DC55C300F8C62B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

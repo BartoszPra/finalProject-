@@ -14,8 +14,13 @@ protocol LocationViewDelegate: class {
 	func locationHasChanged(location: CLLocationCoordinate2D)
 }
 
-class LocationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, LocationCellDelegate {
+class LocationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, LocationCellDelegate, UISearchBarDelegate {
 		
+	@IBOutlet weak var locationSearchBar: UISearchBar!
+	
+	@IBOutlet weak var serachResultsTableView: UITableView!
+	@IBOutlet weak var resultsTbVHeight: NSLayoutConstraint!
+	
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var mapView: MKMapView!
 	@IBOutlet weak var regionView: UIView!
@@ -29,24 +34,77 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 	private var selectedIndexPath: IndexPath?
 	private var selectedRadius = 80.0
 	weak var delegate: LocationViewDelegate?
-	private var city = ""
+	//private var city = ""
 	var currLocation: CLLocationCoordinate2D!
 	var selectedLocation: CLLocationCoordinate2D!
+	var searchItems = [MKMapItem]()
 		
 	override func viewDidLoad() {
         
 		super.viewDidLoad()
 		self.registerNib()
-		
 		locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
 		self.currLocation = locationManager.location?.coordinate
-				
 		self.tableView.delegate = self
 		self.tableView.dataSource = self
 		self.mapView.delegate = self
 		locationManager.delegate = self
-		
+		locationSearchBar.delegate = self
+		serachResultsTableView.delegate = self
+		serachResultsTableView.dataSource = self
+		resultsTbVHeight.constant = 0
     }
+	
+	//searchbarFunctions
+	var searchActive: Bool = false
+
+	private func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+		searchActive = true
+	}
+	
+	func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+		searchActive = false
+	}
+	
+	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+		searchActive = false
+	}
+	
+	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+		searchActive = false
+	}
+	
+	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		
+		if searchText.count > 2 {
+			let searchRequest = MKLocalSearch.Request()
+			searchRequest.naturalLanguageQuery = searchText
+			let search = MKLocalSearch(request: searchRequest)
+
+			search.start { response, error in
+				guard let response = response else {
+					print("Error: \(error?.localizedDescription ?? "Unknown error").")
+					return
+				}
+
+				for item in response.mapItems {
+					self.searchItems.append(item)
+				}
+
+				self.serachResultsTableView.reloadData()
+				self.adjustTableViewHeight()
+			}
+
+		} else {
+			self.clearSearchTable()
+		}
+	}
+	
+	func clearSearchTable() {
+		self.searchItems.removeAll()
+		self.serachResultsTableView.reloadData()
+		self.adjustTableViewHeight()
+	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		checkForSelectedLocationAndRegion()
@@ -61,18 +119,38 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 2
+		
+		if tableView == self.tableView {
+			return 2
+		} else {
+			return searchItems.count
+		}
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "sliderCell",
-		for: indexPath) as? SliderTableViewCell else { return SliderTableViewCell() }
-		let isSelectedCell = indexPath == self.selectedIndexPath
-		cell.configureCell(isCellSelected: isSelectedCell, radius: selectedRadius, indexPath: indexPath)
-		cell.delegate = self
-		return cell
-		
+		if tableView == self.tableView {
+			guard let cell = tableView.dequeueReusableCell(withIdentifier: "sliderCell",
+														   for: indexPath) as? SliderTableViewCell else { return SliderTableViewCell() }
+			let isSelectedCell = indexPath == self.selectedIndexPath
+			cell.configureCell(isCellSelected: isSelectedCell, radius: selectedRadius, indexPath: indexPath)
+			cell.delegate = self
+			return cell
+		} else {
+			guard let cell2 = tableView.dequeueReusableCell(withIdentifier: "locationCell",
+															for: indexPath) as? LocationResultCell else { return LocationResultCell() }
+			cell2.label.text = searchItems[indexPath.row].name
+			return cell2
+		}
+	}
+	
+	func adjustTableViewHeight() {
+		if serachResultsTableView.contentSize.height > 200 {
+			resultsTbVHeight.constant = 200
+		} else {
+			resultsTbVHeight.constant = serachResultsTableView.contentSize.height
+		}
+		self.view.layoutSubviews()
 	}
 	
 	func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -105,27 +183,42 @@ class LocationViewController: UIViewController, UITableViewDataSource, UITableVi
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if indexPath != self.selectedIndexPath {
-			self.selectedIndexPath = indexPath
-			self.tableView.reloadData()
+		if tableView == self.tableView {
+			if indexPath != self.selectedIndexPath {
+				self.selectedIndexPath = indexPath
+				self.tableView.reloadData()
+			}
+		} else {
+			let selectedLoc = searchItems[indexPath.row]
+			let coordinate = selectedLoc.placemark.coordinate
+			self.mapView.setCenter(coordinate, animated: true)
+			self.clearSearchTable()
+			locationSearchBar.text = ""
+			locationSearchBar.resignFirstResponder()
 		}
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		
-		switch indexPath.row {
-		case 0:
-			return 80
-		case 1:
-			return 110
-		default:
-			return 110
+		if tableView == self.tableView {
+			switch indexPath.row {
+			case 0:
+				return 80
+			case 1:
+				return 110
+			default:
+				return 110
+			}
+		} else {
+			return 40
 		}
 	}
 	
 	func registerNib() {
 		let nib = UINib(nibName: "SliderTableViewCell", bundle: nil)
 		tableView.register(nib, forCellReuseIdentifier: "sliderCell")
+		
+		let nib2 = UINib(nibName: "LocationResultCell", bundle: nil)
+		serachResultsTableView.register(nib2, forCellReuseIdentifier: "locationCell")
 	}
 	
 	func KMToMeters(km: Int) -> Int {
@@ -188,7 +281,6 @@ extension LocationViewController: MKMapViewDelegate {
 			circleRenderer.fillColor = UIColor.blue
 			circleRenderer.strokeColor = .white
 			circleRenderer.alpha = 0.5
-			
 		}
 		return circleRenderer
 	}

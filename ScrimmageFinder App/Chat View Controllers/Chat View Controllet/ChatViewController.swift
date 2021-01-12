@@ -262,7 +262,7 @@ final class ChatViewController: MessagesViewController {
 		storageRef.putData(data, metadata: metadata) { metaData, error in
 			if error == nil, metaData != nil {
 				
-				storageRef.downloadURL { url, error in
+				storageRef.downloadURL { url, _ in
 					completion(url)
 					// success!
 				}
@@ -298,7 +298,7 @@ final class ChatViewController: MessagesViewController {
 		let ref = Storage.storage().reference(forURL: url.absoluteString)
 		let megaByte = Int64(1 * 1024 * 1024)
 		
-		ref.getData(maxSize: megaByte) { data, error in
+		ref.getData(maxSize: megaByte) { data, _ in
 			guard let imageData = data else {
 				completion(nil)
 				return
@@ -401,16 +401,15 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 	
-	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+	func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 		picker.dismiss(animated: true, completion: nil)
 		
 		if let asset = info[.phAsset] as? PHAsset { // 1
 			let size = CGSize(width: 500, height: 500)
-			PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { result, info in
+			PHImageManager.default().requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { result, _ in
 				guard let image = result else {
 					return
 				}
-				
 				self.sendPhoto(image)
 			}
 		} else if let image = info[.originalImage] as? UIImage { // 2

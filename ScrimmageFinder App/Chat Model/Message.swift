@@ -34,7 +34,7 @@ struct Message: MessageType {
 	let content: String
 	let sentDate: Date
 	var downloadURL: URL?
-	var image: UIImage? = nil
+	var image: UIImage?
 	
 	var user: User
 

@@ -57,7 +57,7 @@ class CoreDataController {
         var entitiesCount = 0
         do {
             entitiesCount = try self.mainContext.count(for: fetchRequest)
-            print (entitiesCount)
+            print(entitiesCount)
         } catch {
             print("error executing fetch request: \(error)")
         }
@@ -143,7 +143,7 @@ class CoreDataController {
             try context.save()
             print("Profile image deleted")
         } catch {
-            print ("There was an error")
+            print("There was an error")
         }
     }
     

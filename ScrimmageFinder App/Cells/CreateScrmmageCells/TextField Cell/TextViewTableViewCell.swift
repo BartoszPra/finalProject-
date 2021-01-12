@@ -25,7 +25,7 @@ class TextViewTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDe
         titleLabel.text = "    " + title
         inputTextField.attributedPlaceholder = attributedPlaceHolder
         inputTextField.keyboardType = keyboardType!
-		if isEdit, let data = editableData {
+		if isEdit, editableData != nil {
 			self.inputTextField.text = editableData as? String
 		}
     }

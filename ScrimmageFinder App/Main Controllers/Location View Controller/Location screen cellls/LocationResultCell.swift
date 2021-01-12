@@ -10,7 +10,10 @@ import UIKit
 
 class LocationResultCell: UITableViewCell {
 
-    override func awakeFromNib() {
+	@IBOutlet weak var label: UILabel!
+	@IBOutlet weak var icon: UIImageView!
+	
+	override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }

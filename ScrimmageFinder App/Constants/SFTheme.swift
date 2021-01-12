@@ -14,7 +14,6 @@ struct SFTheme {
     struct SFColors {
         let mainFontColor = UIColor.white
 		let tintBlueColor = UIColor(hex: "#007aff") // nice blue tint color
-        
     }
     
     struct SFFonts {

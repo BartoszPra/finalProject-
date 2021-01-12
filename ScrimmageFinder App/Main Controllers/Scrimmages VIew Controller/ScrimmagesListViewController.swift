@@ -69,7 +69,12 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 					self?.items.remove(at: index)
 				}
 			}
-			self?.tableView.reloadData()
+			DispatchQueue.main.async {
+				self?.tableView.reloadData()
+			}
+		}
+		DispatchQueue.main.async {
+			self.tableView.reloadData()
 		}
 	}
 	

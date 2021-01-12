@@ -92,7 +92,7 @@ import FirebaseFirestore
 		
 	lazy var isParticipating: Bool = {
 		if participants.isEmpty {
-			if let _ = participants.first(where: { $0.key == userID }) {
+			if participants.first(where: { $0.key == userID }) != nil {
 				return true
             } else {
 				return false
@@ -114,14 +114,14 @@ import FirebaseFirestore
 			return false
 		}
 	}
-	
+	//move to date extension
 	var timeString: String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "HH:mm"
 		let mydt = dateFormatter.string(from: dateTime).capitalized
 		return "\(mydt)"
 	}
-	
+	//move to date extension
 	var dateString: String {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "dd.MM.yyyy"
@@ -131,7 +131,7 @@ import FirebaseFirestore
 	
 	var isAlreadySaved: Bool {
 		if !self.savedById.isEmpty {
-            if let _ = self.savedById.first(where: {$0 == self.userID}) {
+            if self.savedById.first(where: {$0 == self.userID}) != nil {
                 return true
             } else {
                 return false

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,8 +12,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationViewController" customModule="ScrimmageFinder_App" customModuleProvider="target">
             <connections>
                 <outlet property="height" destination="Q5O-rr-iRx" id="ZO7-zj-Vcc"/>
+                <outlet property="locationSearchBar" destination="Nx6-Gr-mLy" id="XDw-nF-8m8"/>
                 <outlet property="mapView" destination="bDH-XK-kbo" id="2rY-iN-GnG"/>
                 <outlet property="regionView" destination="aCg-0i-Gb5" id="xDi-8B-inj"/>
+                <outlet property="resultsTbVHeight" destination="cwq-bm-UU2" id="8Ma-SW-1xI"/>
+                <outlet property="serachResultsTableView" destination="Gk9-YF-mAd" id="wr4-eU-wZr"/>
                 <outlet property="tableView" destination="Ee0-1c-iMT" id="JM7-v1-14o"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="width" destination="ONi-Dt-dqf" id="Vsa-FS-Ep5"/>
@@ -95,6 +98,13 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </imageView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Gk9-YF-mAd">
+                    <rect key="frame" x="0.0" y="138" width="414" height="50"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="cwq-bm-UU2"/>
+                    </constraints>
+                </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Drag map to choose location    " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgW-Zq-hp8" userLabel="Drag map to choose location">
                     <rect key="frame" x="94.5" y="608" width="225" height="18"/>
                     <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -134,6 +144,7 @@
                 <constraint firstAttribute="trailing" secondItem="Nx6-Gr-mLy" secondAttribute="trailing" id="3Kg-LO-kOU"/>
                 <constraint firstItem="tgW-Zq-hp8" firstAttribute="centerX" secondItem="bDH-XK-kbo" secondAttribute="centerX" id="3oi-iA-fsi"/>
                 <constraint firstAttribute="trailing" secondItem="BLJ-2v-ju7" secondAttribute="trailing" id="6iJ-2h-fQ0"/>
+                <constraint firstItem="Gk9-YF-mAd" firstAttribute="top" secondItem="Nx6-Gr-mLy" secondAttribute="bottom" id="7za-Nm-Qc0"/>
                 <constraint firstItem="6xd-I8-rQf" firstAttribute="centerY" secondItem="bDH-XK-kbo" secondAttribute="centerY" id="9zM-qH-nyP"/>
                 <constraint firstItem="KFa-2T-nBh" firstAttribute="centerY" secondItem="dMg-lC-fDL" secondAttribute="centerY" id="AoM-l7-p1L"/>
                 <constraint firstItem="dMg-lC-fDL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CCH-kD-5FB"/>
@@ -144,11 +155,13 @@
                 <constraint firstItem="tgW-Zq-hp8" firstAttribute="bottom" secondItem="bDH-XK-kbo" secondAttribute="bottom" constant="-10" id="SLO-qs-zNk"/>
                 <constraint firstItem="Nx6-Gr-mLy" firstAttribute="top" secondItem="BLJ-2v-ju7" secondAttribute="bottom" id="TUb-kR-Tow"/>
                 <constraint firstItem="Nx6-Gr-mLy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VJG-xN-bkH"/>
+                <constraint firstItem="Gk9-YF-mAd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="VqZ-m6-oRr"/>
                 <constraint firstItem="aCg-0i-Gb5" firstAttribute="centerX" secondItem="bDH-XK-kbo" secondAttribute="centerX" id="ZO7-ue-8oh"/>
                 <constraint firstItem="dMg-lC-fDL" firstAttribute="top" secondItem="Ee0-1c-iMT" secondAttribute="bottom" id="Ztj-c1-jVT"/>
                 <constraint firstItem="6xd-I8-rQf" firstAttribute="centerX" secondItem="bDH-XK-kbo" secondAttribute="centerX" id="gOo-2R-ABs"/>
                 <constraint firstItem="aCg-0i-Gb5" firstAttribute="centerY" secondItem="bDH-XK-kbo" secondAttribute="centerY" id="iD8-Q1-UT3"/>
                 <constraint firstItem="KFa-2T-nBh" firstAttribute="leading" secondItem="dMg-lC-fDL" secondAttribute="leading" constant="40" id="j5U-lS-DPR"/>
+                <constraint firstAttribute="trailing" secondItem="Gk9-YF-mAd" secondAttribute="trailing" id="j6u-fT-ozA"/>
                 <constraint firstAttribute="bottom" secondItem="dMg-lC-fDL" secondAttribute="bottom" id="m03-Lk-I4k"/>
                 <constraint firstItem="BLJ-2v-ju7" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="m4C-kj-siu"/>
                 <constraint firstAttribute="trailing" secondItem="bDH-XK-kbo" secondAttribute="trailing" id="rTU-R5-Cls"/>
@@ -162,6 +175,9 @@
     </objects>
     <resources>
         <image name="paperplane.fill" catalog="system" width="128" height="118"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
