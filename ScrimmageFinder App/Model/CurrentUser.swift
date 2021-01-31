@@ -10,16 +10,12 @@ import Foundation
 import Firebase
 
 
-class CurrentUser: User {
+class CurrentUser {
+	
+	static let shared = CurrentUser()
+	
+	lazy var id = {return Auth.auth().currentUser?.uid}()
+	lazy var userName = {return Auth.auth().currentUser?.displayName}()
+	lazy var userEmail = {Auth.auth().currentUser?.email}()
     
-//	override init(id:String, userName: String, userEmail: String) {
-//		super.init()
-//		self.id = Auth.auth().currentUser?.uid
-//		self.userName = (Auth.auth().currentUser?.displayName)!
-//		self.userEmail = (Auth.auth().currentUser?.email)!
-//    }	
-//	
-//	required init(from decoder: Decoder) throws {
-//		fatalError("init(from:) has not been implemented")
-//	}
 }

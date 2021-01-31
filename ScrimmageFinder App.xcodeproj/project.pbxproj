@@ -47,6 +47,8 @@
 		A5121D7E2447B41F0057E605 /* MainDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5121D7D2447B41F0057E605 /* MainDetailTableViewCell.swift */; };
 		A5121D832447BBC00057E605 /* DetailButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5121D812447BBC00057E605 /* DetailButtonTableViewCell.swift */; };
 		A5121D842447BBC00057E605 /* DetailButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5121D822447BBC00057E605 /* DetailButtonTableViewCell.xib */; };
+		A51653AA25C60E3C0028B22F /* AddressSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51653A825C60E3C0028B22F /* AddressSearchTableViewController.swift */; };
+		A51653AB25C60E3C0028B22F /* AddressSearchTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A51653A925C60E3C0028B22F /* AddressSearchTableViewController.xib */; };
 		A518D7CB2370D7F400DBDC1A /* SavedScrimmagesCell.xib in Sources */ = {isa = PBXBuildFile; fileRef = A591A30F236F30010075F8E4 /* SavedScrimmagesCell.xib */; };
 		A51AF9CF23DE53E80042D925 /* CellDefinitionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51AF9CE23DE53E80042D925 /* CellDefinitionHelper.swift */; };
 		A52D2CB9241D0E8500605231 /* DatabaseRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52D2CB8241D0E8500605231 /* DatabaseRepresentation.swift */; };
@@ -99,6 +101,8 @@
 		A5A0A89924DE0E9400B0C83D /* SFLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A0A89824DE0E9400B0C83D /* SFLocationManager.swift */; };
 		A5AEC4732385710F0095796A /* ScrimmageStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AEC4722385710F0095796A /* ScrimmageStatus.swift */; };
 		A5AEC476238612E00095796A /* ScrimmageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5AEC475238612E00095796A /* ScrimmageType.swift */; };
+		A5B6C06625AE6A2F00828CDE /* EditUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B6C06425AE6A2F00828CDE /* EditUserViewController.swift */; };
+		A5B6C06725AE6A2F00828CDE /* EditUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5B6C06525AE6A2F00828CDE /* EditUserViewController.xib */; };
 		A5BB82A725ABD07500E4FC16 /* TabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5BB82A525ABD07500E4FC16 /* TabBarController.xib */; };
 		A5BECA1724AA5B110032D2C1 /* Pods_ScrimmageFinder_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06025A504561BDBE1220B5F6 /* Pods_ScrimmageFinder_App.framework */; };
 		A5BEF59A25376F4D00FE1C96 /* UIBarButtonItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5BEF59925376F4D00FE1C96 /* UIBarButtonItem+Extensions.swift */; };
@@ -216,6 +220,8 @@
 		A5121D7D2447B41F0057E605 /* MainDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDetailTableViewCell.swift; sourceTree = "<group>"; };
 		A5121D812447BBC00057E605 /* DetailButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailButtonTableViewCell.swift; sourceTree = "<group>"; };
 		A5121D822447BBC00057E605 /* DetailButtonTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailButtonTableViewCell.xib; sourceTree = "<group>"; };
+		A51653A825C60E3C0028B22F /* AddressSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressSearchTableViewController.swift; sourceTree = "<group>"; };
+		A51653A925C60E3C0028B22F /* AddressSearchTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressSearchTableViewController.xib; sourceTree = "<group>"; };
 		A51AF9CE23DE53E80042D925 /* CellDefinitionHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellDefinitionHelper.swift; sourceTree = "<group>"; };
 		A52D2CB8241D0E8500605231 /* DatabaseRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseRepresentation.swift; sourceTree = "<group>"; };
 		A52D2CBA241E561A00605231 /* UIColor+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Additions.swift"; sourceTree = "<group>"; };
@@ -271,6 +277,8 @@
 		A5A0A89824DE0E9400B0C83D /* SFLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFLocationManager.swift; sourceTree = "<group>"; };
 		A5AEC4722385710F0095796A /* ScrimmageStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageStatus.swift; sourceTree = "<group>"; };
 		A5AEC475238612E00095796A /* ScrimmageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageType.swift; sourceTree = "<group>"; };
+		A5B6C06425AE6A2F00828CDE /* EditUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserViewController.swift; sourceTree = "<group>"; };
+		A5B6C06525AE6A2F00828CDE /* EditUserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditUserViewController.xib; sourceTree = "<group>"; };
 		A5BB82A525ABD07500E4FC16 /* TabBarController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabBarController.xib; sourceTree = "<group>"; };
 		A5BEF59925376F4D00FE1C96 /* UIBarButtonItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Extensions.swift"; sourceTree = "<group>"; };
 		A5CC956F2395EA6C004A0810 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
@@ -347,7 +355,7 @@
 				A50F4244228472A0007841A2 /* MyScrimmages */,
 				A591A307236F285D0075F8E4 /* Saved Scrimmages */,
 				A57BD1282357A64D00A324BC /* MainTabBar */,
-				A50211D024577941000BB18C /* Scrimmages VIew Controller */,
+				A50211D024577941000BB18C /* ScrimmagesVC */,
 				A5531F8B23B2372E0054DA0A /* Add Scrimmage ViewController */,
 			);
 			path = "Main Controllers";
@@ -358,8 +366,6 @@
 			children = (
 				A59034E82391A3A200CB7284 /* FIRStorageReference.swift */,
 				03C6E1E720DD357D001DFD01 /* FIRFiestoreService.swift */,
-				03C6E1ED20DD59C3001DFD01 /* EncodableExtensions.swift */,
-				03C6E1EF20DD63E0001DFD01 /* SnapshotExtensions.swift */,
 				03C6E1EB20DD5557001DFD01 /* FIRCollectionReference.swift */,
 			);
 			path = NetworkService;
@@ -368,6 +374,7 @@
 		0369DAED20E135D3006B7507 /* Detail Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A51653A725C60DEF0028B22F /* AddressSearchController */,
 				A5F762C32388BAD3002CD1B3 /* UsersListController */,
 				A57BD12A2357ADB300A324BC /* Detail */,
 			);
@@ -500,14 +507,14 @@
 			path = "TextView Cell";
 			sourceTree = "<group>";
 		};
-		A50211D024577941000BB18C /* Scrimmages VIew Controller */ = {
+		A50211D024577941000BB18C /* ScrimmagesVC */ = {
 			isa = PBXGroup;
 			children = (
 				A5021202245A3581000BB18C /* MasterViewController.swift */,
 				A50211D32458EAD0000BB18C /* ScrimmagesListViewController.swift */,
 				A50211D42458EAD0000BB18C /* ScrimmagesListViewController.xib */,
 			);
-			path = "Scrimmages VIew Controller";
+			path = ScrimmagesVC;
 			sourceTree = "<group>";
 		};
 		A50211D724596883000BB18C /* NewScrimmageCell */ = {
@@ -600,6 +607,15 @@
 				A5121D822447BBC00057E605 /* DetailButtonTableViewCell.xib */,
 			);
 			path = ButtonCell;
+			sourceTree = "<group>";
+		};
+		A51653A725C60DEF0028B22F /* AddressSearchController */ = {
+			isa = PBXGroup;
+			children = (
+				A51653A825C60E3C0028B22F /* AddressSearchTableViewController.swift */,
+				A51653A925C60E3C0028B22F /* AddressSearchTableViewController.xib */,
+			);
+			path = AddressSearchController;
 			sourceTree = "<group>";
 		};
 		A518D7CD2370DE1E00DBDC1A /* Cells */ = {
@@ -842,6 +858,8 @@
 			isa = PBXGroup;
 			children = (
 				A52D2CBB241E561A00605231 /* UICollectionView+Additions.swift */,
+				03C6E1ED20DD59C3001DFD01 /* EncodableExtensions.swift */,
+				03C6E1EF20DD63E0001DFD01 /* SnapshotExtensions.swift */,
 				A52D2CBA241E561A00605231 /* UIColor+Additions.swift */,
 				A52D2CBD241E561A00605231 /* UIImage+Additions.swift */,
 				A52D2CBC241E561A00605231 /* UIView+Additions.swift */,
@@ -896,6 +914,8 @@
 			children = (
 				A5F762D5238AD365002CD1B3 /* UserProfileViewController.swift */,
 				A5F762D6238AD365002CD1B3 /* UserProfileViewController.xib */,
+				A5B6C06425AE6A2F00828CDE /* EditUserViewController.swift */,
+				A5B6C06525AE6A2F00828CDE /* EditUserViewController.xib */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -1086,9 +1106,11 @@
 				A5121D842447BBC00057E605 /* DetailButtonTableViewCell.xib in Resources */,
 				034D429120E4E8FD00D59F8C /* Settings.bundle in Resources */,
 				A50211D62458EAD0000BB18C /* ScrimmagesListViewController.xib in Resources */,
+				A5B6C06725AE6A2F00828CDE /* EditUserViewController.xib in Resources */,
 				A57BD1302365FDBD00A324BC /* LoginViewController.xib in Resources */,
 				A5F762D8238AD365002CD1B3 /* UserProfileViewController.xib in Resources */,
 				A5531F9F23BA05E10054DA0A /* LogoTableViewCell.xib in Resources */,
+				A51653AB25C60E3C0028B22F /* AddressSearchTableViewController.xib in Resources */,
 				A55EC4E025A233A900BE6C53 /* LocationResultCell.xib in Resources */,
 				034D429320E54FCA00D59F8C /* GoogleService-Info.plist in Resources */,
 				A54BC0BF23BE9C380087178B /* AddressCellTableViewCell.xib in Resources */,
@@ -1254,6 +1276,7 @@
 				A5584FF5245369DF00AEBB92 /* AddressTableViewCell.swift in Sources */,
 				A5D2FA46237F512400FAAC8A /* UIViewController+Extensions.swift in Sources */,
 				A5AEC476238612E00095796A /* ScrimmageType.swift in Sources */,
+				A51653AA25C60E3C0028B22F /* AddressSearchTableViewController.swift in Sources */,
 				A535FBB7249E33DE0028B733 /* ScrimmageOccurance.swift in Sources */,
 				A57BD12E2357EEE400A324BC /* SFAppearance.swift in Sources */,
 				A5814FAA24AD4129008DABFE /* AddScrimmageCoordinator.swift in Sources */,
@@ -1318,6 +1341,7 @@
 				A5814FC324AE88CF008DABFE /* LocationViewController.swift in Sources */,
 				03C6E1EE20DD59C3001DFD01 /* EncodableExtensions.swift in Sources */,
 				A560B17F246836F0005211E9 /* NewScrimmageTableViewController.swift in Sources */,
+				A5B6C06625AE6A2F00828CDE /* EditUserViewController.swift in Sources */,
 				A5531F9323B246E10054DA0A /* TextViewTableViewCell.swift in Sources */,
 				A50F7B3E24158CE400AA9083 /* Chat.swift in Sources */,
 				A5021203245A3581000BB18C /* MasterViewController.swift in Sources */,

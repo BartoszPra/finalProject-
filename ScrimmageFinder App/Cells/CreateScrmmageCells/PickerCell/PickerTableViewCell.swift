@@ -49,6 +49,9 @@ class PickerTableViewCell: MainCreateScrimmageCellTableViewCell, UITextFieldDele
         self.title.text = "    " + title        
         self.picker = UIDatePicker()
 		self.picker.datePickerMode = self.decidePickerType(for: title)
+		if #available(iOS 13.4, *) {
+			picker.preferredDatePickerStyle = .wheels
+		}
         self.picker.backgroundColor = .black
         self.picker.tintColor = .white
         self.picker.setValue(UIColor.white, forKeyPath: "textColor")

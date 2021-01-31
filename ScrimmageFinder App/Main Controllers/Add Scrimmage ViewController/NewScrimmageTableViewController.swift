@@ -369,16 +369,24 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 								  chatId: chatId,
 								  imageUrl: imageUrl,
 								  occurance: 1)
-		// creating a scrimmage
-		newSid = FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages, completion: { (success) in
-			if success {
-				self.service.addGeoLocation(location: scrimmage.geopoint, doc: self.newSid)
-				completion(true)
-			} else {
-				completion(false)
-			}
-		})
-		print(newSid + "Im here with id")
+		
+		//check if the scrimmage with the same name exist
+		FIRFirestoreService.shared.readWhere(from: .scrimmages, whereFld: "name", equalsTo: scrimmage.name, returning: Scrimmage.self, completion: { (scrimmages) in
+				if scrimmages.isEmpty {
+					// creating a scrimmage
+					self.newSid = FIRFirestoreService.shared.create(for: scrimmage, in: .scrimmages, completion: { (success) in
+						if success {
+							self.service.addGeoLocation(location: scrimmage.geopoint, doc: self.newSid)
+							completion(true)
+						} else {
+							completion(false)
+						}
+					})
+				} else {
+					AlertController.showAllert(self, title: "Im Sorry", message: "This scrimmage name already exists please enter different one.")
+					print("This scrimmage name aready exists please enter different one!")
+				}
+			})
 	}
 	
 	func createCells() {
@@ -502,9 +510,13 @@ extension NewScrimmageTableViewController: GMSAutocompleteViewControllerDelegate
 	}
 	
 	@objc func autocompleteClicked(_ sender: UIButton) {
+		//afteer google free time ends
+		//let vc = AddressSearchTableViewController(nibName: "AddressSearchTableViewController", bundle: nil)
+		//present(vc, animated: true, completion: nil)
+				
 		let autocompleteController = GMSAutocompleteViewController()
 		autocompleteController.delegate = self
-		
+
 		// Specify the place data types to return.
 		let fields: GMSPlaceField = GMSPlaceField(rawValue:
 			UInt(GMSPlaceField.name.rawValue) |

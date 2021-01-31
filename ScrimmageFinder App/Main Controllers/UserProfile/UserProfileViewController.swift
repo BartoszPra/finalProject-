@@ -17,6 +17,8 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
     var profileImage: UIImage!
     var userID: String!
     let coreDataController = CoreDataController.shared
+	
+	var user: User!
     
     override func viewDidLoad() {
         
@@ -28,24 +30,37 @@ class UserProfileViewController: UIViewController, UIImagePickerControllerDelega
 		navigationController?.navigationBar.setBackgroundImage(image, for: .default)
 		navigationController?.navigationBar.shadowImage = UIImage()
 		
-        userID = Auth.auth().currentUser?.uid
+        userID = CurrentUser.shared.id
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         profileImageView.isUserInteractionEnabled = true
         imagePicker.delegate = self
         profileImageView.addGestureRecognizer(tapGestureRecognizer)
-		displayNameLabel.text = Auth.auth().currentUser?.displayName
+		displayNameLabel.text = CurrentUser.shared.userName
     }
     
     override func viewDidAppear(_ animated: Bool) {
-                
-        coreDataController.loadImage(for: userID) { (images) in
-            if images != nil {
-                guard let photoData = images?.first?.imageData else {return}
-                profileImage = UIImage(data: photoData)
-                self.profileImageView.image = profileImage
-            }
-        }
+		loadImage()
+		
+		//getUser()
+        
     }
+	
+//	func getUser() {
+//		FIRFirestoreService.shared.readOne(from: .users, with: userID, returning: User.self) { (user) in
+//			self.user = user
+//		}
+//	}
+	
+	func loadImage() {
+		coreDataController.loadImage(for: userID) { (images) in
+			if images != nil {
+				guard let photoData = images?.first?.imageData else {return}
+				profileImage = UIImage(data: photoData)
+				self.profileImageView.image = profileImage
+			}
+		}
+		
+	}
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
         imagePicker.allowsEditing = true

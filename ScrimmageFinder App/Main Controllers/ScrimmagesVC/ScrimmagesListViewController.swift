@@ -29,11 +29,11 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 		tableView = newTable
 		createBarButtons()
 		locationManager = SFLocationManager(delegate: self)
-		
+		self.getScrimages()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
-		self.getScrimages()
+		//self.getScrimages()
 	}
 	
 	func getScrimages() {		
@@ -79,15 +79,14 @@ class ScrimmagesListViewController: MasterViewController<ScrimmagesCell, Scrimma
 	}
 	
 	func checkForSelectedLocationAndRegion() -> CLLocation? {
-		
 		var returnedLocation: CLLocation
 		let defaults = UserDefaults.standard
 		if let savedLat = defaults.object(forKey: "latitude") as? CLLocationDegrees,
-			let savedLon = defaults.object(forKey: "longitude") as? CLLocationDegrees {
-			let location = CLLocationCoordinate2D(latitude: savedLat, longitude: savedLon)
-			self.locationManager.geocodeLocation(location: location)
-			returnedLocation = CLLocation(latitude: savedLat, longitude: savedLon)
-			return returnedLocation
+		   let savedLon = defaults.object(forKey: "longitude") as? CLLocationDegrees {
+				let location = CLLocationCoordinate2D(latitude: savedLat, longitude: savedLon)
+				self.locationManager.geocodeLocation(location: location)
+				returnedLocation = CLLocation(latitude: savedLat, longitude: savedLon)
+				return returnedLocation
 		} else {
 			isCurrentLocationUseOn = true
 			if let lat = locationManager.currentLocation?.latitude, let lon = locationManager.currentLocation?.longitude {

@@ -6,7 +6,6 @@
 //  Copyright © 2019 The App Experts. All rights reserved.
 //
 import UIKit
-import SilentScrolly
 import MobileCoreServices
 import FirebaseAuth
 import FBSDKLoginKit

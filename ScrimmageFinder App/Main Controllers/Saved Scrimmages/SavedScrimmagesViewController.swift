@@ -87,8 +87,9 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
 		case 1:
 			toDisplayArray = savedScrimmages
 		default:
-			toDisplayArray = createdScrimmages
+			toDisplayArray = createdScrimmages			
 		}
+		updateUI()
 		self.savedTableView.reloadData()
 	}
 	
@@ -125,7 +126,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func updateUI() {
-        if self.savedScrimmages.isEmpty {
+        if self.toDisplayArray.isEmpty {
             self.emptyListLabel.text = "No saved Scrimmages"
         } else {
             self.emptyListLabel.text = ""

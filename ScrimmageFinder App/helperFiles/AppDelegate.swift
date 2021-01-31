@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        GMSPlacesClient.provideAPIKey("AIzaSyApO0USOcr2lPn-RRy1Jdfg9UPv2UINosU")
+        GMSPlacesClient.provideAPIKey("AIzaSyBNk2WUV6PAjpcRJXL-2JoMtpgUZzy_nM8")
         SFAppearance.setUpApperance()
         let navController = CoordinatedNavigationController()
         coordinator = MainCoordinator(navigationController: navController)

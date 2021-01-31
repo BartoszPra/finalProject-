@@ -18,7 +18,6 @@ class SFAppearance {
     }
     
     static func setupNavigationBar() {
-        
         let tabBarAppearance = UITabBar.appearance()
 		tabBarAppearance.tintColor = SFTheme.SFColors().tintBlueColor
         tabBarAppearance.barTintColor = UIColor.black
