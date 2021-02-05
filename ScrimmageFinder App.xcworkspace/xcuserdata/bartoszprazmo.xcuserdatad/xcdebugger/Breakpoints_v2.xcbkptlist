@@ -193,10 +193,10 @@
             filePath = "ScrimmageFinder App/Chat View Controllers/ChatsViewController/ChatsTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "116"
+            endingLineNumber = "116"
+            landmarkName = "createChannel(chatName:users:isGrouped:chatImageUrl:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -353,8 +353,8 @@
             filePath = "ScrimmageFinder App/Detail Controllers/Detail/SFDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
             landmarkName = "openGoogleMap()"
             landmarkType = "7">
          </BreakpointContent>
@@ -586,8 +586,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "50"
             endingLineNumber = "50"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "UserProfileViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -650,7 +650,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "374"
                   endingLineNumber = "374"
-                  offsetFromSymbolStart = "5014">
+                  offsetFromSymbolStart = "4270">
                </Location>
                <Location
                   uuid = "8626FC66-6D01-48B8-9E4E-F165EAC14ECD - bc1b41f19b76cfcd"
@@ -673,17 +673,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B5BEEF57-8816-4CFE-ADA0-CF1969322A4B"
+            uuid = "D55963F6-1A62-4729-A611-D51E4638FA1F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScrimmageFinder App/Detail Controllers/Detail/DetailCells/UserOrganizerCell/UserTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "awakeFromNib()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "22C0DA7F-24C0-4775-8B86-C899DE2580E1"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Main Controllers/ScrimmagesVC/ScrimmagesListViewController.swift"
+            filePath = "ScrimmageFinder App/Detail Controllers/Detail/SFDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "viewDidAppear(_:)"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "participateButtonPressed(sender:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5835B3F5-5E32-44BF-87CD-13E9DBFB2166"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScrimmageFinder App/ViewModel/ScrimmageVIewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "isParticipating"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

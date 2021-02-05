@@ -13,11 +13,11 @@ import MapKit
 class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MapCellDelegate {
 	
 	@IBOutlet weak var tableView: UITableView!
-	
 	var cellsArray = [DetailCellDefinition]()
 	var isSavedUsed: Bool!
 	var coordinator: ScrimmagesDetailCoordinator?
 	var viewModel: ScrimmageViewModel!
+	var creator: User!
     private let coreDataController = CoreDataController.shared // not used access to code data
     private var userID: String!
 	var scrimmageImage = UIImage()
@@ -25,7 +25,6 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 	private var channelReference: CollectionReference {
 		return db.collection("chats")
 	}
-	
 	var service = FIRFirestoreService.shared
 	
 	init(nibName nibNameOrNil: String, bundle nibBundleOrNil: Bundle?, scrimmage: ScrimmageViewModel, isSavedUsed: Bool) {
@@ -45,7 +44,7 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		self.userID = Auth.auth().currentUser?.uid
+		self.userID = CurrentUser.shared.id
 		self.tableView.delegate = self
         self.tableView.dataSource = self
 		setupCells()
@@ -71,14 +70,7 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		if indexPath.row == 10 {
-			return 200
-		} else if indexPath.row == 11 {
-			tableView.estimatedRowHeight = 60
-			return UITableView.automaticDimension
-		} else {
-			return 60
-		}
+		return cellsArray[indexPath.row].height
 	}
 	
 	func setupCells() {
@@ -93,6 +85,9 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 		
 		let participantNib = UINib(nibName: "ParticipantsTableViewCell", bundle: nil)
 		tableView.register(participantNib, forCellReuseIdentifier: "participantsCell")
+		
+		let organizerNib = UINib(nibName: "UserTableViewCell", bundle: nil)
+		tableView.register(organizerNib, forCellReuseIdentifier: "organizerCell")
 	}
 	
 	func setupNavigationController() {
@@ -112,7 +107,7 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 
 	@objc func chatButtonPressed() {
 		
-		let user = User(id: Auth.auth().currentUser!.uid, userName: (Auth.auth().currentUser?.displayName)!, userEmail: (Auth.auth().currentUser?.email)!)
+		let user = User(id: CurrentUser.shared.id, userName: CurrentUser.shared.userName, userEmail: CurrentUser.shared.userEmail, phoneNumber: nil)
 		let str = viewModel.chatId
 		channelReference.document(str).getDocument { (querySnapshot, error) in
 			guard let snapshot = querySnapshot else {
@@ -128,47 +123,46 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 	
 	func createCells() {
 
-		let nameCell = DetailCellDefinition(title: "Name", awatar: UIImage(), content: viewModel.name, backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil)
+		let nameCell = DetailCellDefinition(title: "Name", awatar: UIImage(), content: viewModel.name, backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil, height: 60)
 		
-		let venueNameCell = DetailCellDefinition(title: "Venue Name", awatar: UIImage(named: "venueIcon")!, content: viewModel.venueName, backgroundColor: .darkGray, type: .text, action: nil, identifier: "DetailCell", target: nil)
+		let venueNameCell = DetailCellDefinition(title: "Venue Name", awatar: UIImage(named: "venueIcon")!, content: viewModel.venueName, backgroundColor: .darkGray, type: .text, action: nil, identifier: "DetailCell", target: nil, height: 60)
 		
-		let organizerNameCell = DetailCellDefinition(title: "Organizer Name", awatar: UIImage(named: "nameIcon")!, content: viewModel.managerName, backgroundColor: .darkGray, type: .text, action: nil, identifier: "DetailCell", target: nil)
+		let organizerCell = DetailCellDefinition(title: "Organizer", awatar: UIImage(named: "nameIcon")!, content: creator.displayName, backgroundColor: .darkGray, type: .text, action: nil, identifier: "organizerCell", target: nil, height: 60)
 		
-		let locationCell = DetailCellDefinition(title: "Address", awatar: UIImage(named: "addressIcon")!, content: viewModel.address, backgroundColor: .darkGray, type: .text, action: nil, identifier: "AddressCell", target: nil)
+		let locationCell = DetailCellDefinition(title: "Address", awatar: UIImage(named: "addressIcon")!, content: viewModel.address, backgroundColor: .darkGray, type: .text, action: nil, identifier: "AddressCell", target: nil, height: 200)
 		
-		let timeCell = DetailCellDefinition(title: "Time", awatar: UIImage(named: "timeIcon")!, content: viewModel.timeString, backgroundColor: .darkGray, type: .text, action: nil, identifier: "DetailCell", target: nil)
+		let timeCell = DetailCellDefinition(title: "Time", awatar: UIImage(named: "timeIcon")!, content: viewModel.timeString, backgroundColor: .darkGray, type: .text, action: nil, identifier: "DetailCell", target: nil, height: 60)
 		
-		let dateCell = DetailCellDefinition(title: "Date", awatar: UIImage(named: "dateIcon")!, content: viewModel.dateString, backgroundColor: .darkGray, type: .text, action: nil, identifier: "DetailCell", target: nil)
+		let dateCell = DetailCellDefinition(title: "Date", awatar: UIImage(named: "dateIcon")!, content: viewModel.dateString, backgroundColor: .darkGray, type: .text, action: nil, identifier: "DetailCell", target: nil, height: 60)
 		
-		let contactNumberCell = DetailCellDefinition(title: "Contact Number", awatar: UIImage(named: "numberIcon")!, content: viewModel.managerNumber, backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil)
-		
-		let participantsCell = DetailCellDefinition(title: "Participants", awatar: UIImage(named: "usersIcon")!, content: String(describing: viewModel.numberOfUsersParticipating), backgroundColor: .darkGray, type: .text, action: #selector(showParticipants), identifier: "participantsCell", target: nil)
+		let participantsCell = DetailCellDefinition(title: "Participants", awatar: UIImage(named: "usersIcon")!, content: String(describing: viewModel.numberOfUsersParticipating), backgroundColor: .darkGray, type: .text, action: #selector(showParticipants),
+													identifier: "participantsCell",
+													target: nil, height: 60)
 				
-		let typeCell = DetailCellDefinition(title: "Type", awatar: ScrimmageType(rawValue: viewModel.currentType)!.icon, content: ScrimmageType(rawValue: viewModel.currentType)!.description, backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil)
+		let typeCell = DetailCellDefinition(title: "Type", awatar: ScrimmageType(rawValue: viewModel.currentType)!.icon, content: ScrimmageType(rawValue: viewModel.currentType)!.description, backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil, height: 60)
 				
-		let statusCell = DetailCellDefinition(title: "Status", awatar: ScrimmageStatus(rawValue: viewModel.currentStatus)!.icon, content: ScrimmageStatus(rawValue: viewModel.currentStatus)!.description, backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil)
+		let statusCell = DetailCellDefinition(title: "Status", awatar: ScrimmageStatus(rawValue: viewModel.currentStatus)!.icon, content: ScrimmageStatus(rawValue: viewModel.currentStatus)!.description, backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil, height: 60)
 		
-		let priceCell = DetailCellDefinition(title: "Price", awatar: UIImage(named: "priceIcon")!, content: String(format: "%.2f", viewModel.price), backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil)
+		let priceCell = DetailCellDefinition(title: "Price", awatar: UIImage(named: "priceIcon")!, content: String(format: "%.2f", viewModel.price), backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil, height: 60)
 		
-		let participateCell = DetailCellDefinition(title: "Participate", awatar: UIImage(), content: "", backgroundColor: .darkGray, type: .text, action: #selector(participateButtonPressed), identifier: "detailButtonCell", target: nil)
+		let participateCell = DetailCellDefinition(title: "Participate", awatar: UIImage(), content: "", backgroundColor: .darkGray, type: .text, action: #selector(participateButtonPressed), identifier: "detailButtonCell", target: nil, height: 60)
 		
-		let savebuttonCell = DetailCellDefinition(title: "Save", awatar: UIImage(), content: "", backgroundColor: .darkGray, type: .text, action: #selector(saveScrimmageOnRemote(sender:)), identifier: "detailButtonCell", target: nil)
+		let savebuttonCell = DetailCellDefinition(title: "Save", awatar: UIImage(), content: "", backgroundColor: .darkGray, type: .text, action: #selector(saveScrimmageOnRemote(sender:)), identifier: "detailButtonCell", target: nil, height: 60)
 		
-		let notesCell =  DetailCellDefinition(title: "Notes", awatar: UIImage(named: "notes")!, content: viewModel.notes, backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil)
+		let notesCell =  DetailCellDefinition(title: "Notes", awatar: UIImage(named: "notes")!, content: viewModel.notes, backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil, height: UITableView.automaticDimension)
 		
-		cellsArray = [nameCell, venueNameCell, organizerNameCell,
-		timeCell,
-		dateCell,
-		contactNumberCell,
-		participantsCell,
-		typeCell,
-		statusCell,
-		priceCell,
-		locationCell,
-		notesCell,
-		participateCell,
-		savebuttonCell]
-		
+		cellsArray = [nameCell, venueNameCell,
+					  organizerCell,
+					  timeCell,
+					  dateCell,
+					  participantsCell,
+					  typeCell,
+					  statusCell,
+					  priceCell,
+					  locationCell,
+					  notesCell,
+					  participateCell,
+					  savebuttonCell]
 	}
 
 	@objc func saveScrimmageOnRemote(sender: AnyObject) {
@@ -260,12 +254,21 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 	func observeScrimmage(withScrId: String) {
 		//guard let scrimmageId = viewModel.id else {return}
 		service.readOne(from: .scrimmages, with: withScrId, returning: Scrimmage.self) {[weak self] (scrimmage) in
-            self?.viewModel = ScrimmageViewModel(scrimmage: scrimmage)
-			self?.createCells()
-			self?.setupNavigationController()
-			self?.tableView.reloadData()
+			self?.getCreator(id: scrimmage.createdById, completion: { (user) in
+				self?.creator = user
+				self?.viewModel = ScrimmageViewModel(scrimmage: scrimmage)
+				self?.createCells()
+				self?.setupNavigationController()
+				self?.tableView.reloadData()
+			})
         }
     }
+	
+	func getCreator(id: String, completion: @escaping (User) -> Void) {
+		service.readOne(from: .users, with: userID, returning: User.self) { (user) in
+			completion(user)
+		}
+	}
 	
 	func shareButtonPressed() {
         let shareItem = "Hey Im going to \(viewModel.name), do you want to join me?"
@@ -306,7 +309,7 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 			let destination = MKMapItem(coordinate: .init(latitude: self.viewModel.geopoint.latitude, longitude: self.viewModel.geopoint.longitude), name: self.viewModel.name)
 			MKMapItem.openMaps(with: [destination], launchOptions: nil)
 		}))
-			alert.addAction(UIAlertAction(title: "Open in Google Maps", style: .default, handler: {(_) in
+		alert.addAction(UIAlertAction(title: "Open in Google Maps", style: .default, handler: {(_) in
 				self.openGoogleMap()
 		}))
 		alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: {(_) in
@@ -328,27 +331,4 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 			}
 		}
 	}
-}
-
-extension UIBarButtonItem {
-
-    static func menuButton(_ target: Any?, action: Selector, imageName: String) -> UIBarButtonItem {
-        let button = UIButton(type: .system)
-        button.setImage(UIImage(named: imageName), for: .normal)
-        button.addTarget(target, action: action, for: .touchUpInside)
-
-        let menuBarItem = UIBarButtonItem(customView: button)
-        menuBarItem.customView?.translatesAutoresizingMaskIntoConstraints = false
-        menuBarItem.customView?.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        menuBarItem.customView?.widthAnchor.constraint(equalToConstant: 24).isActive = true
-
-        return menuBarItem
-    }
-}
-
-extension MKMapItem {
-  convenience init(coordinate: CLLocationCoordinate2D, name: String) {
-    self.init(placemark: .init(coordinate: coordinate))
-    self.name = name
-  }
 }

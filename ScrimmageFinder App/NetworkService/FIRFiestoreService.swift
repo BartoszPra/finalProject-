@@ -76,7 +76,6 @@ class FIRFirestoreService {
 	func removeGeoObservers() {
 		geoQuery.removeAllObservers()
 	}
-
 	
     // create function exluding id it will be added automatically by fireabase
 	func create<T: Encodable>(for encodableObject: T, in collectionReference: FIRCollectionReference, completion: @escaping (Bool) -> Void) -> String {

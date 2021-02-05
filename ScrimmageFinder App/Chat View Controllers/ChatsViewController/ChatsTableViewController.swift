@@ -14,8 +14,7 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
 	
 	var coordinator: ChatCoordinator?
 	var chats = [Chat]()
-	var currentUserString = Auth.auth().currentUser?.displayName
-	var currentUserId = Auth.auth().currentUser?.uid
+	var currentUser = CurrentUser.shared
 	private var currentChannelAlertController: UIAlertController?
 	private let db = Firestore.firestore()
 	private var channelReference: CollectionReference {
@@ -64,9 +63,9 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
 		var userss = [String]()
 		var titlee = title
 		if !isGrouped {
-			titlee = currentUserString! + ", " + users.first!.userName
+			titlee = currentUser.userName + ", " + users.first!.userName
 		}		
-		userss.append(currentUserId!)
+		userss.append(currentUser.id)
 		for user in users {
 			userss.append(user.id!)
 		}
@@ -95,8 +94,8 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier: "chetsCell", for: indexPath) as? ChatTableViewCell else {return ChatTableViewCell()}
 		cell.configureWithCheckBox(isEnabled: false)
 		var currentChat = chats[indexPath.row]
-		cell.name.text = currentChat.returnChatsName(with: currentUserString!)
-		currentChat.returnChatsImage(with: currentUserId!) { (img) in
+		cell.name.text = currentChat.returnChatsName(with: currentUser.userName)
+		currentChat.returnChatsImage(with: currentUser.id) { (img) in
 			self.chats[indexPath.row].image = img
 			cell.chatImage.image = img
 		}
@@ -104,7 +103,7 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
     }
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let user = User(id: Auth.auth().currentUser!.uid, userName: (Auth.auth().currentUser?.displayName)!, userEmail: (Auth.auth().currentUser?.email)!)
+		let user = User(id: CurrentUser.shared.id, userName: CurrentUser.shared.userName, userEmail: CurrentUser.shared.userEmail, phoneNumber: nil)
 		let cell = tableView.cellForRow(at: indexPath) as? ChatTableViewCell
 		let currentChat = chats[indexPath.row]
 		let vc = ChatViewController(user: user, channel: currentChat)

@@ -15,8 +15,8 @@ import FirebaseFirestore
 	var id: String?
     var name: String
 	var venueName: String
-    var managerName: String
-    var managerNumber: String
+    //var managerName: String
+    //var managerNumber: String
     var price: Double
     var createdById: String
     var savedById: [String]
@@ -36,8 +36,8 @@ import FirebaseFirestore
 		self.id = scrimmage.id
 		self.name = scrimmage.name
 		self.venueName = scrimmage.venueName
-		self.managerName = scrimmage.managerName
-		self.managerNumber = scrimmage.managerNumber
+		//self.managerName = scrimmage.managerName
+		//self.managerNumber = scrimmage.managerNumber
 		self.price = scrimmage.price
 		self.createdById = scrimmage.createdById
 		self.savedById = scrimmage.savedById
@@ -62,8 +62,6 @@ import FirebaseFirestore
 								  venueName: self.venueName,
 								  address: self.address,
 								  dateTime: self.dateTime,
-								  managerName: self.managerName,
-								  managerNumber: self.managerNumber,
 								  price: self.price,
 								  createdById: self.createdById,
 								  currentStatus: self.currentStatus,
@@ -79,7 +77,7 @@ import FirebaseFirestore
 	}
 	
 	lazy var participantStatus: ParticipantsStatus? = {
-		if participants.isEmpty {
+		if !participants.isEmpty {
 			if let participant = participants.first(where: { $0.key == userID }) {
 				return participant.value
             } else {
@@ -91,7 +89,7 @@ import FirebaseFirestore
 	}()
 		
 	lazy var isParticipating: Bool = {
-		if participants.isEmpty {
+		if !participants.isEmpty {
 			if participants.first(where: { $0.key == userID }) != nil {
 				return true
             } else {

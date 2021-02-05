@@ -12,8 +12,8 @@ class Scrimmage: NSObject, Codable, Identifiable {
     @objc var id: String?
     @objc var name: String
 	@objc var venueName: String
-    @objc var managerName: String
-    @objc var managerNumber: String
+    //@objc var managerName: String
+    //@objc var managerNumber: String
     @objc var price: Double
     @objc var createdById: String
     @objc var savedById: [String]
@@ -29,13 +29,13 @@ class Scrimmage: NSObject, Codable, Identifiable {
 	@objc var occurance: Int
 		
 	//new scrimmaage struct init
-	init (name: String, venueName: String, address: String, dateTime: Date, managerName: String, managerNumber: String, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [String: ParticipantsStatus], geopoint: GeoPoint, notes: String, chatId: String, imageUrl: String, occurance: Int) {
+	init (name: String, venueName: String, address: String, dateTime: Date, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [String: ParticipantsStatus], geopoint: GeoPoint, notes: String, chatId: String, imageUrl: String, occurance: Int) {
         self.name = name
 		self.venueName = venueName
 		self.address = address
 		self.dateTime = dateTime
-        self.managerName = managerName
-        self.managerNumber = managerNumber
+        //self.managerName = managerName
+        //self.managerNumber = managerNumber
         self.price = price
         self.createdById = Auth.auth().currentUser!.uid
         self.savedById = [String]()
@@ -49,15 +49,15 @@ class Scrimmage: NSObject, Codable, Identifiable {
 		self.occurance = occurance
     }
 	
-	init(id: String, name: String, venueName: String, address: String, dateTime: Date, managerName: String, managerNumber: String, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [String: ParticipantsStatus], geopoint: GeoPoint, notes: String, chatId: String, imageUrl: String, occurance: Int) {
+	init(id: String, name: String, venueName: String, address: String, dateTime: Date, price: Double, createdById: String, currentStatus: Int, currentType: Int, participants: [String: ParticipantsStatus], geopoint: GeoPoint, notes: String, chatId: String, imageUrl: String, occurance: Int) {
 		
 		self.id = id
 		self.name = name
 		self.venueName = venueName
 		self.address = address
 		self.dateTime = dateTime
-        self.managerName = managerName
-        self.managerNumber = managerNumber
+        //self.managerName = managerName
+        //self.managerNumber = managerNumber
         self.price = price
         self.createdById = Auth.auth().currentUser!.uid
         self.savedById = [String]()

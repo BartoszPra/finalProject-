@@ -11,11 +11,11 @@ import Firebase
 
 
 class CurrentUser {
-	
+	// still need fixing the force unwrap
 	static let shared = CurrentUser()
 	
-	lazy var id = {return Auth.auth().currentUser?.uid}()
-	lazy var userName = {return Auth.auth().currentUser?.displayName}()
-	lazy var userEmail = {Auth.auth().currentUser?.email}()
+	lazy var id = {return Auth.auth().currentUser!.uid}()
+	lazy var userName = { return Auth.auth().currentUser!.displayName ?? "noNameFound"}()
+	lazy var userEmail = {Auth.auth().currentUser!.email ?? "noEmailFound"}()
     
 }

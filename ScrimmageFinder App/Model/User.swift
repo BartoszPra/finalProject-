@@ -17,13 +17,15 @@ class User: Codable, Identifiable, SenderType {
     var id: String?
     var userName: String
     var userEmail: String
+	var phoneNumber: String?
     
-	init(id: String, userName: String, userEmail: String) {
+	init(id: String, userName: String, userEmail: String, phoneNumber: String?) {
 		self.id = id
         self.userName = userName
         self.userEmail = userEmail
 		self.senderId = id
 		self.displayName = userName
+		self.phoneNumber = phoneNumber
     }
 }
 

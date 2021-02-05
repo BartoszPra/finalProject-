@@ -357,8 +357,8 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 								  venueName: venueName,
 								  address: address,
 								  dateTime: dateObj,
-								  managerName: (scrimmageValues["Organizer Name"] as? String)!,
-								  managerNumber: (scrimmageValues["Contact Number"] as? String)!,
+								  //managerName: (scrimmageValues["Organizer Name"] as? String)!,
+								  //managerNumber: (scrimmageValues["Contact Number"] as? String)!,
 								  price: (scrimmageValues["Price"] as? Double)!,
 								  createdById: Auth.auth().currentUser!.uid,
 								  currentStatus: (scrimmageValues["Status"] as? Int)!,
@@ -406,19 +406,19 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 											 identifier: "customPickerCell", keboardType: nil, target: self,
 											 action: #selector(imageTapped(tapGestureRecognizer:)),
 											 placeHolder: "select Price", color: nil, type: .price, height: 58, varName: "price")
-		let organizerName = CellDefinitionHelper(cellTitle: "Organizer Name",
-												 editableData: toEditScrimmage?.managerName,
-												 identifier: "textFieldCell",
-												 keboardType: .default, target: nil, action: nil,
-												 placeHolder: "Specify organizers name", color: nil, type: nil, height: 58, varName: "managerName")
+//		let organizerName = CellDefinitionHelper(cellTitle: "Organizer Name",
+//												 editableData: toEditScrimmage?.managerName,
+//												 identifier: "textFieldCell",
+//												 keboardType: .default, target: nil, action: nil,
+//												 placeHolder: "Specify organizers name", color: nil, type: nil, height: 58, varName: "managerName")
 		let dateCell = CellDefinitionHelper(cellTitle: "Date",
 											editableData: toEditScrimmage?.dateString,
 											identifier: "pickerCell", keboardType: nil, target: nil, action: nil,
 											placeHolder: "Date", color: nil, type: nil, height: 58, varName: "dateTime")
-		let contactNumberCell = CellDefinitionHelper(cellTitle: "Contact Number",
-													 editableData: toEditScrimmage?.managerNumber,
-													 identifier: "textFieldCell", keboardType: .phonePad, target: nil,
-													 action: nil, placeHolder: "Specify contact number", color: nil, type: nil, height: 58, varName: "managerNumber")
+//		let contactNumberCell = CellDefinitionHelper(cellTitle: "Contact Number",
+//													 editableData: toEditScrimmage?.managerNumber,
+//													 identifier: "textFieldCell", keboardType: .phonePad, target: nil,
+//													 action: nil, placeHolder: "Specify contact number", color: nil, type: nil, height: 58, varName: "managerNumber")
 		let addressCell = CellDefinitionHelper(cellTitle: "Address",
 											   editableData: toEditScrimmage?.address,
 											   identifier: "addressCell", keboardType: nil, target: self,
@@ -459,8 +459,8 @@ class NewScrimmageTableViewController: UITableViewController, UIImagePickerContr
 		cellArray = [
 			pictureCell,
 			nameCell,
-			organizerName,
-			contactNumberCell,
+			//organizerName,
+			//contactNumberCell,
 			dateCell,
 			addressCell,
 			priceCell,

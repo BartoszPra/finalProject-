@@ -36,5 +36,6 @@ struct DetailCellDefinition {
 	var action: Selector?
 	var identifier: String
 	var target: UIViewController?
+	var height: CGFloat
 	
 }

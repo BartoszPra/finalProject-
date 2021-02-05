@@ -111,6 +111,10 @@
 		A5D7433F22F7A2C20047E9E0 /* MyScrimmagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50F4245228472CC007841A2 /* MyScrimmagesViewController.swift */; };
 		A5DDEC792449165F0051FE66 /* ParticipantsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DDEC772449165F0051FE66 /* ParticipantsTableViewCell.swift */; };
 		A5DDEC7A2449165F0051FE66 /* ParticipantsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DDEC782449165F0051FE66 /* ParticipantsTableViewCell.xib */; };
+		A5DE387B25CC980000377184 /* UIBarButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DE387A25CC980000377184 /* UIBarButtonExtension.swift */; };
+		A5DE388025CC986000377184 /* MapKitExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DE387F25CC986000377184 /* MapKitExtension.swift */; };
+		A5DE388725CC9DF600377184 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DE388525CC9DF600377184 /* UserTableViewCell.swift */; };
+		A5DE388825CC9DF600377184 /* UserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5DE388625CC9DF600377184 /* UserTableViewCell.xib */; };
 		A5E574AE2387076700DD7C27 /* ParticipantsStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E574AD2387076700DD7C27 /* ParticipantsStatus.swift */; };
 		A5ED86E123E0FADE00753B6F /* MainCreateScrimmageCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5ED86E023E0FADE00753B6F /* MainCreateScrimmageCellTableViewCell.swift */; };
 		A5F762C22388AE1B002CD1B3 /* ScrimmageDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F762C12388AE1B002CD1B3 /* ScrimmageDetailCoordinator.swift */; };
@@ -285,6 +289,10 @@
 		A5D2FA45237F512400FAAC8A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		A5DDEC772449165F0051FE66 /* ParticipantsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsTableViewCell.swift; sourceTree = "<group>"; };
 		A5DDEC782449165F0051FE66 /* ParticipantsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ParticipantsTableViewCell.xib; sourceTree = "<group>"; };
+		A5DE387A25CC980000377184 /* UIBarButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBarButtonExtension.swift; sourceTree = "<group>"; };
+		A5DE387F25CC986000377184 /* MapKitExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapKitExtension.swift; sourceTree = "<group>"; };
+		A5DE388525CC9DF600377184 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		A5DE388625CC9DF600377184 /* UserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserTableViewCell.xib; sourceTree = "<group>"; };
 		A5E574AD2387076700DD7C27 /* ParticipantsStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantsStatus.swift; sourceTree = "<group>"; };
 		A5ED86E023E0FADE00753B6F /* MainCreateScrimmageCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCreateScrimmageCellTableViewCell.swift; sourceTree = "<group>"; };
 		A5F762C12388AE1B002CD1B3 /* ScrimmageDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrimmageDetailCoordinator.swift; sourceTree = "<group>"; };
@@ -364,9 +372,7 @@
 		0369DAEC20E121D1006B7507 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
-				A59034E82391A3A200CB7284 /* FIRStorageReference.swift */,
 				03C6E1E720DD357D001DFD01 /* FIRFiestoreService.swift */,
-				03C6E1EB20DD5557001DFD01 /* FIRCollectionReference.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -840,6 +846,8 @@
 		A5BB81C225A7B29400E4FC16 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				03C6E1EB20DD5557001DFD01 /* FIRCollectionReference.swift */,
+				A59034E82391A3A200CB7284 /* FIRStorageReference.swift */,
 				A5A0A89824DE0E9400B0C83D /* SFLocationManager.swift */,
 				A5E574AD2387076700DD7C27 /* ParticipantsStatus.swift */,
 				A54D94DE240B07E200D4DFCF /* SFAddress.swift */,
@@ -869,6 +877,8 @@
 				A5531F8923B22EEF0054DA0A /* UIButton+Extensions.swift */,
 				A55AEF8B23C2B61600B07642 /* UISearchBar+Extensions.swift */,
 				A5BEF59925376F4D00FE1C96 /* UIBarButtonItem+Extensions.swift */,
+				A5DE387A25CC980000377184 /* UIBarButtonExtension.swift */,
+				A5DE387F25CC986000377184 /* MapKitExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -880,6 +890,15 @@
 				A5DDEC782449165F0051FE66 /* ParticipantsTableViewCell.xib */,
 			);
 			path = ParticipantsCell;
+			sourceTree = "<group>";
+		};
+		A5DE388425CC9D9F00377184 /* UserOrganizerCell */ = {
+			isa = PBXGroup;
+			children = (
+				A5DE388525CC9DF600377184 /* UserTableViewCell.swift */,
+				A5DE388625CC9DF600377184 /* UserTableViewCell.xib */,
+			);
+			path = UserOrganizerCell;
 			sourceTree = "<group>";
 		};
 		A5ED86DF23E0FA8E00753B6F /* MainCell */ = {
@@ -923,6 +942,7 @@
 		A5FD555E244279F100B9E2F2 /* DetailCells */ = {
 			isa = PBXGroup;
 			children = (
+				A5DE388425CC9D9F00377184 /* UserOrganizerCell */,
 				A5DDEC76244916360051FE66 /* ParticipantsCell */,
 				A5121D802447BB930057E605 /* ButtonCell */,
 				A5121D7F2447BB280057E605 /* DatailCell */,
@@ -1114,6 +1134,7 @@
 				A55EC4E025A233A900BE6C53 /* LocationResultCell.xib in Resources */,
 				034D429320E54FCA00D59F8C /* GoogleService-Info.plist in Resources */,
 				A54BC0BF23BE9C380087178B /* AddressCellTableViewCell.xib in Resources */,
+				A5DE388825CC9DF600377184 /* UserTableViewCell.xib in Resources */,
 				A5584FF4245369DF00AEBB92 /* AddressTableViewCell.xib in Resources */,
 				A5814FC424AE88CF008DABFE /* LocationViewController.xib in Resources */,
 				A52D2CCA242191D500605231 /* ChooseUsersViewController.xib in Resources */,
@@ -1336,12 +1357,15 @@
 				A50F7B3624158B7800AA9083 /* ChatViewController.swift in Sources */,
 				A5F762CA2388BB7E002CD1B3 /* User.swift in Sources */,
 				A50211DA245968DE000BB18C /* ScrimmagesCell.swift in Sources */,
+				A5DE388725CC9DF600377184 /* UserTableViewCell.swift in Sources */,
 				A5531F8A23B22EEF0054DA0A /* UIButton+Extensions.swift in Sources */,
 				A591A312236F30010075F8E4 /* SavedScrimmagesCell.swift in Sources */,
 				A5814FC324AE88CF008DABFE /* LocationViewController.swift in Sources */,
 				03C6E1EE20DD59C3001DFD01 /* EncodableExtensions.swift in Sources */,
 				A560B17F246836F0005211E9 /* NewScrimmageTableViewController.swift in Sources */,
+				A5DE388025CC986000377184 /* MapKitExtension.swift in Sources */,
 				A5B6C06625AE6A2F00828CDE /* EditUserViewController.swift in Sources */,
+				A5DE387B25CC980000377184 /* UIBarButtonExtension.swift in Sources */,
 				A5531F9323B246E10054DA0A /* TextViewTableViewCell.swift in Sources */,
 				A50F7B3E24158CE400AA9083 /* Chat.swift in Sources */,
 				A5021203245A3581000BB18C /* MasterViewController.swift in Sources */,

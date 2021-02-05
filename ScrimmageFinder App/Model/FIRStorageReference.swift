@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum FIRStorageReference: String {
+public enum FIRStorageReference: String {
     case profile
         
     var description: String {
