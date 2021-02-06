@@ -13,9 +13,11 @@ class MainDetailTableViewCell: UITableViewCell {
 	var returnValue: ((_ value: Any) -> Void)?
 	weak var mapDelegate: MapCellDelegate?
 	var viewm: ScrimmageViewModel?
+	var user: User?
 	
-	func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel) {
+	func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel, user: User?) {
 		self.viewm = viewModel
+		self.user = user
 	}
 	
 	deinit {

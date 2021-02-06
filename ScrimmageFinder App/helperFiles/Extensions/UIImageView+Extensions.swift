@@ -27,8 +27,7 @@ extension UIImageView {
 	
 	func loadImageUsingCashe(urlString: String, completion: @escaping (UIImage) -> Void) {
 		
-		self.image = nil
-		
+		self.image = nil		
 		if let caschedImage = imageCashe.object(forKey: urlString as NSString) {
 			completion(caschedImage)
 		}

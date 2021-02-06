@@ -16,7 +16,7 @@ class ParticipantsTableViewCell: MainDetailTableViewCell {
 	@IBOutlet weak var seeeParticipantsButton: UIButton!
 	@IBOutlet weak var statusLabel: UILabel!
 	
-	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel) {
+	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel, user: User?) {
 		self.seeeParticipantsButton.tag = 1
 		self.titleLabel.text = title
 		self.contentLabel.text = contentText

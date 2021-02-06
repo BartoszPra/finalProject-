@@ -84,7 +84,7 @@ struct Message: MessageType {
 		id = document.documentID
 
 		self.sentDate = sentDate.dateValue()
-		self.user = User(id: senderID, userName: senderName, userEmail: "", phoneNumber: nil)//Sender(senderId: senderID, displayName: senderName)
+		self.user = User(id: senderID, userName: senderName, userEmail: "", phoneNumber: nil, imageUrl: nil)//Sender(senderId: senderID, displayName: senderName)
 
 		if let content = data["content"] as? String {
 			self.content = content

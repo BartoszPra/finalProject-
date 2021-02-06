@@ -16,7 +16,7 @@ class DetailButtonTableViewCell: MainDetailTableViewCell {
         super.awakeFromNib()
     }
 	
-	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel) {
+	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel, user: User?) {
 		if title == "Participate" {
 			if viewModel.isParticipating && viewModel.participantStatus == .confirmed {
 				self.button.setTitle("Cancel going", for: .normal)

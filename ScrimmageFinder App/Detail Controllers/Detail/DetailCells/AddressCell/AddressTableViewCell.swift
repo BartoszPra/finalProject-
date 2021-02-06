@@ -32,7 +32,7 @@ class AddressTableViewCell: MainDetailTableViewCell {
 	@IBOutlet weak var titleLabel: UILabel!
 	@IBOutlet weak var mapView: MKMapView!
 	
-	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel) {
+	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel, user: User?) {
 		
 		self.titleLabel.text = title
 		self.contentLabel.text = viewModel.address

@@ -41,8 +41,13 @@
                                 <rect key="frame" x="285" y="9" width="20" height="22"/>
                                 <state key="normal" image="info.circle" catalog="system"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNH-4X-obX">
+                                <rect key="frame" x="222" y="9" width="21" height="22"/>
+                                <state key="normal" image="phone" catalog="system"/>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SQZ-Uz-KC1">
-                                <rect key="frame" x="50" y="5" width="88" height="30"/>
+                                <rect key="frame" x="50" y="5" width="95" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Iratek Masek">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -51,12 +56,14 @@
                         <color key="backgroundColor" red="0.1217384264" green="0.12914031740000001" blue="0.14117839930000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="2zV-GY-gBh" firstAttribute="centerY" secondItem="FPy-BO-KKh" secondAttribute="centerY" id="1X1-JB-hv8"/>
+                            <constraint firstItem="UNH-4X-obX" firstAttribute="centerY" secondItem="FPy-BO-KKh" secondAttribute="centerY" id="7qz-6B-9l1"/>
                             <constraint firstItem="yfi-wu-BQv" firstAttribute="centerY" secondItem="FPy-BO-KKh" secondAttribute="centerY" id="8cz-94-QrH"/>
                             <constraint firstAttribute="trailing" secondItem="2zV-GY-gBh" secondAttribute="trailing" constant="5" id="AVp-jS-Cbj"/>
                             <constraint firstItem="SQZ-Uz-KC1" firstAttribute="centerY" secondItem="FPy-BO-KKh" secondAttribute="centerY" id="Dkd-ed-InI"/>
                             <constraint firstItem="2zV-GY-gBh" firstAttribute="leading" secondItem="yfi-wu-BQv" secondAttribute="trailing" constant="10" id="VDB-On-Lim"/>
                             <constraint firstItem="2Cw-NY-Log" firstAttribute="centerX" secondItem="FPy-BO-KKh" secondAttribute="centerX" id="Ztw-Lg-3qL"/>
                             <constraint firstItem="ukB-fX-yql" firstAttribute="centerY" secondItem="FPy-BO-KKh" secondAttribute="centerY" id="iij-as-Bgl"/>
+                            <constraint firstItem="yfi-wu-BQv" firstAttribute="leading" secondItem="UNH-4X-obX" secondAttribute="trailing" constant="10" id="j5w-Sl-6hQ"/>
                             <constraint firstItem="2Cw-NY-Log" firstAttribute="top" secondItem="FPy-BO-KKh" secondAttribute="top" id="k8S-Sf-Q2t"/>
                             <constraint firstItem="SQZ-Uz-KC1" firstAttribute="leading" secondItem="ukB-fX-yql" secondAttribute="trailing" constant="10" id="lbj-5z-YYQ"/>
                             <constraint firstItem="ukB-fX-yql" firstAttribute="leading" secondItem="FPy-BO-KKh" secondAttribute="leading" constant="5" id="rlp-9u-zmr"/>
@@ -84,12 +91,14 @@
                 <outlet property="infoButton" destination="2zV-GY-gBh" id="cnP-91-rAI"/>
                 <outlet property="messageButton" destination="yfi-wu-BQv" id="bzg-fB-eYX"/>
                 <outlet property="nameButton" destination="SQZ-Uz-KC1" id="5It-MY-FKh"/>
+                <outlet property="phoneButton" destination="UNH-4X-obX" id="tcV-TY-cBy"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="122.54464285714285"/>
+            <point key="canvasLocation" x="174" y="109"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="message" catalog="system" width="128" height="113"/>
+        <image name="phone" catalog="system" width="128" height="115"/>
     </resources>
 </document>

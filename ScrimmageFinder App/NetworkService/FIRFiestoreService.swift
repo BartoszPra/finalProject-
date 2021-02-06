@@ -302,6 +302,7 @@ class FIRFirestoreService {
         }
     }
 	
+	
 	func getScrimmageImage(for scrimmageId: String, completion: @escaping (UIImage) -> Void) {
         
 		var image = UIImage(named: "imageJordan")

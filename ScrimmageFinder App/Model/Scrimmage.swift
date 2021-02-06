@@ -12,8 +12,6 @@ class Scrimmage: NSObject, Codable, Identifiable {
     @objc var id: String?
     @objc var name: String
 	@objc var venueName: String
-    //@objc var managerName: String
-    //@objc var managerNumber: String
     @objc var price: Double
     @objc var createdById: String
     @objc var savedById: [String]
@@ -34,8 +32,6 @@ class Scrimmage: NSObject, Codable, Identifiable {
 		self.venueName = venueName
 		self.address = address
 		self.dateTime = dateTime
-        //self.managerName = managerName
-        //self.managerNumber = managerNumber
         self.price = price
         self.createdById = Auth.auth().currentUser!.uid
         self.savedById = [String]()
@@ -56,8 +52,6 @@ class Scrimmage: NSObject, Codable, Identifiable {
 		self.venueName = venueName
 		self.address = address
 		self.dateTime = dateTime
-        //self.managerName = managerName
-        //self.managerNumber = managerNumber
         self.price = price
         self.createdById = Auth.auth().currentUser!.uid
         self.savedById = [String]()

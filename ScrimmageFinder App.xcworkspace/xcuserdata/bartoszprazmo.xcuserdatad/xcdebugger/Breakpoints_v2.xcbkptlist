@@ -353,8 +353,8 @@
             filePath = "ScrimmageFinder App/Detail Controllers/Detail/SFDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
             landmarkName = "openGoogleMap()"
             landmarkType = "7">
          </BreakpointContent>
@@ -683,22 +683,6 @@
             startingLineNumber = "18"
             endingLineNumber = "18"
             landmarkName = "awakeFromNib()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "22C0DA7F-24C0-4775-8B86-C899DE2580E1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Detail Controllers/Detail/SFDetailsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
-            landmarkName = "participateButtonPressed(sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

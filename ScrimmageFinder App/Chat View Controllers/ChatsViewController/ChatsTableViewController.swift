@@ -103,7 +103,7 @@ class ChatsTableViewController: UITableViewController, AddUsersDelegate {
     }
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let user = User(id: CurrentUser.shared.id, userName: CurrentUser.shared.userName, userEmail: CurrentUser.shared.userEmail, phoneNumber: nil)
+		let user = User(id: CurrentUser.shared.id, userName: CurrentUser.shared.userName, userEmail: CurrentUser.shared.userEmail, phoneNumber: nil, imageUrl: nil)
 		let cell = tableView.cellForRow(at: indexPath) as? ChatTableViewCell
 		let currentChat = chats[indexPath.row]
 		let vc = ChatViewController(user: user, channel: currentChat)

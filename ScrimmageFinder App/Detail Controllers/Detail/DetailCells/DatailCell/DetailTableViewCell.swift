@@ -30,7 +30,7 @@ class DetailTableViewCell: MainDetailTableViewCell {
         // Configure the view for the selected state
     }
 	
-	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel) {
+	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel, user: User?) {
 	
 		self.titleLabel.text = title
 		self.contentLabel.text = contentText

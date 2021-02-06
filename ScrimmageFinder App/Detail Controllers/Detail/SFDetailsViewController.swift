@@ -63,7 +63,8 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 						   icon: cellsArray[indexPath.row].awatar,
 						   target: self,
 						   action: cellsArray[indexPath.row].action,
-						   viewModel: viewModel)
+						   viewModel: viewModel,
+						   user: creator)
 		
 		cell.mapDelegate = self
 		return cell
@@ -107,7 +108,7 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 
 	@objc func chatButtonPressed() {
 		
-		let user = User(id: CurrentUser.shared.id, userName: CurrentUser.shared.userName, userEmail: CurrentUser.shared.userEmail, phoneNumber: nil)
+		let user = User(id: CurrentUser.shared.id, userName: CurrentUser.shared.userName, userEmail: CurrentUser.shared.userEmail, phoneNumber: nil, imageUrl: nil)
 		let str = viewModel.chatId
 		channelReference.document(str).getDocument { (querySnapshot, error) in
 			guard let snapshot = querySnapshot else {

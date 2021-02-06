@@ -37,5 +37,6 @@ struct DetailCellDefinition {
 	var identifier: String
 	var target: UIViewController?
 	var height: CGFloat
+	var extraString: String?
 	
 }

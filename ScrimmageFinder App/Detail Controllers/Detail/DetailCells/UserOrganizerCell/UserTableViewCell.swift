@@ -14,7 +14,7 @@ class UserTableViewCell: MainDetailTableViewCell {
 	@IBOutlet weak var messageButton: UIButton!
 	@IBOutlet weak var infoButton: UIButton!
 	@IBOutlet weak var iconView: UIImageView!
-		
+	@IBOutlet weak var phoneButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,9 +26,19 @@ class UserTableViewCell: MainDetailTableViewCell {
         // Configure the view for the selected state
     }
 	
-	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel) {
+	override func configureCell(title: String, contentText: String, icon: UIImage, target: UIViewController?, action: Selector?, viewModel: ScrimmageViewModel, user: User?) {
 		
 		nameButton.titleLabel?.text = title
-		iconView.image = icon
+		if let user = user {
+			phoneButton.isHidden = user.phoneNumber == nil
+			if let url = user.imageUrl {
+				iconView.smoothRoundCorners(to: 10)
+				UIImageView().loadImageUsingCashe(urlString: url) { (img) in
+					self.iconView.image = img
+				}
+			}
+		} else {
+			self.iconView.image = icon
+		}
 	}
 }
