@@ -33,6 +33,7 @@
                             <segments>
                                 <segment title="Created"/>
                                 <segment title="Saved"/>
+                                <segment title="Invited"/>
                             </segments>
                             <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <color key="selectedSegmentTintColor" red="0.1996589899" green="0.46538406609999999" blue="0.94514554740000001" alpha="0.46824165239726029" colorSpace="custom" customColorSpace="displayP3"/>

@@ -15,6 +15,7 @@ class UserTableViewCell: MainDetailTableViewCell {
 	@IBOutlet weak var infoButton: UIButton!
 	@IBOutlet weak var iconView: UIImageView!
 	@IBOutlet weak var phoneButton: UIButton!
+	
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -36,9 +37,9 @@ class UserTableViewCell: MainDetailTableViewCell {
 				UIImageView().loadImageUsingCashe(urlString: url) { (img) in
 					self.iconView.image = img
 				}
+			} else {
+				self.iconView.image = icon
 			}
-		} else {
-			self.iconView.image = icon
 		}
 	}
 }

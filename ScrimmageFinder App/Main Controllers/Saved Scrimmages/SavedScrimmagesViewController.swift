@@ -3,6 +3,11 @@ import CoreData
 import SilentScrolly
 import FirebaseAuth
 
+//public enum FieldName: String {
+//	case crestedBy = "createdById"
+//	case savedBy = "savedById"
+//}
+
 class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var coordinator: SavedScrimmagesCoordinator?
@@ -12,6 +17,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     var savedScrimmages = [ScrimmageViewModel]()
 	var createdScrimmages = [ScrimmageViewModel]()
 	var toDisplayArray = [ScrimmageViewModel]()
+	var invitedScrimmages = [ScrimmageViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +32,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
 		segmentedControll.addTarget(self, action: #selector(handleSegmentedChange), for: .valueChanged)
 		self.getSavedScrimmages()
 		self.getCreatedScrimmages()
+		self.getInvitedScrimmages()
         self.savedTableView.delegate = self
         self.savedTableView.dataSource = self
         let nib = UINib(nibName: "SavedScrimmagesCell", bundle: nil)
@@ -82,15 +89,28 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
 	
 	@objc func handleSegmentedChange() {
 		switch segmentedControll.selectedSegmentIndex {
-		case 0 :
+		case 0:
 			toDisplayArray = createdScrimmages
 		case 1:
 			toDisplayArray = savedScrimmages
+		case 2:
+			toDisplayArray = invitedScrimmages
 		default:
-			toDisplayArray = createdScrimmages			
+			toDisplayArray = createdScrimmages
 		}
 		updateUI()
 		self.savedTableView.reloadData()
+	}
+	
+	func getInvitedScrimmages() {
+		guard let userID = Auth.auth().currentUser?.uid else {return}
+		FIRFirestoreService.shared.readWhere(from: .scrimmages,
+											 whereFld: "participants",
+											 equalsTo: [userID: ParticipantsStatus.invited.rawValue],
+											 returning: Scrimmage.self) { (scrimmages) in
+												self.invitedScrimmages = scrimmages.map({return ScrimmageViewModel(scrimmage: $0)})
+
+		}
 	}
 	
 	func getCreatedScrimmages() {
@@ -127,7 +147,7 @@ class SavedScrimmagesViewController: UIViewController, UITableViewDataSource, UI
     
     func updateUI() {
         if self.toDisplayArray.isEmpty {
-            self.emptyListLabel.text = "No saved Scrimmages"
+            self.emptyListLabel.text = "No Scrimmages"
         } else {
             self.emptyListLabel.text = ""
         }
