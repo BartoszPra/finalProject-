@@ -22,6 +22,10 @@ class TabBarController: UITabBarController, Storyboarded {
 		viewControllers = [scrimmages.navigationController, savedScrimmages.navigationController, addScrimmages.navigationController, chats.navigationController, userProfile.navigationController]        
     }
 	
+	deinit {
+		print("TabbarOUTT")
+	}
+	
 	override func viewDidLayoutSubviews() {
 		super.viewDidLayoutSubviews()
 

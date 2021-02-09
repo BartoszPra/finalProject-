@@ -13,6 +13,9 @@ import MapKit
 class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MapCellDelegate {
 	
 	@IBOutlet weak var tableView: UITableView!
+	@IBOutlet weak var joinButton: UIButton!
+	@IBOutlet weak var saveButton: UIButton!
+		
 	var cellsArray = [DetailCellDefinition]()
 	var isSavedUsed: Bool!
 	var coordinator: ScrimmagesDetailCoordinator?
@@ -146,10 +149,6 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 		
 		let priceCell = DetailCellDefinition(title: "Price", awatar: UIImage(named: "priceIcon")!, content: String(format: "%.2f", viewModel.price), backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil, height: 60)
 		
-		let participateCell = DetailCellDefinition(title: "Participate", awatar: UIImage(), content: "", backgroundColor: .darkGray, type: .text, action: #selector(participateButtonPressed), identifier: "detailButtonCell", target: nil, height: 60)
-		
-		let savebuttonCell = DetailCellDefinition(title: "Save", awatar: UIImage(), content: "", backgroundColor: .darkGray, type: .text, action: #selector(saveScrimmageOnRemote(sender:)), identifier: "detailButtonCell", target: nil, height: 60)
-		
 		let notesCell =  DetailCellDefinition(title: "Notes", awatar: UIImage(named: "notes")!, content: viewModel.notes, backgroundColor: .darkGray, type: .text, identifier: "DetailCell", target: nil, height: UITableView.automaticDimension)
 		
 		cellsArray = [nameCell, venueNameCell,
@@ -161,12 +160,10 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 					  statusCell,
 					  priceCell,
 					  locationCell,
-					  notesCell,
-					  participateCell,
-					  savebuttonCell]
+					  notesCell]
 	}
 
-	@objc func saveScrimmageOnRemote(sender: AnyObject) {
+	func saveScrimmageOnRemote() {
 	
 		guard let currentScrimmageId = self.viewModel?.id else { return }
         FIRFirestoreService.shared.updateSavedTable(for: currentScrimmageId, with: self.userID) { (success) in
@@ -182,7 +179,7 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 		self.coordinator?.goToViewUsers(with: viewModel!.participants, from: self)
 	}
 				
-	@objc func participateButtonPressed(sender: UIButton!) {
+	func participateButtonPressed() {
         
 		guard let currentScrimmageId = self.viewModel?.id else { return }
 		if viewModel.isParticipating && viewModel.participantStatus == .confirmed {
@@ -260,6 +257,7 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 				self?.viewModel = ScrimmageViewModel(scrimmage: scrimmage)
 				self?.createCells()
 				self?.setupNavigationController()
+				self?.configureButtons()
 				self?.tableView.reloadData()
 			})
         }
@@ -302,7 +300,39 @@ class SFDetailsViewController: UIViewController, UITableViewDelegate, UITableVie
 			print("completion block")
 		})
 	}
+	@IBAction func joinButtonPressed(_ sender: Any) {
+		participateButtonPressed()
+	}
 	
+	@IBAction func saveButtonPressed(_ sender: Any) {
+		saveScrimmageOnRemote()
+	}
+		
+	func configureButtons() {
+		
+			if viewModel.isParticipating && viewModel.participantStatus == .confirmed {
+				self.configureButtons(button: joinButton, title: "Resign", alpha: 1, color: .systemRed, isEnabled: true)
+			} else if viewModel.isParticipating && viewModel.participantStatus == .unconfirmed {
+				self.configureButtons(button: joinButton, title: "Go", alpha: 1, color: .systemBlue, isEnabled: true)
+			} else if viewModel.isParticipating && viewModel.participantStatus == .invited {
+				self.configureButtons(button: joinButton, title: "Respond", alpha: 1, color: .systemGreen, isEnabled: true)
+			} else if !viewModel.isParticipating {
+				self.configureButtons(button: joinButton, title: "Join", alpha: 1, color: .systemBlue, isEnabled: true)
+			}
+			if viewModel.isAlreadySaved {
+				self.configureButtons(button: saveButton, title: "Saved", alpha: 0.6, color: .systemGreen, isEnabled: false)
+			} else {
+				self.configureButtons(button: saveButton, title: "Save", alpha: 1, color: .systemBlue, isEnabled: true)
+			}
+	}
+	
+	func configureButtons(button: UIButton, title: String, alpha: CGFloat, color: UIColor, isEnabled: Bool) {
+		button.setTitle(title, for: .normal)
+		button.alpha = alpha
+		button.backgroundColor = color
+		button.isEnabled = isEnabled
+	}
+		
 	func mapPressed() {
 		let alert = UIAlertController(title: "", message: "Please select", preferredStyle: .actionSheet)
 		

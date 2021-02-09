@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SFDetailsViewController" customModule="ScrimmageFinder_App" customModuleProvider="target">
             <connections>
+                <outlet property="joinButton" destination="94P-9W-zuN" id="jOu-fj-JvN"/>
+                <outlet property="saveButton" destination="tRR-LS-aVV" id="TFu-7i-S9r"/>
                 <outlet property="tableView" destination="nxd-Of-Iyd" id="p74-oN-Fkb"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,13 +25,57 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="94P-9W-zuN">
+                    <rect key="frame" x="334" y="782" width="60" height="60"/>
+                    <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="Tmc-8I-OcY"/>
+                        <constraint firstAttribute="height" constant="60" id="Z1L-j6-gcV"/>
+                    </constraints>
+                    <state key="normal" title="Join">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="joinButtonPressed:" destination="-1" eventType="touchUpInside" id="k1Y-Ik-j5N"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRR-LS-aVV">
+                    <rect key="frame" x="254" y="782" width="60" height="60"/>
+                    <color key="backgroundColor" red="0.30196078430000001" green="0.79607843140000001" blue="0.37647058820000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="h9Y-3S-t2O"/>
+                        <constraint firstAttribute="width" constant="60" id="zsE-9L-4Ee"/>
+                    </constraints>
+                    <state key="normal" title="Save">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="saveButtonPressed:" destination="-1" eventType="touchUpInside" id="PFG-VE-QLq"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="nxd-Of-Iyd" secondAttribute="trailing" id="CbV-ZK-reA"/>
+                <constraint firstAttribute="bottomMargin" secondItem="94P-9W-zuN" secondAttribute="bottom" constant="20" id="FcH-Rh-DeU"/>
+                <constraint firstAttribute="bottomMargin" secondItem="tRR-LS-aVV" secondAttribute="bottom" constant="20" id="RqO-Co-eVv"/>
                 <constraint firstItem="nxd-Of-Iyd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Smw-nB-yoZ"/>
                 <constraint firstAttribute="bottom" secondItem="nxd-Of-Iyd" secondAttribute="bottom" id="Vhy-qT-CH3"/>
                 <constraint firstItem="nxd-Of-Iyd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="iWj-0U-Efd"/>
+                <constraint firstItem="94P-9W-zuN" firstAttribute="leading" secondItem="tRR-LS-aVV" secondAttribute="trailing" constant="20" id="qb4-vy-uuZ"/>
+                <constraint firstAttribute="trailing" secondItem="94P-9W-zuN" secondAttribute="trailing" constant="20" id="uIb-Vg-EAt"/>
             </constraints>
             <point key="canvasLocation" x="139" y="120"/>
         </view>

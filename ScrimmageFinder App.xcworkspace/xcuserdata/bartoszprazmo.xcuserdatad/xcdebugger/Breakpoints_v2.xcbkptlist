@@ -353,8 +353,8 @@
             filePath = "ScrimmageFinder App/Detail Controllers/Detail/SFDetailsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
             landmarkName = "openGoogleMap()"
             landmarkType = "7">
          </BreakpointContent>
@@ -510,7 +510,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "CEEAEB62-8EB3-412C-B0ED-CC3D51C7B0FA - bfe512b0c8f529e8"
+                  uuid = "CEEAEB62-8EB3-412C-B0ED-CC3D51C7B0FA - 86393d1bbc720532"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -525,7 +525,7 @@
                   offsetFromSymbolStart = "64">
                </Location>
                <Location
-                  uuid = "CEEAEB62-8EB3-412C-B0ED-CC3D51C7B0FA - b31af5c883f46bfe"
+                  uuid = "CEEAEB62-8EB3-412C-B0ED-CC3D51C7B0FA - 8ac6da63f77347c5"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -638,7 +638,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "8626FC66-6D01-48B8-9E4E-F165EAC14ECD - edb4defbd73e78be"
+                  uuid = "8626FC66-6D01-48B8-9E4E-F165EAC14ECD - e75a1dd01b965920"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -650,10 +650,10 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "374"
                   endingLineNumber = "374"
-                  offsetFromSymbolStart = "4270">
+                  offsetFromSymbolStart = "4493">
                </Location>
                <Location
-                  uuid = "8626FC66-6D01-48B8-9E4E-F165EAC14ECD - bc1b41f19b76cfcd"
+                  uuid = "8626FC66-6D01-48B8-9E4E-F165EAC14ECD - b6f582da57deedb4"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -666,86 +666,6 @@
                   startingLineNumber = "375"
                   endingLineNumber = "375"
                   offsetFromSymbolStart = "173">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "95735FF0-1051-41AB-AB3B-382D02FCA39C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Detail Controllers/Detail/DetailCells/UserOrganizerCell/UserTableViewCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "configureCell(title:contentText:icon:target:action:viewModel:user:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DC5A7D19-7F0F-471C-BC5A-766781ACC22F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Detail Controllers/Detail/DetailCells/UserOrganizerCell/UserTableViewCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "configureCell(title:contentText:icon:target:action:viewModel:user:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "715AF42A-19F1-465D-86C3-E846615BD94D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ScrimmageFinder App/Main Controllers/Saved Scrimmages/SavedScrimmagesViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "getCreatedScrimmages()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "715AF42A-19F1-465D-86C3-E846615BD94D - 5823dcb334a0e36b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Array&lt;ScrimmageFinder_App.Scrimmage&gt;) -&gt; () in ScrimmageFinder_App.SavedScrimmagesViewController.getCreatedScrimmages() -&gt; ()"
-                  moduleName = "ScrimmageFinder App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/Main%20Controllers/Saved%20Scrimmages/SavedScrimmagesViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "43">
-               </Location>
-               <Location
-                  uuid = "715AF42A-19F1-465D-86C3-E846615BD94D - 865b35355461c9f1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (ScrimmageFinder_App.Scrimmage) -&gt; ScrimmageFinder_App.ScrimmageViewModel in closure #1 (Swift.Array&lt;ScrimmageFinder_App.Scrimmage&gt;) -&gt; () in ScrimmageFinder_App.SavedScrimmagesViewController.getCreatedScrimmages() -&gt; ()"
-                  moduleName = "ScrimmageFinder App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bartoszprazmo/Desktop/SF/ScrimmageFinder%20App/Main%20Controllers/Saved%20Scrimmages/SavedScrimmagesViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "30">
                </Location>
             </Locations>
          </BreakpointContent>
